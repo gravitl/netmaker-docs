@@ -71,6 +71,16 @@ How to make machines inside the network reachable if they are blocked by NAT/Fir
    
    relay-server
 
+Access Control and Zero Trust
+------------------------------
+
+Fine-grained control of your networks. Enable or disable any peer-to-peer connection to decide which machines can talk to which other machines.
+
+.. toctree::
+   :maxdepth: 2
+   
+   acls
+
 Kubernetes Documentation
 ---------------------------
 

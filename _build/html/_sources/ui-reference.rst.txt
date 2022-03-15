@@ -201,3 +201,20 @@ View all nodes in your network, zoom in, zoom out, and search for node names. A 
 
 (1) **hover:** Hover over a node to see its direct connections.
 (2) **Configuration Pane:** Manage the node in this pane just like you would in the Nodes pane. See the "Node List" and "Edit Node" sections for more details.
+
+
+Access Control Lists
+=====================
+
+
+.. image:: images/acls-3.jpg
+   :width: 80%
+   :alt: ACLs
+   :align: center
+
+(1) **Reset:** Reset your changes without submitting.
+(2) **Allow All:** Enable all p2p connections
+(3) **Block All:** Disable all p2p connections. Makes building up a Zero Trust network easier.
+(4) **(allowed):** Click to switch a connection to "deny." Note that node names are higlighted on the side and top to track location.
+(5) **(blocked):** Click to switch a connection to "allow."
+(6) **Submit Changes:** Click once you are ready to submit. Will send message to update relevant nodes in network.

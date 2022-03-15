@@ -265,6 +265,13 @@
     <li class="md-nav__item">
     
     
+      <a href="acls.html" class="md-nav__link">Access Control Lists</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="https://k8s.netmaker.org" class="md-nav__link">Kubernetes</a>
       
     
@@ -340,6 +347,8 @@
         <li class="md-nav__item"><a href="#create-edit-users" class="md-nav__link">Create / Edit Users</a>
         </li>
         <li class="md-nav__item"><a href="#node-graph" class="md-nav__link">Node Graph</a>
+        </li>
+        <li class="md-nav__item"><a href="#access-control-lists" class="md-nav__link">Access Control Lists</a>
         </li></ul>
             </nav>
         </li>
@@ -392,6 +401,13 @@
     
     
       <a href="#node-graph" class="md-nav__link">Node Graph</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#access-control-lists" class="md-nav__link">Access Control Lists</a>
       
     
     </li></ul>
@@ -484,6 +500,8 @@
         <li class="md-nav__item"><a href="#create-edit-users" class="md-nav__link">Create / Edit Users</a>
         </li>
         <li class="md-nav__item"><a href="#node-graph" class="md-nav__link">Node Graph</a>
+        </li>
+        <li class="md-nav__item"><a href="#access-control-lists" class="md-nav__link">Access Control Lists</a>
         </li></ul>
             </nav>
         </li>
@@ -654,6 +672,18 @@
 <ol class="arabic simple">
 <li><p><strong>hover:</strong> Hover over a node to see its direct connections.</p></li>
 <li><p><strong>Configuration Pane:</strong> Manage the node in this pane just like you would in the Nodes pane. See the “Node List” and “Edit Node” sections for more details.</p></li>
+</ol>
+
+
+<h2 id="access-control-lists">Access Control Lists<a class="headerlink" href="#access-control-lists" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/acls-3.jpg"><img alt="ACLs" class="align-center" src="_images/acls-3.jpg" style="width: 80%;"/></a>
+<ol class="arabic simple">
+<li><p><strong>Reset:</strong> Reset your changes without submitting.</p></li>
+<li><p><strong>Allow All:</strong> Enable all p2p connections</p></li>
+<li><p><strong>Block All:</strong> Disable all p2p connections. Makes building up a Zero Trust network easier.</p></li>
+<li><p><strong>(allowed):</strong> Click to switch a connection to “deny.” Note that node names are higlighted on the side and top to track location.</p></li>
+<li><p><strong>(blocked):</strong> Click to switch a connection to “allow.”</p></li>
+<li><p><strong>Submit Changes:</strong> Click once you are ready to submit. Will send message to update relevant nodes in network.</p></li>
 </ol>
 
 
