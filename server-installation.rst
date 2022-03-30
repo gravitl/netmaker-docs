@@ -393,56 +393,51 @@ The following file configures Netmaker as a subdomain. This config is an adaptio
 .. code-block:: nginx
 
     server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
-
-        server_name netmaker.*; # The external URL
-        client_max_body_size 0;
-
-        # A valid https certificate is needed.
-        include /config/nginx/ssl.conf;
-
-        location / {
-            # This config file can be found at:
-            # https://github.com/linuxserver/docker-swag/blob/master/root/defaults/proxy.conf
-            include /config/nginx/proxy.conf;
-
-            # if you use a custom resolver to find your app, needed with swag proxy
-            # resolver 127.0.0.11 valid=30s;
-            set $upstream_app netmaker-ui;                             # The internal URL
-            set $upstream_port 80;                                     # The internal Port
-            set $upstream_proto http;                                  # the protocol that is being used
-            proxy_pass $upstream_proto://$upstream_app:$upstream_port; # combine the set variables from above
-            }
+        # Redirect HTTP to HTTPS.
+        listen 80;
+        server_name *.netmaker.example.org; # Please change to your domain
+        return 301 https://$host$request_uri;
         }
-
+    
     server {
         listen 443 ssl;
         listen [::]:443 ssl;
-
-        server_name backend-netmaker.*; # The external URL
-        client_max_body_size 0;
-        underscores_in_headers on;
-
-        # A valid https certificate is needed.
+        server_name dashboard.netmaker.example.org; # Please change to your domain
         include /config/nginx/ssl.conf;
-
         location / {
-            # if you use a custom resolver to find your app, needed with swag proxy
-            # resolver 127.0.0.11 valid=30s;
-
-            set $upstream_app netmaker;                                # The internal URL
-            set $upstream_port 8081;                                   # The internal Port
-            set $upstream_proto http;                                  # the protocol that is being used
-            proxy_pass $upstream_proto://$upstream_app:$upstream_port; # combine the set variables from above
-
-            # Forces the header to be the one that is visible from the outside
-            proxy_set_header                Host backend.netmaker.example.org; # Please cange to your URL
-
-            # Pass all headers through to the backend
-            proxy_pass_request_headers      on;
+            proxy_pass http://<NETMAKER_IP>:8082;
             }
         }
+    
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        server_name api.netmaker.example.org; # Please change to your domain
+        include /config/nginx/ssl.conf;
+    
+        location / {
+            proxy_pass http://<NETMAKER_IP>:8081;
+            proxy_set_header		Host api.netmaker.example.org; # Please change to your domain
+            proxy_pass_request_headers	on;
+            }
+        }
+    
+    server {
+        listen 443 ssl http2;
+        server_name grpc.netmaker.example.org; # Please change to your domain
+        include /config/nginx/ssl.conf;
+    
+        # Forces the header to be the one that is visible from the outside
+        proxy_set_header		Host api.netmaker.example.org; # Please change to your domain
+    
+        # Pass all headers through to the backend
+        proxy_pass_request_headers	on;
+    
+        location / {
+            grpc_pass grpc://<NETMAKER_IP>:50051;
+            }
+        }
+
 
 .. _HAInstall:
 
