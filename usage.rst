@@ -19,3 +19,9 @@ Written Tutorials
 * `K3s Cross-cloud cluster <https://itnext.io/how-to-deploy-a-single-kubernetes-cluster-across-multiple-clouds-using-k3s-and-wireguard-a5ae176a6e81>`_: Tutorial on setting up cross-cloud K3s clusters using Netmaker.
 * `MicroK8s Cross-cloud cluster <https://itnext.io/how-to-deploy-a-cross-cloud-kubernetes-cluster-with-built-in-disaster-recovery-bbce27fcc9d7>`_: Tutorial on setting up cross-cloud MicroK8s clusters using Netmaker.
 * `Secure access to private services <https://afeiszli.medium.com/how-to-enable-secure-access-to-your-hosted-services-using-netmaker-and-wireguard-1b3282d4b7aa>`_: Tutorial on setting up secure Nextcloud with Netmaker.
+
+
+Community Tutorials
+==================
+
+* `How to build NetMaker from source after running NetMaker Quick Install <https://gist.github.com/9to1url/3226825588b3b5550ecad08c367c48a7#file-netmaker-build-from-source-md>`_: Tutorial on building NetMaker from source.
