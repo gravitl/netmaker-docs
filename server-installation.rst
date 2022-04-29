@@ -245,7 +245,7 @@ This install will run Netmaker on a server without HTTPS using an IP address. Th
 It also does not run the CoreDNS server, to simplify the deployment
 
 **Prerequisites:**
-  * server ports 80, 8081, and 50051 are not blocked by firewall
+  * server ports 80, 8081, 8883 and 50051 are not blocked by firewall
 
 **Notes:** 
   * You can change the port mappings in the Docker Compose if the listed ports are already in use.

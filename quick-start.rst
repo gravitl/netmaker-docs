@@ -73,8 +73,9 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
-- **443 (tcp):** for Dashboard, REST API, and gRPC
+- **443 (tcp):** for Dashboard and REST API
 - **80 (tcp):** for LetsEncrypt
+- **8883 (tcp):** for Message Broker (mqtts)
 - **53 (udp and tcp):** for CoreDNS - This is no longer necessary as of 0.10.0, as by default DNS queries will run over WireGuard.
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.
 
@@ -85,6 +86,7 @@ Make sure the following ports are open both on the VM and in the cloud security 
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
+  - allow 8883/tcp from all
   - (optional) allow 53/udp and 53/tcp from all
   - allow 51821-51830/udp from all
 
