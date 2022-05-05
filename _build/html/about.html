@@ -434,9 +434,11 @@
 <h2 id="what-is-netmaker">What is Netmaker?<a class="headerlink" href="#what-is-netmaker" title="Permalink to this headline">¶</a></h2>
 <p>Netmaker is a tool for creating and managing virtual overlay networks. If you have at least two machines with internet access which you need to connect with a secure tunnel, Netmaker is for you. If you have thousands of servers spread across multiple locations, data centers, or clouds, Netmaker is also for you. Netmaker connects machines securely, wherever they are.</p>
 <a class="reference internal image-reference" href="_images/mesh-diagram.png"><img alt="WireGuard Mesh" class="align-center" src="_images/mesh-diagram.png" style="width: 50%;"/></a>
-<p>Netmaker takes those machines and creates a flat network so that they can all talk to each other easily and securely.
+<p>Netmaker takes these machines and creates a flat network so that they can all talk to each other easily and securely.
 If you’re familiar with AWS, it’s like a VPC but made up of arbitrary computers. From the machine’s perspective, all these other machines are in the same neighborhood, even if they’re spread all over the world.</p>
-<p>Netmaker has many similarities to Tailscale, ZeroTier, and Nebula. What makes Netmaker different is its speed and flexibility. Netmaker is faster because it uses kernel WireGuard. It is more dynamic because the server and agents are fully configurable, which lets you handle all sorts of different use cases.</p>
+<p>Beyond creating a flat network, Netmaker introduces Ingress and Egress, which are gateways that control the flow of traffic into and out of the network. Netmaker also has ACLs, which control exactly which machines can reach each other. The end result is you can create much more complex networks than a simple mesh.</p>
+<a class="reference internal image-reference" href="_images/netmaker-advanced.png"><img alt="Netmaker Architecture Diagram" class="align-center" src="_images/netmaker-advanced.png" style="width: 80%;"/></a>
+<p>Netmaker has many similarities to Tailscale, ZeroTier, and Nebula. What makes Netmaker different is the speed and flexibility. Netmaker is faster because it uses kernel WireGuard. It is more dynamic because the server and agents are fully configurable, which lets you handle all sorts of different use cases. And of course, you can also self-host Netmaker, which gives you complete control of your network traffic.</p>
 
 
 <h2 id="how-does-netmaker-work">How Does Netmaker Work?<a class="headerlink" href="#how-does-netmaker-work" title="Permalink to this headline">¶</a></h2>
@@ -445,23 +447,22 @@ If you’re familiar with AWS, it’s like a VPC but made up of arbitrary comput
 <li><p>the admin server, called Netmaker</p></li>
 <li><p>the agent, called Netclient</p></li>
 </ul>
-<p>As the network manager, you interact with the server to create and manage networks and devices. The server holds configurations for these networks and devices, which are retrieved by the netclients (agent). The server runs an MQTT (message queue) broker for client-server communication.</p>
-<p>The netclient is installed on any machine you would like to add to a given network, whether that machine is a VM, Server, or IoT device. The netclient subscribes to the server’s MQ broker, and the server tells it how it should configure WireGuard. The client will let the server know when any local changes should be pushed out to the other clients. By doing this across many machines simultaneously, we create a dynamic, fully configurable virtual networks.</p>
-<p>The Netmaker server does not typically route traffic. Otherwise, this would be a hub-and-spoke model, which is very slow. Instead, Netmaker just tells the machines on the network how they can reach each other directly. This is called a <em>full mesh</em> network and is much faster. Even if the server goes down, as long as none of the existing machines change substantially, your network will still run just fine.</p>
+<p>As the network manager, you interact with the server to create and manage networks and devices. The server holds configurations for these networks and devices, and pushes updates to the agents (netclient) over a message queue.</p>
+<p>The netclient is installed on any machine you would like to add to a given network, whether that machine is a VM, Server, Kubernetes node, or IoT device. The netclient subscribes to the MQ broker, and the server tells it how to configure WireGuard. The client will let the server know when any local changes (like ip address, port) should be pushed out to the other clients. By doing this across many machines simultaneously, we create fully dynamic and configurable virtual networks.</p>
+<p>The Netmaker server does not typically route traffic, which would be a hub-and-spoke model (much slower). Instead, Netmaker just tells the machines on the network how they can reach each other directly. This is called a <em>full mesh</em> network and is much faster. Even if the server goes down, as long as none of the existing machines change substantially, your network will still run just fine.</p>
 
 
 <h2 id="use-cases-for-netmaker">Use Cases for Netmaker<a class="headerlink" href="#use-cases-for-netmaker" title="Permalink to this headline">¶</a></h2>
-<p>There are many use cases for Netmaker. In fact, you could probably be using it right now. This list is not all-encompassing, but provides a sample of how you might want to use Netmaker. Guided setup for many of these use cases can be found in the <a class="reference internal" href="usage.html"><span class="doc">Using Netmaker</span></a> documentation.</p>
+<p>There are many use cases for Netmaker. In fact, you could probably be using it right now. Because of Netmaker’s extreme speed, there is almost no cost to putting a Netmaker overlay network on top of any existing Network. The question becomes, why not use Netmaker? You’ve already got the machines, why not encrypt the traffic and make your network dynamic?</p>
+<p>This list is not all-encompassing, but provides a sample of how many users are using Netmaker in production today. Guided setup for many of these use cases can be found in the <a class="reference internal" href="usage.html"><span class="doc">Using Netmaker</span></a> documentation.</p>
 <blockquote>
 <div><ol class="arabic simple" start="0">
-<li><p>Automate creation of a WireGuard mesh network</p></li>
-<li><p>Create a flat, secure network between cloud environments and data centers</p></li>
-<li><p>Provide secure access to IoT devices, remote servers, and client sites.</p></li>
-<li><p>Secure a home or office network</p></li>
-<li><p>Add a layer of encryption to an existing network</p></li>
-<li><p>Secure site-to-site connections</p></li>
-<li><p>Manage cryptocurrency proof-of-stake machines</p></li>
-<li><p>Create a dynamic and secure Kubernetes underlay network</p></li>
+<li><p>Automate the creation of a large WireGuard-based network</p></li>
+<li><p>Create a flat, secure network between multiple environments (VPCs, clouds, data centers)</p></li>
+<li><p>Secure access to a home or office network</p></li>
+<li><p>Provide remote access to resources like an AWS VPC, data center, or K8S cluster</p></li>
+<li><p>Create distributed, cross-cloud Kubernetes clusters or database clusters</p></li>
+<li><p>Manage a secure mesh of IoT devices</p></li>
 </ol>
 </div></blockquote>
 

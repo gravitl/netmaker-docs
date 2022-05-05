@@ -7,71 +7,61 @@ This section outlines installing the Netmaker server, including Netmaker, Netmak
 System Compatibility
 ====================
 
-Netmaker will require elevated privileges to perform network operations. Netmaker has similar limitations to :doc:`netclient <./client-installation>` (client networking agent). 
+Netmaker requires elevated privileges on the host machine to perform network operations. Netmaker must be able to modify interfaces and set firewall rules using iptables. 
 
-Typically, Netmaker is run inside of containers (Docker). To run a non-docker installation, you must run the Netmaker binary, CoreDNS binary, database, and a web server directly on the host. Each of these components have their own individual requirements.
+Typically, Netmaker is run inside of containers, using Docker or Kubernetes. 
 
-The quick install guide is recommended for first-time installs. 
+Netmaker can be run without containers, but this is not recommended. You must run the Netmaker binary, CoreDNS binary, database, and a web server directly on the host.
 
-The following documents are meant for special cases like Kubernetes and LXC, or for more advanced setups. 
+Each of these components have their own individual requirements and the management complexity increases exponentially by running outside of containers.
+
+For first-time installs, we recommend the quick install guide. The following documents are meant for more advanced installation environments and are not recommended for most users. However, these documents can be helpful in customizing or troubleshooting your own installation. 
 
 
 Server Configuration Reference
 ==========================================
 
-Netmaker sets its configuration in the following order of precendence:
+Netmaker sets its configuration in the following order of precendence:  
 
-1. Defaults
-2. Config File
-3. Environment Variables
+1. **Defaults:** Default values set on the server if no value is provided in configuration.  
+2. **Config File:** Values set in the config/environments/*.yaml file 
+3. **Environment Variables:** Typically values set in the Docker Compose. This is the most common way of setting server values.
+
+In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run "docker kill netmaker" and "docker-compose up -d".
 
 Variable Description
 ----------------------
-VERBOSITY:
-    **Default:** 0
 
-    **Description:** Specify level of logging you would like on the server. Goes up to 3 for debugging.
+SERVER_NAME
+    **Default:** ""
 
+    **Description:**  MUST SET THIS VALUE. This is the public, resolvable DNS name of the MQ Broker. For instance: broker.netmaker.example.com.
 
-GRPC_SSL:
-    **Default:** "off"
+SERVER_HOST
+    **Default:** (Server detects public IP address of machine)
 
-    **Description:** Specifies if GRPC is going over secure GRPC or SSL. This is a setting for the clients and is passed through the access token. Can be set to "on" and "off". Set to on if SSL is configured for GRPC.
+    **Description:** The public IP of the server where the machine is running. 
 
 SERVER_API_CONN_STRING
     **Default:** ""
 
-    **Description:**  Allows specification of the string used to connect to the server api. Format: IP:PORT or DOMAIN:PORT. Defaults to SERVER_HOST if not specified.
+    **Description:**  MUST SET THIS VALUE. This is the public, resolvable address of the API, including port. For instance: api.netmaker.example.com:443.
 
-SERVER_GRPC_CONN_STRING
+COREDNS_ADDR
     **Default:** ""
 
-    **Description:**  Allows specification of the string used to connect to grpc. Format: IP:PORT or DOMAIN:PORT. Defaults to SERVER_HOST if not specified.
+    **Description:** The public IP of the CoreDNS server. Will typically be the same as the server where Netmaker is running (same as SERVER_HOST).
 
-SERVER_HOST: *(depreciated, use SERVER_API_CONN_STRING and SERVER_GRPC_CONN_STRING)* 
-    **Default:** Server will perform an IP check and set automatically unless explicitly set, or DISABLE_REMOTE_IP_CHECK is set to true, in which case it defaults to 127.0.0.1
 
-    **Description:** Sets the SERVER_HTTP_HOST and SERVER_GRPC_HOST variables if they are unset. The address where traffic comes in. 
-
-SERVER_HTTP_HOST: *(depreciated, use SERVER_API_CONN_STRING and SERVER_GRPC_CONN_STRING)*
+SERVER_HTTP_HOST
     **Default:** Equals SERVER_HOST if set, "127.0.0.1" if SERVER_HOST is unset.
     
-    **Description:** Set to make the HTTP and GRPC functions available via different interfaces/networks.
-
-SERVER_GRPC_HOST: *(depreciated, use SERVER_API_CONN_STRING and SERVER_GRPC_CONN_STRING)*
-    **Default:** Equals SERVER_HOST if set, "127.0.0.1" if SERVER_HOST is unset.
-
-    **Description:** Set to make the HTTP and GRPC functions available via different interfaces/networks.
+    **Description:** Should be the same as SERVER_API_CONN_STRING minus the port.
 
 API_PORT:
     **Default:** 8081 
 
-    **Description:** The HTTP API port for Netmaker. Used for API calls / communication from front end.
-
-GRPC_PORT:  
-    **Default:** 50051
-
-    **Description:** The GRPC port for Netmaker. Used for communications from nodes.
+    **Description:** Should be the same as the port on SERVER_API_CONN_STRING in most cases. Sets the port for the API on the server.
 
 MASTER_KEY:  
     **Default:** "secretkey" 
@@ -133,18 +123,15 @@ SQL_PASS:
 
     **Description:** Password for postgres.
 
-CLIENT_MODE:  
-    **Default:** "on"
-
-    **Description:** Specifies if server should deploy itself as a node (client) in each network. May be turned to "off" for more restricted servers.
-
 RCE:  
     **Default:** "off"
 
     **Description:** The server enables you to set PostUp and PostDown commands for nodes, which is standard for WireGuard with wg-quick, but is also **Remote Code Execution**, which is a critical vulnerability if the server is exploited. Because of this, it's turned off by default, but if turned on, PostUp and PostDown become editable.
 
-SERVER_GRPC_WIREGUARD
-    **Depreciated:** no longer in use
+DEFAULT_NODE_LIMIT
+    **Default:** "999999999"
+
+    **Description:** Limits the number of nodes allowed on the server (total).
 
 DISPLAY_KEYS
     **Default:** "on"
@@ -174,12 +161,24 @@ HOST_NETWORK:
 MANAGE_IPTABLES: 
     **Default:** "on"
 
-    **Description:** # Sets iptables on the machine being managed in order to forward properly from wireguard interface to MQ and other services listed in "port forward services." It's better to leave this on unless you know what you're doing.
+    **Description:** # Allows netmaker to manage iptables locally to set forwarding rules. Largely for DNS or SSH forwarding (see below). It will also set a default "allow forwarding" policy on the host. It's better to leave this on unless you know what you're doing.
 
 PORT_FORWARD_SERVICES: 
     **Default:** ""
 
-    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". Typically best to leave mq and dns on. ssh can be removed.'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. dns enables private dns over wireguard. mq enables mq.
+    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. However, if you set the Netmaker server as a ingress gateway, this will break SSH on external clients, so be careful. DNS enables private dns over wireguard. If you would like to use private dns with ext clients, turn this on.
+
+POD_IP: 
+    **Default:** "127.0.0.1"
+
+    **Description:** Specific to a Kubernetes installation. Gets the container IP address of the pod where Netmaker is running.
+
+
+VERBOSITY:
+    **Default:** 0
+
+    **Description:** Specify level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.
+
 
 Config File Reference
 -----------------------
