@@ -422,22 +422,6 @@ The following file configures Netmaker as a subdomain. This config is an adaptio
             }
         }
     
-    server {
-        listen 443 ssl http2;
-        server_name grpc.netmaker.example.org; # Please change to your domain
-        include /config/nginx/ssl.conf;
-    
-        # Forces the header to be the one that is visible from the outside
-        proxy_set_header		Host api.netmaker.example.org; # Please change to your domain
-    
-        # Pass all headers through to the backend
-        proxy_pass_request_headers	on;
-    
-        location / {
-            grpc_pass grpc://<NETMAKER_IP>:50051;
-            }
-        }
-
 
 .. _HAInstall:
 
