@@ -301,14 +301,6 @@
         <li class="md-nav__item"><a href="#compose-file-annotated" class="md-nav__link">Compose File - Annotated</a>
         </li>
         <li class="md-nav__item"><a href="#available-docker-compose-files" class="md-nav__link">Available docker-compose files</a>
-        </li></ul>
-            </nav>
-        </li>
-        <li class="md-nav__item"><a href="#dns-mode-setup" class="md-nav__link">DNS Mode Setup</a>
-        </li>
-        <li class="md-nav__item"><a href="#docker-compose-install" class="md-nav__link">Docker Compose Install</a><nav class="md-nav">
-              <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#test-install-no-dns-no-secure-grpc" class="md-nav__link">Test Install - No DNS, No Secure GRPC</a>
         </li>
         <li class="md-nav__item"><a href="#traefik-proxy" class="md-nav__link">Traefik Proxy</a>
         </li>
@@ -324,9 +316,9 @@
         </li>
         <li class="md-nav__item"><a href="#ui-setup" class="md-nav__link">UI Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#coredns-setup-optional" class="md-nav__link">CoreDNS Setup (optional)</a>
-        </li>
         <li class="md-nav__item"><a href="#proxy-load-balancer" class="md-nav__link">Proxy / Load Balancer</a>
+        </li>
+        <li class="md-nav__item"><a href="#mq" class="md-nav__link">MQ</a>
         </li></ul>
             </nav>
         </li>
@@ -386,20 +378,6 @@
     
     
       <a href="#server-configuration-reference" class="md-nav__link">Server Configuration Reference</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#dns-mode-setup" class="md-nav__link">DNS Mode Setup</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#docker-compose-install" class="md-nav__link">Docker Compose Install</a>
       
     
     </li>
@@ -537,14 +515,6 @@
         <li class="md-nav__item"><a href="#compose-file-annotated" class="md-nav__link">Compose File - Annotated</a>
         </li>
         <li class="md-nav__item"><a href="#available-docker-compose-files" class="md-nav__link">Available docker-compose files</a>
-        </li></ul>
-            </nav>
-        </li>
-        <li class="md-nav__item"><a href="#dns-mode-setup" class="md-nav__link">DNS Mode Setup</a>
-        </li>
-        <li class="md-nav__item"><a href="#docker-compose-install" class="md-nav__link">Docker Compose Install</a><nav class="md-nav">
-              <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#test-install-no-dns-no-secure-grpc" class="md-nav__link">Test Install - No DNS, No Secure GRPC</a>
         </li>
         <li class="md-nav__item"><a href="#traefik-proxy" class="md-nav__link">Traefik Proxy</a>
         </li>
@@ -560,9 +530,9 @@
         </li>
         <li class="md-nav__item"><a href="#ui-setup" class="md-nav__link">UI Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#coredns-setup-optional" class="md-nav__link">CoreDNS Setup (optional)</a>
-        </li>
         <li class="md-nav__item"><a href="#proxy-load-balancer" class="md-nav__link">Proxy / Load Balancer</a>
+        </li>
+        <li class="md-nav__item"><a href="#mq" class="md-nav__link">MQ</a>
         </li></ul>
             </nav>
         </li>
@@ -633,7 +603,7 @@
 <p>Netmaker sets its configuration in the following order of precendence:</p>
 <ol class="arabic simple">
 <li><p><strong>Defaults:</strong> Default values set on the server if no value is provided in configuration.</p></li>
-<li><p><strong>Config File:</strong> Values set in the config/environments/<a href="#id1"><span class="problematic" id="id2">*</span></a>.yaml file</p></li>
+<li><p><strong>Config File:</strong> Values set in the <cite>config/environments/*.yaml`</cite> file</p></li>
 <li><p><strong>Environment Variables:</strong> Typically values set in the Docker Compose. This is the most common way of setting server values.</p></li>
 </ol>
 <p>In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run “docker kill netmaker” and “docker-compose up -d”.</p>
@@ -865,57 +835,12 @@
 </ul>
 
 
-
-<h2 id="dns-mode-setup">DNS Mode Setup<a class="headerlink" href="#dns-mode-setup" title="Permalink to this headline">¶</a></h2>
-<p>If you plan on running the server in DNS Mode, know that a <a class="reference external" href="https://coredns.io/manual/toc/">CoreDNS Server</a> will be installed. CoreDNS is a light-weight, fast, and easy-to-configure DNS server. It is recommended to bind CoreDNS to port 53 of the host system, and it will do so by default. The clients will expect the nameserver to be on port 53, and many systems have issues resolving a different port.</p>
-<p>However, on your host system (for Netmaker), this may conflict with an existing process. On linux systems running systemd-resolved, there is likely a service consuming port 53. The below steps will disable systemd-resolved, and replace it with a generic (e.g. Google) nameserver. Be warned that this may have consequences for any existing private DNS configuration.</p>
-<p>With the latest docker-compose, it is not necessary to perform these steps. But if you are running the install and find that port 53 is blocked, you can perform the following steps, which were tested on Ubuntu 20.04 (these should be run prior to deploying the docker containers).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">stop</span> <span class="n">systemd</span><span class="o">-</span><span class="n">resolved</span>
-<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">systemd</span><span class="o">-</span><span class="n">resolved</span>
-<span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">resolved</span><span class="o">.</span><span class="n">conf</span>
-  <span class="o">*</span>  <span class="n">uncomment</span> <span class="n">DNS</span> <span class="ow">and</span> <span class="n">add</span> <span class="mf">8.8</span><span class="o">.</span><span class="mf">8.8</span> <span class="ow">or</span> <span class="n">whatever</span> <span class="n">reachable</span> <span class="n">nameserver</span> <span class="ow">is</span> <span class="n">your</span> <span class="n">preference</span>  <span class="o">*</span>
-  <span class="o">*</span>  <span class="n">uncomment</span> <span class="n">DNSStubListener</span> <span class="ow">and</span> <span class="nb">set</span> <span class="n">to</span> <span class="s2">"no"</span>  <span class="o">*</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">sf</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">resolve</span><span class="o">/</span><span class="n">resolv</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="o">.</span><span class="n">conf</span>
-</pre></div>
-</div>
-<p>Port 53 should now be available for CoreDNS to use.</p>
-
-
-<h2 id="docker-compose-install">Docker Compose Install<a class="headerlink" href="#docker-compose-install" title="Permalink to this headline">¶</a></h2>
-<p>The most simple (and recommended) way of installing Netmaker is to use one of the provided <a class="reference external" href="https://github.com/gravitl/netmaker/tree/master/compose">Docker Compose files</a>. Below are instructions for several different options to install Netmaker via Docker Compose, followed by an annotated reference Docker Compose in case your use case requires additional customization.</p>
-
-<h3 id="test-install-no-dns-no-secure-grpc">Test Install - No DNS, No Secure GRPC<a class="headerlink" href="#test-install-no-dns-no-secure-grpc" title="Permalink to this headline">¶</a></h3>
-<p>This install will run Netmaker on a server without HTTPS using an IP address. This is not secure and not recommended, but can be helpful for testing.</p>
-<p>It also does not run the CoreDNS server, to simplify the deployment</p>
-<dl class="simple">
-<dt><strong>Prerequisites:</strong></dt><dd><ul class="simple">
-<li><p>server ports 80, 8081, and 50051 are not blocked by firewall</p></li>
-</ul>
-</dd>
-<dt><strong>Notes:</strong></dt><dd><ul class="simple">
-<li><p>You can change the port mappings in the Docker Compose if the listed ports are already in use.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Assuming you have Docker and Docker Compose installed, you can just run the following, replacing <strong>&lt; Insert your-host IP Address Here &gt;</strong> with your host IP (or domain):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/docker-compose.test.yml
-sed -i ‘s/HOST_IP/&lt; Insert your-host IP Address Here &gt;/g’ docker-compose.yml
-docker-compose up -d`
-</pre></div>
-</div>
-
-
 <h3 id="traefik-proxy">Traefik Proxy<a class="headerlink" href="#traefik-proxy" title="Permalink to this headline">¶</a></h3>
 <p>To install with Traefik, rather than Nginx or the default Caddy, check out this repo: <a class="reference external" href="https://github.com/bsherman/netmaker-traefik">https://github.com/bsherman/netmaker-traefik</a></p>
 
 
 <h3 id="no-dns-coredns-disabled">No DNS - CoreDNS Disabled<a class="headerlink" href="#no-dns-coredns-disabled" title="Permalink to this headline">¶</a></h3>
-<p>DNS Mode is currently limited to clients that can run resolvectl (systemd-resolved, see <a class="reference internal" href="architecture.html"><span class="doc">Architecture docs</span></a> for more info). You may wish to disable DNS mode for various reasons. This installation option gives you the full feature set minus CoreDNS.</p>
-<p>To run without DNS, follow the <a class="reference internal" href="quick-start.html"><span class="doc">Quick Install</span></a> guide, omitting the steps for DNS setup. In addition, when the guide has you pull (wget) the Netmaker docker-compose template, use the following link instead:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">-O</span> <span class="pre">docker-compose.yml</span> <span class="pre">https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/docker-compose.nodns.yml</span></code></p></li>
-</ol>
-<p>This template is equivalent but omits CoreDNS.</p>
+<p>CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function, because it is added directly to nodes’ hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE=”off”</p>
 
 
 
@@ -939,7 +864,7 @@ docker-compose up -d`
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">-sfL</span> <span class="pre">https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker-server.sh</span> <span class="pre">|</span> <span class="pre">sh</span> <span class="pre">-</span></code></p>
 <ol class="arabic simple" start="2">
 <li><p>Check status:  <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">netmaker</span></code></p></li>
-<li><p>If any settings are incorrect such as host or mongo credentials, change them under /etc/netmaker/config/environments/&lt; your env &gt;.yaml and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">netmaker</span></code></p></li>
+<li><p>If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/config/environments/&lt; your env &gt;.yaml and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">netmaker</span></code></p></li>
 </ol>
 
 
@@ -947,7 +872,7 @@ docker-compose up -d`
 <p>The following uses Nginx as an http server. You may alternatively use Apache or any other web server that serves static web files.</p>
 <ol class="arabic simple">
 <li><p>Download and Unzip UI asset files</p></li>
-<li><p>Copy Config to Nginx</p></li>
+<li><p>Copy Config to Nginx or other reverse proxy</p></li>
 <li><p>Modify Default Config Path</p></li>
 <li><p>Change Backend URL</p></li>
 <li><p>Start Nginx</p></li>
@@ -962,13 +887,13 @@ docker-compose up -d`
 </div>
 
 
-<h3 id="coredns-setup-optional">CoreDNS Setup (optional)<a class="headerlink" href="#coredns-setup-optional" title="Permalink to this headline">¶</a></h3>
-<p>CoreDNS is only required if you want private DNS features. Once installed, you must set the CoreDNS variables in the env settings of the server.</p>
-<p>See <a class="reference external" href="https://coredns.io/manual/toc/#installation">https://coredns.io/manual/toc/#installation</a></p>
-
-
 <h3 id="proxy-load-balancer">Proxy / Load Balancer<a class="headerlink" href="#proxy-load-balancer" title="Permalink to this headline">¶</a></h3>
-<p>You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082, and 50051 (grpc). This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs). The proxy must be able to handle gRPC connections.</p>
+<p>You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs).</p>
+
+
+<h3 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this headline">¶</a></h3>
+<p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file found here: <a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf">https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf</a></p>
+<p>Netmaker env vars must be configured to reach the MQ broker</p>
 
 
 

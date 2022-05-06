@@ -24,7 +24,7 @@ Server Configuration Reference
 Netmaker sets its configuration in the following order of precendence:  
 
 1. **Defaults:** Default values set on the server if no value is provided in configuration.  
-2. **Config File:** Values set in the config/environments/*.yaml file 
+2. **Config File:** Values set in the `config/environments/*.yaml`` file 
 3. **Environment Variables:** Typically values set in the Docker Compose. This is the most common way of setting server values.
 
 In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run "docker kill netmaker" and "docker-compose up -d".
@@ -210,52 +210,6 @@ The following is a brief description of each:
 - `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.contained.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
 - `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the "primary" docker-compose that users should work with.
 
-DNS Mode Setup
-====================================
-
-If you plan on running the server in DNS Mode, know that a `CoreDNS Server <https://coredns.io/manual/toc/>`_ will be installed. CoreDNS is a light-weight, fast, and easy-to-configure DNS server. It is recommended to bind CoreDNS to port 53 of the host system, and it will do so by default. The clients will expect the nameserver to be on port 53, and many systems have issues resolving a different port.
-
-However, on your host system (for Netmaker), this may conflict with an existing process. On linux systems running systemd-resolved, there is likely a service consuming port 53. The below steps will disable systemd-resolved, and replace it with a generic (e.g. Google) nameserver. Be warned that this may have consequences for any existing private DNS configuration. 
-
-With the latest docker-compose, it is not necessary to perform these steps. But if you are running the install and find that port 53 is blocked, you can perform the following steps, which were tested on Ubuntu 20.04 (these should be run prior to deploying the docker containers).
-
-.. code-block::
-
-  systemctl stop systemd-resolved
-  systemctl disable systemd-resolved 
-  vim /etc/systemd/resolved.conf
-    *  uncomment DNS and add 8.8.8.8 or whatever reachable nameserver is your preference  *
-    *  uncomment DNSStubListener and set to "no"  *
-  ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
-Port 53 should now be available for CoreDNS to use.
-
-
-Docker Compose Install
-=======================
-
-The most simple (and recommended) way of installing Netmaker is to use one of the provided `Docker Compose files <https://github.com/gravitl/netmaker/tree/master/compose>`_. Below are instructions for several different options to install Netmaker via Docker Compose, followed by an annotated reference Docker Compose in case your use case requires additional customization.
-
-Test Install - No DNS, No Secure GRPC
---------------------------------------------------------
-
-This install will run Netmaker on a server without HTTPS using an IP address. This is not secure and not recommended, but can be helpful for testing.
-
-It also does not run the CoreDNS server, to simplify the deployment
-
-**Prerequisites:**
-  * server ports 80, 8081, and 50051 are not blocked by firewall
-
-**Notes:** 
-  * You can change the port mappings in the Docker Compose if the listed ports are already in use.
-
-Assuming you have Docker and Docker Compose installed, you can just run the following, replacing **< Insert your-host IP Address Here >** with your host IP (or domain):
-
-.. code-block::
-
-  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/docker-compose.test.yml
-  sed -i ‘s/HOST_IP/< Insert your-host IP Address Here >/g’ docker-compose.yml
-  docker-compose up -d`
 
 Traefik Proxy
 ------------------------
@@ -266,14 +220,7 @@ To install with Traefik, rather than Nginx or the default Caddy, check out this 
 No DNS - CoreDNS Disabled
 ----------------------------------------------
 
-DNS Mode is currently limited to clients that can run resolvectl (systemd-resolved, see :doc:`Architecture docs <./architecture>` for more info). You may wish to disable DNS mode for various reasons. This installation option gives you the full feature set minus CoreDNS.
-
-To run without DNS, follow the :doc:`Quick Install <./quick-start>` guide, omitting the steps for DNS setup. In addition, when the guide has you pull (wget) the Netmaker docker-compose template, use the following link instead:
-
-#. ``wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/docker-compose.nodns.yml``
-
-This template is equivalent but omits CoreDNS.
-
+CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function, because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE="off"
 
 .. _NoDocker:
 
@@ -302,7 +249,7 @@ Server Setup
 ``sudo curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker-server.sh | sh -``
 
 2. Check status:  ``sudo journalctl -u netmaker``
-3. If any settings are incorrect such as host or mongo credentials, change them under /etc/netmaker/config/environments/< your env >.yaml and then run ``sudo systemctl restart netmaker``
+3. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/config/environments/< your env >.yaml and then run ``sudo systemctl restart netmaker``
 
 UI Setup
 -----------
@@ -310,7 +257,7 @@ UI Setup
 The following uses Nginx as an http server. You may alternatively use Apache or any other web server that serves static web files.
 
 1. Download and Unzip UI asset files
-2. Copy Config to Nginx
+2. Copy Config to Nginx or other reverse proxy
 3. Modify Default Config Path
 4. Change Backend URL
 5. Start Nginx
@@ -324,17 +271,18 @@ The following uses Nginx as an http server. You may alternatively use Apache or 
   sudo sh -c 'BACKEND_URL=http://<YOUR BACKEND API URL>:PORT /usr/share/nginx/html/generate_config_js.sh >/usr/share/nginx/html/config.js'
   sudo systemctl start nginx
 
-CoreDNS Setup (optional)
-----------------------------
-
-CoreDNS is only required if you want private DNS features. Once installed, you must set the CoreDNS variables in the env settings of the server.
-
-See https://coredns.io/manual/toc/#installation
 
 Proxy / Load Balancer
 ------------------------
 
-You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082, and 50051 (grpc). This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs). The proxy must be able to handle gRPC connections.
+You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs).
+
+MQ
+----
+
+You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file found here: https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf
+
+Netmaker env vars must be configured to reach the MQ broker
 
 
 .. _KubeInstall:
