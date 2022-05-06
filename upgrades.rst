@@ -5,7 +5,14 @@ Upgrades
 Introduction
 ===============
 
-As of 0.10.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now is still a relatively straightforward process. 
+As of 0.13.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now is still a relatively straightforward process. 
+
+Critical Notes for 0.13.X
+================================
+
+If upgrading from 0.12 to 0.13, refer to this gist: https://gist.github.com/afeiszli/f53f34eb4c5654d4e16da2919540d0eb
+
+
 
 Critical Notes for 0.10.0
 =============================================
