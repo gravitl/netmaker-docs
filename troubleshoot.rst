@@ -61,6 +61,15 @@ Server
   There is no official uninstall script for the Netmaker server at this time. If you followed the quick-start guide, simply run ``sudo docker-compose -f docker-compose.quickstart.yml down --volumes``
   to completely wipe your server. Otherwise kill the running binary and it's up to you to remove database records/volumes.
 
+MQ
+-----
+
+If your client installs keep hanging or erroring out, the most common issue as of 0.13 is with MQ. There have been some architecture changes that are very important to account for in the upgrade.
+
+Please follow this Gist if you are encountering issues with 0.13+: https://gist.github.com/mattkasun/face2a7c1f32031a2126ff7243caad12
+
+
+
 UI
 ----
 **I want to make a seperate network and give my friend access to only that network.**

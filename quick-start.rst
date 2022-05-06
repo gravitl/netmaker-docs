@@ -2,18 +2,20 @@
 Quick Install
 ===============
 
-This quick start guide is an **opinionated** guide for getting up and running with Netmaker as quickly as possible.
+This quick install guide is an **opinionated** guide for getting up and running with Netmaker as quickly as possible.
 
-If just trialing netmaker, you may also want to check out the 3-minute PoC install of Netmaker in the README on GitHub. The following is just a guided version of that script, plus a custom domain (instead of nip.io): https://github.com/gravitl/netmaker .
+If you are just looking to trial netmaker, we **highly recommend** using the 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker 
 
-Introduction
-==================
+The following is a guided version of that script, with the option to add a custom domain (instead of nip.io):  
 
-We assume for this installation that you want all of the Netmaker features enabled, you want your server to be secure, and you want your server to be accessible from anywhere.
+Assumptions
+============================
 
-This instance will not be HA. However, it should comfortably handle around one hundred concurrent clients and support the most common use cases.
+We assume for this installation that you want all of the Netmaker features enabled, and you want your server to be accessible from anywhere.
 
-If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact info@gravitl.com, or check out the business subscription plans at https://gravitl.com/plans/business.
+This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.
+
+If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact us: https://www.netmaker.org/contact
 
 By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Caddy reverse proxy.
 
@@ -26,11 +28,13 @@ For information about deploying more advanced configurations, see the :doc:`Adva
    
    - Preferably from a cloud provider (e.x: DigitalOcean, Linode, AWS, GCP, etc.)
    
-   - (We do not recommend Oracle Cloud, as VM's here have been known to cause network interference.)
+   - We **highly recommend** that Netmaker be deployed in a dedicated networking environment. It should not share a local network with the clients which it will be managing. This can cause routing issues.
 
-   - Public, static IP 
+   - We do not recommend Oracle Cloud, as VM's here have been known to cause network interference.
+
+   - The machine should have a public, static IP address 
    
-   - Min 1GB RAM, 1 CPU (4GB RAM, 2CPU preferred for production installs)
+   - The machine should have at least 1GB RAM and 1 CPU (2GB RAM preferred for production installs)
    
    - 2GB+ of storage 
    
@@ -40,20 +44,18 @@ For information about deploying more advanced configurations, see the :doc:`Adva
 
   - A publicly owned domain (e.x. example.com, mysite.biz) 
   - Permission and access to modify DNS records via DNS service (e.x: Route53)
+  - **Important Note:** Some of our users like use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed.
 
 1. Prepare DNS
 ================
 
-Create a wildcard A record pointing to the public IP of your VM. As an example, \*.netmaker.example.com.
+Create a wildcard A record pointing to the public IP of your VM. As an example, \*.netmaker.example.com. Alternatively, create records for these specific subdomains:
 
-Caddy will create 3 subdomains with this wildcard, EX:
+- dashboard.domain
 
-- dashboard.netmaker.example.com
+- api.domain
 
-- api.netmaker.example.com
-
-- grpc.netmaker.example.com
-
+- broker.domain
 
 2. Install Dependencies
 ========================
@@ -73,21 +75,32 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
-- **443 (tcp):** for Dashboard, REST API, and gRPC
-- **80 (tcp):** for LetsEncrypt
-- **53 (udp and tcp):** for CoreDNS - This is no longer necessary as of 0.10.0, as by default DNS queries will run over WireGuard.
-- **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.
+- **443 (tcp):** for Dashboard and REST API  
+- **80 (tcp):** for LetsEncrypt  
+- **ICMP (optional:** as of 0.14.0 this should not be necessary, but previous versions require nodes to ping the server over public IP  
+- **53 (udp and tcp):** for CoreDNS - This is no longer necessary as of 0.10.0, but in some cases you may still want to use CoreDNS externally.  
+- **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
+- **8883 (tcp):** for MQ Broker
 
 .. code-block::
 
-  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow 53/udp && sudo ufw allow 53/tcp && sudo ufw allow 51821:51830/udp
+  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow 53/udp && sudo ufw allow 53/tcp && sudo ufw allow 51821:51830/udp && sudo ufw allow 8883/tcp
+
+It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
+
+.. code-block::
+
+  iptables --policy FORWARD ACCEPT
+
+
 
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
+  - allow 8883/tcp from all
   - (optional) allow 53/udp and 53/tcp from all
+  - (optional) allow icmp from all
   - allow 51821-51830/udp from all
-
 
 4. Install Netmaker
 ========================
@@ -95,21 +108,17 @@ Make sure the following ports are open both on the VM and in the cloud security 
 Prepare Docker Compose 
 ------------------------
 
-**Note 1 on COREDNS_IP:** As of 0.10.0, the default installation does not require COREDNS_IP to be set. Queries will run over WireGuard.
-**Note 2 on COREDNS_IP:** Depending on your cloud provider, the public IP may not be bound directly to the VM on which you are running. In such cases, CoreDNS cannot bind to this IP, and you should use the IP of the default interface on your machine in place of COREDNS_IP. This command will get you the correct IP for CoreDNS in many cases:
-
 .. code-block::
 
   ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'
 
-Now, insert the values for your base (wildcard) domain, public ip, and coredns ip.
+Now, insert the values for your base (wildcard) domain, public ip.
 
 .. code-block::
 
-  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.contained.yml
+  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
   sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
   sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
-  sed -i 's/COREDNS_IP/<default interface ip>/g' docker-compose.yml
 
 Generate a unique master key and insert it:
 

@@ -241,7 +241,7 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#quick-start--page-root" class="md-nav__link">Quick Install</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#introduction" class="md-nav__link">Introduction</a>
+        <li class="md-nav__item"><a href="#assumptions" class="md-nav__link">Assumptions</a>
         </li>
         <li class="md-nav__item"><a href="#prerequisites" class="md-nav__link">0. Prerequisites</a>
         </li>
@@ -271,7 +271,7 @@
     <li class="md-nav__item">
     
     
-      <a href="#introduction" class="md-nav__link">Introduction</a>
+      <a href="#assumptions" class="md-nav__link">Assumptions</a>
       
     
     </li>
@@ -447,7 +447,7 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#quick-start--page-root" class="md-nav__link">Quick Install</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#introduction" class="md-nav__link">Introduction</a>
+        <li class="md-nav__item"><a href="#assumptions" class="md-nav__link">Assumptions</a>
         </li>
         <li class="md-nav__item"><a href="#prerequisites" class="md-nav__link">0. Prerequisites</a>
         </li>
@@ -482,13 +482,14 @@
             
   
 <h1 id="quick-start--page-root">Quick Install<a class="headerlink" href="#quick-start--page-root" title="Permalink to this headline">¶</a></h1>
-<p>This quick start guide is an <strong>opinionated</strong> guide for getting up and running with Netmaker as quickly as possible.</p>
-<p>If just trialing netmaker, you may also want to check out the 3-minute PoC install of Netmaker in the README on GitHub. The following is just a guided version of that script, plus a custom domain (instead of nip.io): <a class="reference external" href="https://github.com/gravitl/netmaker">https://github.com/gravitl/netmaker</a> .</p>
+<p>This quick install guide is an <strong>opinionated</strong> guide for getting up and running with Netmaker as quickly as possible.</p>
+<p>If you are just looking to trial netmaker, we <strong>highly recommend</strong> using the 5-minute installer of Netmaker in the README on GitHub: <a class="reference external" href="https://github.com/gravitl/netmaker">https://github.com/gravitl/netmaker</a></p>
+<p>The following is a guided version of that script, with the option to add a custom domain (instead of nip.io):</p>
 
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>We assume for this installation that you want all of the Netmaker features enabled, you want your server to be secure, and you want your server to be accessible from anywhere.</p>
-<p>This instance will not be HA. However, it should comfortably handle around one hundred concurrent clients and support the most common use cases.</p>
-<p>If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact <a class="reference external" href="mailto:info%40gravitl.com">info<span>@</span>gravitl<span>.</span>com</a>, or check out the business subscription plans at <a class="reference external" href="https://gravitl.com/plans/business">https://gravitl.com/plans/business</a>.</p>
+<h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h2>
+<p>We assume for this installation that you want all of the Netmaker features enabled, and you want your server to be accessible from anywhere.</p>
+<p>This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.</p>
+<p>If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact us: <a class="reference external" href="https://www.netmaker.org/contact">https://www.netmaker.org/contact</a></p>
 <p>By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Caddy reverse proxy.</p>
 <p>For information about deploying more advanced configurations, see the <a class="reference internal" href="server-installation.html"><span class="doc">Advanced Installation</span></a> docs.</p>
 
@@ -498,9 +499,10 @@
 <li><p><strong>Virtual Machine</strong></p>
 <ul>
 <li><p>Preferably from a cloud provider (e.x: DigitalOcean, Linode, AWS, GCP, etc.)</p></li>
-<li><p>(We do not recommend Oracle Cloud, as VM’s here have been known to cause network interference.)</p></li>
-<li><p>Public, static IP</p></li>
-<li><p>Min 1GB RAM, 1 CPU (4GB RAM, 2CPU preferred for production installs)</p></li>
+<li><p>We <strong>highly recommend</strong> that Netmaker be deployed in a dedicated networking environment. It should not share a local network with the clients which it will be managing. This can cause routing issues.</p></li>
+<li><p>We do not recommend Oracle Cloud, as VM’s here have been known to cause network interference.</p></li>
+<li><p>The machine should have a public, static IP address</p></li>
+<li><p>The machine should have at least 1GB RAM and 1 CPU (2GB RAM preferred for production installs)</p></li>
 <li><p>2GB+ of storage</p></li>
 <li><p>Ubuntu  20.04 Installed</p></li>
 </ul>
@@ -509,18 +511,18 @@
 <ul>
 <li><p>A publicly owned domain (e.x. example.com, mysite.biz)</p></li>
 <li><p>Permission and access to modify DNS records via DNS service (e.x: Route53)</p></li>
+<li><p><strong>Important Note:</strong> Some of our users like use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed.</p></li>
 </ul>
 </li>
 </ul>
 
 
 <h2 id="prepare-dns">1. Prepare DNS<a class="headerlink" href="#prepare-dns" title="Permalink to this headline">¶</a></h2>
-<p>Create a wildcard A record pointing to the public IP of your VM. As an example, *.netmaker.example.com.</p>
-<p>Caddy will create 3 subdomains with this wildcard, EX:</p>
+<p>Create a wildcard A record pointing to the public IP of your VM. As an example, *.netmaker.example.com. Alternatively, create records for these specific subdomains:</p>
 <ul class="simple">
-<li><p>dashboard.netmaker.example.com</p></li>
-<li><p>api.netmaker.example.com</p></li>
-<li><p>grpc.netmaker.example.com</p></li>
+<li><p>dashboard.domain</p></li>
+<li><p>api.domain</p></li>
+<li><p>broker.domain</p></li>
 </ul>
 
 
@@ -537,19 +539,27 @@
 <p>Make sure firewall settings are set for Netmaker both on the VM and with your cloud security groups (AWS, GCP, etc).</p>
 <p>Make sure the following ports are open both on the VM and in the cloud security groups:</p>
 <ul class="simple">
-<li><p><strong>443 (tcp):</strong> for Dashboard, REST API, and gRPC</p></li>
+<li><p><strong>443 (tcp):</strong> for Dashboard and REST API</p></li>
 <li><p><strong>80 (tcp):</strong> for LetsEncrypt</p></li>
-<li><p><strong>53 (udp and tcp):</strong> for CoreDNS - This is no longer necessary as of 0.10.0, as by default DNS queries will run over WireGuard.</p></li>
+<li><p><strong>ICMP (optional:</strong> as of 0.14.0 this should not be necessary, but previous versions require nodes to ping the server over public IP</p></li>
+<li><p><strong>53 (udp and tcp):</strong> for CoreDNS - This is no longer necessary as of 0.10.0, but in some cases you may still want to use CoreDNS externally.</p></li>
 <li><p><strong>51821-518XX (udp):</strong> for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.</p></li>
+<li><p><strong>8883 (tcp):</strong> for MQ Broker</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="n">proto</span> <span class="n">tcp</span> <span class="kn">from</span> <span class="nn">any</span> <span class="n">to</span> <span class="nb">any</span> <span class="n">port</span> <span class="mi">443</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">53</span><span class="o">/</span><span class="n">udp</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">53</span><span class="o">/</span><span class="n">tcp</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">51821</span><span class="p">:</span><span class="mi">51830</span><span class="o">/</span><span class="n">udp</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="n">proto</span> <span class="n">tcp</span> <span class="kn">from</span> <span class="nn">any</span> <span class="n">to</span> <span class="nb">any</span> <span class="n">port</span> <span class="mi">443</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">53</span><span class="o">/</span><span class="n">udp</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">53</span><span class="o">/</span><span class="n">tcp</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">51821</span><span class="p">:</span><span class="mi">51830</span><span class="o">/</span><span class="n">udp</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">ufw</span> <span class="n">allow</span> <span class="mi">8883</span><span class="o">/</span><span class="n">tcp</span>
+</pre></div>
+</div>
+<p>It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">iptables</span> <span class="o">--</span><span class="n">policy</span> <span class="n">FORWARD</span> <span class="n">ACCEPT</span>
 </pre></div>
 </div>
 <dl class="simple">
 <dt><strong>Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:</strong></dt><dd><ul class="simple">
 <li><p>allow 443/tcp from all</p></li>
 <li><p>allow 80/tcp from all</p></li>
+<li><p>allow 8883/tcp from all</p></li>
 <li><p>(optional) allow 53/udp and 53/tcp from all</p></li>
+<li><p>(optional) allow icmp from all</p></li>
 <li><p>allow 51821-51830/udp from all</p></li>
 </ul>
 </dd>
@@ -559,16 +569,13 @@
 <h2 id="install-netmaker">4. Install Netmaker<a class="headerlink" href="#install-netmaker" title="Permalink to this headline">¶</a></h2>
 
 <h3 id="prepare-docker-compose">Prepare Docker Compose<a class="headerlink" href="#prepare-docker-compose" title="Permalink to this headline">¶</a></h3>
-<p><strong>Note 1 on COREDNS_IP:</strong> As of 0.10.0, the default installation does not require COREDNS_IP to be set. Queries will run over WireGuard.
-<strong>Note 2 on COREDNS_IP:</strong> Depending on your cloud provider, the public IP may not be bound directly to the VM on which you are running. In such cases, CoreDNS cannot bind to this IP, and you should use the IP of the default interface on your machine in place of COREDNS_IP. This command will get you the correct IP for CoreDNS in many cases:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ip</span> <span class="n">route</span> <span class="n">get</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/^.*src \([0-9.]*\) .*$/</span><span class="se">\1</span><span class="s1">/p'</span>
 </pre></div>
 </div>
-<p>Now, insert the values for your base (wildcard) domain, public ip, and coredns ip.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">compose</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">contained</span><span class="o">.</span><span class="n">yml</span>
+<p>Now, insert the values for your base (wildcard) domain, public ip.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">compose</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span>
 <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">'s/NETMAKER_BASE_DOMAIN/&lt;your base domain&gt;/g'</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span>
 <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">'s/SERVER_PUBLIC_IP/&lt;your server ip&gt;/g'</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span>
-<span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">'s/COREDNS_IP/&lt;default interface ip&gt;/g'</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
 <p>Generate a unique master key and insert it:</p>
