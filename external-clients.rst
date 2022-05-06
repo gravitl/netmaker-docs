@@ -74,4 +74,4 @@ If you do not want DNS on your ext client conf files, simply leave it blank.
    :alt: Gateway
    :align: center
 
-Important to note, your client automatically adds egress gateway ranges (if any on the same network) to it's allowed IPs.
+Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.
