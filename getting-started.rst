@@ -35,7 +35,7 @@ Network Settings Description
 
 The Network creation form has a few fields which may seem unfamiliar. Here is a brief description:
 
-**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily. This has two benefits. For one, it%. It also means, you dont usually have to worry about opening up the local firewall for ports (for instance, 51821). **This setting is usually good to turn on, with some noteable exceptions.** This setting cannot be enabled if "client mode" is turned off. This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.
+**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily. This has two benefits. For one, it%. It also means, you dont usually have to worry about opening up the local firewall for ports (for instance, 51821). **This setting is usually good to turn on, with some noteable exceptions.** This setting cannot be enabled if "client mode" is turned off. This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.
 
 **Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.
 
@@ -76,13 +76,13 @@ Networks can also be enabled to allow nodes to sign up without keys at all. In t
 Deploy Nodes
 =================
 
-0. Prereqisite: Every machine on which you install should have wireguard and systemd already installed.
+0. Prereqisite: Every machine on which you install should have WireGuard and systemd already installed.
 
 1. SSH to each machine 
 2. ``sudo su -``
 3. **Prerequisite Check:** Every Linux machine on which you run the netclient must have WireGuard and systemd installed
-4. For linux machines with SystemD and WireGuard installed, Run the install command, Ex: ``curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | KEY=vm3ow4thatogiwnsla3thsl3894ths sh -``
-5. For Mac, Windows, and arch-specific linux distributions (e.g. ARM), `download the appropriate netclient for your system <https://github.com/gravitl/netmaker/releases/tag/latest/>`_ . Then, run "netclient join -t <your token>".
+4. For Linux machines with systemd and WireGuard installed, run the install command, Ex: ``curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | KEY=vm3ow4thatogiwnsla3thsl3894ths sh -``
+5. For Mac, Windows, and arch-specific Linux distributions (e.g. ARM), `download the appropriate netclient for your system <https://github.com/gravitl/netmaker/releases/tag/latest/>`_ . Then, run "netclient join -t <your token>".
 
 You should get output similar to the below. The netclient retrieves local settings, submits them to the server for processing, and retrieves updated settings. Then it sets the local network configuration. For more information about this process, see the :doc:`client installation <./client-installation>` documentation. If this process failed and you do not see your node in the console (see below), then reference the :doc:`troubleshooting <./troubleshoot>` documentation.
 
@@ -118,7 +118,7 @@ Your machines should now be visible in the control pane.
    :alt: Node Success
    :align: center
 
-You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
+You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 
 .. image:: images/node-details.png
    :width: 80%
@@ -127,7 +127,7 @@ You can view/modify/delete any node by selecting it in the NODES tab. For instan
 
 
 
-Nodes can be added/removed/modified on the network at any time. Nodes can also be added to multiple Netmaker networks. Any changes will get picked up by any nodes on a given network, and will take aboue ~30 seconds to take effect.
+Nodes can be added/removed/modified on the network at any time. Nodes can also be added to multiple Netmaker networks. Any changes will get picked up by any nodes on a given network and will take about ~30 seconds to take effect.
 
 Uninstalling the netclient
 =============================
