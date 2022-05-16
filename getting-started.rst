@@ -133,7 +133,7 @@ Uninstalling the netclient
 =============================
 
 1. To remove your nodes from the default network, run the following on each node: ``sudo netclient leave -n default``
-2. To remove the netclient entirely from each node, run ``sudo rm -rf /etc/netclient`` (after running the first step)
+2. To remove the netclient entirely from each node, run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient`` (after running the first step)
 
 Uninstalling Netmaker
 ===========================
