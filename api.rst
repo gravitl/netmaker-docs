@@ -10,9 +10,9 @@ Most actions that can be performed via API can be performed via UI. We recommend
 
 Authentication
 ==============
-API calls must be authenticated via a header of  the format  `-H "Authorization: Bearer <YOUR_SECRET_KEY>"` There are two methods to obtain YOUR_SECRET_KEY:
+API calls must be authenticated via a header of the format  `-H "Authorization: Bearer <YOUR_SECRET_KEY>"` There are two methods to obtain YOUR_SECRET_KEY:
 1. Using the masterkey. By default, this value is "secret key," but you should change this on your instance and keep it secure. This value can be set via env var at startup or in a config file (config/environments/< env >.yaml). See the [general usage](./USAGE.md) documentation for more details.
-2. Using a JWT received for a node. This  can be retrieved by calling the `/api/nodes/<network>/authenticate` endpoint, as documented below.
+2. Using a JWT received for a node. This can be retrieved by calling the `/api/nodes/<network>/authenticate` endpoint, as documented below.
 
 
 Format of Calls for Curl
@@ -141,7 +141,7 @@ Nodes API Call Examples
 Users API
 -----------------------
   
-**Note:** Only able to create Admin user at this time. The "user" is only used by the `user interface <https://github.com/gravitl/netmaker-ui>`_ to authenticate the  single  admin user.
+**Note:** Only able to create Admin user at this time. The "user" is only used by the `user interface <https://github.com/gravitl/netmaker-ui>`_ to authenticate the single admin user.
 
 **Get User:** `/api/users/{username}`, `GET`  
   
