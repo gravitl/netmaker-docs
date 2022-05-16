@@ -46,7 +46,7 @@
   
   
   
-    <title>Advanced Server Installation &#8212; Netmaker 0.13.1 documentation</title>
+    <title>Advanced Server Installation &#8212; Netmaker 0.14.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -56,7 +56,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Advanced Client Installation" href="client-installation.html" />
+    <link rel="next" title="Advanced Client Installation" href="advanced-client-install.html" />
     <link rel="prev" title="Access Control Lists" href="acls.html" />
   
    
@@ -81,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="index.html" title="Netmaker 0.13.1 documentation"
+        <a href="index.html" title="Netmaker 0.14.0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#xe869</i>
@@ -167,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.13.1 documentation</a></li>
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.0 documentation</a></li>
       </ul>
     </div>
   </nav>
@@ -179,13 +179,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="index.html" title="Netmaker 0.13.1 documentation" class="md-nav__button md-logo">
+    <a href="index.html" title="Netmaker 0.14.0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#xe869</i>
       
     </a>
     <a href="index.html"
-       title="Netmaker 0.13.1 documentation">Netmaker Docs</a>
+       title="Netmaker 0.14.0 documentation">Netmaker Docs</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/gravitl/netmaker/" title="Go to repository" class="md-source" data-md-source="github">
@@ -238,6 +238,13 @@
     
     
       <a href="getting-started.html" class="md-nav__link">Getting Started</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="netclient.html" class="md-nav__link">Netclient Setup</a>
       
     
     </li>
@@ -421,7 +428,7 @@
     <li class="md-nav__item">
     
     
-      <a href="client-installation.html" class="md-nav__link">Advanced Client Installation</a>
+      <a href="advanced-client-install.html" class="md-nav__link">Advanced Client Installation</a>
       
     
     </li>
@@ -728,7 +735,7 @@
 <span class="nt">services</span><span class="p">:</span>
   <span class="nt">netmaker</span><span class="p">:</span> <span class="c1"># The Netmaker Server</span>
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker:v0.13.1</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker:v0.14.0</span>
     <span class="nt">volumes</span><span class="p">:</span> <span class="c1"># Volume mounts necessary to store SQL Data, and share data with CoreDNS and MQ (certs folder)</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dnsconfig:/root/config/dnsconfig</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sqldata:/root/data</span>
@@ -769,7 +776,7 @@
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">netmaker-ui</span>
     <span class="nt">depends_on</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker-ui:v0.13.1</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker-ui:v0.14.0</span>
     <span class="nt">links</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="s">"netmaker:api"</span>
     <span class="nt">ports</span><span class="p">:</span>
@@ -931,54 +938,32 @@ kubectl apply -f netclient-template.yaml
 <p>The following file configures Netmaker as a subdomain. This config is an adaption from the swag proxy project.</p>
 <p>./netmaker.subdomain.conf:</p>
 <div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+    <span class="c1"># Redirect HTTP to HTTPS.</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">*.netmaker.example.org</span><span class="p">;</span> <span class="c1"># Please change to your domain</span>
+    <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
     <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
     <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span><span class="p">;</span>
-
-    <span class="kn">server_name</span> <span class="s">netmaker.*</span><span class="p">;</span> <span class="c1"># The external URL</span>
-    <span class="kn">client_max_body_size</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="c1"># A valid https certificate is needed.</span>
+    <span class="kn">server_name</span> <span class="s">dashboard.netmaker.example.org</span><span class="p">;</span> <span class="c1"># Please change to your domain</span>
     <span class="kn">include</span> <span class="s">/config/nginx/ssl.conf</span><span class="p">;</span>
-
     <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-        <span class="c1"># This config file can be found at:</span>
-        <span class="c1"># https://github.com/linuxserver/docker-swag/blob/master/root/defaults/proxy.conf</span>
-        <span class="kn">include</span> <span class="s">/config/nginx/proxy.conf</span><span class="p">;</span>
-
-        <span class="c1"># if you use a custom resolver to find your app, needed with swag proxy</span>
-        <span class="c1"># resolver 127.0.0.11 valid=30s;</span>
-        <span class="kn">set</span> <span class="nv">$upstream_app</span> <span class="s">netmaker-ui</span><span class="p">;</span>                             <span class="c1"># The internal URL</span>
-        <span class="kn">set</span> <span class="nv">$upstream_port</span> <span class="mi">80</span><span class="p">;</span>                                     <span class="c1"># The internal Port</span>
-        <span class="kn">set</span> <span class="nv">$upstream_proto</span> <span class="s">http</span><span class="p">;</span>                                  <span class="c1"># the protocol that is being used</span>
-        <span class="kn">proxy_pass</span> <span class="nv">$upstream_proto://$upstream_app:$upstream_port</span><span class="p">;</span> <span class="c1"># combine the set variables from above</span>
+        <span class="kn">proxy_pass</span> <span class="s">http://&lt;NETMAKER_IP&gt;:8082</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
 <span class="k">server</span> <span class="p">{</span>
     <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
     <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span><span class="p">;</span>
-
-    <span class="kn">server_name</span> <span class="s">backend-netmaker.*</span><span class="p">;</span> <span class="c1"># The external URL</span>
-    <span class="kn">client_max_body_size</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kn">underscores_in_headers</span> <span class="no">on</span><span class="p">;</span>
-
-    <span class="c1"># A valid https certificate is needed.</span>
+    <span class="kn">server_name</span> <span class="s">api.netmaker.example.org</span><span class="p">;</span> <span class="c1"># Please change to your domain</span>
     <span class="kn">include</span> <span class="s">/config/nginx/ssl.conf</span><span class="p">;</span>
 
     <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-        <span class="c1"># if you use a custom resolver to find your app, needed with swag proxy</span>
-        <span class="c1"># resolver 127.0.0.11 valid=30s;</span>
-
-        <span class="kn">set</span> <span class="nv">$upstream_app</span> <span class="s">netmaker</span><span class="p">;</span>                                <span class="c1"># The internal URL</span>
-        <span class="kn">set</span> <span class="nv">$upstream_port</span> <span class="mi">8081</span><span class="p">;</span>                                   <span class="c1"># The internal Port</span>
-        <span class="kn">set</span> <span class="nv">$upstream_proto</span> <span class="s">http</span><span class="p">;</span>                                  <span class="c1"># the protocol that is being used</span>
-        <span class="kn">proxy_pass</span> <span class="nv">$upstream_proto://$upstream_app:$upstream_port</span><span class="p">;</span> <span class="c1"># combine the set variables from above</span>
-
-        <span class="c1"># Forces the header to be the one that is visible from the outside</span>
-        <span class="kn">proxy_set_header</span>                <span class="s">Host</span> <span class="s">backend.netmaker.example.org</span><span class="p">;</span> <span class="c1"># Please cange to your URL</span>
-
-        <span class="c1"># Pass all headers through to the backend</span>
-        <span class="kn">proxy_pass_request_headers</span>      <span class="no">on</span><span class="p">;</span>
+        <span class="kn">proxy_pass</span> <span class="s">http://&lt;NETMAKER_IP&gt;:8081</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span>            <span class="s">Host</span> <span class="s">api.netmaker.example.org</span><span class="p">;</span> <span class="c1"># Please change to your domain</span>
+        <span class="kn">proxy_pass_request_headers</span>  <span class="no">on</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 </pre></div>
@@ -1169,7 +1154,7 @@ This install has some notable exceptions:
             </a>
           
           
-            <a href="client-installation.html" title="Advanced Client Installation"
+            <a href="advanced-client-install.html" title="Advanced Client Installation"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span

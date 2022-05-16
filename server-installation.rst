@@ -2,7 +2,7 @@
 Advanced Server Installation
 =================================
 
-This section outlines installing the Netmaker server, including Netmaker, Netmaker UI, rqlite, and CoreDNS
+This section outlines installing the Netmaker server, including Netmaker, Netmaker UI, rqlite, and CoreDNS.
 
 System Compatibility
 ====================
@@ -13,7 +13,7 @@ Typically, Netmaker is run inside of containers, using Docker or Kubernetes.
 
 Netmaker can be run without containers, but this is not recommended. You must run the Netmaker binary, CoreDNS binary, database, and a web server directly on the host.
 
-Each of these components have their own individual requirements and the management complexity increases exponentially by running outside of containers.
+Each of these components has its own individual requirements and the management complexity increases exponentially by running outside of containers.
 
 For first-time installs, we recommend the quick install guide. The following documents are meant for more advanced installation environments and are not recommended for most users. However, these documents can be helpful in customizing or troubleshooting your own installation. 
 
@@ -21,7 +21,7 @@ For first-time installs, we recommend the quick install guide. The following doc
 Server Configuration Reference
 ==========================================
 
-Netmaker sets its configuration in the following order of precendence:  
+Netmaker sets its configuration in the following order of precedence:  
 
 1. **Defaults:** Default values set on the server if no value is provided in configuration.  
 2. **Config File:** Values set in the `config/environments/*.yaml`` file 
@@ -38,14 +38,14 @@ SERVER_NAME
     **Description:**  MUST SET THIS VALUE. This is the public, resolvable DNS name of the MQ Broker. For instance: broker.netmaker.example.com.
 
 SERVER_HOST
-    **Default:** (Server detects public IP address of machine)
+    **Default:** (Server detects the public IP address of machine)
 
     **Description:** The public IP of the server where the machine is running. 
 
 SERVER_API_CONN_STRING
     **Default:** ""
 
-    **Description:**  MUST SET THIS VALUE. This is the public, resolvable address of the API, including port. For instance: api.netmaker.example.com:443.
+    **Description:**  MUST SET THIS VALUE. This is the public, resolvable address of the API, including the port. For instance: api.netmaker.example.com:443.
 
 COREDNS_ADDR
     **Default:** ""
@@ -151,7 +151,7 @@ TELEMETRY
 MQ_HOST 
     **Default:** (public IP of server)
 
-    **Description:** The address of the mq server. If running from docker compose it will be "mq". If using "host networking", it will find and detect the IP of the mq container. Otherwise, need to input address. If not set, it will use the public IP of the server. the port 1883 will be appended automatically. This is the expected reachable port for MQ and cannot be changed at this time.
+    **Description:** The address of the mq server. If running from docker compose it will be "mq". If using "host networking", it will find and detect the IP of the mq container. Otherwise, need to input address. If not set, it will use the public IP of the server. The port 1883 will be appended automatically. This is the expected reachable port for MQ and cannot be changed at this time.
 
 HOST_NETWORK: 
     **Default:** "off"
@@ -166,7 +166,7 @@ MANAGE_IPTABLES:
 PORT_FORWARD_SERVICES: 
     **Default:** ""
 
-    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. However, if you set the Netmaker server as a ingress gateway, this will break SSH on external clients, so be careful. DNS enables private dns over wireguard. If you would like to use private dns with ext clients, turn this on.
+    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
 
 POD_IP: 
     **Default:** "127.0.0.1"
@@ -177,7 +177,7 @@ POD_IP:
 VERBOSITY:
     **Default:** 0
 
-    **Description:** Specify level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.
+    **Description:** Specify the level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.
 
 
 Config File Reference
@@ -190,7 +190,7 @@ A config file may be placed under config/environments/<env-name>.yml. To read th
 Compose File - Annotated
 --------------------------------------
 
-All environment variables and options are enabled in this file. It is the equivalent to running the "full install" from the above section. However, all environment variables are included, and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.
+All environment variables and options are enabled in this file. It is the equivalent to running the "full install" from the above section. However, all environment variables are included and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.
 
 .. literalinclude:: ./examplecode/docker-compose.reference.yml
   :language: YAML
@@ -203,12 +203,12 @@ The default options for docker-compose can be found here: https://github.com/gra
 The following is a brief description of each:
 
 - `docker-compose.contained.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.contained.yml>`_ - This is the default docker-compose, used in the quick start and deployment script in the README on GitHub. It deploys Netmaker with all options included (Caddy and CoreDNS) and has "self-contained" netclients, meaning they do not affect host networking.
-- `docker-compose.coredns.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.coredns.yml>`_ - This is a simple compose used to spin up a standalone CoreDNS server. Can be useful if, for instance, you are unning Netmaker on baremetal but need CoreDNS.
+- `docker-compose.coredns.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.coredns.yml>`_ - This is a simple compose used to spin up a standalone CoreDNS server. Can be useful if, for instance, you are running Netmaker on baremetal but need CoreDNS.
 - `docker-compose.hostnetwork.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.hostnetwork.yml>`_ - This is similar to the docker-compose.contained.yml but with a key difference: it has advanced permissions and mounts host volumes to control networking on the host level.
 - `docker-compose.nocaddy.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nocaddy.yml>`_ -= This is the same as docker-compose.contained.yml but without Caddy, in case you need to use a different proxy like Nginx, Traefik, or HAProxy.
 - `docker-compose.nodns.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nodns.yml>`_ - This is the same as docker-compose.contained.yml but without CoreDNS, in which case you will not have the Private DNS feature.
 - `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.contained.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
-- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the "primary" docker-compose that users should work with.
+- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the "primary" docker-compose users should work with.
 
 
 Traefik Proxy
@@ -220,21 +220,21 @@ To install with Traefik, rather than Nginx or the default Caddy, check out this 
 No DNS - CoreDNS Disabled
 ----------------------------------------------
 
-CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function, because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE="off"
+CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE="off"
 
 .. _NoDocker:
 
 Linux Install without Docker
 =============================
 
-Most systems support Docker, but some do not. In such environments, there are many options for installing Netmaker. Netmaker is available as a binary file, and there is a zip file of the Netmaker UI static HTML on GitHub. Beyond the UI and Server, you may want to optionally install a database (sqlite is embedded, rqlite or postgres are supported) and CoreDNS (also optional). 
+Most systems support Docker, but some do not. In such environments, there are many options for installing Netmaker. Netmaker is available as a binary file, and there is a zip file of the Netmaker UI static HTML on GitHub. Beyond the UI and Server, you may want to optionally install a database (SQLite is embedded, rqlite or postgres are supported) and CoreDNS (also optional). 
 
 Once this is enabled and configured for a domain, you can continue with the below. The recommended server runs Ubuntu 20.04.
 
 Database Setup (optional)
 --------------------------
 
-You can run the netmaker binary standalone and it will run an embedded sqlite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.
+You can run the netmaker binary standalone and it will run an embedded SQLite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.
 
 1. Install rqlite on your server: https://github.com/rqlite/rqlite
 
@@ -254,7 +254,7 @@ Server Setup
 UI Setup
 -----------
 
-The following uses Nginx as an http server. You may alternatively use Apache or any other web server that serves static web files.
+The following uses Nginx as an http server. Alternatively, you may use Apache or any other web server that serves static web files.
 
 1. Download and Unzip UI asset files
 2. Copy Config to Nginx or other reverse proxy
@@ -275,7 +275,7 @@ The following uses Nginx as an http server. You may alternatively use Apache or 
 Proxy / Load Balancer
 ------------------------
 
-You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs).
+You will need to proxy connections to your UI and Server. By default, the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs).
 
 MQ
 ----
@@ -331,7 +331,7 @@ For a more detailed guide on integrating Netmaker with MicroK8s, `check out this
 Nginx Reverse Proxy Setup with https
 ======================================
 
-The `Swag Proxy <https://github.com/linuxserver/docker-swag>`_ makes it easy to generate a valid ssl certificate for the config bellow. Here is the `documentation <https://docs.linuxserver.io/general/swag>`_ for the installation.
+The `Swag Proxy <https://github.com/linuxserver/docker-swag>`_ makes it easy to generate a valid SSL certificate for the config below. Here is the `documentation <https://docs.linuxserver.io/general/swag>`_ for the installation.
 
 The following file configures Netmaker as a subdomain. This config is an adaption from the swag proxy project.
 
@@ -340,56 +340,140 @@ The following file configures Netmaker as a subdomain. This config is an adaptio
 .. code-block:: nginx
 
     server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
-
-        server_name netmaker.*; # The external URL
-        client_max_body_size 0;
-
-        # A valid https certificate is needed.
-        include /config/nginx/ssl.conf;
-
-        location / {
-            # This config file can be found at:
-            # https://github.com/linuxserver/docker-swag/blob/master/root/defaults/proxy.conf
-            include /config/nginx/proxy.conf;
-
-            # if you use a custom resolver to find your app, needed with swag proxy
-            # resolver 127.0.0.11 valid=30s;
-            set $upstream_app netmaker-ui;                             # The internal URL
-            set $upstream_port 80;                                     # The internal Port
-            set $upstream_proto http;                                  # the protocol that is being used
-            proxy_pass $upstream_proto://$upstream_app:$upstream_port; # combine the set variables from above
-            }
+        # Redirect HTTP to HTTPS.
+        listen 80;
+        server_name *.netmaker.example.org; # Please change to your domain
+        return 301 https://$host$request_uri;
         }
-
+    
     server {
         listen 443 ssl;
         listen [::]:443 ssl;
-
-        server_name backend-netmaker.*; # The external URL
-        client_max_body_size 0;
-        underscores_in_headers on;
-
-        # A valid https certificate is needed.
+        server_name dashboard.netmaker.example.org; # Please change to your domain
         include /config/nginx/ssl.conf;
-
         location / {
-            # if you use a custom resolver to find your app, needed with swag proxy
-            # resolver 127.0.0.11 valid=30s;
-
-            set $upstream_app netmaker;                                # The internal URL
-            set $upstream_port 8081;                                   # The internal Port
-            set $upstream_proto http;                                  # the protocol that is being used
-            proxy_pass $upstream_proto://$upstream_app:$upstream_port; # combine the set variables from above
-
-            # Forces the header to be the one that is visible from the outside
-            proxy_set_header                Host backend.netmaker.example.org; # Please cange to your URL
-
-            # Pass all headers through to the backend
-            proxy_pass_request_headers      on;
+            proxy_pass http://<NETMAKER_IP>:8082;
             }
         }
+    
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        server_name api.netmaker.example.org; # Please change to your domain
+        include /config/nginx/ssl.conf;
+    
+        location / {
+            proxy_pass http://<NETMAKER_IP>:8081;
+            proxy_set_header		Host api.netmaker.example.org; # Please change to your domain
+            proxy_pass_request_headers	on;
+            }
+        }
+    
+
+
+Nginx Proxy Manager Setup
+======================================
+
+To use Netmaker with Nginx Proxy Manager, three proxy hosts should be added, one for each subdomain used by netmaker. Each subdomain should have SSL enable and be configured as follows:
+
+.. code-block::
+
+	api.netmaker.example.com: 
+	Forward Hostname/IP: netmaker
+	Forward Port: 8081
+	dashboard.netmaker.example.com:
+	Forward Hostname/IP: netmaker-ui
+	Forward Port: 80
+	grpc.netmaker.example.com:
+	Forward Hostname/IP: netmaker
+	Forward Port: 50051
+	Custom Locations:
+	Add location /
+	Forward Hostname/IP: netmaker
+	Forward Port: 50051
+	Custom config (gear button): grpc_pass netmaker:50051;
+
+
+The following is a cleaned up config generated by Nginx Proxy Manager to show how nginx can be configured to support Netmaker. This does not include the neccessary SSL configuration. 
+
+
+.. code-block:: nginx
+
+	# ------------------------------------------------------------
+	# dashboard.netmaker.example.com
+	# ------------------------------------------------------------
+	server {
+	  set $forward_scheme http;
+	  set $server         "netmaker-ui";
+	  set $port           80;
+	listen 80;
+	listen [::]:80;
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	server_name dashboard.netmaker.example.com;
+	  location / {
+	    # Proxy!
+	    include conf.d/include/proxy.conf;
+		#above file includes:
+		#add_header       X-Served-By $host;
+		#proxy_set_header Host $host;
+		#proxy_set_header X-Forwarded-Scheme $scheme;
+		#proxy_set_header X-Forwarded-Proto  $scheme;
+		#proxy_set_header X-Forwarded-For    $remote_addr;
+		#proxy_set_header X-Real-IP          $remote_addr;
+		#proxy_pass       $forward_scheme://$server:$port$request_uri;
+	  }
+	}
+	
+	# ------------------------------------------------------------
+	# api.netmaker.example.com
+	# ------------------------------------------------------------
+	server {
+	  set $forward_scheme http;
+	  set $server         "netmaker";
+	  set $port           8081;
+	listen 80;
+	listen [::]:80;
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	  server_name api.netmaker.example.com;
+	  location / {
+	    # Proxy!
+	    include conf.d/include/proxy.conf;
+		#above file includes:
+		#add_header       X-Served-By $host;
+		#proxy_set_header Host $host;
+		#proxy_set_header X-Forwarded-Scheme $scheme;
+		#proxy_set_header X-Forwarded-Proto  $scheme;
+		#proxy_set_header X-Forwarded-For    $remote_addr;
+		#proxy_set_header X-Real-IP          $remote_addr;
+		#proxy_pass       $forward_scheme://$server:$port$request_uri;
+	  }
+	}
+	
+	# ------------------------------------------------------------
+	# grpc.netmaker.example.com
+	# ------------------------------------------------------------
+	server {
+	  set $forward_scheme http;
+	  set $server         "netmaker";
+	  set $port           50051;
+	listen 80;
+	listen [::]:80;
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	  server_name grpc.netmaker.example.com;
+	  location / {
+	    proxy_set_header Host $host;
+	    proxy_set_header X-Forwarded-Scheme $scheme;
+	    proxy_set_header X-Forwarded-Proto  $scheme;
+	    proxy_set_header X-Forwarded-For    $remote_addr;
+	    proxy_set_header X-Real-IP          $remote_addr;
+	    proxy_pass       http://netmaker:50051;
+	    grpc_pass netmaker:50051;
+	  }
+	}
+
 
 .. _HAInstall:
 
@@ -451,7 +535,7 @@ The below command will install netmaker with two server replicas, a coredns serv
     --set dns.clusterIP=10.245.75.75 --set dns.RWX.storageClassName=nfs \
     --set ingress.className=nginx
 
-The below command will install netmaker with three server replicas (the default), **no coredns**, and ingress with routes of api.netmaker.example.com, grpc.netmaker.example.com, and dashboard.netmaker.example.com. There will be one UI replica instead of two, and one database instance instead of two. Traefik will look for a ClusterIssuer named "le-prod-2" to get valid certificates for the ingress. 
+The below command will install netmaker with three server replicas (the default), **no coredns**, and ingress with routes of api.netmaker.example.com, grpc.netmaker.example.com, and dashboard.netmaker.example.com. There will be one UI replica instead of two and one database instance instead of two. Traefik will look for a ClusterIssuer named "le-prod-2" to get valid certificates for the ingress. 
 
 .. code-block::
 
@@ -481,7 +565,7 @@ There are some example ingress objects in the kube/example folder.
 
 Kernel WireGuard
 ------------------
-If you have control of the Kubernetes worker node servers, we recommend **first** installing WireGuard on the hosts, and then installing HA Netmaker in Kernel mode. By default, Netmaker will install with userspace WireGuard (wireguard-go) for maximum compatibility, and to avoid needing permissions at the host level. If you have installed WireGuard on your hosts, you should install Netmaker's helm chart with the following option:
+If you have control of the Kubernetes worker node servers, we recommend **first** installing WireGuard on the hosts, and then installing HA Netmaker in Kernel mode. By default, Netmaker will install with userspace WireGuard (wireguard-go) for maximum compatibility and to avoid needing permissions at the host level. If you have installed WireGuard on your hosts, you should install Netmaker's helm chart with the following option:
 
 - `--set wireguard.kernel=true`
 
@@ -528,12 +612,12 @@ If using PostgreSQL, follow their documentation for `installing in HA mode <http
 
 Your load balancer of choice will send requests to the Netmaker servers. Setup is similar to the various guides we have created for Nginx, Caddy, and Traefik. SSL certificates must also be configured and handled by the LB.
 
-2. RQLite Setup
+2. rqlite Setup
 ------------------
 
-RQLite is the included distributed datastore for an HA Netmaker installation. If you have a different corporate database you wish to integrate, Netmaker is easily extended to other DB's. If this is a requirement, please contact us.
+rqlite is the included distributed datastore for an HA Netmaker installation. If you have a different corporate database you wish to integrate, Netmaker is easily extended to other DB's. If this is a requirement, please contact us.
 
-Assuming you use Rqlite, you must run it on each Netmaker server VM, or alongside that VM as a container. Setup a config.json for database credentials (password supports BCRYPT HASHING) and mount in working directory of rqlite and specify with `-auth config.json` :
+Assuming you use rqlite, you must run it on each Netmaker server VM, or alongside that VM as a container. Setup a config.json for database credentials (password supports BCRYPT HASHING) and mount in working directory of rqlite and specify with `-auth config.json` :
 
 .. code-block::
 
@@ -564,7 +648,7 @@ Once rqlite instances have been configured, the Netmaker servers can be deployed
 3. Netmaker Setup
 ------------------
 
-Netmaker will be started on each node with default settings, except with DATABASE=rqlite (or DATABASE=postgress) and SQL_CONN set appropriately to reach the local rqlite instance. Rqlite will maintain consistency with each Netmaker backend.
+Netmaker will be started on each node with default settings, except with DATABASE=rqlite (or DATABASE=postgress) and SQL_CONN set appropriately to reach the local rqlite instance. rqlite will maintain consistency with each Netmaker backend.
 
 If deploying HA with PostgreSQL, you will connect with the following settings:
 

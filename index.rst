@@ -16,7 +16,7 @@ Welcome to the Netmaker Documentation
 
 Netmaker is a platform for creating fast and secure virtual networks with WireGuard.
 
-This documentation covers Netmaker's :doc:`installation <./server-installation>`, :doc:`usage <./usage>`, and :doc:`troubleshooting <./support>`. It also contains reference documentation for the :doc:`API <./api>`, :doc:`UI <./ui-reference>` and :doc:`Netclient <./client-installation>` configuration. All of the `source code <https://github.com/gravitl/netmaker>`_ for Netmaker is on GitHub.
+This documentation covers Netmaker's :doc:`installation <./server-installation>`, :doc:`usage <./usage>`, and :doc:`troubleshooting <./support>`. It also contains reference documentation for the :doc:`API <./api>`, :doc:`UI <./ui-reference>` and :doc:`Netclient <./advanced-client-install>` configuration. All of the `source code <https://github.com/gravitl/netmaker>`_ for Netmaker is on GitHub.
 
 **For Kubernetes-specific guidance, please see the** `Netmaker Kubernetes Documentation. <https://k8s.netmaker.org>`_
 
@@ -45,6 +45,16 @@ How to install Netmaker and set up your first network.
    quick-start
 
    getting-started
+
+Netclient
+------------------------------------
+
+Client-side instructions for joining a network and managing a machine locally.
+
+.. toctree::
+   :maxdepth: 2
+
+   netclient
 
 Ingress, Egress, and Relays
 ------------------------------
@@ -109,7 +119,7 @@ A detailed guide to installing the Netmaker agent (netclient) on devices and con
 .. toctree::
    :maxdepth: 2
    
-   client-installation
+   advanced-client-install
 
 
 Oauth Configuration

@@ -15,13 +15,13 @@ Netmaker allows for "external clients" to reach into a network and access servic
         - Laptops
         - Desktops
 
-An external client is not "managed," meaning it does not automatically pull the latest network configuration, or push changes to its configuration. Instead, it uses a generated WireGuard config file to access the designated **Ingress Gateway**, which **is** a managed server (running netclient). This server then forwards traffic to the appropriate endpoint, acting as a middle-man/relay.
+An external client is not "managed," meaning it does not automatically pull the latest network configuration or push changes to its configuration. Instead, it uses a generated WireGuard config file to access the designated **Ingress Gateway**, which **is** a managed server (running netclient). This server then forwards traffic to the appropriate endpoint, acting as a middle-man/relay.
 
 By using this method, you can hook any machine into a netmaker network that can run WireGuard.
 
 It is recommended to run the netclient where compatible, but for all other cases, a machine can be configured as an external client.
 
-Important to note, an external client is not **reachable** by the network, meaning the client can establish connections to other machines, but those machines cannot independently establish a connection back. The External Client method should only be used in use cases where one wishes to access resource running on the virtual network, and **not** for use cases where one wishes to make a resource accessible on the network. For that, use netclient.
+Important to note, that an external client is not **reachable** by the network, meaning the client can establish connections to other machines, but those machines cannot independently establish a connection back. The External Client method should only be used in use cases where one wishes to access resources running on the virtual network and **not** for use cases where one wishes to make a resource accessible on the network. For that, use netclient.
 
 Configuring an Ingress Gateway
 ==================================
@@ -50,7 +50,7 @@ After creating a client, you can edit the name to something more logical.
    :alt: Gateway
    :align: center
 
-Then, you can either download the configuration file directly, or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.
+Then, you can either download the configuration file directly or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.
 
 .. image:: images/exclient4.png
    :width: 80%
@@ -67,11 +67,11 @@ Configuring DNS for Ext Clients (OPTIONAL)
 ============================================
 
 If you wish to have a DNS field on your ext clients conf, simply edit the network field as shown below to 1.1.1.1 or 8.8.8.8 for example.
-If you do not want DNS on your ext client conf files, simply leave it blank.
+If you do not want DNS on your ext client conf files, leave it blank.
 
 .. image:: images/extclient5.png
    :width: 80%
    :alt: Gateway
    :align: center
 
-Important to note, your client automatically adds egress gateway ranges (if any on the same network) to it's allowed IPs.
+Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.
