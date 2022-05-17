@@ -79,7 +79,7 @@ Brew Install
 Installer
 ---------------
 
-Installer: <installer link coming soon>
+Installer: https://fileserver.netmaker.org/v0.14.0/netclient-install.pkg
 
 FreeBSD
 =============
