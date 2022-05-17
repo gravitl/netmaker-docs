@@ -62,7 +62,7 @@ Arch Distros (arch/manjaro/endeavouros)
 Windows
 ===============
 
-Installer: <installer link coming soon>
+MSI Installer: https://fileserver.netmaker.org/v0.14.0/netclient_x86.msi
 
 Mac
 ============
