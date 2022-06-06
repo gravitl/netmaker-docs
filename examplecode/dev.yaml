@@ -13,3 +13,16 @@ server:
   disableremoteipcheck: "" # defaults to "false" or DISABLE_REMOTE_IP_CHECK (if set)
   version: "" # version of server
   rce: "" # defaults to "off"
+  mqhost: "" # defaults to "mq"
+  nodeid: "" # defaults to macaddress of machine
+  messagequeuebackend: "" # default to "on"
+  database: "" # defaults to "sqlite"
+  verbosity: "" # defaults to 0
+  authprovider: "" # defaults to ""
+  displaykeys: "" #  defaults to "on"
+  manageiptables: "" # defaults to "on"
+  portforwardservices: "" # defaults to "", options include "dns" and "ssh"
+  hostnetwork: "" # defaults to "off"
+  mqport: "" # defaults to 8883
+  mqserverport: "" # defaults to 1883
+  server: "" # defaults to "", should be broker domain

@@ -5,7 +5,7 @@ Upgrades
 Introduction
 ===============
 
-As of 0.13.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now is still a relatively straightforward process. 
+As of 0.13.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now, is still a relatively straightforward process. 
 
 Critical Notes for 0.13.X
 ================================
@@ -36,7 +36,7 @@ Upgrade the Clients (prior to 0.10.0)
 
 To upgrade the client, you must get the new client binary and place it in /etc/netclient. Depending on the new vs. old version, there may be minor incompatibilities (discussed below).
 
-1. Vists https://github.com/gravitl/netmaker/releases/
+1. Visit https://github.com/gravitl/netmaker/releases/
 2. Find the appropriate binary for your machine.
 3. Download. E.x.: `wget https://github.com/gravitl/netmaker/releases/download/vX.X.X/netclient-myversion`
 4. Rename binary to `netclient` and move to folder. E.x.: `mv netclient-myversion /etc/netclient/netclient`

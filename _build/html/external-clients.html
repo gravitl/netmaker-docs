@@ -458,10 +458,10 @@
 </ul>
 </dd>
 </dl>
-<p>An external client is not “managed,” meaning it does not automatically pull the latest network configuration, or push changes to its configuration. Instead, it uses a generated WireGuard config file to access the designated <strong>Ingress Gateway</strong>, which <strong>is</strong> a managed server (running netclient). This server then forwards traffic to the appropriate endpoint, acting as a middle-man/relay.</p>
+<p>An external client is not “managed,” meaning it does not automatically pull the latest network configuration or push changes to its configuration. Instead, it uses a generated WireGuard config file to access the designated <strong>Ingress Gateway</strong>, which <strong>is</strong> a managed server (running netclient). This server then forwards traffic to the appropriate endpoint, acting as a middle-man/relay.</p>
 <p>By using this method, you can hook any machine into a netmaker network that can run WireGuard.</p>
 <p>It is recommended to run the netclient where compatible, but for all other cases, a machine can be configured as an external client.</p>
-<p>Important to note, an external client is not <strong>reachable</strong> by the network, meaning the client can establish connections to other machines, but those machines cannot independently establish a connection back. The External Client method should only be used in use cases where one wishes to access resource running on the virtual network, and <strong>not</strong> for use cases where one wishes to make a resource accessible on the network. For that, use netclient.</p>
+<p>Important to note, that an external client is not <strong>reachable</strong> by the network, meaning the client can establish connections to other machines, but those machines cannot independently establish a connection back. The External Client method should only be used in use cases where one wishes to access resources running on the virtual network and <strong>not</strong> for use cases where one wishes to make a resource accessible on the network. For that, use netclient.</p>
 
 
 <h2 id="configuring-an-ingress-gateway">Configuring an Ingress Gateway<a class="headerlink" href="#configuring-an-ingress-gateway" title="Permalink to this headline">¶</a></h2>
@@ -474,7 +474,7 @@
 <a class="reference internal image-reference" href="_images/exclient2.png"><img alt="Gateway" class="align-center" src="_images/exclient2.png" style="width: 80%;"/></a>
 <p>After creating a client, you can edit the name to something more logical.</p>
 <a class="reference internal image-reference" href="_images/exclient3.png"><img alt="Gateway" class="align-center" src="_images/exclient3.png" style="width: 80%;"/></a>
-<p>Then, you can either download the configuration file directly, or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.</p>
+<p>Then, you can either download the configuration file directly or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.</p>
 <a class="reference internal image-reference" href="_images/exclient4.png"><img alt="Gateway" class="align-center" src="_images/exclient4.png" style="width: 80%;"/></a>
 <p>Example config file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Interface</span><span class="p">]</span>
@@ -494,7 +494,7 @@
 
 <h2 id="configuring-dns-for-ext-clients-optional">Configuring DNS for Ext Clients (OPTIONAL)<a class="headerlink" href="#configuring-dns-for-ext-clients-optional" title="Permalink to this headline">¶</a></h2>
 <p>If you wish to have a DNS field on your ext clients conf, simply edit the network field as shown below to 1.1.1.1 or 8.8.8.8 for example.
-If you do not want DNS on your ext client conf files, simply leave it blank.</p>
+If you do not want DNS on your ext client conf files, leave it blank.</p>
 <a class="reference internal image-reference" href="_images/extclient5.png"><img alt="Gateway" class="align-center" src="_images/extclient5.png" style="width: 80%;"/></a>
 <p>Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.</p>
 

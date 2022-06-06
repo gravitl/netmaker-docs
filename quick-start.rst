@@ -17,7 +17,7 @@ This instance will not be HA. However, it should comfortably handle 100+ concurr
 
 If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact us: https://www.netmaker.org/contact
 
-By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Caddy reverse proxy.
+By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Traefik reverse proxy.
 
 For information about deploying more advanced configurations, see the :doc:`Advanced Installation <./server-installation>` docs. 
 
@@ -38,13 +38,13 @@ For information about deploying more advanced configurations, see the :doc:`Adva
    
    - 2GB+ of storage 
    
-   - Ubuntu  20.04 Installed
+   - Ubuntu 20.04 Installed
 
 - **Domain**
 
   - A publicly owned domain (e.x. example.com, mysite.biz) 
   - Permission and access to modify DNS records via DNS service (e.x: Route53)
-  - **Important Note:** Some of our users like use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed.
+  - **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudlare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
 
 1. Prepare DNS
 ================
@@ -75,16 +75,13 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
-- **443 (tcp):** for Dashboard and REST API  
-- **80 (tcp):** for LetsEncrypt  
-- **ICMP (optional:** as of 0.14.0 this should not be necessary, but previous versions require nodes to ping the server over public IP  
-- **53 (udp and tcp):** for CoreDNS - This is no longer necessary as of 0.10.0, but in some cases you may still want to use CoreDNS externally.  
+- **443 (tcp):** for Traefik, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
-- **8883 (tcp):** for MQ Broker
+
 
 .. code-block::
 
-  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow 53/udp && sudo ufw allow 53/tcp && sudo ufw allow 51821:51830/udp && sudo ufw allow 8883/tcp
+  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow 51821:51830/udp
 
 It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
 
@@ -93,13 +90,8 @@ It is also important to make sure the server does not block forwarding traffic (
   iptables --policy FORWARD ACCEPT
 
 
-
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
-  - allow 80/tcp from all
-  - allow 8883/tcp from all
-  - (optional) allow 53/udp and 53/tcp from all
-  - (optional) allow icmp from all
   - allow 51821-51830/udp from all
 
 4. Install Netmaker
@@ -116,9 +108,11 @@ Now, insert the values for your base (wildcard) domain, public ip.
 
 .. code-block::
 
-  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
+  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.traefik.yml
   sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
   sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
+  sed -i 's/YOUR_EMAIL/<your email>/g' docker-compose.yml
+
 
 Generate a unique master key and insert it:
 
@@ -129,15 +123,6 @@ Generate a unique master key and insert it:
 
 You may want to save this key for future use with the API.
 
-Prepare Caddy
-------------------------
-
-.. code-block::
-
-  wget -O /root/Caddyfile https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile
-
-  sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' /root/Caddyfile
-  sed -i 's/YOUR_EMAIL/<your email>/g' /root/Caddyfile
 
 Prepare MQ
 ------------------------

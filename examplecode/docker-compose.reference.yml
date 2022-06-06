@@ -3,11 +3,7 @@ version: "3.4"
 services:
   netmaker: # The Netmaker Server
     container_name: netmaker
-    image: gravitl/netmaker:v0.14.0
-    volumes: # Volume mounts necessary to store SQL Data, and share data with CoreDNS and MQ (certs folder)
-      - dnsconfig:/root/config/dnsconfig
-      - sqldata:/root/data
-      - /root/certs:/etc/netmaker/
+    image: gravitl/netmaker:v0.14.2
     cap_add: # necessary permissions to manage networking
       - NET_ADMIN
       - NET_RAW
@@ -18,6 +14,10 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
     restart: always
+    volumes: # Volume mounts necessary to store SQL Data, and share data with CoreDNS and MQ (certs folder)
+      - dnsconfig:/root/config/dnsconfig
+      - sqldata:/root/data
+      - shared_certs:/etc/netmaker
     environment:
       SERVER_NAME: "broker.NETMAKER_BASE_DOMAIN" # The resolvable domain of the MQ broker (must point to machine)
       SERVER_HOST: "SERVER_PUBLIC_IP" # the ip of the host machine
@@ -33,61 +33,100 @@ services:
       DATABASE: "sqlite" # The database Netmaker should configure itself for. If not SQLite, need to provide connection details (see above for env vars).
       NODE_ID: "netmaker-server-1" # The ID of the server to identify itself in HA setups and scenarios with multiple Netmaker servers.
       MQ_HOST: "mq" # The name of the MQ container
+      MQ_PORT: "443" # The publicly reachable port of MQ
       HOST_NETWORK: "off"  # whether or not host networking is turned on. Only turn on if configured for host networking (see docker-compose.hostnetwork.yml). Will set host-level settings like iptables.
       VERBOSITY: "1" # Logging verbosity of the server. Can be 0-3
-      PORT_FORWARD_SERVICES: "dns"  # set iptables on the machine being managed in order to forward properly from wireguard interface to services listed in "port forward services"
-      MANAGE_IPTABLES: "on"  # services for which to configure port forwarding on the machine. 'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. dns enables private dns over wireguard.
+      MANAGE_IPTABLES: "on" # services for which to configure port forwarding on the machine. 'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. dns enables private dns over wireguard.
+      PORT_FORWARD_SERVICES: "dns" # set iptables on the machine being managed in order to forward properly from wireguard interface to services listed in "port forward services"
     ports:
       - "51821-51830:51821-51830/udp" # WireGuard ports - one per network you plan on running
-      - "8081:8081" # API port
-  netmaker-ui: # The Netmaker UI Component
+    expose:
+      - "8081" # API port
+    labels: # traefik configuration
+      - traefik.enable=true
+      - traefik.http.routers.netmaker-api.entrypoints=websecure
+      - traefik.http.routers.netmaker-api.rule=Host(`api.NETMAKER_BASE_DOMAIN`)
+      - traefik.http.routers.netmaker-api.service=netmaker-api
+      - traefik.http.services.netmaker-api.loadbalancer.server.port=8081
+  netmaker-ui:
     container_name: netmaker-ui
+    image: gravitl/netmaker-ui:v0.14.2
     depends_on:
       - netmaker
-    image: gravitl/netmaker-ui:v0.14.0
     links:
       - "netmaker:api"
-    ports:
-      - "8082:80"
+    restart: always
     environment:
       BACKEND_URL: "https://api.NETMAKER_BASE_DOMAIN" # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
-    restart: always
-  coredns: # The DNS Server. Remove this section if you dont plan to use the coredns server"
-    depends_on:
-      - netmaker 
+    expose:
+      - "80"
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.nmui-security.headers.accessControlAllowOriginList=*.NETMAKER_BASE_DOMAIN
+      - traefik.http.middlewares.nmui-security.headers.stsSeconds=31536000
+      - traefik.http.middlewares.nmui-security.headers.browserXssFilter=true
+      - traefik.http.middlewares.nmui-security.headers.customFrameOptionsValue=SAMEORIGIN
+      - traefik.http.middlewares.nmui-security.headers.customResponseHeaders.X-Robots-Tag=none
+      - traefik.http.middlewares.nmui-security.headers.customResponseHeaders.Server= # Remove the server name
+      - traefik.http.routers.netmaker-ui.entrypoints=websecure
+      - traefik.http.routers.netmaker-ui.middlewares=nmui-security@docker
+      - traefik.http.routers.netmaker-ui.rule=Host(`dashboard.NETMAKER_BASE_DOMAIN`)
+      - traefik.http.routers.netmaker-ui.service=netmaker-ui
+      - traefik.http.services.netmaker-ui.loadbalancer.server.port=80
+  coredns:
+    container_name: coredns
     image: coredns/coredns
     command: -conf /root/dnsconfig/Corefile
-    container_name: coredns
+    depends_on:
+      - netmaker
     restart: always
     volumes:
       - dnsconfig:/root/dnsconfig
-  caddy:
-    image: caddy:latest
-    container_name: caddy
-    restart: unless-stopped
-    network_mode: host # Wants ports 80 and 443!
+  traefik:
+    image: traefik:v2.6
+    container_name: traefik
+    command: # embedded config for Traefik (alternative to mounting a YAML file)
+      - "--certificatesresolvers.http.acme.email=YOUR_EMAIL"
+      - "--certificatesresolvers.http.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.http.acme.tlschallenge=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls=true"
+      - "--entrypoints.websecure.http.tls.certResolver=http"
+      - "--log.level=INFO"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--serverstransport.insecureskipverify=true"
+    restart: always
     volumes:
-      - /root/Caddyfile:/etc/caddy/Caddyfile
-      # - $PWD/site:/srv # you could also serve a static site in site folder
-      - caddy_data:/data
-      - caddy_conf:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_certs:/letsencrypt
+    ports:
+      - "443:443"
   mq: # the MQTT broker for netmaker
+    container_name: mq
     image: eclipse-mosquitto:2.0.11-openssl
     depends_on:
       - netmaker
-    container_name: mq
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:1883:1883" # only exposed locally
-      - "8883:8883" # exposed publicly and must be reachable from all clients!
     volumes:
       - /root/mosquitto.conf:/mosquitto/config/mosquitto.conf # need to pull conf file from github before running (under docker/mosquitto.conf
-      - /root/certs/:/mosquitto/certs/ # certs generated by netmaker server, including root certificate and client certs for every peer.
       - mosquitto_data:/mosquitto/data
       - mosquitto_logs:/mosquitto/log
+      - shared_certs:/mosquitto/certs # certs generated by netmaker server, including root certificate and client certs for every peer.
+    ports:
+      - "127.0.0.1:1883:1883" # only exposed locally
+    expose:
+      - "8883"
+    labels: # traefik configuration
+      - traefik.enable=true
+      - traefik.tcp.routers.mqtts.rule=HostSNI(`broker.NETMAKER_BASE_DOMAIN`)
+      - traefik.tcp.routers.mqtts.tls.passthrough=true
+      - traefik.tcp.services.mqtts-svc.loadbalancer.server.port=8883
+      - traefik.tcp.routers.mqtts.service=mqtts-svc
+      - traefik.tcp.routers.mqtts.entrypoints=websecure
 volumes:
-  caddy_data: {} # storage for caddy data
-  caddy_conf: {} # storage for caddy configuration file
+  traefik_certs: {} # certificates for traefik (generated by Traefik/LetsEncrypt)
+  shared_certs: {} # certificates for MQ (generated by Netmaker)
   sqldata: {} # storage for embedded sqlite
   dnsconfig: {} # storage for coredns
   mosquitto_data: {} # storage for mqtt data
