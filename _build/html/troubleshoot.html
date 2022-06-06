@@ -472,18 +472,18 @@
 
 <h2 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
-<dt><strong>How can I connect my Android or IOS device to my Netmaker VPN?</strong></dt><dd><p>Currently meshing one of these devices is not supported, however it will be soon.
-For now you can connect to your VPN by making one of the nodes an Ingress Gateway, then
+<dt><strong>How can I connect my Android or IOS device to my Netmaker VPN?</strong></dt><dd><p>Currently meshing one of these devices is not supported, however, it will be soon.
+For now, you can connect to your VPN by making one of the nodes an Ingress Gateway, then
 create an Ext Client for each device. Finally, use the official WG app or another
-WG configuration app to connect via QR or downloading the device’s WireGuard configuration.</p>
+WG configuration app to connect via QR or download the device’s WireGuard configuration.</p>
 </dd>
-<dt><strong>I’ve made changes to my nodes but the nodes themselves haven’t updated yet, why?</strong></dt><dd><p>Please allow your nodes to complete a check in or two, in order to reconfigure themselves.
+<dt><strong>I’ve made changes to my nodes but the nodes themselves haven’t updated yet, why?</strong></dt><dd><p>Please allow your nodes to complete a check-in or two, in order to reconfigure themselves.
 In some cases, it could take up to a minute or so.</p>
 </dd>
 <dt><strong>Do I have to use access keys to join a network?</strong></dt><dd><p>Although keys are the preferred way to join a network, Netmaker does allow for manual node sign-ups.
-Simply turn on “allow manual signups” on your network and nodes will not connect until you manually aprove each one.</p>
+Simply turn on “allow manual signups” on your network and nodes will not connect until you manually approve each one.</p>
 </dd>
-<dt><strong>Is there a community or forum to ask questions about Netmaker?</strong></dt><dd><p>Yes, we have an active <a class="reference external" href="https://discord.gg/Pt4T9y9XK8">discord</a> community and issues on our <a class="reference external" href="https://github.com/gravitl/netmaker/issues">github</a> are answered frequently!
+<dt><strong>Is there a community or forum to ask questions about Netmaker?</strong></dt><dd><p>Yes, we have an active <a class="reference external" href="https://discord.gg/Pt4T9y9XK8">Discord</a> community and issues on our <a class="reference external" href="https://github.com/gravitl/netmaker/issues">GitHub</a> are answered frequently!
 You can also sign-up for updates at our <a class="reference external" href="https://gravitl.com/">gravitl site</a>!</p>
 </dd>
 <dt><strong>How can I get additional support for my business?</strong></dt><dd><p>Check out our business support subscriptions at <a class="reference external" href="https://gravitl.com/plans">https://gravitl.com/plans</a>. Subscription holders can also purchase consulting credits via the site.</p>
@@ -494,16 +494,16 @@ You can also sign-up for updates at our <a class="reference external" href="http
 <h2 id="server">Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt><strong>How do I use a private address from the Netmaker Server? How do I contact nodes using their private addresses from the server?</strong></dt><dd><p>Default nodes appear in each network with the “netmaker” name. These nodes are created by, and attached to, the server. The server is contained in docker, meaning these clients are also contained in docker. Their networking stack is also contained in docker. The “netmaker” nodes are meant to function as network utilities. They assist with UDP Hole Punching and can run Relays, Egress, and Ingress. However, they are meant to stay contained in the server. They do not touch the host networking stack.</p>
-<p>If you want to give the physical server / VM a private IP in the netmaker network, you must deploy an <strong>additional</strong> node using the standard netclient. The only note here is that the server consumes ports 51821-51831, so you will need to give it a port outside this range, e.x. <cite>./netclient join &lt;token&gt; –port 51835</cite>.</p>
+<p>If you want to give the physical server / VM a private IP in the netmaker network, you must deploy an <strong>additional</strong> node using the standard netclient. The only note here is that the server consumes ports 51821-51831, so you will need to give it a port outside this range, e.x. <cite>./netclient join &lt;token&gt; –port 51835</cite>. You may also need to add <cite>–udpholepunch no</cite>.</p>
 <p>One a netclient is deployed to the underlying server/VM, you will be able to use the private address to reach other nodes from the host, or to reach the server over the private network.</p>
 </dd>
-<dt><strong>I upgraded from 0.7 to 0.8 and now I dont have any data in my server!</strong></dt><dd><p>In 0.8, sqlite becomes the default database. If you were running with rqlite, you must set the DATABASE environment variable to rqlite in order to continue using rqlite.</p>
+<dt><strong>I upgraded from 0.7 to 0.8 and now I don’t have any data in my server!</strong></dt><dd><p>In 0.8, SQLite becomes the default database. If you were running with rqlite, you must set the DATABASE environment variable to rqlite in order to continue using rqlite.</p>
 </dd>
-<dt><strong>Can I secure/encrypt all the traffic to my server and UI?</strong></dt><dd><p>This can fairly simple to achieve assuming you have access to a domain and are familiar with Nginx.
+<dt><strong>Can I secure/encrypt all the traffic to my server and UI?</strong></dt><dd><p>This can be fairly simple to achieve assuming you have access to a domain and are familiar with Nginx.
 Please refer to the quick-start guide to see!</p>
 </dd>
-<dt><strong>Can I connect multiple nodes (mesh clients) behind a single firewall/router?</strong></dt><dd><p>Yes! As of version 0.7 Netmaker supports UDP Hole Punching to allow this, without the use of a third party STUN server!
-Is UDP hole punching a risk for you? Well you can turn it off and make static nodes/ports for the server to refer to as well.</p>
+<dt><strong>Can I connect multiple nodes (mesh clients) behind a single firewall/router?</strong></dt><dd><p>Yes! As of version 0.7 Netmaker supports UDP Hole Punching to allow this, without the use of a third-party STUN server!
+Is UDP hole punching a risk for you? Well, you can turn it off and make static nodes/ports for the server to refer to as well.</p>
 </dd>
 <dt><strong>What are the minimum specs to run the server?</strong></dt><dd><p>We recommend at least 1 CPU and 2 GB Memory.</p>
 </dd>
@@ -525,15 +525,15 @@ to completely wipe your server. Otherwise kill the running binary and it’s up 
 
 <h2 id="ui">UI<a class="headerlink" href="#ui" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
-<dt><strong>I want to make a seperate network and give my friend access to only that network.</strong></dt><dd><p>Simply navigate to the UI (as an admin account). Select users in the top left and create them an account.
+<dt><strong>I want to make a separate network and give my friend access to only that network.</strong></dt><dd><p>Simply navigate to the UI (as an admin account). Select users in the top left and create an account for them.
 Select the network(s) to give them and they should be good to go! They are an admin of that network(s) only now.</p>
 </dd>
-<dt><strong>I’m done with an access key, can I delete it?</strong></dt><dd><p>Simply navigate to the UI (as an admin account). Select your network of interest, then the select the <code class="docutils literal notranslate"><span class="pre">Access</span> <span class="pre">Keys</span></code> tab.
+<dt><strong>I’m done with an access key, can I delete it?</strong></dt><dd><p>Simply navigate to the UI (as an admin account). Select your network of interest, then select the <code class="docutils literal notranslate"><span class="pre">Access</span> <span class="pre">Keys</span></code> tab.
 Then delete the rogue access key.</p>
 </dd>
 <dt><strong>I can’t delete my network, why?</strong></dt><dd><p>You <strong>MUST</strong> remove all nodes in a network before you can delete it.</p>
 </dd>
-<dt><strong>Can I have multiple nodes with the same name?</strong></dt><dd><p>Yes, nodes can share names without issue. It may just be harder on you to know which is which.</p>
+<dt><strong>Can I have multiple nodes with the same name?</strong></dt><dd><p>Yes, nodes can share names without issue. It may just be harder for you to know which is which.</p>
 </dd>
 </dl>
 
@@ -564,7 +564,7 @@ You can also see the current WireGuard configuration with <code class="docutils 
 </dd>
 <dt><strong>I have a handshake with a peer but can’t ping it, what gives?</strong></dt><dd><p>This is commonly due to incorrect MTU settings. Typically, it will be because MTU is too high. Try setting MTU lower on the node. This can be done via netconfig, or by editing the node in the UI.</p>
 </dd>
-<dt><strong>I have a hard to reach machine behind a firewall or a corporate NAT, what can I do?</strong></dt><dd><p>In this situation you can use the Relay Server functionality introduced in Netmaker v0.8 to designate a node as a relay to your “stuck” machine. Simply click the button to make a node into a relay and tell it to relay traffic to this hard-to-reach peer.</p>
+<dt><strong>I have a hard to reach machine behind a firewall or a corporate NAT, what can I do?</strong></dt><dd><p>In this situation, you can use the Relay Server functionality introduced in Netmaker v0.8 to designate a node as a relay to your “stuck” machine. Simply click the button to make a node into a relay and tell it to relay traffic to this hard-to-reach peer.</p>
 </dd>
 <dt><strong>I am unable to run the netclient on my OpenWRT machine, what’s wrong?</strong></dt><dd><p>Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used. If the primary installer does not work, there are two things you can try:</p>
 <ol class="arabic simple">

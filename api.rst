@@ -82,6 +82,26 @@ Access Keys API Call Examples
     Delete Key: curl -X DELETE -H "Authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/networks/skynet/keys/mykey
 
     
+ACL API
+---------
+
+**Get ACL for network** `/api/networks/{network id}/acl`, `GET`
+
+**Update ACL for network** `/api/networks/{network id}/acl`, `PUT`
+
+ACL API Call Examples
+-----------------------------
+
+.. code-block::
+
+    Get ACL for Network: curl -H "Authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/networks/skynet/acl | jq
+
+    Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/nodes/skynet/acl \
+
+    -d `{"20703260-4b0e-4f2d-8d74-bf28e21cc682":{"75721e5b-f2ac-4cca-b648-fa1d83712287":1},"75721e5b-f2ac-4cca-b648-fa1d83712287":{"20703260-4b0e-4f2d-8d74-bf28e21cc682":1}}`
+
+
+
 Nodes API
 ---------
   

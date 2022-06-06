@@ -247,13 +247,13 @@
         </li>
         <li class="md-nav__item"><a href="#netclient" class="md-nav__link">Netclient</a>
         </li>
-        <li class="md-nav__item"><a href="#database-sqlite-rqlite-postgres" class="md-nav__link">Database (sqlite, rqlite, postgres)</a>
+        <li class="md-nav__item"><a href="#database-sqlite-rqlite-postgres" class="md-nav__link">Database (SQLite, rqlite, postgres)</a>
         </li>
         <li class="md-nav__item"><a href="#netmaker-ui" class="md-nav__link">Netmaker UI</a>
         </li>
         <li class="md-nav__item"><a href="#coredns" class="md-nav__link">CoreDNS</a>
         </li>
-        <li class="md-nav__item"><a href="#caddy" class="md-nav__link">Caddy</a>
+        <li class="md-nav__item"><a href="#traefik" class="md-nav__link">Traefik</a>
         </li>
         <li class="md-nav__item"><a href="#external-client" class="md-nav__link">External Client</a>
         </li></ul>
@@ -483,13 +483,13 @@
         </li>
         <li class="md-nav__item"><a href="#netclient" class="md-nav__link">Netclient</a>
         </li>
-        <li class="md-nav__item"><a href="#database-sqlite-rqlite-postgres" class="md-nav__link">Database (sqlite, rqlite, postgres)</a>
+        <li class="md-nav__item"><a href="#database-sqlite-rqlite-postgres" class="md-nav__link">Database (SQLite, rqlite, postgres)</a>
         </li>
         <li class="md-nav__item"><a href="#netmaker-ui" class="md-nav__link">Netmaker UI</a>
         </li>
         <li class="md-nav__item"><a href="#coredns" class="md-nav__link">CoreDNS</a>
         </li>
-        <li class="md-nav__item"><a href="#caddy" class="md-nav__link">Caddy</a>
+        <li class="md-nav__item"><a href="#traefik" class="md-nav__link">Traefik</a>
         </li>
         <li class="md-nav__item"><a href="#external-client" class="md-nav__link">External Client</a>
         </li></ul>
@@ -518,11 +518,11 @@
 <p><em>Pictured Above: A detailed diagram of Netmaker’s Architecture.</em></p>
 
 <h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permalink to this headline">¶</a></h2>
-<p>Familiarity with several core concepts will help when you encounter them later on in the documentation.</p>
+<p>Familiarity with several core concepts will help when you encounter them later in the documentation.</p>
 
 <h3 id="wireguard">WireGuard<a class="headerlink" href="#wireguard" title="Permalink to this headline">¶</a></h3>
-<p>WireGuard is a relatively new but very important technology which was recently added to the Linux kernel. WireGuard creates very fast but simple encrypted tunnels between devices. From the <a class="reference external" href="https://www.wireguard.com/">WireGuard</a> website, “it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry.”</p>
-<p>Previous solutions like OpenVPN and IPSec are considerably more heavy and complex, while being less performant. All existing VPN tunneling solutions will cause a significant increase in your network latency. WireGuard is the first to achieve near over-the-line network speeds, meaning you see no significant performance impact.  With the release of WireGuard, there is little reason to use any other existing tunnel encryption technology.</p>
+<p>WireGuard is a relatively new but very important technology that was recently added to the Linux kernel. WireGuard creates very fast but simple encrypted tunnels between devices. From the <a class="reference external" href="https://www.wireguard.com/">WireGuard</a> website, “it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry.”</p>
+<p>Previous solutions like OpenVPN and IPSec are considerably more heavy and complex while being less performant. All existing VPN tunneling solutions will cause a significant increase in your network latency. WireGuard is the first to achieve near over-the-line network speeds, meaning you see no significant performance impact.  With the release of WireGuard, there is little reason to use any other existing tunnel encryption technology.</p>
 
 
 <h3 id="mesh-network">Mesh Network<a class="headerlink" href="#mesh-network" title="Permalink to this headline">¶</a></h3>
@@ -530,15 +530,15 @@
 <a class="reference internal image-reference" href="_images/mesh.png"><img alt="Full Mesh Network Diagram" class="align-center" src="_images/mesh.png" style="width: 33%;"/></a>
 <p>A full <a class="reference external" href="https://www.bbc.co.uk/bitesize/guides/zr3yb82/revision/2">mesh network</a> exists where each machine is able to directly talk to every other machine on the network. For example, on your home network, behind your router, all the computers are likely given private addresses and can reach each other directly.</p>
 <p>This is in contrast to a hub-and-spoke network, where each machine must first pass its traffic through a relay server before it can reach other machines.</p>
-<p>In certain situations you may either want or need a <em>partial mesh</em> network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh, because the servers (nodes A-D) are meshed, but then external clients come in via a gateway, and are not meshed.</p>
-<p>Mesh networks are generally faster than other topologies, but are also more complicated to set up. WireGuard on its own gives you the means to create encrypted tunnels between devices, but it does not provide a method for setting up a full network. This is where Netmaker comes in.</p>
+<p>In certain situations, you may either want or need a <em>partial mesh</em> network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh because the servers (nodes A-D) are meshed, but then external clients come in via a gateway and are not meshed.</p>
+<p>Mesh networks are generally faster than other topologies but are also more complicated to set up. WireGuard on its own gives you the means to create encrypted tunnels between devices, but it does not provide a method for setting up a full network. This is where Netmaker comes in.</p>
 
 
 <h3 id="netmaker">Netmaker<a class="headerlink" href="#netmaker" title="Permalink to this headline">¶</a></h3>
-<p>Netmaker is a platform built off of WireGuard which enables users to create mesh networks between their devices. Netmaker can create both full and partial mesh networks depending on the use case.</p>
-<p>When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, sqlite,  Mosquitto (MQ Broker) and UI webserver. There is also almost always a proxy server / LB, which is typically Caddy.</p>
+<p>Netmaker is a platform built off of WireGuard enabling users to create mesh networks between their devices. Netmaker can create both full and partial mesh networks depending on the use case.</p>
+<p>When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, SQLite,  Mosquitto (MQ Broker), and UI webserver. There is also almost always a proxy server / LB, which by default is Traefik, but could be any number of tools.</p>
 <p>From an end user perspective, they typically interact with the Netmaker UI, or even just run the install script for the netclient on their devices. The other components run in the background invisibly.</p>
-<p>Netmaker does a lot of work to set configurations for you, so that you don’t have to. This includes things like WireGuard ports, endpoints, public IPs, keys, and peers. Netmaker works to abstract away as much of the network management as possible, so that you can just click to create a network, and click to add a machine to a network. That said, every machine (node) is different, and may require special configuration. That is why, while Netmaker sets practical default settings, everything within Netmaker is fully configurable.</p>
+<p>Netmaker does a lot of work to set configurations for you so that you don’t have to. This includes things like WireGuard ports, endpoints, public IPs, keys, and peers. Netmaker works to abstract away as much of the network management as possible, so that you can just click to create a network, and click to add a machine to a network. That said, every machine (node) is different, and may require special configuration. That is why, while Netmaker sets practical default settings, everything within Netmaker is fully configurable.</p>
 
 
 <h3 id="node">Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h3>
@@ -550,32 +550,32 @@
 <p>Netmaker consists of several core components, which are explained in high-level technical detail below.</p>
 
 <h3 id="netmaker-server">Netmaker Server<a class="headerlink" href="#netmaker-server" title="Permalink to this headline">¶</a></h3>
-<p>The Netmaker server is, at its core, a golang binary. Source code can be found <a class="reference external" href="https://github.com/gravitl/netmaker">on GitHub</a>. The binary, by itself can be compiled for most systems. If you need to run the Netmaker server on a particular system, it likely can be made to work. In typical deployments, it is run as a Docker container. It can also be run as a systemd service as outlined in the non-docker install guide.</p>
-<p>The Netmaker server acts as an API to the front end, and publishes messages to clients via an MQ broker. The Netmaker server also runs an embedded “netclient” for each network that is created. This is a special netclient that enabled “UDP Hole Punching” on the system. When nodes reach the server, Netmaker uses this netclient to determine a routable address for each machine, and sends this out to the network.</p>
+<p>The Netmaker server is, at its core, a golang binary. Source code can be found <a class="reference external" href="https://github.com/gravitl/netmaker">on GitHub</a>. The binary, by itself, can be compiled for most systems. If you need to run the Netmaker server on a particular system, it likely can be made to work. In typical deployments, it is run as a Docker container. It can also be run as a systemd service as outlined in the non-docker install guide.</p>
+<p>The Netmaker server acts as an API to the front end and publishes messages to clients via an MQ broker. The Netmaker server also runs an embedded “netclient” for each network that is created. This is a special netclient that enabled “UDP Hole Punching” on the system. When nodes reach the server, Netmaker uses this netclient to determine a routable address for each machine, and sends this out to the network.</p>
 <p>Most server settings are configurable via a config file, or by environment variables (which take precedence). If the server finds neither of these, it sets sensible defaults, including things like the server’s reachable IP, ports, and which “modes” to run in.</p>
-<p>The Netmaker server interacts with either sqlite (default), postgres, or rqlite, a distributed version of sqlite, as its database. This DB holds information about nodes, networks, users, and other important data. This data is configuration data.</p>
-<p>When the netmaker server needs to send an update to nodes, is publishes a message to the broker, MQ.</p>
-<p>The components of the server are usually proxied via Caddy, or an alternative like Nginx or Traefik. The proxy handles SSL certificates to secure traffic, and routes to the UI and API.</p>
+<p>The Netmaker server interacts with either SQLite (default), postgres, or rqlite, a distributed version of SQLite, as its database. This DB holds information about nodes, networks, users, and other important data. This data is configuration data.</p>
+<p>When the netmaker server needs to send an update to nodes, it publishes a message to the broker, MQ.</p>
+<p>The components of the server are usually proxied via Traefik or an alternative like Nginx or Caddy. The proxy handles SSL certificates to secure traffic, and routes to the UI and API.</p>
 
 
 <h3 id="message-broker-mosquitto">Message Broker (Mosquitto)<a class="headerlink" href="#message-broker-mosquitto" title="Permalink to this headline">¶</a></h3>
-<p>The Moquitto broker is the default MQTT broker that ships with Netmaker, though technically, any MQTT broker should work so long as the correct configuration is applied. The broker enables the establishment of a pub-sub messaging system, whereby clients subscribe to recieve updates. When the server recieves a change, it will publish that change to the broker that pushes out the change to the appropriate nodes.</p>
-<p>The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly, and MQ is NOT proxied via Caddy. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. As of 0.13.1, The certificate management system is still relatively new, and this is often a point of initial setup failure, due to either incorrect DNS, firewall, or MQ setup.</p>
+<p>The Mosquitto broker is the default MQTT broker that ships with Netmaker, though technically, any MQTT broker should work so long as the correct configuration is applied. The broker enables the establishment of a pub-sub messaging system, whereby clients subscribe to receive updates. When the server receives a change, it will publish that change to the broker that pushes out the change to the appropriate nodes.</p>
+<p>The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. As of 0.14.2, The certificate management system is still relatively new, and this is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.</p>
 
 
 <h3 id="netclient">Netclient<a class="headerlink" href="#netclient" title="Permalink to this headline">¶</a></h3>
 <p>The netclient is, at its core, a golang binary. Source code can be found in the netclient folder of the Netmaker <a class="reference external" href="https://github.com/gravitl/netmaker/tree/master/netclient">GitHub Repository</a>. The binary, by itself, can be compiled for most systems. However, this binary is designed to manage a certain number of Operating Systems.</p>
 <p>The netclient is installed via a simple bash script, which pulls the latest binary and runs ‘register’ and ‘join’ commands.</p>
 <p>The ‘join’ command attempts to add the machine to the Netmaker network using sensible defaults, which can be overridden with a config file or environment variables. Assuming the netclient has a valid key (or the network allows manual node signup), it will be registered into the Netmaker network, and will be returned necessary configuration details for how to set up its local network.</p>
-<p>The netclient automatically registers with the MQTT server running with Netmaker, which will send it periodic updates when the network changes. The netclient recieves the certificates necessary to reach the broker over a secure connection.</p>
-<p>The netclient then sets up the system daemon (if running in daemon mode), and configures WireGuard. At this point it should be part of the network.</p>
+<p>The netclient automatically registers with the MQTT server running with Netmaker, which will send it periodic updates when the network changes. The netclient receives the certificates necessary to reach the broker over a secure connection.</p>
+<p>The netclient then sets up the system daemon (if running in daemon mode), and configures WireGuard. At this point, it should be part of the network.</p>
 <p>The netclient will detect local changes and send them to the server when necessary. A change to IP address or port will lead to a network update to keep everything in sync. If the node is not running with the in daemon on, it is up to the operator to keep the netclient up-to-date by running regular “pulls” (netclient pull).</p>
-<p>The MQ pub-sub system allows Netmaker to create dynamic mesh networks. As nodes are added to, removed from, and modified on the network, other nodes are notified, and make appropriate changes.</p>
+<p>The MQ pub-sub system allows Netmaker to create dynamic mesh networks. As nodes are added to, removed from, and modified on the network, other nodes are notified and make appropriate changes.</p>
 
 
-<h3 id="database-sqlite-rqlite-postgres">Database (sqlite, rqlite, postgres)<a class="headerlink" href="#database-sqlite-rqlite-postgres" title="Permalink to this headline">¶</a></h3>
-<p>Netmaker uses embedded sqlite as the default database. It can also use PostgreSQL, or rqlite, a distributed (RAFT consensus) database. Netmaker interacts with the database to store and retrieve information about nodes, networks, and users.</p>
-<p>Additional database support (besides sqlite and rqlite) is very easy to implement for special use cases. Netmaker uses simple key value lookups to run the networks, and the database was designed to be extensible, so support for key-value stores and other SQL-based databases can be achieved by changing a single file.</p>
+<h3 id="database-sqlite-rqlite-postgres">Database (SQLite, rqlite, postgres)<a class="headerlink" href="#database-sqlite-rqlite-postgres" title="Permalink to this headline">¶</a></h3>
+<p>Netmaker uses embedded SQLite as the default database. It can also use PostgreSQL, or rqlite, a distributed (RAFT consensus) database. Netmaker interacts with the database to store and retrieve information about nodes, networks, and users.</p>
+<p>Additional database support (besides SQLite and rqlite) is very easy to implement for special use cases. Netmaker uses simple key-value lookups to run the networks, and the database was designed to be extensible, so support for key-value stores and other SQL-based databases can be achieved by changing a single file.</p>
 
 
 <h3 id="netmaker-ui">Netmaker UI<a class="headerlink" href="#netmaker-ui" title="Permalink to this headline">¶</a></h3>
@@ -584,10 +584,10 @@
 
 
 <h3 id="coredns">CoreDNS<a class="headerlink" href="#coredns" title="Permalink to this headline">¶</a></h3>
-<p>As of 0.12.0, CoreDNS is not an active part of the Netmaker system. Nodes DO NOT recieve their DNS updates using a nameserver. Instead, DNS entries are added to the local “hosts” file directly. The CoreDNS component can be safely removed from the setup and DNS will continue to function.</p>
-<p>Previously, CoreDNS was used as a nameserver and the netclient would set the nameserver per-peer. However, this only worked on a subset of linux systems, because it required resolvectl. The new method (using the hosts file) works across OS’s.</p>
+<p>As of 0.12.0, CoreDNS is not an active part of the Netmaker system. Nodes DO NOT receive their DNS updates using a nameserver. Instead, DNS entries are added to the local “hosts” file directly. The CoreDNS component can be safely removed from the setup and DNS will continue to function.</p>
+<p>Previously, CoreDNS was used as a nameserver and the netclient would set the nameserver per peer. However, this only worked on a subset of Linux systems, because it required resolvectl. The new method (using the hosts file) works across OSs.</p>
 <dl class="simple">
-<dt>However, we still maintain CoreDNS in the default deployment for 2 reasons:</dt><dd><ol class="arabic simple">
+<dt>However, we still maintain CoreDNS in the default deployment for two reasons:</dt><dd><ol class="arabic simple">
 <li><p>You may wish to add a nameserver to “Ext Clients”. CoreDNS can still be used for this.</p></li>
 <li><p>You may wish to integrate the Netmaker nameserver with your existing DNS setup.</p></li>
 </ol>
@@ -595,25 +595,25 @@
 </dl>
 
 
-<h3 id="caddy">Caddy<a class="headerlink" href="#caddy" title="Permalink to this headline">¶</a></h3>
-<p>Caddy is the default proxy for Netmaker if you set it up via Quick Start. Caddy is an extremely simple and docker-friendly proxy, which can be compared to Nginx, Traefik, or HAProxy. We use Caddy by default because of the ease of management. A typical setup for Nginx might take dozens of lines of code, and we need to request and manage SSL certificates separately.</p>
-<p>Caddy handles all these things automatically in very few lines of code. You can see our default “Caddyfile” here, which is fed to the container and has all the configuration necessary to configure the proxy for our app:</p>
-<p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/docker/Caddyfile">https://github.com/gravitl/netmaker/blob/master/docker/Caddyfile</a></p>
+<h3 id="traefik">Traefik<a class="headerlink" href="#traefik" title="Permalink to this headline">¶</a></h3>
+<p>As of 0.14.2, Traefik is the default proxy for Netmaker if you set it up via Quick Start. Caddy was previously the default proxy, but is unable to handle MQTT by default, which is why the switch to Traefik was made. Traefik is a simple and docker-friendly proxy, which can be compared to Nginx, Caddy, or HAProxy.</p>
+<p>Traefik simplifies management because the configuration can be embedded into the docker compose. In addition, it can request certificates automatically, and it can handle MQ traffic, which many proxies (such as Caddy) cannot handle by default.</p>
+<p>Caddy is still a functioning proxy with configs available for Netmaker. We are moving guidance towards Traefik by default, but if you are maintaining an installation that relies on Caddy, you can continue to use it with Netmaker.</p>
 
 
 <h3 id="external-client">External Client<a class="headerlink" href="#external-client" title="Permalink to this headline">¶</a></h3>
 <p>The external client is simply a manually configured WireGuard connection to your network, which Netmaker helps to manage.</p>
-<p>Most machines can run WireGuard. It is fairly simple to set up a WireGuard connection to a single endpoint. It is setting up mesh networks and other topologies like site-to-site which becomes complicated.</p>
+<p>Most machines can run WireGuard. Setting up a WireGuard connection to a single endpoint is fairly simple. It is setting up mesh networks and other topologies like site-to-site which becomes complicated.</p>
 <p>Mac, Windows, and Linux are handled natively by the Netclient, though you can still add them as ext clients if you wish. Primarily, iPhone and Android are the main systems unsupported by the Netclient which MUST be handled via external client.</p>
 <p>External clients hook into a Netmaker network via an “Ingress Gateway,” which is configured for a given node and allows traffic to flow into the network. External clients are also reachable via the gateway. While this is a “concentrator” and not peer-to-peer, this is often desirable.</p>
-<p>Many users use external clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software required. It can also be quite helpful to have a “choke point” for traffic (the gateway) rather than direct p2p connections to every machine.</p>
+<p>Many users use external clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software is required. It can also be quite helpful to have a “choke point” for traffic (the gateway) rather than direct p2p connections to every machine.</p>
 
 
 
 <h2 id="technical-process">Technical Process<a class="headerlink" href="#technical-process" title="Permalink to this headline">¶</a></h2>
 <p>Below is a high level, step-by-step overview of the flow of communications within Netmaker (assuming Netmaker has already been installed):</p>
 <ol class="arabic simple">
-<li><p>Admin creates a new network with a subnet, for instance 10.10.10.0/24</p></li>
+<li><p>Admin creates a new network with a subnet, for instance, 10.10.10.0/24</p></li>
 <li><p>Admin creates an access key for signing up new nodes</p></li>
 <li><p>Both of the above requests are routed to the server via an API call from the front end</p></li>
 <li><p>Admin runs the netclient install script on any given node (machine).</p></li>
@@ -626,13 +626,13 @@
 <li><p>Netclient subscribes to the MQ broker.</p></li>
 <li><p>Netclient configures itself as a daemon (if joining for the first time).</p></li>
 <li><p>Netclient regularly retrieves local information, checking for changes in things like IP and keys. If there is a change, it pushes them to the server.</p></li>
-<li><p>If a change occurs in any other peer, or peers are added/removed, an update will be sent to the Netclient via MQ, and it will re-configure WireGuard.</p></li>
+<li><p>If a change occurs in any other peer or peers are added/removed, an update will be sent to the Netclient via MQ, and it will re-configure WireGuard.</p></li>
 </ol>
 
 
 <h2 id="compatible-systems-for-netclient">Compatible Systems for Netclient<a class="headerlink" href="#compatible-systems-for-netclient" title="Permalink to this headline">¶</a></h2>
-<p>To manage a node manually, the Netclient can be compiled and run for most linux distibutions, with a prerequisite of WireGuard with kernel headers. If the netclient from the release pages does not run natively on your system, you may need to compile the netclient binary directly on the machine from the source code. This may be true for some installations of SUSE, Fedora, and some Debian-based systems. However, if the dependencies are installed on the machine, the netclient should run correctly after being compiled.</p>
-<p>Simply clone the repo, cd to netmaker/netclient and run “go build” (Golang must be installed).</p>
+<p>To manage a node manually, the netclient can be compiled and run for most Linux distibutions, with a prerequisite of WireGuard with kernel headers. If the netclient from the release pages does not run natively on your system, you may need to compile the netclient binary directly on the machine from the source code. This may be true for some installations of SUSE, Fedora, and some Debian-based systems. However, if the dependencies are installed on the machine, the netclient should run correctly after being compiled.</p>
+<p>Simply clone the repo, cd to netmaker/netclient, and run “go build” (Golang must be installed).</p>
 <dl class="simple">
 <dt>The following systems should be operable natively with Netclient in daemon mode:</dt><dd><ul class="simple">
 <li><p>Windows</p></li>
@@ -652,7 +652,7 @@
 </ul>
 </dd>
 </dl>
-<p>Systemd is a system service manager for a wide array of Linux operating systems, but not all Linux distributions have adopted systemd. If you need to run on a Linux distro without systemd, we recommend the following: Join “unmanaged” with <strong>netclient join -daemon=off</strong> on Linux systems that do not run systemd, and use some other method to run the daemon like a cron job or custom script.</p>
+<p>Systemd is a system service manager for a wide array of Linux operating systems, but not all Linux distributions have adopted systemd. If you need to run on a Linux distro without systemd, we recommend the following: Join “unmanaged” with <strong>netclient join -daemon=off</strong> on Linux systems that do not run systemd and use some other method to run the daemon like a cron job or custom script.</p>
 
 
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
