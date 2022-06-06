@@ -47,7 +47,7 @@ Netmaker
 
 Netmaker is a platform built off of WireGuard enabling users to create mesh networks between their devices. Netmaker can create both full and partial mesh networks depending on the use case.
 
-When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, SQLite,  Mosquitto (MQ Broker), and UI webserver. There is also almost always a proxy server / LB, which is typically Caddy.
+When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, SQLite,  Mosquitto (MQ Broker), and UI webserver. There is also almost always a proxy server / LB, which by default is Traefik, but could be any number of tools.
 
 From an end user perspective, they typically interact with the Netmaker UI, or even just run the install script for the netclient on their devices. The other components run in the background invisibly. 
 
@@ -76,14 +76,14 @@ The Netmaker server interacts with either SQLite (default), postgres, or rqlite,
 
 When the netmaker server needs to send an update to nodes, it publishes a message to the broker, MQ.
 
-The components of the server are usually proxied via Caddy or an alternative like Nginx or Traefik. The proxy handles SSL certificates to secure traffic, and routes to the UI and API.
+The components of the server are usually proxied via Traefik or an alternative like Nginx or Caddy. The proxy handles SSL certificates to secure traffic, and routes to the UI and API.
 
 Message Broker (Mosquitto)
 ---------------------------
 
 The Mosquitto broker is the default MQTT broker that ships with Netmaker, though technically, any MQTT broker should work so long as the correct configuration is applied. The broker enables the establishment of a pub-sub messaging system, whereby clients subscribe to receive updates. When the server receives a change, it will publish that change to the broker that pushes out the change to the appropriate nodes. 
 
-The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly, and MQ is NOT proxied via Caddy. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. As of 0.13.1, The certificate management system is still relatively new, and this is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.
+The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. As of 0.14.2, The certificate management system is still relatively new, and this is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.
 
 Netclient
 ----------------
@@ -129,14 +129,14 @@ However, we still maintain CoreDNS in the default deployment for two reasons:
   2. You may wish to integrate the Netmaker nameserver with your existing DNS setup.  
 
 
-Caddy
+Traefik
 -------
 
-Caddy is the default proxy for Netmaker if you set it up via Quick Start. Caddy is an extremely simple and docker-friendly proxy, which can be compared to Nginx, Traefik, or HAProxy. We use Caddy by default because of the ease of management. A typical setup for Nginx might take dozens of lines of code, and we need to request and manage SSL certificates separately.
+As of 0.14.2, Traefik is the default proxy for Netmaker if you set it up via Quick Start. Caddy was previously the default proxy, but is unable to handle MQTT by default, which is why the switch to Traefik was made. Traefik is a simple and docker-friendly proxy, which can be compared to Nginx, Caddy, or HAProxy.
 
-Caddy handles all these things automatically in very few lines of code. You can see our default "Caddyfile" here, which is fed to the container and has all the configuration necessary to configure the proxy for our app:
+Traefik simplifies management because the configuration can be embedded into the docker compose. In addition, it can request certificates automatically, and it can handle MQ traffic, which many proxies (such as Caddy) cannot handle by default.
 
-https://github.com/gravitl/netmaker/blob/master/docker/Caddyfile
+Caddy is still a functioning proxy with configs available for Netmaker. We are moving guidance towards Traefik by default, but if you are maintaining an installation that relies on Caddy, you can continue to use it with Netmaker.
 
 
 External Client

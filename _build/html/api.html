@@ -348,6 +348,10 @@
         </li>
         <li class="md-nav__item"><a href="#access-keys-api-call-examples" class="md-nav__link">Access Keys API Call Examples</a>
         </li>
+        <li class="md-nav__item"><a href="#acl-api" class="md-nav__link">ACL API</a>
+        </li>
+        <li class="md-nav__item"><a href="#acl-api-call-examples" class="md-nav__link">ACL API Call Examples</a>
+        </li>
         <li class="md-nav__item"><a href="#nodes-api" class="md-nav__link">Nodes API</a>
         </li>
         <li class="md-nav__item"><a href="#nodes-api-call-examples" class="md-nav__link">Nodes API Call Examples</a>
@@ -464,6 +468,10 @@
         </li>
         <li class="md-nav__item"><a href="#access-keys-api-call-examples" class="md-nav__link">Access Keys API Call Examples</a>
         </li>
+        <li class="md-nav__item"><a href="#acl-api" class="md-nav__link">ACL API</a>
+        </li>
+        <li class="md-nav__item"><a href="#acl-api-call-examples" class="md-nav__link">ACL API Call Examples</a>
+        </li>
         <li class="md-nav__item"><a href="#nodes-api" class="md-nav__link">Nodes API</a>
         </li>
         <li class="md-nav__item"><a href="#nodes-api-call-examples" class="md-nav__link">Nodes API Call Examples</a>
@@ -497,9 +505,9 @@
 
 
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
-<p>API calls must be authenticated via a header of  the format  <cite>-H “Authorization: Bearer &lt;YOUR_SECRET_KEY&gt;”</cite> There are two methods to obtain YOUR_SECRET_KEY:
+<p>API calls must be authenticated via a header of the format  <cite>-H “Authorization: Bearer &lt;YOUR_SECRET_KEY&gt;”</cite> There are two methods to obtain YOUR_SECRET_KEY:
 1. Using the masterkey. By default, this value is “secret key,” but you should change this on your instance and keep it secure. This value can be set via env var at startup or in a config file (config/environments/&lt; env &gt;.yaml). See the [general usage](./USAGE.md) documentation for more details.
-2. Using a JWT received for a node. This  can be retrieved by calling the <cite>/api/nodes/&lt;network&gt;/authenticate</cite> endpoint, as documented below.</p>
+2. Using a JWT received for a node. This can be retrieved by calling the <cite>/api/nodes/&lt;network&gt;/authenticate</cite> endpoint, as documented below.</p>
 
 
 <h2 id="format-of-calls-for-curl">Format of Calls for Curl<a class="headerlink" href="#format-of-calls-for-curl" title="Permalink to this headline">¶</a></h2>
@@ -552,6 +560,21 @@
 </div>
 
 
+<h3 id="acl-api">ACL API<a class="headerlink" href="#acl-api" title="Permalink to this headline">¶</a></h3>
+<p><strong>Get ACL for network</strong> <cite>/api/networks/{network id}/acl</cite>, <cite>GET</cite></p>
+<p><strong>Update ACL for network</strong> <cite>/api/networks/{network id}/acl</cite>, <cite>PUT</cite></p>
+
+
+<h3 id="acl-api-call-examples">ACL API Call Examples<a class="headerlink" href="#acl-api-call-examples" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Get ACL for Network: curl -H "Authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/networks/skynet/acl | jq
+
+Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/nodes/skynet/acl \
+
+-d `{"20703260-4b0e-4f2d-8d74-bf28e21cc682":{"75721e5b-f2ac-4cca-b648-fa1d83712287":1},"75721e5b-f2ac-4cca-b648-fa1d83712287":{"20703260-4b0e-4f2d-8d74-bf28e21cc682":1}}`
+</pre></div>
+</div>
+
+
 <h3 id="nodes-api">Nodes API<a class="headerlink" href="#nodes-api" title="Permalink to this headline">¶</a></h3>
 <p><strong>Get All Nodes:</strong> <cite>/api/nodes</cite>, <cite>GET</cite></p>
 <p><strong>Get Network Nodes:</strong> <cite>/api/nodes/{network id}</cite>, <cite>GET</cite></p>
@@ -594,7 +617,7 @@
 
 
 <h3 id="users-api">Users API<a class="headerlink" href="#users-api" title="Permalink to this headline">¶</a></h3>
-<p><strong>Note:</strong> Only able to create Admin user at this time. The “user” is only used by the <a class="reference external" href="https://github.com/gravitl/netmaker-ui">user interface</a> to authenticate the  single  admin user.</p>
+<p><strong>Note:</strong> Only able to create Admin user at this time. The “user” is only used by the <a class="reference external" href="https://github.com/gravitl/netmaker-ui">user interface</a> to authenticate the single admin user.</p>
 <p><strong>Get User:</strong> <cite>/api/users/{username}</cite>, <cite>GET</cite></p>
 <p><strong>Update User:</strong> <cite>/api/users/{username}</cite>, <cite>PUT</cite></p>
 <p><strong>Delete User:</strong> <cite>/api/users/{username}</cite>, <cite>DELETE</cite></p>

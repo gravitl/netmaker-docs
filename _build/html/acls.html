@@ -451,8 +451,8 @@
 <p>The ACL feature can be accessed by either clicking on “ACLs” in the sidebar, or by clicking on a Node in either the Node List or in the Graph view.</p>
 
 <h3 id="acl-screen">ACL Screen<a class="headerlink" href="#acl-screen" title="Permalink to this headline">¶</a></h3>
-<p>If you are on the ACLs tab (pictured above), you will have a full list of all ACLs for the whole network. You can simply click on any one of these to enable or disable a pair of connections. You will note that when you “disable” the connection from any one node, it will automatically “disable” the matching connection on the other node. An update is sent to the nodes over MQ, telling them to remove the connection locally.</p>
-<p>In the upper right-hand corner of the screen you will also notice an “Allow All” button and a “Block All” button. “Allow All” will enable all connections, and “Block All” will block all connections. If you block all connections, no nodes will be able to talk to each other.</p>
+<p>If you are on the ACLs tab (pictured above), you will have a complete list of all ACLs for the whole network. You can simply click on any one of these to enable or disable a pair of connections. You will note that when you “disable” the connection from any one node, it will automatically “disable” the matching connection on the other node. An update is sent to the nodes over MQ, telling them to remove the connection locally.</p>
+<p>In the upper right-hand corner of the screen, you will also notice an “Allow All” button and a “Block All” button. “Allow All” will enable all connections, and “Block All” will block all connections. If you block all connections, no nodes will be able to talk to each other.</p>
 <p>For more information, see the <a class="reference internal" href="ui-reference.html"><span class="doc">UI reference.</span></a></p>
 
 
@@ -462,8 +462,8 @@
 
 
 <h3 id="important-note-about-udp-hole-punching">Important Note about UDP Hole Punching<a class="headerlink" href="#important-note-about-udp-hole-punching" title="Permalink to this headline">¶</a></h3>
-<p>As of 0.12.0, we allow you to disable any p2p connection, including a node’s connection to the server (e.g. netmaker-1). <strong>If you disable this connection and you use UDP Hole Punching, your network will break.</strong> Why? The netmaker server collects the endpoints/ports necessary to reach every node, and then sends this information to the network. If this connection is disabled, the server will not know how to reach the given node.</p>
-<p>As an alternative, you can turn off UDP Hole Punching on the individual node, if you do not wish for it to communicate with the server.</p>
+<p>As of 0.12.0, we allow you to disable any p2p connection, including a node’s connection to the server (e.g. netmaker-1). <strong>If you disable this connection and you use UDP Hole Punching, your network will break.</strong> Why? The netmaker server collects the endpoints/ports necessary to reach every node and then sends this information to the network. If this connection is disabled, the server will not know how to reach the given node.</p>
+<p>As an alternative, you can turn off UDP Hole Punching on the individual node if you do not wish for it to communicate with the server.</p>
 
 
 

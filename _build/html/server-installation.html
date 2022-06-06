@@ -309,8 +309,6 @@
         </li>
         <li class="md-nav__item"><a href="#available-docker-compose-files" class="md-nav__link">Available docker-compose files</a>
         </li>
-        <li class="md-nav__item"><a href="#traefik-proxy" class="md-nav__link">Traefik Proxy</a>
-        </li>
         <li class="md-nav__item"><a href="#no-dns-coredns-disabled" class="md-nav__link">No DNS - CoreDNS Disabled</a>
         </li></ul>
             </nav>
@@ -339,6 +337,8 @@
         </li>
         <li class="md-nav__item"><a href="#nginx-reverse-proxy-setup-with-https" class="md-nav__link">Nginx Reverse Proxy Setup with https</a>
         </li>
+        <li class="md-nav__item"><a href="#nginx-proxy-manager-setup" class="md-nav__link">Nginx Proxy Manager Setup</a>
+        </li>
         <li class="md-nav__item"><a href="#highly-available-installation-kubernetes" class="md-nav__link">Highly Available Installation (Kubernetes)</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#requirements" class="md-nav__link">Requirements</a>
@@ -361,7 +361,7 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#load-balancer-setup" class="md-nav__link">1. Load Balancer Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#rqlite-setup" class="md-nav__link">2. RQLite Setup</a>
+        <li class="md-nav__item"><a href="#rqlite-setup" class="md-nav__link">2. rqlite Setup</a>
         </li>
         <li class="md-nav__item"><a href="#netmaker-setup" class="md-nav__link">3. Netmaker Setup</a>
         </li>
@@ -406,6 +406,13 @@
     
     
       <a href="#nginx-reverse-proxy-setup-with-https" class="md-nav__link">Nginx Reverse Proxy Setup with https</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#nginx-proxy-manager-setup" class="md-nav__link">Nginx Proxy Manager Setup</a>
       
     
     </li>
@@ -523,8 +530,6 @@
         </li>
         <li class="md-nav__item"><a href="#available-docker-compose-files" class="md-nav__link">Available docker-compose files</a>
         </li>
-        <li class="md-nav__item"><a href="#traefik-proxy" class="md-nav__link">Traefik Proxy</a>
-        </li>
         <li class="md-nav__item"><a href="#no-dns-coredns-disabled" class="md-nav__link">No DNS - CoreDNS Disabled</a>
         </li></ul>
             </nav>
@@ -553,6 +558,8 @@
         </li>
         <li class="md-nav__item"><a href="#nginx-reverse-proxy-setup-with-https" class="md-nav__link">Nginx Reverse Proxy Setup with https</a>
         </li>
+        <li class="md-nav__item"><a href="#nginx-proxy-manager-setup" class="md-nav__link">Nginx Proxy Manager Setup</a>
+        </li>
         <li class="md-nav__item"><a href="#highly-available-installation-kubernetes" class="md-nav__link">Highly Available Installation (Kubernetes)</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#requirements" class="md-nav__link">Requirements</a>
@@ -575,7 +582,7 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#load-balancer-setup" class="md-nav__link">1. Load Balancer Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#rqlite-setup" class="md-nav__link">2. RQLite Setup</a>
+        <li class="md-nav__item"><a href="#rqlite-setup" class="md-nav__link">2. rqlite Setup</a>
         </li>
         <li class="md-nav__item"><a href="#netmaker-setup" class="md-nav__link">3. Netmaker Setup</a>
         </li>
@@ -596,18 +603,18 @@
             
   
 <h1 id="server-installation--page-root">Advanced Server Installation<a class="headerlink" href="#server-installation--page-root" title="Permalink to this headline">¶</a></h1>
-<p>This section outlines installing the Netmaker server, including Netmaker, Netmaker UI, rqlite, and CoreDNS</p>
+<p>This section outlines installing the Netmaker server, including Netmaker, Netmaker UI, rqlite, and CoreDNS.</p>
 
 <h2 id="system-compatibility">System Compatibility<a class="headerlink" href="#system-compatibility" title="Permalink to this headline">¶</a></h2>
 <p>Netmaker requires elevated privileges on the host machine to perform network operations. Netmaker must be able to modify interfaces and set firewall rules using iptables.</p>
 <p>Typically, Netmaker is run inside of containers, using Docker or Kubernetes.</p>
 <p>Netmaker can be run without containers, but this is not recommended. You must run the Netmaker binary, CoreDNS binary, database, and a web server directly on the host.</p>
-<p>Each of these components have their own individual requirements and the management complexity increases exponentially by running outside of containers.</p>
+<p>Each of these components has its own individual requirements and the management complexity increases exponentially by running outside of containers.</p>
 <p>For first-time installs, we recommend the quick install guide. The following documents are meant for more advanced installation environments and are not recommended for most users. However, these documents can be helpful in customizing or troubleshooting your own installation.</p>
 
 
 <h2 id="server-configuration-reference">Server Configuration Reference<a class="headerlink" href="#server-configuration-reference" title="Permalink to this headline">¶</a></h2>
-<p>Netmaker sets its configuration in the following order of precendence:</p>
+<p>Netmaker sets its configuration in the following order of precedence:</p>
 <ol class="arabic simple">
 <li><p><strong>Defaults:</strong> Default values set on the server if no value is provided in configuration.</p></li>
 <li><p><strong>Config File:</strong> Values set in the <cite>config/environments/*.yaml`</cite> file</p></li>
@@ -620,11 +627,11 @@
 <dt>SERVER_NAME</dt><dd><p><strong>Default:</strong> “”</p>
 <p><strong>Description:</strong>  MUST SET THIS VALUE. This is the public, resolvable DNS name of the MQ Broker. For instance: broker.netmaker.example.com.</p>
 </dd>
-<dt>SERVER_HOST</dt><dd><p><strong>Default:</strong> (Server detects public IP address of machine)</p>
+<dt>SERVER_HOST</dt><dd><p><strong>Default:</strong> (Server detects the public IP address of machine)</p>
 <p><strong>Description:</strong> The public IP of the server where the machine is running.</p>
 </dd>
 <dt>SERVER_API_CONN_STRING</dt><dd><p><strong>Default:</strong> “”</p>
-<p><strong>Description:</strong>  MUST SET THIS VALUE. This is the public, resolvable address of the API, including port. For instance: api.netmaker.example.com:443.</p>
+<p><strong>Description:</strong>  MUST SET THIS VALUE. This is the public, resolvable address of the API, including the port. For instance: api.netmaker.example.com:443.</p>
 </dd>
 <dt>COREDNS_ADDR</dt><dd><p><strong>Default:</strong> “”</p>
 <p><strong>Description:</strong> The public IP of the CoreDNS server. Will typically be the same as the server where Netmaker is running (same as SERVER_HOST).</p>
@@ -687,7 +694,7 @@
 <p><strong>Description:</strong> If “on”, the server will send anonymous telemetry data once daily, which is used to improve the product. Data sent includes counts (integer values) for the number of nodes, types of nodes, users, and networks. It also sends the version of the server.</p>
 </dd>
 <dt>MQ_HOST</dt><dd><p><strong>Default:</strong> (public IP of server)</p>
-<p><strong>Description:</strong> The address of the mq server. If running from docker compose it will be “mq”. If using “host networking”, it will find and detect the IP of the mq container. Otherwise, need to input address. If not set, it will use the public IP of the server. the port 1883 will be appended automatically. This is the expected reachable port for MQ and cannot be changed at this time.</p>
+<p><strong>Description:</strong> The address of the mq server. If running from docker compose it will be “mq”. If using “host networking”, it will find and detect the IP of the mq container. Otherwise, need to input address. If not set, it will use the public IP of the server. The port 1883 will be appended automatically. This is the expected reachable port for MQ and cannot be changed at this time.</p>
 </dd>
 <dt>HOST_NETWORK:</dt><dd><p><strong>Default:</strong> “off”</p>
 <p><strong>Description:</strong> Whether or not host networking is turned on. Only turn on if configured for host networking (see docker-compose.hostnetwork.yml). Will set host-level settings like iptables and forwarding for MQ.</p>
@@ -696,13 +703,13 @@
 <p><strong>Description:</strong> # Allows netmaker to manage iptables locally to set forwarding rules. Largely for DNS or SSH forwarding (see below). It will also set a default “allow forwarding” policy on the host. It’s better to leave this on unless you know what you’re doing.</p>
 </dd>
 <dt>PORT_FORWARD_SERVICES:</dt><dd><p><strong>Default:</strong> “”</p>
-<p><strong>Description:</strong> Comma-separated list of services for which to configure port forwarding on the machine. Options include “mq,dns,ssh”. MQ IS DEPRECIATED, DO NOT SET THIS.’ssh’ forwards port 22 over wireguard, enabling ssh to server over wireguard. However, if you set the Netmaker server as a ingress gateway, this will break SSH on external clients, so be careful. DNS enables private dns over wireguard. If you would like to use private dns with ext clients, turn this on.</p>
+<p><strong>Description:</strong> Comma-separated list of services for which to configure port forwarding on the machine. Options include “mq,dns,ssh”. MQ IS DEPRECIATED, DO NOT SET THIS.’ssh’ forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.</p>
 </dd>
 <dt>POD_IP:</dt><dd><p><strong>Default:</strong> “127.0.0.1”</p>
 <p><strong>Description:</strong> Specific to a Kubernetes installation. Gets the container IP address of the pod where Netmaker is running.</p>
 </dd>
 <dt>VERBOSITY:</dt><dd><p><strong>Default:</strong> 0</p>
-<p><strong>Description:</strong> Specify level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.</p>
+<p><strong>Description:</strong> Specify the level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.</p>
 </dd>
 </dl>
 
@@ -724,22 +731,31 @@
   <span class="nt">disableremoteipcheck</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "false" or DISABLE_REMOTE_IP_CHECK (if set)</span>
   <span class="nt">version</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># version of server</span>
   <span class="nt">rce</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "off"</span>
+  <span class="nt">mqhost</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "mq"</span>
+  <span class="nt">nodeid</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to macaddress of machine</span>
+  <span class="nt">messagequeuebackend</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># default to "on"</span>
+  <span class="nt">database</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "sqlite"</span>
+  <span class="nt">verbosity</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to 0</span>
+  <span class="nt">authprovider</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to ""</span>
+  <span class="nt">displaykeys</span><span class="p">:</span> <span class="s">""</span> <span class="c1">#  defaults to "on"</span>
+  <span class="nt">manageiptables</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "on"</span>
+  <span class="nt">portforwardservices</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "", options include "dns" and "ssh"</span>
+  <span class="nt">hostnetwork</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "off"</span>
+  <span class="nt">mqport</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to 8883</span>
+  <span class="nt">mqserverport</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to 1883</span>
+  <span class="nt">server</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># defaults to "", should be broker domain</span>
 </pre></div>
 </div>
 
 
 <h3 id="compose-file-annotated">Compose File - Annotated<a class="headerlink" href="#compose-file-annotated" title="Permalink to this headline">¶</a></h3>
-<p>All environment variables and options are enabled in this file. It is the equivalent to running the “full install” from the above section. However, all environment variables are included, and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.</p>
+<p>All environment variables and options are enabled in this file. It is the equivalent to running the “full install” from the above section. However, all environment variables are included and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.</p>
 <div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">"3.4"</span>
 
 <span class="nt">services</span><span class="p">:</span>
   <span class="nt">netmaker</span><span class="p">:</span> <span class="c1"># The Netmaker Server</span>
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker:v0.14.0</span>
-    <span class="nt">volumes</span><span class="p">:</span> <span class="c1"># Volume mounts necessary to store SQL Data, and share data with CoreDNS and MQ (certs folder)</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dnsconfig:/root/config/dnsconfig</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sqldata:/root/data</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/certs:/etc/netmaker/</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker:v0.14.2</span>
     <span class="nt">cap_add</span><span class="p">:</span> <span class="c1"># necessary permissions to manage networking</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NET_ADMIN</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NET_RAW</span>
@@ -750,6 +766,10 @@
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">net.ipv6.conf.all.disable_ipv6=0</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">net.ipv6.conf.all.forwarding=1</span>
     <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
+    <span class="nt">volumes</span><span class="p">:</span> <span class="c1"># Volume mounts necessary to store SQL Data, and share data with CoreDNS and MQ (certs folder)</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dnsconfig:/root/config/dnsconfig</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sqldata:/root/data</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">shared_certs:/etc/netmaker</span>
     <span class="nt">environment</span><span class="p">:</span>
       <span class="nt">SERVER_NAME</span><span class="p">:</span> <span class="s">"broker.NETMAKER_BASE_DOMAIN"</span> <span class="c1"># The resolvable domain of the MQ broker (must point to machine)</span>
       <span class="nt">SERVER_HOST</span><span class="p">:</span> <span class="s">"SERVER_PUBLIC_IP"</span> <span class="c1"># the ip of the host machine</span>
@@ -765,61 +785,100 @@
       <span class="nt">DATABASE</span><span class="p">:</span> <span class="s">"sqlite"</span> <span class="c1"># The database Netmaker should configure itself for. If not SQLite, need to provide connection details (see above for env vars).</span>
       <span class="nt">NODE_ID</span><span class="p">:</span> <span class="s">"netmaker-server-1"</span> <span class="c1"># The ID of the server to identify itself in HA setups and scenarios with multiple Netmaker servers.</span>
       <span class="nt">MQ_HOST</span><span class="p">:</span> <span class="s">"mq"</span> <span class="c1"># The name of the MQ container</span>
+      <span class="nt">MQ_PORT</span><span class="p">:</span> <span class="s">"443"</span> <span class="c1"># The publicly reachable port of MQ</span>
       <span class="nt">HOST_NETWORK</span><span class="p">:</span> <span class="s">"off"</span>  <span class="c1"># whether or not host networking is turned on. Only turn on if configured for host networking (see docker-compose.hostnetwork.yml). Will set host-level settings like iptables.</span>
       <span class="nt">VERBOSITY</span><span class="p">:</span> <span class="s">"1"</span> <span class="c1"># Logging verbosity of the server. Can be 0-3</span>
-      <span class="nt">PORT_FORWARD_SERVICES</span><span class="p">:</span> <span class="s">"dns"</span>  <span class="c1"># set iptables on the machine being managed in order to forward properly from wireguard interface to services listed in "port forward services"</span>
-      <span class="nt">MANAGE_IPTABLES</span><span class="p">:</span> <span class="s">"on"</span>  <span class="c1"># services for which to configure port forwarding on the machine. 'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. dns enables private dns over wireguard.</span>
+      <span class="nt">MANAGE_IPTABLES</span><span class="p">:</span> <span class="s">"on"</span> <span class="c1"># services for which to configure port forwarding on the machine. 'ssh' forwards port 22 over wireguard, enabling ssh to server over wireguard. dns enables private dns over wireguard.</span>
+      <span class="nt">PORT_FORWARD_SERVICES</span><span class="p">:</span> <span class="s">"dns"</span> <span class="c1"># set iptables on the machine being managed in order to forward properly from wireguard interface to services listed in "port forward services"</span>
     <span class="nt">ports</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="s">"51821-51830:51821-51830/udp"</span> <span class="c1"># WireGuard ports - one per network you plan on running</span>
-      <span class="p p-Indicator">-</span> <span class="s">"8081:8081"</span> <span class="c1"># API port</span>
-  <span class="nt">netmaker-ui</span><span class="p">:</span> <span class="c1"># The Netmaker UI Component</span>
+    <span class="nt">expose</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">"8081"</span> <span class="c1"># API port</span>
+    <span class="nt">labels</span><span class="p">:</span> <span class="c1"># traefik configuration</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.enable=true</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-api.entrypoints=websecure</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-api.rule=Host(`api.NETMAKER_BASE_DOMAIN`)</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-api.service=netmaker-api</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.services.netmaker-api.loadbalancer.server.port=8081</span>
+  <span class="nt">netmaker-ui</span><span class="p">:</span>
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">netmaker-ui</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker-ui:v0.14.2</span>
     <span class="nt">depends_on</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gravitl/netmaker-ui:v0.14.0</span>
     <span class="nt">links</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="s">"netmaker:api"</span>
-    <span class="nt">ports</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">"8082:80"</span>
+    <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
     <span class="nt">environment</span><span class="p">:</span>
       <span class="nt">BACKEND_URL</span><span class="p">:</span> <span class="s">"https://api.NETMAKER_BASE_DOMAIN"</span> <span class="c1"># URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT</span>
-    <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
-  <span class="nt">coredns</span><span class="p">:</span> <span class="c1"># The DNS Server. Remove this section if you dont plan to use the coredns server"</span>
-    <span class="nt">depends_on</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span> 
+    <span class="nt">expose</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">"80"</span>
+    <span class="nt">labels</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.enable=true</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.accessControlAllowOriginList=*.NETMAKER_BASE_DOMAIN</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.stsSeconds=31536000</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.browserXssFilter=true</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.customFrameOptionsValue=SAMEORIGIN</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.customResponseHeaders.X-Robots-Tag=none</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.middlewares.nmui-security.headers.customResponseHeaders.Server=</span> <span class="c1"># Remove the server name</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-ui.entrypoints=websecure</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-ui.middlewares=nmui-security@docker</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-ui.rule=Host(`dashboard.NETMAKER_BASE_DOMAIN`)</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.routers.netmaker-ui.service=netmaker-ui</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.http.services.netmaker-ui.loadbalancer.server.port=80</span>
+  <span class="nt">coredns</span><span class="p">:</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">coredns</span>
     <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">coredns/coredns</span>
     <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-conf /root/dnsconfig/Corefile</span>
-    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">coredns</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
     <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
     <span class="nt">volumes</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dnsconfig:/root/dnsconfig</span>
-  <span class="nt">caddy</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">caddy:latest</span>
-    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">caddy</span>
-    <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-    <span class="nt">network_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span> <span class="c1"># Wants ports 80 and 443!</span>
+  <span class="nt">traefik</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik:v2.6</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">traefik</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="c1"># embedded config for Traefik (alternative to mounting a YAML file)</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--certificatesresolvers.http.acme.email=YOUR_EMAIL"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--certificatesresolvers.http.acme.storage=/letsencrypt/acme.json"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--certificatesresolvers.http.acme.tlschallenge=true"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--entrypoints.websecure.address=:443"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--entrypoints.websecure.http.tls=true"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--entrypoints.websecure.http.tls.certResolver=http"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--log.level=INFO"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--providers.docker=true"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--providers.docker.exposedByDefault=false"</span>
+      <span class="p p-Indicator">-</span> <span class="s">"--serverstransport.insecureskipverify=true"</span>
+    <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
     <span class="nt">volumes</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/Caddyfile:/etc/caddy/Caddyfile</span>
-      <span class="c1"># - $PWD/site:/srv # you could also serve a static site in site folder</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">caddy_data:/data</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">caddy_conf:/config</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock:/var/run/docker.sock:ro</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik_certs:/letsencrypt</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">"443:443"</span>
   <span class="nt">mq</span><span class="p">:</span> <span class="c1"># the MQTT broker for netmaker</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mq</span>
     <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">eclipse-mosquitto:2.0.11-openssl</span>
     <span class="nt">depends_on</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">netmaker</span>
-    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mq</span>
     <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-    <span class="nt">ports</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">"127.0.0.1:1883:1883"</span> <span class="c1"># only exposed locally</span>
-      <span class="p p-Indicator">-</span> <span class="s">"8883:8883"</span> <span class="c1"># exposed publicly and must be reachable from all clients!</span>
     <span class="nt">volumes</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/mosquitto.conf:/mosquitto/config/mosquitto.conf</span> <span class="c1"># need to pull conf file from github before running (under docker/mosquitto.conf</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/certs/:/mosquitto/certs/</span> <span class="c1"># certs generated by netmaker server, including root certificate and client certs for every peer.</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mosquitto_data:/mosquitto/data</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mosquitto_logs:/mosquitto/log</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">shared_certs:/mosquitto/certs</span> <span class="c1"># certs generated by netmaker server, including root certificate and client certs for every peer.</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">"127.0.0.1:1883:1883"</span> <span class="c1"># only exposed locally</span>
+    <span class="nt">expose</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">"8883"</span>
+    <span class="nt">labels</span><span class="p">:</span> <span class="c1"># traefik configuration</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.enable=true</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.tcp.routers.mqtts.rule=HostSNI(`broker.NETMAKER_BASE_DOMAIN`)</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.tcp.routers.mqtts.tls.passthrough=true</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.tcp.services.mqtts-svc.loadbalancer.server.port=8883</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.tcp.routers.mqtts.service=mqtts-svc</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">traefik.tcp.routers.mqtts.entrypoints=websecure</span>
 <span class="nt">volumes</span><span class="p">:</span>
-  <span class="nt">caddy_data</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># storage for caddy data</span>
-  <span class="nt">caddy_conf</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># storage for caddy configuration file</span>
+  <span class="nt">traefik_certs</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># certificates for traefik (generated by Traefik/LetsEncrypt)</span>
+  <span class="nt">shared_certs</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># certificates for MQ (generated by Netmaker)</span>
   <span class="nt">sqldata</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># storage for embedded sqlite</span>
   <span class="nt">dnsconfig</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># storage for coredns</span>
   <span class="nt">mosquitto_data</span><span class="p">:</span> <span class="p p-Indicator">{}</span> <span class="c1"># storage for mqtt data</span>
@@ -832,31 +891,28 @@
 <p>The default options for docker-compose can be found here: <a class="reference external" href="https://github.com/gravitl/netmaker/tree/master/compose">https://github.com/gravitl/netmaker/tree/master/compose</a></p>
 <p>The following is a brief description of each:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.traefik.yml">docker-compose.traefik.yml</a> -= This maintains the most recommended setup at the moment, using the Traefik proxy.</p></li>
 <li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.contained.yml">docker-compose.contained.yml</a> - This is the default docker-compose, used in the quick start and deployment script in the README on GitHub. It deploys Netmaker with all options included (Caddy and CoreDNS) and has “self-contained” netclients, meaning they do not affect host networking.</p></li>
-<li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.coredns.yml">docker-compose.coredns.yml</a> - This is a simple compose used to spin up a standalone CoreDNS server. Can be useful if, for instance, you are unning Netmaker on baremetal but need CoreDNS.</p></li>
+<li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.coredns.yml">docker-compose.coredns.yml</a> - This is a simple compose used to spin up a standalone CoreDNS server. Can be useful if, for instance, you are running Netmaker on baremetal but need CoreDNS.</p></li>
 <li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.hostnetwork.yml">docker-compose.hostnetwork.yml</a> - This is similar to the docker-compose.contained.yml but with a key difference: it has advanced permissions and mounts host volumes to control networking on the host level.</p></li>
 <li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nocaddy.yml">docker-compose.nocaddy.yml</a> -= This is the same as docker-compose.contained.yml but without Caddy, in case you need to use a different proxy like Nginx, Traefik, or HAProxy.</p></li>
 <li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nodns.yml">docker-compose.nodns.yml</a> - This is the same as docker-compose.contained.yml but without CoreDNS, in which case you will not have the Private DNS feature.</p></li>
 <li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml">docker-compose.reference.yml</a> - This is the same as docker-compose.contained.yml but with all variable options on display and annotated (it’s what we show right above this section). Use this to determine which variables you should add or change in your configuration.</p></li>
-<li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml">docker-compose.yml</a> - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the “primary” docker-compose that users should work with.</p></li>
+<li><p><a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml">docker-compose.yml</a> - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the “primary” docker-compose users should work with.</p></li>
 </ul>
 
 
-<h3 id="traefik-proxy">Traefik Proxy<a class="headerlink" href="#traefik-proxy" title="Permalink to this headline">¶</a></h3>
-<p>To install with Traefik, rather than Nginx or the default Caddy, check out this repo: <a class="reference external" href="https://github.com/bsherman/netmaker-traefik">https://github.com/bsherman/netmaker-traefik</a></p>
-
-
 <h3 id="no-dns-coredns-disabled">No DNS - CoreDNS Disabled<a class="headerlink" href="#no-dns-coredns-disabled" title="Permalink to this headline">¶</a></h3>
-<p>CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function, because it is added directly to nodes’ hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE=”off”</p>
+<p>CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes’ hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE=”off”</p>
 
 
 
 <span id="nodocker"></span><h2 id="linux-install-without-docker">Linux Install without Docker<a class="headerlink" href="#linux-install-without-docker" title="Permalink to this headline">¶</a></h2>
-<p>Most systems support Docker, but some do not. In such environments, there are many options for installing Netmaker. Netmaker is available as a binary file, and there is a zip file of the Netmaker UI static HTML on GitHub. Beyond the UI and Server, you may want to optionally install a database (sqlite is embedded, rqlite or postgres are supported) and CoreDNS (also optional).</p>
+<p>Most systems support Docker, but some do not. In such environments, there are many options for installing Netmaker. Netmaker is available as a binary file, and there is a zip file of the Netmaker UI static HTML on GitHub. Beyond the UI and Server, you may want to optionally install a database (SQLite is embedded, rqlite or postgres are supported) and CoreDNS (also optional).</p>
 <p>Once this is enabled and configured for a domain, you can continue with the below. The recommended server runs Ubuntu 20.04.</p>
 
 <h3 id="database-setup-optional">Database Setup (optional)<a class="headerlink" href="#database-setup-optional" title="Permalink to this headline">¶</a></h3>
-<p>You can run the netmaker binary standalone and it will run an embedded sqlite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.</p>
+<p>You can run the netmaker binary standalone and it will run an embedded SQLite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.</p>
 <ol class="arabic simple">
 <li><p>Install rqlite on your server: <a class="reference external" href="https://github.com/rqlite/rqlite">https://github.com/rqlite/rqlite</a></p></li>
 <li><p>Run rqlite: rqlited -node-id 1 ~/node.1</p></li>
@@ -876,7 +932,7 @@
 
 
 <h3 id="ui-setup">UI Setup<a class="headerlink" href="#ui-setup" title="Permalink to this headline">¶</a></h3>
-<p>The following uses Nginx as an http server. You may alternatively use Apache or any other web server that serves static web files.</p>
+<p>The following uses Nginx as an http server. Alternatively, you may use Apache or any other web server that serves static web files.</p>
 <ol class="arabic simple">
 <li><p>Download and Unzip UI asset files</p></li>
 <li><p>Copy Config to Nginx or other reverse proxy</p></li>
@@ -895,7 +951,7 @@
 
 
 <h3 id="proxy-load-balancer">Proxy / Load Balancer<a class="headerlink" href="#proxy-load-balancer" title="Permalink to this headline">¶</a></h3>
-<p>You will need to proxy connections to your UI and Server. By default the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Caddy or Nginx (you can follow the Nginx guide in these docs).</p>
+<p>You will need to proxy connections to your UI and Server. By default, the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Traefik, Caddy, or Nginx (you can follow the Nginx guide in these docs).</p>
 
 
 <h3 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this headline">¶</a></h3>
@@ -934,7 +990,7 @@ kubectl apply -f netclient-template.yaml
 
 
 <h2 id="nginx-reverse-proxy-setup-with-https">Nginx Reverse Proxy Setup with https<a class="headerlink" href="#nginx-reverse-proxy-setup-with-https" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://github.com/linuxserver/docker-swag">Swag Proxy</a> makes it easy to generate a valid ssl certificate for the config bellow. Here is the <a class="reference external" href="https://docs.linuxserver.io/general/swag">documentation</a> for the installation.</p>
+<p>The <a class="reference external" href="https://github.com/linuxserver/docker-swag">Swag Proxy</a> makes it easy to generate a valid SSL certificate for the config below. Here is the <a class="reference external" href="https://docs.linuxserver.io/general/swag">documentation</a> for the installation.</p>
 <p>The following file configures Netmaker as a subdomain. This config is an adaption from the swag proxy project.</p>
 <p>./netmaker.subdomain.conf:</p>
 <div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
@@ -966,6 +1022,103 @@ kubectl apply -f netclient-template.yaml
         <span class="kn">proxy_pass_request_headers</span>  <span class="no">on</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
+</pre></div>
+</div>
+
+
+<h2 id="nginx-proxy-manager-setup">Nginx Proxy Manager Setup<a class="headerlink" href="#nginx-proxy-manager-setup" title="Permalink to this headline">¶</a></h2>
+<p>To use Netmaker with Nginx Proxy Manager, three proxy hosts should be added, one for each subdomain used by netmaker. Each subdomain should have SSL enable and be configured as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">netmaker</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span>
+<span class="n">Forward</span> <span class="n">Hostname</span><span class="o">/</span><span class="n">IP</span><span class="p">:</span> <span class="n">netmaker</span>
+<span class="n">Forward</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">8081</span>
+<span class="n">dashboard</span><span class="o">.</span><span class="n">netmaker</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span>
+<span class="n">Forward</span> <span class="n">Hostname</span><span class="o">/</span><span class="n">IP</span><span class="p">:</span> <span class="n">netmaker</span><span class="o">-</span><span class="n">ui</span>
+<span class="n">Forward</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">80</span>
+<span class="n">grpc</span><span class="o">.</span><span class="n">netmaker</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span>
+<span class="n">Forward</span> <span class="n">Hostname</span><span class="o">/</span><span class="n">IP</span><span class="p">:</span> <span class="n">netmaker</span>
+<span class="n">Forward</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">50051</span>
+<span class="n">Custom</span> <span class="n">Locations</span><span class="p">:</span>
+<span class="n">Add</span> <span class="n">location</span> <span class="o">/</span>
+<span class="n">Forward</span> <span class="n">Hostname</span><span class="o">/</span><span class="n">IP</span><span class="p">:</span> <span class="n">netmaker</span>
+<span class="n">Forward</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">50051</span>
+<span class="n">Custom</span> <span class="n">config</span> <span class="p">(</span><span class="n">gear</span> <span class="n">button</span><span class="p">):</span> <span class="n">grpc_pass</span> <span class="n">netmaker</span><span class="p">:</span><span class="mi">50051</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following is a cleaned up config generated by Nginx Proxy Manager to show how nginx can be configured to support Netmaker. This does not include the neccessary SSL configuration.</p>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># dashboard.netmaker.example.com</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">set</span> <span class="nv">$forward_scheme</span> <span class="s">http</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$server</span>         <span class="s">"netmaker-ui"</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$port</span>           <span class="mi">80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+<span class="kn">server_name</span> <span class="s">dashboard.netmaker.example.com</span><span class="p">;</span>
+  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="c1"># Proxy!</span>
+    <span class="kn">include</span> <span class="s">conf.d/include/proxy.conf</span><span class="p">;</span>
+        <span class="c1">#above file includes:</span>
+        <span class="c1">#add_header       X-Served-By $host;</span>
+        <span class="c1">#proxy_set_header Host $host;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-Scheme $scheme;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-Proto  $scheme;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-For    $remote_addr;</span>
+        <span class="c1">#proxy_set_header X-Real-IP          $remote_addr;</span>
+        <span class="c1">#proxy_pass       $forward_scheme://$server:$port$request_uri;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># api.netmaker.example.com</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">set</span> <span class="nv">$forward_scheme</span> <span class="s">http</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$server</span>         <span class="s">"netmaker"</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$port</span>           <span class="mi">8081</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+  <span class="kn">server_name</span> <span class="s">api.netmaker.example.com</span><span class="p">;</span>
+  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="c1"># Proxy!</span>
+    <span class="kn">include</span> <span class="s">conf.d/include/proxy.conf</span><span class="p">;</span>
+        <span class="c1">#above file includes:</span>
+        <span class="c1">#add_header       X-Served-By $host;</span>
+        <span class="c1">#proxy_set_header Host $host;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-Scheme $scheme;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-Proto  $scheme;</span>
+        <span class="c1">#proxy_set_header X-Forwarded-For    $remote_addr;</span>
+        <span class="c1">#proxy_set_header X-Real-IP          $remote_addr;</span>
+        <span class="c1">#proxy_pass       $forward_scheme://$server:$port$request_uri;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># grpc.netmaker.example.com</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">set</span> <span class="nv">$forward_scheme</span> <span class="s">http</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$server</span>         <span class="s">"netmaker"</span><span class="p">;</span>
+  <span class="kn">set</span> <span class="nv">$port</span>           <span class="mi">50051</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+<span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+  <span class="kn">server_name</span> <span class="s">grpc.netmaker.example.com</span><span class="p">;</span>
+  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Scheme</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span>  <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span>    <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span>          <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="kn">proxy_pass</span>       <span class="s">http://netmaker:50051</span><span class="p">;</span>
+    <span class="kn">grpc_pass</span> <span class="n">netmaker</span><span class="p">:</span><span class="mi">50051</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 
@@ -1015,7 +1168,7 @@ This install has some notable exceptions:
 <span class="o">--</span><span class="nb">set</span> <span class="n">ingress</span><span class="o">.</span><span class="n">className</span><span class="o">=</span><span class="n">nginx</span>
 </pre></div>
 </div>
-<p>The below command will install netmaker with three server replicas (the default), <strong>no coredns</strong>, and ingress with routes of api.netmaker.example.com, grpc.netmaker.example.com, and dashboard.netmaker.example.com. There will be one UI replica instead of two, and one database instance instead of two. Traefik will look for a ClusterIssuer named “le-prod-2” to get valid certificates for the ingress.</p>
+<p>The below command will install netmaker with three server replicas (the default), <strong>no coredns</strong>, and ingress with routes of api.netmaker.example.com, grpc.netmaker.example.com, and dashboard.netmaker.example.com. There will be one UI replica instead of two and one database instance instead of two. Traefik will look for a ClusterIssuer named “le-prod-2” to get valid certificates for the ingress.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">helm3</span> <span class="n">install</span> <span class="n">netmaker</span><span class="o">/</span><span class="n">netmaker</span> <span class="o">--</span><span class="n">generate</span><span class="o">-</span><span class="n">name</span> \
 <span class="o">--</span><span class="nb">set</span> <span class="n">baseDomain</span><span class="o">=</span><span class="n">netmaker</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="nb">set</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">ha</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">replicaCount</span><span class="o">=</span><span class="mi">1</span> \
 <span class="o">--</span><span class="nb">set</span> <span class="n">ui</span><span class="o">.</span><span class="n">replicas</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="nb">set</span> <span class="n">ingress</span><span class="o">.</span><span class="n">enabled</span><span class="o">=</span><span class="n">true</span> \
@@ -1042,7 +1195,7 @@ This install has some notable exceptions:
 
 
 <h3 id="kernel-wireguard">Kernel WireGuard<a class="headerlink" href="#kernel-wireguard" title="Permalink to this headline">¶</a></h3>
-<p>If you have control of the Kubernetes worker node servers, we recommend <strong>first</strong> installing WireGuard on the hosts, and then installing HA Netmaker in Kernel mode. By default, Netmaker will install with userspace WireGuard (wireguard-go) for maximum compatibility, and to avoid needing permissions at the host level. If you have installed WireGuard on your hosts, you should install Netmaker’s helm chart with the following option:</p>
+<p>If you have control of the Kubernetes worker node servers, we recommend <strong>first</strong> installing WireGuard on the hosts, and then installing HA Netmaker in Kernel mode. By default, Netmaker will install with userspace WireGuard (wireguard-go) for maximum compatibility and to avoid needing permissions at the host level. If you have installed WireGuard on your hosts, you should install Netmaker’s helm chart with the following option:</p>
 <ul class="simple">
 <li><p><cite>–set wireguard.kernel=true</cite></p></li>
 </ul>
@@ -1086,9 +1239,9 @@ This install has some notable exceptions:
 <p>Your load balancer of choice will send requests to the Netmaker servers. Setup is similar to the various guides we have created for Nginx, Caddy, and Traefik. SSL certificates must also be configured and handled by the LB.</p>
 
 
-<h3 id="rqlite-setup">2. RQLite Setup<a class="headerlink" href="#rqlite-setup" title="Permalink to this headline">¶</a></h3>
-<p>RQLite is the included distributed datastore for an HA Netmaker installation. If you have a different corporate database you wish to integrate, Netmaker is easily extended to other DB’s. If this is a requirement, please contact us.</p>
-<p>Assuming you use Rqlite, you must run it on each Netmaker server VM, or alongside that VM as a container. Setup a config.json for database credentials (password supports BCRYPT HASHING) and mount in working directory of rqlite and specify with <cite>-auth config.json</cite> :</p>
+<h3 id="rqlite-setup">2. rqlite Setup<a class="headerlink" href="#rqlite-setup" title="Permalink to this headline">¶</a></h3>
+<p>rqlite is the included distributed datastore for an HA Netmaker installation. If you have a different corporate database you wish to integrate, Netmaker is easily extended to other DB’s. If this is a requirement, please contact us.</p>
+<p>Assuming you use rqlite, you must run it on each Netmaker server VM, or alongside that VM as a container. Setup a config.json for database credentials (password supports BCRYPT HASHING) and mount in working directory of rqlite and specify with <cite>-auth config.json</cite> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
     <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"netmaker"</span><span class="p">,</span>
     <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"&lt;YOUR_DB_PASSWORD&gt;"</span><span class="p">,</span>
@@ -1112,7 +1265,7 @@ This install has some notable exceptions:
 
 
 <h3 id="netmaker-setup">3. Netmaker Setup<a class="headerlink" href="#netmaker-setup" title="Permalink to this headline">¶</a></h3>
-<p>Netmaker will be started on each node with default settings, except with DATABASE=rqlite (or DATABASE=postgress) and SQL_CONN set appropriately to reach the local rqlite instance. Rqlite will maintain consistency with each Netmaker backend.</p>
+<p>Netmaker will be started on each node with default settings, except with DATABASE=rqlite (or DATABASE=postgress) and SQL_CONN set appropriately to reach the local rqlite instance. rqlite will maintain consistency with each Netmaker backend.</p>
 <p>If deploying HA with PostgreSQL, you will connect with the following settings:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SQL_HOST</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">sql</span> <span class="n">host</span><span class="o">&gt;</span>
 <span class="n">SQL_PORT</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
