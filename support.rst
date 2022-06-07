@@ -62,7 +62,7 @@ The following is the full list of telemetry data we collect. Besides "Server Ver
 - Count of k8s nodes
 - Server version
 
-We use  `PostHog <https://https://posthog.com/>`_, an open source and trusted framework for telemetry data.
+We use  `PostHog <https://posthog.com/>`_, an open source and trusted framework for telemetry data.
 
 To look at exactly we collect telemetry, you can view the source code under serverctl/telemetry.go: https://github.com/gravitl/netmaker/blob/master/serverctl/telemetry.go
 
