@@ -46,7 +46,7 @@
   
   
   
-    <title>Integrating OAuth &#8212; Netmaker 0.14.0 documentation</title>
+    <title>Integrating OAuth &#8212; Netmaker 0.14.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -81,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="index.html" title="Netmaker 0.14.0 documentation"
+        <a href="index.html" title="Netmaker 0.14.5 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#xe869</i>
@@ -167,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.5 documentation</a></li>
       </ul>
     </div>
   </nav>
@@ -179,13 +179,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="index.html" title="Netmaker 0.14.0 documentation" class="md-nav__button md-logo">
+    <a href="index.html" title="Netmaker 0.14.5 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#xe869</i>
       
     </a>
     <a href="index.html"
-       title="Netmaker 0.14.0 documentation">Netmaker Docs</a>
+       title="Netmaker 0.14.5 documentation">Netmaker Docs</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/gravitl/netmaker/" title="Go to repository" class="md-source" data-md-source="github">
@@ -449,11 +449,12 @@
 <h1 id="oauth--page-root">Integrating OAuth<a class="headerlink" href="#oauth--page-root" title="Permalink to this headline">¶</a></h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>As of v0.8.5, Netmaker offers integration with the following OAuth providers:</p>
+<p>As of v0.14.5, Netmaker offers integration with the following OAuth providers:</p>
 <ul class="simple">
 <li><p>GitHub</p></li>
 <li><p>Google</p></li>
 <li><p>Microsoft Azure AD</p></li>
+<li><p>Open ID Connect (OIDC)</p></li>
 </ul>
 <p>By integrating with an OAuth provider, your Netmaker users can log in via the provider, rather than the default simple auth.</p>
 
@@ -467,18 +468,20 @@
 <p>General provider instructions can be found with the following links:</p>
 <p>Instructions for GitHub: <a class="reference external" href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#github-auth-provider">https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#github-auth-provider</a>
 Instructions for Google: <a class="reference external" href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#google-auth-provider">https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#google-auth-provider</a>
-Instructions for Microsoft Azure AD: <a class="reference external" href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#microsoft-azure-ad-provider">https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#microsoft-azure-ad-provider</a></p>
+Instructions for Microsoft Azure AD: <a class="reference external" href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#microsoft-azure-ad-provider">https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#microsoft-azure-ad-provider</a>
+Instructions for OIDC: <a class="reference external" href="https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#openid-connect-provider">https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#openid-connect-provider</a></p>
 
 
 <h2 id="configuring-netmaker">Configuring Netmaker<a class="headerlink" href="#configuring-netmaker" title="Permalink to this headline">¶</a></h2>
 <p>After you have configured your OAuth provider, take note of the CLIENT_ID and CLIENT_SECRET. If you are using Azure for oauth, you may also want to note down the Azure tenant ID you wish to use.</p>
 <p>Next, Configure Netmaker with the following environment variables. If any are left blank, OAuth will fail.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_PROVIDER</span><span class="p">:</span> <span class="s2">"&lt;azure-ad|github|google&gt;"</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_PROVIDER</span><span class="p">:</span> <span class="s2">"&lt;azure-ad|github|google|oidc&gt;"</span>
 <span class="n">CLIENT_ID</span><span class="p">:</span> <span class="s2">"&lt;client id of your oauth provider&gt;"</span>
 <span class="n">CLIENT_SECRET</span><span class="p">:</span> <span class="s2">"&lt;client secret of your oauth provider&gt;"</span>
 <span class="n">SERVER_HTTP_HOST</span><span class="p">:</span> <span class="s2">"api.&lt;netmaker base domain&gt;"</span>
 <span class="n">FRONTEND_URL</span><span class="p">:</span> <span class="s2">"https://dashboard.&lt;netmaker base domain&gt;"</span>
 <span class="n">AZURE_TENANT</span><span class="p">:</span> <span class="s2">"&lt;only for azure, you may optionally specify the tenant for the OAuth&gt;"</span>
+<span class="n">OIDC_ISSUER</span><span class="p">:</span> <span class="s2">"&lt;only for oidc, your issuer endpoint for OIDC ie. http://127.0.0.1:5556/dex"</span>
 </pre></div>
 </div>
 <p>After restarting your server, the Netmaker logs will indicate if the OAuth provider was successfully initialized:</p>

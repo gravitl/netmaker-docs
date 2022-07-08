@@ -202,15 +202,8 @@ The default options for docker-compose can be found here: https://github.com/gra
 
 The following is a brief description of each:
 
-- `docker-compose.traefik.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.traefik.yml>`_ -= This maintains the most recommended setup at the moment, using the Traefik proxy.
-- `docker-compose.contained.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.contained.yml>`_ - This is the default docker-compose, used in the quick start and deployment script in the README on GitHub. It deploys Netmaker with all options included (Caddy and CoreDNS) and has "self-contained" netclients, meaning they do not affect host networking.
-- `docker-compose.coredns.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.coredns.yml>`_ - This is a simple compose used to spin up a standalone CoreDNS server. Can be useful if, for instance, you are running Netmaker on baremetal but need CoreDNS.
-- `docker-compose.hostnetwork.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.hostnetwork.yml>`_ - This is similar to the docker-compose.contained.yml but with a key difference: it has advanced permissions and mounts host volumes to control networking on the host level.
-- `docker-compose.nocaddy.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nocaddy.yml>`_ -= This is the same as docker-compose.contained.yml but without Caddy, in case you need to use a different proxy like Nginx, Traefik, or HAProxy.
-- `docker-compose.nodns.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.nodns.yml>`_ - This is the same as docker-compose.contained.yml but without CoreDNS, in which case you will not have the Private DNS feature.
-- `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.contained.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
-- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ - This is a renamed docker-compose.contained.yml. It is meant only to act as a placeholder for what we consider the "primary" docker-compose users should work with.
-
+- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the Traefik proxy.
+- `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
 
 No DNS - CoreDNS Disabled
 ----------------------------------------------
