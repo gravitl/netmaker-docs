@@ -46,7 +46,7 @@
   
   
   
-    <title>Netclient Setup &#8212; Netmaker 0.14.0 documentation</title>
+    <title>Netclient Setup &#8212; Netmaker 0.14.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -81,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="index.html" title="Netmaker 0.14.0 documentation"
+        <a href="index.html" title="Netmaker 0.14.5 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#xe869</i>
@@ -167,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.5 documentation</a></li>
       </ul>
     </div>
   </nav>
@@ -179,13 +179,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="index.html" title="Netmaker 0.14.0 documentation" class="md-nav__button md-logo">
+    <a href="index.html" title="Netmaker 0.14.5 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#xe869</i>
       
     </a>
     <a href="index.html"
-       title="Netmaker 0.14.0 documentation">Netmaker Docs</a>
+       title="Netmaker 0.14.5 documentation">Netmaker Docs</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/gravitl/netmaker/" title="Go to repository" class="md-source" data-md-source="github">
@@ -267,13 +267,19 @@
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#windows" class="md-nav__link">Windows</a>
+        <li class="md-nav__item"><a href="#windows" class="md-nav__link">Windows</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#powershell-script" class="md-nav__link">PowerShell script</a>
+        </li>
+        <li class="md-nav__item"><a href="#msi-installer" class="md-nav__link">MSI Installer</a>
+        </li></ul>
+            </nav>
         </li>
         <li class="md-nav__item"><a href="#mac" class="md-nav__link">Mac</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#brew-install" class="md-nav__link">Brew Install</a>
         </li>
-        <li class="md-nav__item"><a href="#installer" class="md-nav__link">Installer</a>
+        <li class="md-nav__item"><a href="#gui-installer" class="md-nav__link">GUI Installer</a>
         </li></ul>
             </nav>
         </li>
@@ -462,13 +468,19 @@
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#windows" class="md-nav__link">Windows</a>
+        <li class="md-nav__item"><a href="#windows" class="md-nav__link">Windows</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#powershell-script" class="md-nav__link">PowerShell script</a>
+        </li>
+        <li class="md-nav__item"><a href="#msi-installer" class="md-nav__link">MSI Installer</a>
+        </li></ul>
+            </nav>
         </li>
         <li class="md-nav__item"><a href="#mac" class="md-nav__link">Mac</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#brew-install" class="md-nav__link">Brew Install</a>
         </li>
-        <li class="md-nav__item"><a href="#installer" class="md-nav__link">Installer</a>
+        <li class="md-nav__item"><a href="#gui-installer" class="md-nav__link">GUI Installer</a>
         </li></ul>
             </nav>
         </li>
@@ -540,7 +552,16 @@
 
 
 <h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
-<p>Installer: &lt;installer link coming soon&gt;</p>
+
+<h4 id="powershell-script">PowerShell script<a class="headerlink" href="#powershell-script" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span> <span class="p">{</span> <span class="n">iwr</span> <span class="o">-</span><span class="n">useb</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">netclient</span><span class="o">-</span><span class="n">install</span><span class="o">.</span><span class="n">ps1</span> <span class="p">}</span> <span class="o">|</span> <span class="n">iex</span><span class="p">;</span> <span class="n">Netclient</span><span class="o">-</span><span class="n">Install</span> <span class="o">-</span><span class="n">version</span> <span class="s2">"&lt;your netmaker version&gt;"</span>
+</pre></div>
+</div>
+
+
+<h4 id="msi-installer">MSI Installer<a class="headerlink" href="#msi-installer" title="Permalink to this headline">¶</a></h4>
+<p>Download Link: <a class="reference external" href="https://fileserver.netmaker.org/latest/windows/netclient_x86.msi">https://fileserver.netmaker.org/latest/windows/netclient_x86.msi</a></p>
+
 
 
 <h3 id="mac">Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
@@ -553,8 +574,8 @@
 </div>
 
 
-<h4 id="installer">Installer<a class="headerlink" href="#installer" title="Permalink to this headline">¶</a></h4>
-<p>Installer: &lt;installer link coming soon&gt;</p>
+<h4 id="gui-installer">GUI Installer<a class="headerlink" href="#gui-installer" title="Permalink to this headline">¶</a></h4>
+<p>Download Link: <a class="reference external" href="https://fileserver.netmaker.org/latest/darwin/Netclient.pkg">https://fileserver.netmaker.org/latest/darwin/Netclient.pkg</a></p>
 
 
 

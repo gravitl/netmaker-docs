@@ -108,7 +108,7 @@ Now, insert the values for your base (wildcard) domain, public ip.
 
 .. code-block::
 
-  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.traefik.yml
+  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
   sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
   sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
   sed -i 's/YOUR_EMAIL/<your email>/g' docker-compose.yml

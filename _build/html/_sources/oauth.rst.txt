@@ -5,11 +5,12 @@ Integrating OAuth
 Introduction
 ==============
 
-As of v0.8.5, Netmaker offers integration with the following OAuth providers: 
+As of v0.14.5, Netmaker offers integration with the following OAuth providers: 
 
 - GitHub
 - Google
 - Microsoft Azure AD
+- Open ID Connect (OIDC)
 
 By integrating with an OAuth provider, your Netmaker users can log in via the provider, rather than the default simple auth.
 
@@ -31,6 +32,7 @@ General provider instructions can be found with the following links:
 Instructions for GitHub: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#github-auth-provider
 Instructions for Google: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#google-auth-provider
 Instructions for Microsoft Azure AD: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#microsoft-azure-ad-provider 
+Instructions for OIDC: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#openid-connect-provider
 
 Configuring Netmaker
 ======================
@@ -41,12 +43,13 @@ Next, Configure Netmaker with the following environment variables. If any are le
 
 .. code-block::
 
-    AUTH_PROVIDER: "<azure-ad|github|google>"
+    AUTH_PROVIDER: "<azure-ad|github|google|oidc>"
     CLIENT_ID: "<client id of your oauth provider>"
     CLIENT_SECRET: "<client secret of your oauth provider>"
     SERVER_HTTP_HOST: "api.<netmaker base domain>"
     FRONTEND_URL: "https://dashboard.<netmaker base domain>"
     AZURE_TENANT: "<only for azure, you may optionally specify the tenant for the OAuth>"
+    OIDC_ISSUER: "<only for oidc, your issuer endpoint for OIDC ie. http://127.0.0.1:5556/dex"
 
 After restarting your server, the Netmaker logs will indicate if the OAuth provider was successfully initialized:
 

@@ -62,7 +62,17 @@ Arch Distros (arch/manjaro/endeavouros)
 Windows
 ===============
 
-Installer: <installer link coming soon>
+PowerShell script
+------------------
+
+.. code-block::
+
+  . { iwr -useb  https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.ps1 } | iex; Netclient-Install -version "<your netmaker version>"
+
+MSI Installer
+--------------
+
+Download Link: https://fileserver.netmaker.org/latest/windows/netclient_x86.msi 
 
 Mac
 ============
@@ -76,10 +86,10 @@ Brew Install
   (optional) brew audit netclient
   brew install netclient
 
-Installer
+GUI Installer
 ---------------
 
-Installer: <installer link coming soon>
+Download Link: https://fileserver.netmaker.org/latest/darwin/Netclient.pkg
 
 FreeBSD
 =============
