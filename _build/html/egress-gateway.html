@@ -46,7 +46,7 @@
   
   
   
-    <title>Egress Gateway &#8212; Netmaker 0.14.0 documentation</title>
+    <title>Egress Gateway &#8212; Netmaker 0.14.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -81,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="index.html" title="Netmaker 0.14.0 documentation"
+        <a href="index.html" title="Netmaker 0.14.5 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#xe869</i>
@@ -167,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">Netmaker 0.14.5 documentation</a></li>
       </ul>
     </div>
   </nav>
@@ -179,13 +179,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="index.html" title="Netmaker 0.14.0 documentation" class="md-nav__button md-logo">
+    <a href="index.html" title="Netmaker 0.14.5 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#xe869</i>
       
     </a>
     <a href="index.html"
-       title="Netmaker 0.14.0 documentation">Netmaker Docs</a>
+       title="Netmaker 0.14.5 documentation">Netmaker Docs</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/gravitl/netmaker/" title="Go to repository" class="md-source" data-md-source="github">
@@ -277,7 +277,7 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#remote-access" class="md-nav__link">1) Remote Access</a>
         </li>
-        <li class="md-nav__item"><a href="#vpn-nat-gateway" class="md-nav__link">2) VPN / NAT Gateway</a>
+        <li class="md-nav__item"><a href="#nat-gateway" class="md-nav__link">2)  / NAT Gateway</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -431,7 +431,7 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#remote-access" class="md-nav__link">1) Remote Access</a>
         </li>
-        <li class="md-nav__item"><a href="#vpn-nat-gateway" class="md-nav__link">2) VPN / NAT Gateway</a>
+        <li class="md-nav__item"><a href="#nat-gateway" class="md-nav__link">2)  / NAT Gateway</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -486,7 +486,7 @@
 <a class="reference internal image-reference" href="_images/egress3.png"><img alt="Gateway" class="align-center" src="_images/egress3.png" style="width: 50%;"/></a>
 
 
-<h3 id="vpn-nat-gateway">2) VPN / NAT Gateway<a class="headerlink" href="#vpn-nat-gateway" title="Permalink to this headline">¶</a></h3>
+<h3 id="nat-gateway">2)  / NAT Gateway<a class="headerlink" href="#nat-gateway" title="Permalink to this headline">¶</a></h3>
 <p>Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country,using a VPN server based in that country.</p>
 <p>These are not typical use cases for Netmaker, but can be easily enabled.</p>
 <p><strong>The most important note is this: Do not use 0.0.0.0/0 as your egress gateway.</strong> This is how you typically set up a “standard” VPN with WireGuard, however, it will not work with Netmaker. The Netclient specifically ignores gateways that overlap with local ranges (for efficiency ranges). 0.0.0.0 overlaps with everything, so it is always ignored.</p>

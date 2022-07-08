@@ -83,7 +83,7 @@ Message Broker (Mosquitto)
 
 The Mosquitto broker is the default MQTT broker that ships with Netmaker, though technically, any MQTT broker should work so long as the correct configuration is applied. The broker enables the establishment of a pub-sub messaging system, whereby clients subscribe to receive updates. When the server receives a change, it will publish that change to the broker that pushes out the change to the appropriate nodes. 
 
-The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. As of 0.14.2, The certificate management system is still relatively new, and this is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.
+The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. The certificate management system is still relatively new, and is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.
 
 Netclient
 ----------------
