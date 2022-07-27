@@ -91,6 +91,14 @@ This list encompasses the standard "public" network ranges, and ignores the stan
 
 Simply paste this list into your "egress gateway ranges" and your clients should begin routing public-facing traffic over the gateway.
 
+Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
+simply add:
+.. code-block::
+   
+   wget -qO - https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh | sudo bash -s -- -v true
+
+This will configure a VPN with a default of 5 external clients for you.
+
 .. image:: images/egress5.png
    :width: 50%
    :alt: Gateway
