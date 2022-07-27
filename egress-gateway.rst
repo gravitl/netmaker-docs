@@ -44,12 +44,13 @@ Finally, once you have determined the interface, the subnet, and deployed your n
 
 At this point simply insert the range(s) into the first field, and the interface name into the second field, and click "create".
 
-.. image:: images/ui-6.jpg
+.. image:: images/ui-6.png
    :width: 80%
    :alt: Gateway
    :align: center
 
 Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).
+Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.
 
 Use Cases
 ============
