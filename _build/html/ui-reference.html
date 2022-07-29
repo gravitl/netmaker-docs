@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -521,17 +523,17 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="ui-reference--page-root">UI Reference<a class="headerlink" href="#ui-reference--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="ui-reference">
+<h1 id="ui-reference--page-root">UI Reference<a class="headerlink" href="#ui-reference--page-root" title="Permalink to this heading">¶</a></h1>
 <p>This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.</p>
-
-<h2 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permalink to this headline">¶</a></h2>
+<section id="dashboard">
+<h2 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/ui-1.jpg"><img alt="dashboard" class="align-center" src="_images/ui-1.jpg" style="width: 80%;"/></a>
-
-
-<h2 id="networks">Networks<a class="headerlink" href="#networks" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="create">Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="networks">
+<h2 id="networks">Networks<a class="headerlink" href="#networks" title="Permalink to this heading">¶</a></h2>
+<section id="create">
+<h3 id="create">Create<a class="headerlink" href="#create" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-2.jpg"><img alt="create network" class="align-center" src="_images/ui-2.jpg" style="width: 80%;"/></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
@@ -544,9 +546,9 @@
 <li><p><strong>Is Local Network:</strong> Turn on if all clients in the network will be in the same “local” network. This is a very rare situation and depends on the use case. Almost always leave this off. Turn on if you are in a large data center with a large private address space over which clients should communicate. Can also enable if using a VPC and are treating a single client as “egress” for the VPC. If enabled, fill out the address range of the local network which should determine endpoints.</p></li>
 <li><p><strong>Is Dual Stack:</strong> Turn on to add private ipv6 addresses to all clients in addition to their ipv4 addresses. Not typically necessary. If on, enter a private ipv6 address range to pull from.</p></li>
 </ol>
-
-
-<h3 id="edit">Edit<a class="headerlink" href="#edit" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="edit">
+<h3 id="edit">Edit<a class="headerlink" href="#edit" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-3.jpg"><img alt="edit network" class="align-center" src="_images/ui-3.jpg" style="width: 80%;"/></a>
 <p><strong>NOTE:</strong> With the exception of Address Ranges (1-2) any setting that affects nodes will not take effect on existing nodes. It will only set the settings on any <strong>new</strong> node, after the setting has been changed.</p>
 <ol class="arabic simple">
@@ -566,12 +568,12 @@
 <li><p><strong>Default Saveconfig:</strong> Typically ignore this. Sets the SaveConfig field on wireguard config.</p></li>
 <li><p><strong>UDP Hole Punching:</strong> Whether or not UDP Hole Punching is turned on (see Network Create notes). Only effects new nodes. Enables or disables “UDP Hole Punching” on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will “roam” frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.</p></li>
 </ol>
-
-
-
-<h2 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="node-list">Node List<a class="headerlink" href="#node-list" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="nodes">
+<h2 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permalink to this heading">¶</a></h2>
+<section id="node-list">
+<h3 id="node-list">Node List<a class="headerlink" href="#node-list" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-4.jpg"><img alt="dashboard" class="align-center" src="_images/ui-4.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Search Nodes:</strong> Look up a node by name.</p></li>
@@ -585,26 +587,26 @@
 <li><p><strong>Status:</strong> Indicates how recently the node checked into the server. Displays “Warning” after 5 minutes and “Error” after 30 minutes without a check in. Does <strong>not</strong> indicate the health of the node’s virtual network connections.</p></li>
 <li><p><strong>Delete:</strong> Delete the node.</p></li>
 </ol>
-
-
-<h3 id="create-egress">Create Egress<a class="headerlink" href="#create-egress" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="create-egress">
+<h3 id="create-egress">Create Egress<a class="headerlink" href="#create-egress" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-6.jpg"><img alt="dashboard" class="align-center" src="_images/ui-6.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Egress Gateway Ranges:</strong> A comma-separated list of the subnets for which the gateway will route traffic. For instance, with Kubernetes this could be both the Service Network and Pod Network. For a standard VPN, Netmaker can use a list of the public CIDR’s (see the docs). Typically, this will be something like a data center network, VPC, or home network.</p></li>
 <li><p><strong>Interface:</strong> The interface on the machine used to access the provided egress gateway ranges. For instance, on a typical linux machine, the interface for public traffic would be “eth0”. Usually you will need to check on the machine first to find the right interface. For instance, on Linux, you can find the interface by running this: ip route get &lt;address in subnet&gt;.</p></li>
 </ol>
-
-
-<h3 id="create-relay">Create Relay<a class="headerlink" href="#create-relay" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="create-relay">
+<h3 id="create-relay">Create Relay<a class="headerlink" href="#create-relay" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-7.jpg"><img alt="dashboard" class="align-center" src="_images/ui-7.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Relay Addresses:</strong> Specify which private addresses (of nodes) that this node should relay for.</p></li>
 <li><p><strong>Select Nodes:</strong> Rather than specify by IP, you can just select from a list of node names instead.</p></li>
 <li><p><strong>Select All:</strong> Rather than select a list, you can “select all”, which converts the network from “pure mesh” into “hub-and-spoke”, meaning there are no p2p connections, everything goes through this relay first.</p></li>
 </ol>
-
-
-<h3 id="edit-node-node-details">Edit Node / Node Details<a class="headerlink" href="#edit-node-node-details" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="edit-node-node-details">
+<h3 id="edit-node-node-details">Edit Node / Node Details<a class="headerlink" href="#edit-node-node-details" title="Permalink to this heading">¶</a></h3>
 <a class="reference internal image-reference" href="_images/ui-5.jpg"><img alt="dashboard" class="align-center" src="_images/ui-5.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>IP Address:</strong> The primary private IP address of the node. Assigned automatically by Netmaker but can be changed to whatever you want within the Network CIDR.</p></li>
@@ -636,10 +638,10 @@
 <li><p><strong>Roaming:</strong> If on, will check regularly for changes in the Endpoint and modify the Endpoint value appropriately. This allows a client to “roam” between wifi networks and maintain a connection. Good to keep on for machines where the public address may change.</p></li>
 <li><p><strong>IPforwarding:</strong> If on, ipforwarding is enabled on the machine. Should almost always be kept on.</p></li>
 </ol>
-
-
-
-<h2 id="ext-clients">Ext Clients<a class="headerlink" href="#ext-clients" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="ext-clients">
+<h2 id="ext-clients">Ext Clients<a class="headerlink" href="#ext-clients" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/ui-8.jpg"><img alt="dashboard" class="align-center" src="_images/ui-8.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Gateway Name / IP Address:</strong> Information about which Node is the Ingress Gateway.</p></li>
@@ -650,18 +652,18 @@
 <li><p><strong>Download Client Configuration:</strong> If joining from a laptop/desktop, download the config file and run “wg-quick up /path/to/config”</p></li>
 <li><p><strong>Delete:</strong> Delete the ext client and remove its network access.</p></li>
 </ol>
-
-
-<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="dns">
+<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/ui-10.jpg"><img alt="dashboard" class="align-center" src="_images/ui-10.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>DNS Name:</strong> The private DNS entry. Must end in “.&lt;network name&gt;” (added automatically). This avoids conflicts between networks.</p></li>
 <li><p><strong>IP Address:</strong> The IP address of the entry. Can be anything (public addresses too!) but typically a node IP.</p></li>
 <li><p><strong>Select Node Address:</strong> Select a node name to populate its IP address automatically.</p></li>
 </ol>
-
-
-<h2 id="create-edit-users">Create / Edit Users<a class="headerlink" href="#create-edit-users" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-edit-users">
+<h2 id="create-edit-users">Create / Edit Users<a class="headerlink" href="#create-edit-users" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/ui-11.jpg"><img alt="dashboard" class="align-center" src="_images/ui-11.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Username:</strong> Specify Username.</p></li>
@@ -670,9 +672,9 @@
 <li><p><strong>Make Admin:</strong> Make into a server admin or “super admin”, which has access to all networks and server-level settings.</p></li>
 <li><p><strong>Networks:</strong> If not made into an “admin”, select the networks which this user has access to. The user will be a “network admin” of these networks, but other networks will be invisible/unaccessible.</p></li>
 </ol>
-
-
-<h2 id="node-graph">Node Graph<a class="headerlink" href="#node-graph" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="node-graph">
+<h2 id="node-graph">Node Graph<a class="headerlink" href="#node-graph" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/node-graph-1.png"><img alt="dashboard" class="align-center" src="_images/node-graph-1.png" style="width: 80%;"/></a>
 <p>View all nodes in your network, zoom in, zoom out, and search for node names. A legend is on the side to identify each node status / configuration.</p>
 <a class="reference internal image-reference" href="_images/node-graph-2.png"><img alt="dashboard" class="align-center" src="_images/node-graph-2.png" style="width: 80%;"/></a>
@@ -680,9 +682,9 @@
 <li><p><strong>hover:</strong> Hover over a node to see its direct connections.</p></li>
 <li><p><strong>Configuration Pane:</strong> Manage the node in this pane just like you would in the Nodes pane. See the “Node List” and “Edit Node” sections for more details.</p></li>
 </ol>
-
-
-<h2 id="access-control-lists">Access Control Lists<a class="headerlink" href="#access-control-lists" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="access-control-lists">
+<h2 id="access-control-lists">Access Control Lists<a class="headerlink" href="#access-control-lists" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/acls-3.jpg"><img alt="ACLs" class="align-center" src="_images/acls-3.jpg" style="width: 80%;"/></a>
 <ol class="arabic simple">
 <li><p><strong>Reset:</strong> Reset your changes without submitting.</p></li>
@@ -692,8 +694,8 @@
 <li><p><strong>(blocked):</strong> Click to switch a connection to “allow.”</p></li>
 <li><p><strong>Submit Changes:</strong> Click once you are ready to submit. Will send message to update relevant nodes in network.</p></li>
 </ol>
-
-
+</section>
+</section>
 
 
           </article>
@@ -742,7 +744,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="#" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -434,11 +436,11 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="about--page-root">About<a class="headerlink" href="#about--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="about">
+<h1 id="about--page-root">About<a class="headerlink" href="#about--page-root" title="Permalink to this heading">¶</a></h1>
 <a class="reference internal image-reference" href="_images/netmaker-simple.png"><img alt="Netmaker Architecture Diagram" class="align-center" src="_images/netmaker-simple.png" style="width: 60%;"/></a>
-
-<h2 id="what-is-netmaker">What is Netmaker?<a class="headerlink" href="#what-is-netmaker" title="Permalink to this headline">¶</a></h2>
+<section id="what-is-netmaker">
+<h2 id="what-is-netmaker">What is Netmaker?<a class="headerlink" href="#what-is-netmaker" title="Permalink to this heading">¶</a></h2>
 <p>Netmaker is a tool for creating and managing virtual overlay networks. If you have at least two machines with internet access that you need to connect with a secure tunnel, Netmaker is for you. If you have thousands of servers spread across multiple locations, data centers, or clouds, Netmaker is also for you. Netmaker connects machines securely, wherever they are.</p>
 <a class="reference internal image-reference" href="_images/mesh-diagram.png"><img alt="WireGuard Mesh" class="align-center" src="_images/mesh-diagram.png" style="width: 50%;"/></a>
 <p>Netmaker takes these machines and creates a flat network so that they can all talk to each other easily and securely.
@@ -446,9 +448,9 @@ If you’re familiar with AWS, it’s like a VPC but made up of arbitrary comput
 <p>Beyond creating a flat network, Netmaker introduces Ingress and Egress, which are gateways that control the flow of traffic into and out of the network. Netmaker also has ACLs, which control exactly which machines can reach each other. The end result is you can create much more complex networks than a simple mesh.</p>
 <a class="reference internal image-reference" href="_images/netmaker-advanced.png"><img alt="Netmaker Architecture Diagram" class="align-center" src="_images/netmaker-advanced.png" style="width: 80%;"/></a>
 <p>Netmaker has many similarities to Tailscale, ZeroTier, and Nebula. What makes Netmaker different is the speed and flexibility. Netmaker is faster because it uses kernel WireGuard. It is more dynamic because the server and agents are fully configurable, which lets you handle all sorts of different use cases. And, of course, you can also self-host Netmaker, which gives you complete control of your network traffic.</p>
-
-
-<h2 id="how-does-netmaker-work">How Does Netmaker Work?<a class="headerlink" href="#how-does-netmaker-work" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="how-does-netmaker-work">
+<h2 id="how-does-netmaker-work">How Does Netmaker Work?<a class="headerlink" href="#how-does-netmaker-work" title="Permalink to this heading">¶</a></h2>
 <p>Netmaker relies on WireGuard to create tunnels between machines. At its core, Netmaker is managing WireGuard across machines to create sensible networks. Technically, Netmaker is two things:</p>
 <ul class="simple">
 <li><p>the admin server, called Netmaker</p></li>
@@ -457,9 +459,9 @@ If you’re familiar with AWS, it’s like a VPC but made up of arbitrary comput
 <p>As the network manager, you interact with the server to create and manage networks and devices. The server holds configurations for these networks and devices and pushes updates to the agents (netclient) over a message queue.</p>
 <p>The netclient is installed on any machine you would like to add to a given network, whether that machine is a VM, Server, Kubernetes node, or IoT device. The netclient subscribes to the MQ broker, and the server tells it how to configure WireGuard. The client will let the server know when any local changes (like ip address, port) should be pushed out to the other clients. By doing this across many machines simultaneously, we create fully dynamic and configurable virtual networks.</p>
 <p>The Netmaker server does not typically route traffic, which would be a hub-and-spoke model (much slower). Instead, Netmaker just tells the machines on the network how they can reach each other directly. This is called a <em>full mesh</em> network and is much faster. Even if the server goes down, as long as none of the existing machines change substantially, your network will still run just fine.</p>
-
-
-<h2 id="use-cases-for-netmaker">Use Cases for Netmaker<a class="headerlink" href="#use-cases-for-netmaker" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="use-cases-for-netmaker">
+<h2 id="use-cases-for-netmaker">Use Cases for Netmaker<a class="headerlink" href="#use-cases-for-netmaker" title="Permalink to this heading">¶</a></h2>
 <p>There are many use cases for Netmaker. In fact, you could probably be using it right now. Because of Netmaker’s extreme speed, there is almost no cost to putting a Netmaker overlay network on top of any existing Network. The question becomes, why not use Netmaker? You’ve already got the machines; why not encrypt the traffic and make your network dynamic?</p>
 <p>This list is not all-encompassing but provides a sample of how many users use Netmaker in production today. Guided setup for many of these use cases can be found in the <a class="reference internal" href="usage.html"><span class="doc">Using Netmaker</span></a> documentation.</p>
 <blockquote>
@@ -472,8 +474,8 @@ If you’re familiar with AWS, it’s like a VPC but made up of arbitrary comput
 <li><p>Manage a secure mesh of IoT devices</p></li>
 </ol>
 </div></blockquote>
-
-
+</section>
+</section>
 
 
           </article>
@@ -522,7 +524,7 @@ If you’re familiar with AWS, it’s like a VPC but made up of arbitrary comput
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

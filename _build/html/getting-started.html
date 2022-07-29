@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -486,19 +488,19 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="getting-started--page-root">Getting Started<a class="headerlink" href="#getting-started--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="getting-started">
+<h1 id="getting-started--page-root">Getting Started<a class="headerlink" href="#getting-started--page-root" title="Permalink to this heading">¶</a></h1>
 <p>Once you have Netmaker installed via the <a class="reference internal" href="quick-start.html"><span class="doc">Quick Install</span></a> guide, you can use this Getting Started guide to help create and manage your first network.</p>
-
-<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<section id="setup">
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Create your admin user, with a username and password.</p></li>
 <li><p>Login with your new user</p></li>
 <li><p>Create your first network by clicking on Create Network</p></li>
 </ol>
-
-
-<h2 id="create-a-network">Create a Network<a class="headerlink" href="#create-a-network" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-a-network">
+<h2 id="create-a-network">Create a Network<a class="headerlink" href="#create-a-network" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/create-net.png"><img alt="Create Network Screen" class="align-center" src="_images/create-net.png" style="width: 80%;"/></a>
 <p>This network should have a sensible name (nodes will use it to set their interfaces).</p>
 <p>More importantly, it should have a non-overlapping, private address range.</p>
@@ -508,18 +510,18 @@
 <li><p>10.20.30.0/24</p></li>
 <li><p>100.99.98.0/24</p></li>
 </ul>
-
-<h3 id="network-settings-description">Network Settings Description<a class="headerlink" href="#network-settings-description" title="Permalink to this headline">¶</a></h3>
+<section id="network-settings-description">
+<h3 id="network-settings-description">Network Settings Description<a class="headerlink" href="#network-settings-description" title="Permalink to this heading">¶</a></h3>
 <p>The Network creation form has a few fields which may seem unfamiliar. Here is a brief description:</p>
 <p><strong>UDP Hole Punching:</strong> UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily. This has two benefits. For one, it%. It also means, you dont usually have to worry about opening up the local firewall for ports (for instance, 51821). <strong>This setting is usually good to turn on, with some noteable exceptions.</strong> This setting cannot be enabled if “client mode” is turned off. This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.</p>
 <p><strong>Is Local Network:</strong>  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don’t want any nodes to be reachable via a public IP, and instead want to use a private range.</p>
 <p><strong>Is Dual Stack:</strong> This setting adds ipv6 private addresses to nodes, in addition to ipv4 addresses. Usually, this is unnecessary, but in some cases, you may have a requirement for ipv6 and can enable this setting.</p>
 <p>Once your network is created, you should see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.</p>
 <a class="reference internal image-reference" href="_images/netmaker-node.png"><img alt="Node Screen" class="align-center" src="_images/netmaker-node.png" style="width: 80%;"/></a>
-
-
-
-<h2 id="create-a-key">Create a Key<a class="headerlink" href="#create-a-key" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="create-a-key">
+<h2 id="create-a-key">Create a Key<a class="headerlink" href="#create-a-key" title="Permalink to this heading">¶</a></h2>
 <p>Adding nodes to the network typically requires a key.</p>
 <ol class="arabic simple">
 <li><p>Click on the ACCESS KEYS tab and select the network you created.</p></li>
@@ -536,16 +538,15 @@
 <li><p>The <strong>install command</strong> value is a curl command that can be run on Linux systems. It is a simple script that downloads the netclient binary and runs the install command all in one.</p></li>
 </ul>
 <p>Networks can also be enabled to allow nodes to sign up without keys at all. In this scenario, nodes enter a “pending state” and are not permitted to join the network until an admin approves them.</p>
-
-
-<h2 id="deploy-nodes">Deploy Nodes<a class="headerlink" href="#deploy-nodes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="deploy-nodes">
+<h2 id="deploy-nodes">Deploy Nodes<a class="headerlink" href="#deploy-nodes" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple" start="0">
 <li><p>Prereqisite: Every machine on which you install should have WireGuard and systemd already installed.</p></li>
 <li><p>SSH to each machine</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">su</span> <span class="pre">-</span></code></p></li>
 <li><p><strong>Prerequisite Check:</strong> Every Linux machine on which you run the netclient must have WireGuard and systemd installed</p></li>
-<li><p>For Linux machines with systemd and WireGuard installed, run the install command, Ex: <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-sfL</span> <span class="pre">https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh</span> <span class="pre">|</span> <span class="pre">KEY=vm3ow4thatogiwnsla3thsl3894ths</span> <span class="pre">sh</span> <span class="pre">-</span></code></p></li>
-<li><p>For Mac, Windows, and arch-specific Linux distributions (e.g. ARM), <a class="reference external" href="https://github.com/gravitl/netmaker/releases/tag/latest/">download the appropriate netclient for your system</a> . Then, run “netclient join -t &lt;your token&gt;”.</p></li>
+<li><p>Follow the installation instructions for your operating system <a class="reference external" href="https://docs.netmaker.org/netclient.html#installation">here</a></p></li>
 </ol>
 <p>You should get output similar to the below. The netclient retrieves local settings, submits them to the server for processing, and retrieves updated settings. Then it sets the local network configuration. For more information about this process, see the <a class="reference internal" href="netclient.html"><span class="doc">client installation</span></a> documentation. If this process failed and you do not see your node in the console (see below), then reference the <a class="reference internal" href="troubleshoot.html"><span class="doc">troubleshooting</span></a> documentation.</p>
 <a class="reference internal image-reference" href="_images/nc-install-output.png"><img alt="Output from Netclient Install" class="align-center" src="_images/nc-install-output.png" style="width: 80%;"/></a>
@@ -553,27 +554,27 @@
 <p>Repeat the above steps for every machine you would like to add to your network. You can re-use the same install command so long as you do not run out of uses on your access key (after which it will be invalidated and deleted).</p>
 <p>Once installed on all nodes, you can test the connection by pinging the private address of any node from any other node.</p>
 <a class="reference internal image-reference" href="_images/ping-node.png"><img alt="Node Success" class="align-center" src="_images/ping-node.png" style="width: 80%;"/></a>
-
-
-<h2 id="manage-nodes">Manage Nodes<a class="headerlink" href="#manage-nodes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="manage-nodes">
+<h2 id="manage-nodes">Manage Nodes<a class="headerlink" href="#manage-nodes" title="Permalink to this heading">¶</a></h2>
 <p>Your machines should now be visible in the control pane.</p>
 <a class="reference internal image-reference" href="_images/nodes.png"><img alt="Node Success" class="align-center" src="_images/nodes.png" style="width: 80%;"/></a>
 <p>You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like “workstation” or “api server”. You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the <a class="reference internal" href="usage.html"><span class="doc">Using Netmaker</span></a> docs.</p>
 <a class="reference internal image-reference" href="_images/node-details.png"><img alt="Node Success" class="align-center" src="_images/node-details.png" style="width: 80%;"/></a>
 <p>Nodes can be added/removed/modified on the network at any time. Nodes can also be added to multiple Netmaker networks. Any changes will get picked up by any nodes on a given network and will take about ~30 seconds to take effect.</p>
-
-
-<h2 id="uninstalling-the-netclient">Uninstalling the netclient<a class="headerlink" href="#uninstalling-the-netclient" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="uninstalling-the-netclient">
+<h2 id="uninstalling-the-netclient">Uninstalling the netclient<a class="headerlink" href="#uninstalling-the-netclient" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>To remove your nodes from the default network, run the following on each node: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">netclient</span> <span class="pre">leave</span> <span class="pre">-n</span> <span class="pre">default</span></code></p></li>
 <li><p>To remove the netclient entirely from each node, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">netclient</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">disable</span> <span class="pre">netclient</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">/etc/netclient</span> <span class="pre">/etc/systemd/system/netclient.service</span> <span class="pre">/usr/sbin/netclient</span></code> (after running the first step)</p></li>
 </ol>
-
-
-<h2 id="uninstalling-netmaker">Uninstalling Netmaker<a class="headerlink" href="#uninstalling-netmaker" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="uninstalling-netmaker">
+<h2 id="uninstalling-netmaker">Uninstalling Netmaker<a class="headerlink" href="#uninstalling-netmaker" title="Permalink to this heading">¶</a></h2>
 <p>To uninstall Netmaker from the server, simply run <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">down</span></code> or <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">down</span> <span class="pre">--volumes</span></code> to remove the docker volumes for a future installation.</p>
-
-
+</section>
+</section>
 
 
           </article>
@@ -622,7 +623,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

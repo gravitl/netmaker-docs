@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -439,34 +441,34 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="acls--page-root">Access Control Lists<a class="headerlink" href="#acls--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="access-control-lists">
+<h1 id="acls--page-root">Access Control Lists<a class="headerlink" href="#acls--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/acls-3.png"><img alt="ACLs" class="align-center" src="_images/acls-3.png" style="width: 80%;"/></a>
 <p>By default, Netmaker creates a “full mesh,” meaning every node in your network can talk to every other node. You don’t always want this to be the case. Sometimes, only some connections should be valid. That’s why Netmaker has ACLs. By using Netmaker’s ACL feature, you can enable/disable any peer-to-peer connection in your network to remove its ability to communicate.</p>
-
-
-<h2 id="configuring-acls">Configuring ACLs<a class="headerlink" href="#configuring-acls" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuring-acls">
+<h2 id="configuring-acls">Configuring ACLs<a class="headerlink" href="#configuring-acls" title="Permalink to this heading">¶</a></h2>
 <p>The ACL feature can be accessed by either clicking on “ACLs” in the sidebar, or by clicking on a Node in either the Node List or in the Graph view.</p>
-
-<h3 id="acl-screen">ACL Screen<a class="headerlink" href="#acl-screen" title="Permalink to this headline">¶</a></h3>
+<section id="acl-screen">
+<h3 id="acl-screen">ACL Screen<a class="headerlink" href="#acl-screen" title="Permalink to this heading">¶</a></h3>
 <p>If you are on the ACLs tab (pictured above), you will have a complete list of all ACLs for the whole network. You can simply click on any one of these to enable or disable a pair of connections. You will note that when you “disable” the connection from any one node, it will automatically “disable” the matching connection on the other node. An update is sent to the nodes over MQ, telling them to remove the connection locally.</p>
 <p>In the upper right-hand corner of the screen, you will also notice an “Allow All” button and a “Block All” button. “Allow All” will enable all connections, and “Block All” will block all connections. If you block all connections, no nodes will be able to talk to each other.</p>
 <p>For more information, see the <a class="reference internal" href="ui-reference.html"><span class="doc">UI reference.</span></a></p>
-
-
-<h3 id="node-acl-screen">Node ACL Screen<a class="headerlink" href="#node-acl-screen" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="node-acl-screen">
+<h3 id="node-acl-screen">Node ACL Screen<a class="headerlink" href="#node-acl-screen" title="Permalink to this heading">¶</a></h3>
 <p>Alternatively, you can reach the individual node ACLs by clicking on a Node in either the Node List or the Graph view. This will give you the ACLs for just this individual node, making it easier to enable/disable peers at an individual level.</p>
 <a class="reference internal image-reference" href="_images/acls-2.png"><img alt="ACLs" class="align-center" src="_images/acls-2.png" style="width: 80%;"/></a>
-
-
-<h3 id="important-note-about-udp-hole-punching">Important Note about UDP Hole Punching<a class="headerlink" href="#important-note-about-udp-hole-punching" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="important-note-about-udp-hole-punching">
+<h3 id="important-note-about-udp-hole-punching">Important Note about UDP Hole Punching<a class="headerlink" href="#important-note-about-udp-hole-punching" title="Permalink to this heading">¶</a></h3>
 <p>As of 0.12.0, we allow you to disable any p2p connection, including a node’s connection to the server (e.g. netmaker-1). <strong>If you disable this connection and you use UDP Hole Punching, your network will break.</strong> Why? The netmaker server collects the endpoints/ports necessary to reach every node and then sends this information to the network. If this connection is disabled, the server will not know how to reach the given node.</p>
 <p>As an alternative, you can turn off UDP Hole Punching on the individual node if you do not wish for it to communicate with the server.</p>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -515,7 +517,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

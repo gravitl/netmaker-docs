@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -456,22 +458,22 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="upgrades--page-root">Upgrades<a class="headerlink" href="#upgrades--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="upgrades">
+<h1 id="upgrades--page-root">Upgrades<a class="headerlink" href="#upgrades--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <p>As of 0.13.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now, is still a relatively straightforward process.</p>
-
-
-<h2 id="critical-notes-for-0-13-x">Critical Notes for 0.13.X<a class="headerlink" href="#critical-notes-for-0-13-x" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="critical-notes-for-0-13-x">
+<h2 id="critical-notes-for-0-13-x">Critical Notes for 0.13.X<a class="headerlink" href="#critical-notes-for-0-13-x" title="Permalink to this heading">¶</a></h2>
 <p>If upgrading from 0.12 to 0.13, refer to this gist: <a class="reference external" href="https://gist.github.com/afeiszli/f53f34eb4c5654d4e16da2919540d0eb">https://gist.github.com/afeiszli/f53f34eb4c5654d4e16da2919540d0eb</a></p>
-
-
-<h2 id="critical-notes-for-0-10-0">Critical Notes for 0.10.0<a class="headerlink" href="#critical-notes-for-0-10-0" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="critical-notes-for-0-10-0">
+<h2 id="critical-notes-for-0-10-0">Critical Notes for 0.10.0<a class="headerlink" href="#critical-notes-for-0-10-0" title="Permalink to this heading">¶</a></h2>
 <p>At the time of this writing, an upgrade process has not been defined for 0.10.0. DO NOT follow this documentation to upgrade from a prior version to 0.10.0. An upgrade process will be defined shortly. For now, if you seek to upgrade to 0.10.0, you must clear your server entirely (docker-compose down –volumes), uninstall your netclients, and re-install netmaker + netclients.</p>
-
-
-<h2 id="upgrade-the-server-prior-to-0-10-0">Upgrade the Server (prior to 0.10.0)<a class="headerlink" href="#upgrade-the-server-prior-to-0-10-0" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="upgrade-the-server-prior-to-0-10-0">
+<h2 id="upgrade-the-server-prior-to-0-10-0">Upgrade the Server (prior to 0.10.0)<a class="headerlink" href="#upgrade-the-server-prior-to-0-10-0" title="Permalink to this heading">¶</a></h2>
 <p>To upgrade the server, you only need to change the docker image versions:</p>
 <ol class="arabic simple">
 <li><p><cite>ssh root@my-server-ip</cite></p></li>
@@ -481,9 +483,9 @@
 <li><p>Save and close the file</p></li>
 <li><p><cite>docker-compose up -d</cite></p></li>
 </ol>
-
-
-<h2 id="upgrade-the-clients-prior-to-0-10-0">Upgrade the Clients (prior to 0.10.0)<a class="headerlink" href="#upgrade-the-clients-prior-to-0-10-0" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="upgrade-the-clients-prior-to-0-10-0">
+<h2 id="upgrade-the-clients-prior-to-0-10-0">Upgrade the Clients (prior to 0.10.0)<a class="headerlink" href="#upgrade-the-clients-prior-to-0-10-0" title="Permalink to this heading">¶</a></h2>
 <p>To upgrade the client, you must get the new client binary and place it in /etc/netclient. Depending on the new vs. old version, there may be minor incompatibilities (discussed below).</p>
 <ol class="arabic simple">
 <li><p>Visit <a class="reference external" href="https://github.com/gravitl/netmaker/releases/">https://github.com/gravitl/netmaker/releases/</a></p></li>
@@ -501,8 +503,8 @@
 <ol class="arabic simple" start="2">
 <li><p>Leave and rejoin the network</p></li>
 </ol>
-
-
+</section>
+</section>
 
 
           </article>
@@ -551,7 +553,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

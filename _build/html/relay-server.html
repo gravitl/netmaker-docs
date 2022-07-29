@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -423,24 +425,24 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="relay-server--page-root">Relay Servers<a class="headerlink" href="#relay-server--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="relay-servers">
+<h1 id="relay-server--page-root">Relay Servers<a class="headerlink" href="#relay-server--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/relay1.png"><img alt="Relay" class="align-center" src="_images/relay1.png" style="width: 80%;"/></a>
 <p>Sometimes nodes are in hard-to-reach places. Typically this will be due to a CGNAT, Double NAT, or a restrictive firewall. In such scenarios, a direct peer-to-peer connection with all other nodes might be impossible.</p>
 <p>For this reason, Netmaker has a Relay Server functionality. At any time you may designate a publicly reachable node (such as the Netmaker Server) as a Relay, and tell it which machines it should relay. Then, all traffic routing to and from that machine will go through the relay. This allows you to circumvent the above issues and ensure connectivity when direct measures do not work.</p>
-
-
-<h2 id="configuring-a-relay">Configuring a Relay<a class="headerlink" href="#configuring-a-relay" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuring-a-relay">
+<h2 id="configuring-a-relay">Configuring a Relay<a class="headerlink" href="#configuring-a-relay" title="Permalink to this heading">¶</a></h2>
 <p>To create a relay, you can use any node in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be a relay server and makes for a good default choice if you are unsure of which node to select.</p>
 <p>Simply click the relay button in the nodes list. Then, specify the nodes which it should relay. You can either enter the IP’s directly, select from a list, or click “Select All.”</p>
 <a class="reference internal image-reference" href="_images/ui-7.jpg"><img alt="Relay" class="align-center" src="_images/ui-7.jpg" style="width: 80%;"/></a>
 <p>If you choose “select all” this essentially turns your network into a hub-and-spoke network. All traffic now routes over the relay node. This can create a bottleneck and slow down your network, but in some scenarios may simplify network operations.</p>
 <p>After creation, you can change the list of relayed nodes by clicking “edit node” and editing the list (Field #12 below).</p>
 <a class="reference internal image-reference" href="_images/ui-5.jpg"><img alt="Relay" class="align-center" src="_images/ui-5.jpg" style="width: 40%;"/></a>
-
-
+</section>
+</section>
 
 
           </article>
@@ -489,7 +491,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
