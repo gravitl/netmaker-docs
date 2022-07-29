@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -557,48 +559,48 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="advanced-client-install--page-root">Advanced Client Installation<a class="headerlink" href="#advanced-client-install--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="advanced-client-installation">
+<h1 id="advanced-client-install--page-root">Advanced Client Installation<a class="headerlink" href="#advanced-client-install--page-root" title="Permalink to this heading">¶</a></h1>
 <p>This document tells you how to install the netclient on machines that will be a part of your Netmaker network, as well as non-compatible systems.</p>
 <p>These steps should be run after the Netmaker server has been created and a network has been designated within Netmaker.</p>
-
-<h2 id="introduction-to-netclient">Introduction to Netclient<a class="headerlink" href="#introduction-to-netclient" title="Permalink to this headline">¶</a></h2>
+<section id="introduction-to-netclient">
+<h2 id="introduction-to-netclient">Introduction to Netclient<a class="headerlink" href="#introduction-to-netclient" title="Permalink to this heading">¶</a></h2>
 <p>At its heart, the netclient is a simple CLI for managing access to various WireGuard-based networks. It manages WireGuard on the host system, so that you don’t have to. Why is this necessary?</p>
 <p>If you are setting up a WireGuard-based virtual network, you must configure each machine with very specific settings, so that every machine can reach it, and it can reach every machine. Any changes to the settings of any one of these machines can break those connections. Any machine that is added, removed, or modified on the network requires reconfiguring every peer in the network. This can be very time consuming.</p>
 <p>The netmaker server holds configuration details about every machine in your network and how other machines should connect to it.</p>
 <p>The netclient agent connects to the server, pushing and pulling information when the network (or its local configuration) changes.</p>
 <p>The netclient agent then configures WireGuard (and other network properties) locally, so that the network stays intact.</p>
-
-
-<h2 id="notes-on-windows">Notes on Windows<a class="headerlink" href="#notes-on-windows" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="notes-on-windows">
+<h2 id="notes-on-windows">Notes on Windows<a class="headerlink" href="#notes-on-windows" title="Permalink to this heading">¶</a></h2>
 <p>If running the netclient on windows, you must download the netclient.exe binary and run it from Powershell as an Administrator.</p>
 <p>Windows will by default have firewall rules that prevent inbound connections. If you wish to allow inbound connections from particular peers, use the following command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">netsh</span> <span class="pre">advfirewall</span> <span class="pre">firewall</span> <span class="pre">add</span> <span class="pre">rule</span> <span class="pre">name="Allow</span> <span class="pre">from</span> <span class="pre">&lt;peer</span> <span class="pre">private</span> <span class="pre">addr&gt;"</span> <span class="pre">dir=in</span> <span class="pre">action=allow</span> <span class="pre">protocol=ANY</span> <span class="pre">remoteip=&lt;peer</span> <span class="pre">private</span> <span class="pre">addr&gt;</span></code></p>
 <p>If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server.</p>
-
-<h3 id="running-the-install-script">Running the install script<a class="headerlink" href="#running-the-install-script" title="Permalink to this headline">¶</a></h3>
+<section id="running-the-install-script">
+<h3 id="running-the-install-script">Running the install script<a class="headerlink" href="#running-the-install-script" title="Permalink to this heading">¶</a></h3>
 <p>Some file locations have issues running the install script, such as running from the root C:/ folder. Users have noted the following locations work well for running the install powershell script:</p>
 <ul class="simple">
 <li><p><cite>C:/Program Files/wireguard</cite></p></li>
 <li><p><cite>C:/Windows/System32</cite></p></li>
 </ul>
-
-
-<h3 id="running-netclient-commands">Running netclient commands<a class="headerlink" href="#running-netclient-commands" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="running-netclient-commands">
+<h3 id="running-netclient-commands">Running netclient commands<a class="headerlink" href="#running-netclient-commands" title="Permalink to this heading">¶</a></h3>
 <p>If running the netclient manually (“netclient join”, “netclient checkin”, “netclient pull”) it should be run from outside of the installed directory, which will be either:</p>
 <ul class="simple">
 <li><p><cite>C:/Program Files/netclient</cite></p></li>
 <li><p><cite>C:/ProgramData/netclient</cite></p></li>
 </ul>
 <p>It is better to call it from a different directory.</p>
-
-
-<h3 id="high-cpu-utilization">High CPU Utilization<a class="headerlink" href="#high-cpu-utilization" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="high-cpu-utilization">
+<h3 id="high-cpu-utilization">High CPU Utilization<a class="headerlink" href="#high-cpu-utilization" title="Permalink to this heading">¶</a></h3>
 <p>With some versions of WireGuard on Windows, high CPU utilization has been found with the netclient. This is typically due to interaction with the WireGuard GUI component (app). If you’re experiencing high CPU utilization, close the WireGuard app. WireGuard will still be running, but the CPU usage should go back down to normal.</p>
-
-
-
-<h2 id="notes-on-openwrt">Notes on OpenWRT<a class="headerlink" href="#notes-on-openwrt" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="notes-on-openwrt">
+<h2 id="notes-on-openwrt">Notes on OpenWRT<a class="headerlink" href="#notes-on-openwrt" title="Permalink to this heading">¶</a></h2>
 <p>Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used. If the primary installer does not work, there are two things you can try:</p>
 <ol class="arabic simple">
 <li><p>This community-run package for OpenWRT: <a class="reference external" href="https://github.com/sbilly/netmaker-openwrt">https://github.com/sbilly/netmaker-openwrt</a></p></li>
@@ -617,158 +619,158 @@
 <li><p>./token-convert &lt;token value&gt;</p></li>
 <li><p>Run the output on your OpenWRT machine</p></li>
 </ul>
-
-
-<h2 id="modes-and-system-compatibility">Modes and System Compatibility<a class="headerlink" href="#modes-and-system-compatibility" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modes-and-system-compatibility">
+<h2 id="modes-and-system-compatibility">Modes and System Compatibility<a class="headerlink" href="#modes-and-system-compatibility" title="Permalink to this heading">¶</a></h2>
 <p><strong>Note: If you would like to connect non-Linux/Unix machines to your network such as phones and Windows desktops, please see the documentation on External Clients</strong></p>
 <p>The netclient can be run in a few “modes”. System compatibility depends on which modes you intend to use. These modes can be mixed and matched across a network, meaning all machines do not have to run with the same “mode.”</p>
-
-<h3 id="cli">CLI<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h3>
+<section id="cli">
+<h3 id="cli">CLI<a class="headerlink" href="#cli" title="Permalink to this heading">¶</a></h3>
 <p>In its simplest form, the netclient can be treated as just a simple, manual, CLI tool, which a user can call to configure the machine. The cli can be compiled from source code to run on most systems, and has already been compiled for x86 and ARM devices.</p>
 <p>As a CLI, the netclient should function on any Linux or Unix based system that has the wireguard utility (callable with <strong>wg</strong>) installed.</p>
-
-
-<h3 id="daemon">Daemon<a class="headerlink" href="#daemon" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="daemon">
+<h3 id="daemon">Daemon<a class="headerlink" href="#daemon" title="Permalink to this heading">¶</a></h3>
 <p>The netclient is intended to be run as a system daemon. This allows it to automatically retrieve and send updates. To do this, the netclient can install itself as a systemd service, or launchd/windows service for Mac or Windows.</p>
 <p>If running the netclient on non-systemd linux, it is recommended to manually configure the netclient as a daemon using whatever method is acceptable on the chosen operating system.</p>
-
-
-<h3 id="private-dns-management">Private DNS Management<a class="headerlink" href="#private-dns-management" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="private-dns-management">
+<h3 id="private-dns-management">Private DNS Management<a class="headerlink" href="#private-dns-management" title="Permalink to this heading">¶</a></h3>
 <p>To manage private DNS, the netclient relies on systemd-resolved (resolvectl). Absent this, it cannot set private DNS for the machine.</p>
 <p>A user may choose to manually set a private DNS nameserver of &lt;netmaker server&gt;:53. However, beware, as netmaker sets split dns, and the system must be configured properly. Otherwise, this nameserver may break your local DNS.</p>
-
-
-
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="prerequisites">
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
 <p>To obtain the netclient, go to the GitHub releases: <a class="reference external" href="https://github.com/gravitl/netmaker/releases">https://github.com/gravitl/netmaker/releases</a></p>
 <p><strong>For netclient cli:</strong> Linux/Unix with WireGuard installed (wg command available)</p>
 <p><strong>For netclient daemon:</strong> Systemd Linux + WireGuard</p>
 <p><strong>For Private DNS management:</strong> Resolvectl (systemd-resolved)</p>
-
-
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuration">
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">¶</a></h2>
 <p>The CLI has information about all commands and variables. This section shows the “help” output for these commands as well as some additional reference.</p>
-
-<h3 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permalink to this headline">¶</a></h3>
+<section id="cli-reference">
+<h3 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">netclient</span> <span class="pre">--help</span></code></p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">NAME</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">Netclient CLI - Netmaker's netclient agent and CLI. Used to perform interactions with Netmaker server and set local WireGuard config.</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">NAME</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">Netclient CLI - Netmaker's netclient agent and CLI. Used to perform interactions with Netmaker server and set local WireGuard config.</span><span class="w"></span>
 
-<span class="nt">USAGE</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">netclient [global options] command [command options] [arguments...]</span>
+<span class="nt">USAGE</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">netclient [global options] command [command options] [arguments...]</span><span class="w"></span>
 
-<span class="nt">COMMANDS</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">register    Register with Netmaker Server for secure GRPC communications.</span>
-   <span class="l l-Scalar l-Scalar-Plain">join        Join a Netmaker network.</span>
-   <span class="l l-Scalar l-Scalar-Plain">leave       Leave a Netmaker network.</span>
-   <span class="l l-Scalar l-Scalar-Plain">checkin     Checks for local changes and then checks into the specified Netmaker network to ask about remote changes.</span>
-   <span class="l l-Scalar l-Scalar-Plain">push        Push configuration changes to server.</span>
-   <span class="l l-Scalar l-Scalar-Plain">pull        Pull latest configuration and peers from server.</span>
-   <span class="l l-Scalar l-Scalar-Plain">list        Get list of networks.</span>
-   <span class="l l-Scalar l-Scalar-Plain">uninstall   Uninstall the netclient system service.</span>
-   <span class="l l-Scalar l-Scalar-Plain">unregister  Unregister the netclient from secure server GRPC.</span>
-   <span class="l l-Scalar l-Scalar-Plain">help, h     Shows a list of commands or help for one command</span>
+<span class="nt">COMMANDS</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">register    Register with Netmaker Server for secure GRPC communications.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">join        Join a Netmaker network.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">leave       Leave a Netmaker network.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">checkin     Checks for local changes and then checks into the specified Netmaker network to ask about remote changes.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">push        Push configuration changes to server.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">pull        Pull latest configuration and peers from server.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">list        Get list of networks.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">uninstall   Uninstall the netclient system service.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">unregister  Unregister the netclient from secure server GRPC.</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">help, h     Shows a list of commands or help for one command</span><span class="w"></span>
 
-<span class="nt">GLOBAL OPTIONS</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">--help, -h  show help (default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false)</span>
+<span class="nt">GLOBAL OPTIONS</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--help, -h  show help (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false)</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">netclient</span> <span class="pre">join</span> <span class="pre">--help</span></code></p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">alex@workstation:~$ sudo netclient join --help</span>
-<span class="l l-Scalar l-Scalar-Plain">NAME</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">netclient join - Join a Netmaker network.</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">alex@workstation:~$ sudo netclient join --help</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">NAME</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">netclient join - Join a Netmaker network.</span><span class="w"></span>
 
-<span class="nt">USAGE</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">netclient join [command options] [arguments...]</span>
+<span class="nt">USAGE</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">netclient join [command options] [arguments...]</span><span class="w"></span>
 
-<span class="nt">OPTIONS</span><span class="p">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">--network value, -n value            Network to perform specified action against. (default</span><span class="p p-Indicator">:</span> <span class="s">"all"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_NETWORK]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--password value, -p value           Password for authenticating with netmaker. [$NETCLIENT_PASSWORD]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--endpoint value, -e value           Reachable (usually public) address for WireGuard (not the private WG address). [$NETCLIENT_ENDPOINT]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--macaddress value, -m value         Mac Address for this machine. Used as a unique identifier within Netmaker network. [$NETCLIENT_MACADDRESS]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--publickey value, --pubkey value    Public Key for WireGuard Interface. [$NETCLIENT_PUBLICKEY]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--privatekey value, --privkey value  Private Key for WireGuard Interface. [$NETCLIENT_PRIVATEKEY]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--port value                         Port for WireGuard Interface. [$NETCLIENT_PORT]</span>
-   <span class="nt">--keepalive value                    Default PersistentKeepAlive for Peers in WireGuard Interface. (default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0) [$NETCLIENT_KEEPALIVE]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--operatingsystem value, --os value  Identifiable name for machine within Netmaker network. [$NETCLIENT_OS]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--name value                         Identifiable name for machine within Netmaker network. [$NETCLIENT_NAME]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--localaddress value                 Local address for machine. Can be used in place of Endpoint for machines on the same LAN. [$NETCLIENT_LOCALADDRESS]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--address value, -a value            WireGuard address for machine within Netmaker network. [$NETCLIENT_ADDRESS]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--addressIPv6 value, --a6 value      WireGuard address for machine within Netmaker network. [$NETCLIENT_ADDRESSIPV6]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--interface value, -i value          WireGuard local network interface name. [$NETCLIENT_INTERFACE]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--apiserver value                    Address + GRPC Port (e.g. 1.2.3.4:50051) of Netmaker server. [$NETCLIENT_API_SERVER]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--grpcserver value                   Address + API Port (e.g. 1.2.3.4:8081) of Netmaker server. [$NETCLIENT_GRPC_SERVER]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--key value, -k value                Access Key for signing up machine with Netmaker server during initial 'add'. [$NETCLIENT_ACCESSKEY]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--token value, -t value              Access Token for signing up machine with Netmaker server during initial 'add'. [$NETCLIENT_ACCESSTOKEN]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--localrange value                   Local Range if network is local, for instance 192.168.1.0/24. [$NETCLIENT_LOCALRANGE]</span>
-   <span class="nt">--dns value                          Sets private dns if 'on'. Ignores if 'off'. Will retrieve from network if unset. (default</span><span class="p">:</span> <span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_DNS]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--islocal value                      Sets endpoint to local address if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_IS_LOCAL]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--isdualstack value                  Sets ipv6 address if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_IS_DUALSTACK]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--udpholepunch value                 Turns on udp holepunching if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_UDP_HOLEPUNCH]</span>
-   <span class="nt">--ipforwarding value                 Sets ip forwarding on if 'on'. Ignores if 'off'. On by default. (default</span><span class="p">:</span> <span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_IPFORWARDING]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--postup value                       Sets PostUp command for WireGuard. [$NETCLIENT_POSTUP]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--postdown value                     Sets PostDown command for WireGuard. [$NETCLIENT_POSTDOWN]</span>
-   <span class="nt">--daemon value                       Installs daemon if 'on'. Ignores if 'off'. On by default. (default</span><span class="p">:</span> <span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_DAEMON]</span>
-   <span class="nt">--roaming value                      Checks for IP changes if 'on'. Ignores if 'off'. On by default. (default</span><span class="p">:</span> <span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_ROAMING]</span>
-   <span class="l l-Scalar l-Scalar-Plain">--help, -h                           show help (default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false)</span>
+<span class="nt">OPTIONS</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--network value, -n value            Network to perform specified action against. (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"all"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_NETWORK]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--password value, -p value           Password for authenticating with netmaker. [$NETCLIENT_PASSWORD]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--endpoint value, -e value           Reachable (usually public) address for WireGuard (not the private WG address). [$NETCLIENT_ENDPOINT]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--macaddress value, -m value         Mac Address for this machine. Used as a unique identifier within Netmaker network. [$NETCLIENT_MACADDRESS]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--publickey value, --pubkey value    Public Key for WireGuard Interface. [$NETCLIENT_PUBLICKEY]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--privatekey value, --privkey value  Private Key for WireGuard Interface. [$NETCLIENT_PRIVATEKEY]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--port value                         Port for WireGuard Interface. [$NETCLIENT_PORT]</span><span class="w"></span>
+<span class="w">   </span><span class="nt">--keepalive value                    Default PersistentKeepAlive for Peers in WireGuard Interface. (default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0) [$NETCLIENT_KEEPALIVE]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--operatingsystem value, --os value  Identifiable name for machine within Netmaker network. [$NETCLIENT_OS]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--name value                         Identifiable name for machine within Netmaker network. [$NETCLIENT_NAME]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--localaddress value                 Local address for machine. Can be used in place of Endpoint for machines on the same LAN. [$NETCLIENT_LOCALADDRESS]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--address value, -a value            WireGuard address for machine within Netmaker network. [$NETCLIENT_ADDRESS]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--addressIPv6 value, --a6 value      WireGuard address for machine within Netmaker network. [$NETCLIENT_ADDRESSIPV6]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--interface value, -i value          WireGuard local network interface name. [$NETCLIENT_INTERFACE]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--apiserver value                    Address + GRPC Port (e.g. 1.2.3.4:50051) of Netmaker server. [$NETCLIENT_API_SERVER]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--grpcserver value                   Address + API Port (e.g. 1.2.3.4:8081) of Netmaker server. [$NETCLIENT_GRPC_SERVER]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--key value, -k value                Access Key for signing up machine with Netmaker server during initial 'add'. [$NETCLIENT_ACCESSKEY]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--token value, -t value              Access Token for signing up machine with Netmaker server during initial 'add'. [$NETCLIENT_ACCESSTOKEN]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--localrange value                   Local Range if network is local, for instance 192.168.1.0/24. [$NETCLIENT_LOCALRANGE]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--dns value                          Sets private dns if 'on'. Ignores if 'off'. Will retrieve from network if unset. (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_DNS]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--islocal value                      Sets endpoint to local address if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_IS_LOCAL]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--isdualstack value                  Sets ipv6 address if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_IS_DUALSTACK]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--udpholepunch value                 Turns on udp holepunching if 'yes'. Ignores if 'no'. Will retrieve from network if unset. [$NETCLIENT_UDP_HOLEPUNCH]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--ipforwarding value                 Sets ip forwarding on if 'on'. Ignores if 'off'. On by default. (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_IPFORWARDING]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--postup value                       Sets PostUp command for WireGuard. [$NETCLIENT_POSTUP]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--postdown value                     Sets PostDown command for WireGuard. [$NETCLIENT_POSTDOWN]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--daemon value                       Installs daemon if 'on'. Ignores if 'off'. On by default. (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_DAEMON]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--roaming value                      Checks for IP changes if 'on'. Ignores if 'off'. On by default. (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"on"</span><span class="l l-Scalar l-Scalar-Plain">) [$NETCLIENT_ROAMING]</span><span class="w"></span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">--help, -h                           show help (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false)</span><span class="w"></span>
 </pre></div>
 </div>
-
-
-<h3 id="config-file-reference">Config File Reference<a class="headerlink" href="#config-file-reference" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="config-file-reference">
+<h3 id="config-file-reference">Config File Reference<a class="headerlink" href="#config-file-reference" title="Permalink to this heading">¶</a></h3>
 <p>There is a config file for each node under /etc/netconfig-&lt;network name&gt;. You can change these values and then set “postchanges” to “true”, or go to the CLI and run <code class="docutils literal notranslate"><span class="pre">netclient</span> <span class="pre">push</span> <span class="pre">-n</span> <span class="pre">&lt;network&gt;</span></code></p>
-<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
-    <span class="nt">corednsaddr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">147.182.251.203</span> <span class="c1"># Address of CoreDNS Server (set locally with resolvectl)</span>
-    <span class="nt">grpcaddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.101.0.1:50051</span> <span class="c1"># Address of GRPC Server (used for all interaction with server after registration)</span>
-    <span class="nt">apiaddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.2.3.4:8081</span> <span class="c1"># Address of API Server (used only for registration/unregistration)</span>
-    <span class="nt">accesskey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5qKTbTgsvb45y3qyRmWft</span> <span class="c1"># Key used to sign up with server. Used only during registration</span>
-<span class="nt">node</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-computer</span> <span class="c1"># name of this node</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nm-example</span> <span class="c1"># name of interface to create/use for WG</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">example</span> <span class="c1"># name of network this ode is a part of</span>
-    <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$2a$0afehuytviN/thMpVlCYkonxy.Ws2.rNCJjBSAa3HZuhrK5hpYxme</span> <span class="c1"># encrypted node password, used to retrieve JWT. Can be changed to new pass in plaintext and CLI will update/replace with encrypted pass</span>
-    <span class="nt">macaddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">6c:4b:91:0g:68:7b</span> <span class="c1"># MAC of node. Used as a Unique ID</span>
-    <span class="nt">localaddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">192.168.1.32</span> <span class="c1"># Address on local network, used as endpoint for other local nodes for faster comms</span>
-    <span class="nt">wgaddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.7.11.2</span> <span class="c1"># Private WG addres on network</span>
-    <span class="nt">wgaddress6</span><span class="p">:</span> <span class="s">"f8:34:41:77:5c:15"</span> <span class="c1"># Private ipv6 address if network is dual stack</span>
-    <span class="nt">roaming</span><span class="p">:</span> <span class="s">"yes"</span> <span class="c1"># Whether or not to grab new endpoint value automatically</span>
-    <span class="nt">dnson</span><span class="p">:</span> <span class="s">"no"</span> <span class="c1"># Whether or not to set local DNS based on Netmaker's Private DNS server</span>
-    <span class="nt">islocal</span><span class="p">:</span> <span class="s">"no"</span> <span class="c1"># Based on network. If yes, will use local IP as endpoint.</span>
-    <span class="nt">isdualstack</span><span class="p">:</span> <span class="s">"yes"</span> <span class="c1"># Use IPv6 in addition to IPv4</span>
-    <span class="nt">isingressgateway</span><span class="p">:</span> <span class="s">"no"</span> <span class="c1"># whether or not node is an ingress gateway (will set iptables forwarding rules)</span>
-    <span class="nt">allowedips</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># additional IP's to add to client</span>
-    <span class="nt">localrange</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># local range if it's a local network. For instance, 192.168.1.0/24</span>
-    <span class="nt">postup</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># postup command, used by ingress/egress gateways to set iptables</span>
-    <span class="nt">postdown</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># postdown command, used by ingress/egress gateways to set iptables</span>
-    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">51821</span> <span class="c1"># WG port to use</span>
-    <span class="nt">keepalive</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span> <span class="c1"># default keepalive with nodes</span>
-    <span class="nt">publickey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8/q9cOg7c9QjnoXygVrY/VNE197VMRadJodkb1ZsujA=</span> <span class="c1"># public key of node to show to other nodes</span>
-    <span class="nt">privatekey</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># private key, set only for changing and then will revert to blank in config</span>
-    <span class="nt">endpoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">78.170.22.168</span> <span class="c1"># public endpoint for reaching node </span>
-    <span class="nt">postchanges</span><span class="p">:</span> <span class="s">"false"</span> <span class="c1"># if true, will post and config file changes on next checkin and then revert to false</span>
-    <span class="nt">ipforwarding</span><span class="p">:</span> <span class="s">"yes"</span> <span class="c1"># set ip forwarding; highly recommended to leave on</span>
-    <span class="nt">isstatic</span><span class="p">:</span> <span class="s">"no"</span> <span class="c1"># if yes, daemon will not change pubkey, endpoint, or address</span>
-    <span class="nt">udpholepunch</span><span class="p">:</span> <span class="s">"yes"</span> <span class="c1"># run UDP hole punching (will ignore port above, e.g. 51821)</span>
-    <span class="nt">network</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">home</span> <span class="c1"># the network (duplicate of node.network)</span>
-<span class="nt">daemon</span><span class="p">:</span> <span class="s">"yes"</span> <span class="c1"># whether or not to manage systemd</span>
-<span class="nt">operatingsystem</span><span class="p">:</span> <span class="s">""</span> <span class="c1"># not currently in use</span>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">corednsaddr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">147.182.251.203</span><span class="w"> </span><span class="c1"># Address of CoreDNS Server (set locally with resolvectl)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">grpcaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.101.0.1:50051</span><span class="w"> </span><span class="c1"># Address of GRPC Server (used for all interaction with server after registration)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">apiaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.2.3.4:8081</span><span class="w"> </span><span class="c1"># Address of API Server (used only for registration/unregistration)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">accesskey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5qKTbTgsvb45y3qyRmWft</span><span class="w"> </span><span class="c1"># Key used to sign up with server. Used only during registration</span><span class="w"></span>
+<span class="nt">node</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-computer</span><span class="w"> </span><span class="c1"># name of this node</span><span class="w"></span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nm-example</span><span class="w"> </span><span class="c1"># name of interface to create/use for WG</span><span class="w"></span>
+<span class="w">    </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example</span><span class="w"> </span><span class="c1"># name of network this ode is a part of</span><span class="w"></span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$2a$0afehuytviN/thMpVlCYkonxy.Ws2.rNCJjBSAa3HZuhrK5hpYxme</span><span class="w"> </span><span class="c1"># encrypted node password, used to retrieve JWT. Can be changed to new pass in plaintext and CLI will update/replace with encrypted pass</span><span class="w"></span>
+<span class="w">    </span><span class="nt">macaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6c:4b:91:0g:68:7b</span><span class="w"> </span><span class="c1"># MAC of node. Used as a Unique ID</span><span class="w"></span>
+<span class="w">    </span><span class="nt">localaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.32</span><span class="w"> </span><span class="c1"># Address on local network, used as endpoint for other local nodes for faster comms</span><span class="w"></span>
+<span class="w">    </span><span class="nt">wgaddress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.7.11.2</span><span class="w"> </span><span class="c1"># Private WG addres on network</span><span class="w"></span>
+<span class="w">    </span><span class="nt">wgaddress6</span><span class="p">:</span><span class="w"> </span><span class="s">"f8:34:41:77:5c:15"</span><span class="w"> </span><span class="c1"># Private ipv6 address if network is dual stack</span><span class="w"></span>
+<span class="w">    </span><span class="nt">roaming</span><span class="p">:</span><span class="w"> </span><span class="s">"yes"</span><span class="w"> </span><span class="c1"># Whether or not to grab new endpoint value automatically</span><span class="w"></span>
+<span class="w">    </span><span class="nt">dnson</span><span class="p">:</span><span class="w"> </span><span class="s">"no"</span><span class="w"> </span><span class="c1"># Whether or not to set local DNS based on Netmaker's Private DNS server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">islocal</span><span class="p">:</span><span class="w"> </span><span class="s">"no"</span><span class="w"> </span><span class="c1"># Based on network. If yes, will use local IP as endpoint.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">isdualstack</span><span class="p">:</span><span class="w"> </span><span class="s">"yes"</span><span class="w"> </span><span class="c1"># Use IPv6 in addition to IPv4</span><span class="w"></span>
+<span class="w">    </span><span class="nt">isingressgateway</span><span class="p">:</span><span class="w"> </span><span class="s">"no"</span><span class="w"> </span><span class="c1"># whether or not node is an ingress gateway (will set iptables forwarding rules)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">allowedips</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># additional IP's to add to client</span><span class="w"></span>
+<span class="w">    </span><span class="nt">localrange</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># local range if it's a local network. For instance, 192.168.1.0/24</span><span class="w"></span>
+<span class="w">    </span><span class="nt">postup</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># postup command, used by ingress/egress gateways to set iptables</span><span class="w"></span>
+<span class="w">    </span><span class="nt">postdown</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># postdown command, used by ingress/egress gateways to set iptables</span><span class="w"></span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">51821</span><span class="w"> </span><span class="c1"># WG port to use</span><span class="w"></span>
+<span class="w">    </span><span class="nt">keepalive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"> </span><span class="c1"># default keepalive with nodes</span><span class="w"></span>
+<span class="w">    </span><span class="nt">publickey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8/q9cOg7c9QjnoXygVrY/VNE197VMRadJodkb1ZsujA=</span><span class="w"> </span><span class="c1"># public key of node to show to other nodes</span><span class="w"></span>
+<span class="w">    </span><span class="nt">privatekey</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># private key, set only for changing and then will revert to blank in config</span><span class="w"></span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">78.170.22.168</span><span class="w"> </span><span class="c1"># public endpoint for reaching node </span><span class="w"></span>
+<span class="w">    </span><span class="nt">postchanges</span><span class="p">:</span><span class="w"> </span><span class="s">"false"</span><span class="w"> </span><span class="c1"># if true, will post and config file changes on next checkin and then revert to false</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ipforwarding</span><span class="p">:</span><span class="w"> </span><span class="s">"yes"</span><span class="w"> </span><span class="c1"># set ip forwarding; highly recommended to leave on</span><span class="w"></span>
+<span class="w">    </span><span class="nt">isstatic</span><span class="p">:</span><span class="w"> </span><span class="s">"no"</span><span class="w"> </span><span class="c1"># if yes, daemon will not change pubkey, endpoint, or address</span><span class="w"></span>
+<span class="w">    </span><span class="nt">udpholepunch</span><span class="p">:</span><span class="w"> </span><span class="s">"yes"</span><span class="w"> </span><span class="c1"># run UDP hole punching (will ignore port above, e.g. 51821)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class="w"> </span><span class="c1"># the network (duplicate of node.network)</span><span class="w"></span>
+<span class="nt">daemon</span><span class="p">:</span><span class="w"> </span><span class="s">"yes"</span><span class="w"> </span><span class="c1"># whether or not to manage systemd</span><span class="w"></span>
+<span class="nt">operatingsystem</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="c1"># not currently in use</span><span class="w"></span>
 </pre></div>
 </div>
-
-
-
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="installation">
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <p>To install netmaker, you need a server token for a particular network, unless you’re joining a network that allows manual signup, in which case you can join without a token, but the server will quarantine the machine until the admin approves it.</p>
 <p>An admin creates a token in the ACCESS KEYS section of the UI. Upon creating a token, it generates 3 values:</p>
 <p><strong>Access Key:</strong> The secret key to authenticate as a node in the network</p>
 <p><strong>Access Token:</strong> The secret key plus information about how to access the server (addresses, ports), all decoded by the netclient to register with the server</p>
 <p><strong>Install Command:</strong> A short script that will obtain the netclient binary, register with the server, and join the network, all in one</p>
 <p>For first time installations, you can run the Install Command. For additional networks, simply run <code class="docutils literal notranslate"><span class="pre">netclient</span> <span class="pre">join</span> <span class="pre">-t</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>. The raw access key will not be needed unless there are special circumstances, mostly troubleshooting incorrect information in the token (you can instead manually specify the server location).</p>
-
-
-<h2 id="managing-netclient">Managing Netclient<a class="headerlink" href="#managing-netclient" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="viewing-logs">Viewing Logs<a class="headerlink" href="#viewing-logs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="managing-netclient">
+<h2 id="managing-netclient">Managing Netclient<a class="headerlink" href="#managing-netclient" title="Permalink to this heading">¶</a></h2>
+<section id="viewing-logs">
+<h3 id="viewing-logs">Viewing Logs<a class="headerlink" href="#viewing-logs" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt><strong>to view current networks</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">netclient</span> <span class="pre">list</span></code></p>
 </dd>
@@ -777,33 +779,33 @@
 <dt><strong>to get most recent log run</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">netclient</span></code></p>
 </dd>
 </dl>
-
-
-<h3 id="re-syncing-netclient-basic-troubleshooting">Re-syncing netclient (basic troubleshooting)<a class="headerlink" href="#re-syncing-netclient-basic-troubleshooting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="re-syncing-netclient-basic-troubleshooting">
+<h3 id="re-syncing-netclient-basic-troubleshooting">Re-syncing netclient (basic troubleshooting)<a class="headerlink" href="#re-syncing-netclient-basic-troubleshooting" title="Permalink to this heading">¶</a></h3>
 <p>If the daemon is not running correctly run, try restarting the daemon, or pulling changes directly (don’t do both at once)</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">netclient</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">netclient</span> <span class="pre">pull</span></code></p>
 </div></blockquote>
-
-
-<h3 id="making-updates">Making Updates<a class="headerlink" href="#making-updates" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="making-updates">
+<h3 id="making-updates">Making Updates<a class="headerlink" href="#making-updates" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">/etc/netclient/config/netconfig-&lt;network&gt;</span></code></p>
 <p>Change any of the variables in this file, and changes will be pushed to the server and processed locally on the next checkin.</p>
 <p>For instance, change the private address, endpoint, or name. See above example config file for details</p>
-
-
-<h3 id="adding-removing-networks">Adding/Removing Networks<a class="headerlink" href="#adding-removing-networks" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="adding-removing-networks">
+<h3 id="adding-removing-networks">Adding/Removing Networks<a class="headerlink" href="#adding-removing-networks" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">netclient</span> <span class="pre">join</span> <span class="pre">-t</span> <span class="pre">&lt;token&gt;</span></code></p>
 <p>Set any of the above flags (netclient join –help) to override settings for joining the network.
 If a key is provided (-k), then a token is unnecessary, but grpc, server, ports, and network must all be provided via flags.</p>
-
-
-<h3 id="uninstalling">Uninstalling<a class="headerlink" href="#uninstalling" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="uninstalling">
+<h3 id="uninstalling">Uninstalling<a class="headerlink" href="#uninstalling" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">netclient</span> <span class="pre">uninstall</span></code></p>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -852,7 +854,7 @@ If a key is provided (-k), then a token is unnecessary, but grpc, server, ports,
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

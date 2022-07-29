@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -467,10 +469,10 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="troubleshoot--page-root">Troubleshooting<a class="headerlink" href="#troubleshoot--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this headline">¶</a></h2>
+  <section id="troubleshooting">
+<h1 id="troubleshoot--page-root">Troubleshooting<a class="headerlink" href="#troubleshoot--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="common-issues">
+<h2 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt><strong>How can I connect my Android or IOS device to my Netmaker VPN?</strong></dt><dd><p>Currently meshing one of these devices is not supported, however, it will be soon.
 For now, you can connect to your VPN by making one of the nodes an Ingress Gateway, then
@@ -489,9 +491,9 @@ You can also sign-up for updates at our <a class="reference external" href="http
 <dt><strong>How can I get additional support for my business?</strong></dt><dd><p>Check out our business support subscriptions at <a class="reference external" href="https://gravitl.com/plans">https://gravitl.com/plans</a>. Subscription holders can also purchase consulting credits via the site.</p>
 </dd>
 </dl>
-
-
-<h2 id="server">Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="server">
+<h2 id="server">Server<a class="headerlink" href="#server" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt><strong>How do I use a private address from the Netmaker Server? How do I contact nodes using their private addresses from the server?</strong></dt><dd><p>Default nodes appear in each network with the “netmaker” name. These nodes are created by, and attached to, the server. The server is contained in docker, meaning these clients are also contained in docker. Their networking stack is also contained in docker. The “netmaker” nodes are meant to function as network utilities. They assist with UDP Hole Punching and can run Relays, Egress, and Ingress. However, they are meant to stay contained in the server. They do not touch the host networking stack.</p>
 <p>If you want to give the physical server / VM a private IP in the netmaker network, you must deploy an <strong>additional</strong> node using the standard netclient. The only note here is that the server consumes ports 51821-51831, so you will need to give it a port outside this range, e.x. <cite>./netclient join &lt;token&gt; –port 51835</cite>. You may also need to add <cite>–udpholepunch no</cite>.</p>
@@ -516,14 +518,14 @@ Nodes will be given IPv6 addresses along with their IPv4 address. It does not cu
 to completely wipe your server. Otherwise kill the running binary and it’s up to you to remove database records/volumes.</p>
 </dd>
 </dl>
-
-
-<h2 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mq">
+<h2 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this heading">¶</a></h2>
 <p>If your client installs keep hanging or erroring out, the most common issue as of 0.13 is with MQ. There have been some architecture changes that are very important to account for in the upgrade.</p>
 <p>Please follow this Gist if you are encountering issues with 0.13+: <a class="reference external" href="https://gist.github.com/mattkasun/face2a7c1f32031a2126ff7243caad12">https://gist.github.com/mattkasun/face2a7c1f32031a2126ff7243caad12</a></p>
-
-
-<h2 id="ui">UI<a class="headerlink" href="#ui" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="ui">
+<h2 id="ui">UI<a class="headerlink" href="#ui" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt><strong>I want to make a separate network and give my friend access to only that network.</strong></dt><dd><p>Simply navigate to the UI (as an admin account). Select users in the top left and create an account for them.
 Select the network(s) to give them and they should be good to go! They are an admin of that network(s) only now.</p>
@@ -536,9 +538,9 @@ Then delete the rogue access key.</p>
 <dt><strong>Can I have multiple nodes with the same name?</strong></dt><dd><p>Yes, nodes can share names without issue. It may just be harder for you to know which is which.</p>
 </dd>
 </dl>
-
-
-<h2 id="netclient">Netclient<a class="headerlink" href="#netclient" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="netclient">
+<h2 id="netclient">Netclient<a class="headerlink" href="#netclient" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt><strong>How do I connect a node to my Netmaker network with Netclient?</strong></dt><dd><p>First get your access token (not just access key), then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">netclient</span> <span class="pre">join</span> <span class="pre">-t</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.
 <strong>NOTE:</strong> netclient may be under /etc/netclient/, i.e run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/etc/netclient/netclient</span> <span class="pre">join</span> <span class="pre">-t</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code></p>
@@ -586,17 +588,17 @@ You can also see the current WireGuard configuration with <code class="docutils 
 </ul>
 </dd>
 </dl>
-
-
-<h2 id="coredns">CoreDNS<a class="headerlink" href="#coredns" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="coredns">
+<h2 id="coredns">CoreDNS<a class="headerlink" href="#coredns" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt><strong>Is CoreDNS required to use Netmaker?</strong></dt><dd><p>CoreDNS is not required. Simply start your server with <code class="docutils literal notranslate"><span class="pre">DNS_MODE="off"</span></code>.</p>
 </dd>
 <dt><strong>What is the minimum DNS entry value I can use?</strong></dt><dd><p>Netmaker supports down to two characters for DNS names for your networks domains**</p>
 </dd>
 </dl>
-
-
+</section>
+</section>
 
 
           </article>
@@ -645,7 +647,7 @@ You can also see the current WireGuard configuration with <code class="docutils 
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

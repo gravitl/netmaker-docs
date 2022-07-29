@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -445,10 +447,10 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="external-clients--page-root">Ingress + External Clients<a class="headerlink" href="#external-clients--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="ingress-external-clients">
+<h1 id="external-clients--page-root">Ingress + External Clients<a class="headerlink" href="#external-clients--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/ingress1.png"><img alt="Gateway" class="align-center" src="_images/ingress1.png" style="width: 50%;"/></a>
 <dl class="simple">
 <dt>Netmaker allows for “external clients” to reach into a network and access services via an Ingress Gateway. So what is an “external client”? An external client is any machine which cannot or should not be meshed. This can include:</dt><dd><ul class="simple">
@@ -462,14 +464,14 @@
 <p>By using this method, you can hook any machine into a netmaker network that can run WireGuard.</p>
 <p>It is recommended to run the netclient where compatible, but for all other cases, a machine can be configured as an external client.</p>
 <p>Important to note, that an external client is not <strong>reachable</strong> by the network, meaning the client can establish connections to other machines, but those machines cannot independently establish a connection back. The External Client method should only be used in use cases where one wishes to access resources running on the virtual network and <strong>not</strong> for use cases where one wishes to make a resource accessible on the network. For that, use netclient.</p>
-
-
-<h2 id="configuring-an-ingress-gateway">Configuring an Ingress Gateway<a class="headerlink" href="#configuring-an-ingress-gateway" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuring-an-ingress-gateway">
+<h2 id="configuring-an-ingress-gateway">Configuring an Ingress Gateway<a class="headerlink" href="#configuring-an-ingress-gateway" title="Permalink to this heading">¶</a></h2>
 <p>External Clients must attach to an Ingress Gateway. By default, your network will not have an ingress gateway. To configure an ingress gateway, you can use any node in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be an ingress gateway and makes for a good default choice if you are unsure of which node to select.</p>
 <a class="reference internal image-reference" href="_images/exclient1.png"><img alt="Gateway" class="align-center" src="_images/exclient1.png" style="width: 80%;"/></a>
-
-
-<h2 id="adding-clients-to-a-gateway">Adding Clients to a Gateway<a class="headerlink" href="#adding-clients-to-a-gateway" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="adding-clients-to-a-gateway">
+<h2 id="adding-clients-to-a-gateway">Adding Clients to a Gateway<a class="headerlink" href="#adding-clients-to-a-gateway" title="Permalink to this heading">¶</a></h2>
 <p>Once you have configured a node as a gateway, you can then add clients to that gateway. Clients will be able to access other nodes in the network just as the gateway node does.</p>
 <a class="reference internal image-reference" href="_images/exclient2.png"><img alt="Gateway" class="align-center" src="_images/exclient2.png" style="width: 80%;"/></a>
 <p>After creating a client, you can edit the name to something more logical.</p>
@@ -478,27 +480,27 @@
 <a class="reference internal image-reference" href="_images/exclient4.png"><img alt="Gateway" class="align-center" src="_images/exclient4.png" style="width: 80%;"/></a>
 <p>Example config file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Interface</span><span class="p">]</span>
-<span class="n">Address</span> <span class="o">=</span> <span class="mf">10.7</span><span class="o">.</span><span class="mf">11.5</span><span class="o">/</span><span class="mi">32</span>
+<span class="n">Address</span> <span class="o">=</span> <span class="mf">10.7.11.5</span><span class="o">/</span><span class="mi">32</span>
 <span class="n">PrivateKey</span> <span class="o">=</span> <span class="n">EJf6Yy51M</span><span class="o">/</span><span class="n">YDaZgedRpuxMmrqul35WfjmHvRZR1rQ0U</span><span class="o">=</span>
 
 <span class="p">[</span><span class="n">Peer</span><span class="p">]</span>
 <span class="n">PublicKey</span> <span class="o">=</span> <span class="n">m</span><span class="o">/</span><span class="n">RPuMVsbpgQ</span><span class="o">+</span><span class="n">RkxlgK2mG</span><span class="o">+</span><span class="n">dDFlzqn</span><span class="o">+</span><span class="n">ua2zJt8Wn7GA</span><span class="o">=</span>
-<span class="n">AllowedIPs</span> <span class="o">=</span> <span class="mf">10.7</span><span class="o">.</span><span class="mf">11.0</span><span class="o">/</span><span class="mi">24</span>
-<span class="n">Endpoint</span> <span class="o">=</span> <span class="mf">3.236</span><span class="o">.</span><span class="mf">60.247</span><span class="p">:</span><span class="mi">51822</span>
+<span class="n">AllowedIPs</span> <span class="o">=</span> <span class="mf">10.7.11.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="n">Endpoint</span> <span class="o">=</span> <span class="mf">3.236.60.247</span><span class="p">:</span><span class="mi">51822</span>
 <span class="n">PersistentKeepalive</span> <span class="o">=</span> <span class="mi">20</span>
 
 </pre></div>
 </div>
 <p>Your client should now be able to access the network! A client can be invalidated at any time by simply deleting it from the UI.</p>
-
-
-<h2 id="configuring-dns-for-ext-clients-optional">Configuring DNS for Ext Clients (OPTIONAL)<a class="headerlink" href="#configuring-dns-for-ext-clients-optional" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuring-dns-for-ext-clients-optional">
+<h2 id="configuring-dns-for-ext-clients-optional">Configuring DNS for Ext Clients (OPTIONAL)<a class="headerlink" href="#configuring-dns-for-ext-clients-optional" title="Permalink to this heading">¶</a></h2>
 <p>If you wish to have a DNS field on your ext clients conf, simply edit the network field as shown below to 1.1.1.1 or 8.8.8.8 for example.
 If you do not want DNS on your ext client conf files, leave it blank.</p>
 <a class="reference internal image-reference" href="_images/extclient5.png"><img alt="Gateway" class="align-center" src="_images/extclient5.png" style="width: 80%;"/></a>
 <p>Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.</p>
-
-
+</section>
+</section>
 
 
           </article>
@@ -547,7 +549,7 @@ If you do not want DNS on your ext client conf files, leave it blank.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

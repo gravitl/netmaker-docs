@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -446,16 +448,16 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="egress-gateway--page-root">Egress Gateway<a class="headerlink" href="#egress-gateway--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="egress-gateway">
+<h1 id="egress-gateway--page-root">Egress Gateway<a class="headerlink" href="#egress-gateway--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <a class="reference internal image-reference" href="_images/egress1.png"><img alt="Gateway" class="align-center" src="_images/egress1.png" style="width: 80%;"/></a>
 <p>Netmaker allows your clients to reach external networks via an Egress Gateway. The Egress Gateway is a netclient which has been deployed to a server or router with access to a given subnet.</p>
 <p>In the netmaker UI, that node is set as an “egress gateway.” Range(s) are specified which this node has access to. Once created, all clients (and all new ext clients) in the network will be able to reach those ranges via the gateway.</p>
-
-
-<h2 id="configuring-an-egress-gateway">Configuring an Egress Gateway<a class="headerlink" href="#configuring-an-egress-gateway" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="configuring-an-egress-gateway">
+<h2 id="configuring-an-egress-gateway">Configuring an Egress Gateway<a class="headerlink" href="#configuring-an-egress-gateway" title="Permalink to this heading">¶</a></h2>
 <p>Configuring an Egress Gateway is very straight forward. As a prerequisite, you must know what you are trying to access remotely. For instance:</p>
 <ul class="simple">
 <li><p>a VPC</p></li>
@@ -466,7 +468,7 @@
 </ul>
 <p>After you have determined this, you must next deploy a netclient in a compatible location where the network is accessible. For instance, a Linux server or router in the office, or a Kubernetes worker node. This machine should be stable and relatively static (not expected to change its IP frequently or shut down unexpectedly).</p>
 <p>Next, you must determine which interface to use in order to reach the internal network. As an example, lets say there is a machine in the network at 10.10.10.2, and you have deployed the netclient on a different machine. You can run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ip</span> <span class="n">route</span> <span class="n">get</span> <span class="mf">10.10</span><span class="o">.</span><span class="mf">10.2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ip</span> <span class="n">route</span> <span class="n">get</span> <span class="mf">10.10.10.2</span>
 </pre></div>
 </div>
 <p>This should return the interface used to reach that address (e.x. “eth2”)</p>
@@ -475,31 +477,31 @@
 <p>At this point simply insert the range(s) into the first field, and the interface name into the second field, and click “create”.</p>
 <a class="reference internal image-reference" href="_images/ui-6.jpg"><img alt="Gateway" class="align-center" src="_images/ui-6.jpg" style="width: 80%;"/></a>
 <p>Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).</p>
-
-
-<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="remote-access">1) Remote Access<a class="headerlink" href="#remote-access" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="use-cases">
+<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">¶</a></h2>
+<section id="remote-access">
+<h3 id="remote-access">1) Remote Access<a class="headerlink" href="#remote-access" title="Permalink to this heading">¶</a></h3>
 <p>A common scenario would be to combine this with an “Ingress Gateway” to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the ingress and egress gateways. The Ingress Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the netmaker server as the Ingress, and one additional machine (in the private network you wish to reach), as the Egress.</p>
 <a class="reference internal image-reference" href="_images/egress2.png"><img alt="Gateway" class="align-center" src="_images/egress2.png" style="width: 80%;"/></a>
 <p>In some scenarios, a single node will act as both ingress and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.</p>
 <a class="reference internal image-reference" href="_images/egress3.png"><img alt="Gateway" class="align-center" src="_images/egress3.png" style="width: 50%;"/></a>
-
-
-<h3 id="nat-gateway">2)  / NAT Gateway<a class="headerlink" href="#nat-gateway" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="nat-gateway">
+<h3 id="nat-gateway">2)  / NAT Gateway<a class="headerlink" href="#nat-gateway" title="Permalink to this heading">¶</a></h3>
 <p>Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country,using a VPN server based in that country.</p>
 <p>These are not typical use cases for Netmaker, but can be easily enabled.</p>
 <p><strong>The most important note is this: Do not use 0.0.0.0/0 as your egress gateway.</strong> This is how you typically set up a “standard” VPN with WireGuard, however, it will not work with Netmaker. The Netclient specifically ignores gateways that overlap with local ranges (for efficiency ranges). 0.0.0.0 overlaps with everything, so it is always ignored.</p>
 <p>Instead, use the following list of ranges:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">8.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">11.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">12.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">16.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mf">32.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mf">64.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mf">128.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mf">160.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">168.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">172.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span><span class="mf">172.32</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">11</span><span class="p">,</span><span class="mf">172.64</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mf">172.128</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="mf">173.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">174.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">176.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mf">192.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="mf">192.128</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">11</span><span class="p">,</span><span class="mf">192.160</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">13</span><span class="p">,</span><span class="mf">192.169</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span><span class="mf">192.170</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">15</span><span class="p">,</span><span class="mf">192.172</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">14</span><span class="p">,</span><span class="mf">192.176</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span><span class="mf">192.192</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mf">193.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">194.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">196.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">200.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">208.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">8.0.0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">11.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">12.0.0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">16.0.0.0</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mf">32.0.0.0</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mf">64.0.0.0</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mf">128.0.0.0</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mf">160.0.0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">168.0.0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">172.0.0.0</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span><span class="mf">172.32.0.0</span><span class="o">/</span><span class="mi">11</span><span class="p">,</span><span class="mf">172.64.0.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mf">172.128.0.0</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="mf">173.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">174.0.0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">176.0.0.0</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mf">192.0.0.0</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="mf">192.128.0.0</span><span class="o">/</span><span class="mi">11</span><span class="p">,</span><span class="mf">192.160.0.0</span><span class="o">/</span><span class="mi">13</span><span class="p">,</span><span class="mf">192.169.0.0</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span><span class="mf">192.170.0.0</span><span class="o">/</span><span class="mi">15</span><span class="p">,</span><span class="mf">192.172.0.0</span><span class="o">/</span><span class="mi">14</span><span class="p">,</span><span class="mf">192.176.0.0</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span><span class="mf">192.192.0.0</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mf">193.0.0.0</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mf">194.0.0.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span><span class="mf">196.0.0.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mf">200.0.0.0</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mf">208.0.0.0</span><span class="o">/</span><span class="mi">4</span>
 </pre></div>
 </div>
 <p>This list encompasses the standard “public” network ranges, and ignores the standard “private” network ranges.</p>
 <p>Simply paste this list into your “egress gateway ranges” and your clients should begin routing public-facing traffic over the gateway.</p>
 <a class="reference internal image-reference" href="_images/egress5.png"><img alt="Gateway" class="align-center" src="_images/egress5.png" style="width: 50%;"/></a>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -548,7 +550,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

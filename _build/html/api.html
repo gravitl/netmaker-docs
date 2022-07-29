@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -497,38 +499,38 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="api--page-root">API Reference<a class="headerlink" href="#api--page-root" title="Permalink to this headline">¶</a></h1>
-
-<h2 id="api-usage">API Usage<a class="headerlink" href="#api-usage" title="Permalink to this headline">¶</a></h2>
+  <section id="api-reference">
+<h1 id="api--page-root">API Reference<a class="headerlink" href="#api--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="api-usage">
+<h2 id="api-usage">API Usage<a class="headerlink" href="#api-usage" title="Permalink to this heading">¶</a></h2>
 <p>Most actions that can be performed via API can be performed via UI. We recommend managing your networks using the official netmaker-ui project. However, Netmaker can also be run without the UI, and all functions can be achieved via API calls. If your use case requires using Netmaker without the UI or you need to do some troubleshooting/advanced configuration, using the API directly may help.</p>
-
-
-<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="authentication">
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permalink to this heading">¶</a></h2>
 <p>API calls must be authenticated via a header of the format  <cite>-H “Authorization: Bearer &lt;YOUR_SECRET_KEY&gt;”</cite> There are two methods to obtain YOUR_SECRET_KEY:
 1. Using the masterkey. By default, this value is “secret key,” but you should change this on your instance and keep it secure. This value can be set via env var at startup or in a config file (config/environments/&lt; env &gt;.yaml). See the [general usage](./USAGE.md) documentation for more details.
 2. Using a JWT received for a node. This can be retrieved by calling the <cite>/api/nodes/&lt;network&gt;/authenticate</cite> endpoint, as documented below.</p>
-
-
-<h2 id="format-of-calls-for-curl">Format of Calls for Curl<a class="headerlink" href="#format-of-calls-for-curl" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="format-of-calls-for-curl">
+<h2 id="format-of-calls-for-curl">Format of Calls for Curl<a class="headerlink" href="#format-of-calls-for-curl" title="Permalink to this heading">¶</a></h2>
 <p>Requests take the format of</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer &lt;YOUR_SECRET_KEY&gt;"</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">endpoint</span>
 </pre></div>
 </div>
-
-
-<h2 id="api-documentation">API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="networks-api">Networks API<a class="headerlink" href="#networks-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="api-documentation">
+<h2 id="api-documentation">API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading">¶</a></h2>
+<section id="networks-api">
+<h3 id="networks-api">Networks API<a class="headerlink" href="#networks-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Get All Networks:</strong> <cite>/api/networks</cite>, <cite>GET</cite></p>
 <p><strong>Create Network:</strong> <cite>/api/network</cite>, <cite>POST</cite></p>
 <p><strong>Get Network:</strong> <cite>/api/networks/{network id}</cite>, <cite>GET</cite></p>
 <p><strong>Update Network:</strong> <cite>/api/networks/{network id}</cite>, <cite>PUT</cite></p>
 <p><strong>Delete Network:</strong> <cite>/api/networks/{network id}</cite>, <cite>DELETE</cite></p>
 <p><strong>Cycle PublicKeys on all Nodes:</strong> <cite>/api/networks/{network id}/keyupdate</cite>, <cite>POST</cite></p>
-
-
-<h3 id="networks-api-call-examples">Networks API Call Examples<a class="headerlink" href="#networks-api-call-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="networks-api-call-examples">
+<h3 id="networks-api-call-examples">Networks API Call Examples<a class="headerlink" href="#networks-api-call-examples" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Get</span> <span class="n">All</span> <span class="n">Networks</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span> <span class="o">|</span> <span class="n">jq</span>
 
 <span class="n">Create</span> <span class="n">Network</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">'{"addressrange":"10.70.0.0/16","netid":"skynet"}'</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span>
@@ -542,15 +544,15 @@
 <span class="n">Cycle</span> <span class="n">PublicKeys</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">Nodes</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">keyupdate</span>
 </pre></div>
 </div>
-
-
-<h3 id="access-keys-api">Access Keys API<a class="headerlink" href="#access-keys-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="access-keys-api">
+<h3 id="access-keys-api">Access Keys API<a class="headerlink" href="#access-keys-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Get All Keys:</strong> <cite>/api/networks/{network id}/keys</cite>, <cite>GET</cite></p>
 <p><strong>Create Key:</strong> <cite>/api/networks/{network id}/keys</cite>, <cite>GET</cite></p>
 <p><strong>Delete Key:</strong> <cite>/api/networks/{network id}/keys/{keyname}</cite>, <cite>DELETE</cite></p>
-
-
-<h3 id="access-keys-api-call-examples">Access Keys API Call Examples<a class="headerlink" href="#access-keys-api-call-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="access-keys-api-call-examples">
+<h3 id="access-keys-api-call-examples">Access Keys API Call Examples<a class="headerlink" href="#access-keys-api-call-examples" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Get</span> <span class="n">All</span> <span class="n">Keys</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">keys</span> <span class="o">|</span> <span class="n">jq</span>
 
 <span class="n">Create</span> <span class="n">Key</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">'{"uses":10,"name":"mykey"}'</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">keys</span>
@@ -558,14 +560,14 @@
 <span class="n">Delete</span> <span class="n">Key</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">DELETE</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">keys</span><span class="o">/</span><span class="n">mykey</span>
 </pre></div>
 </div>
-
-
-<h3 id="acl-api">ACL API<a class="headerlink" href="#acl-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="acl-api">
+<h3 id="acl-api">ACL API<a class="headerlink" href="#acl-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Get ACL for network</strong> <cite>/api/networks/{network id}/acl</cite>, <cite>GET</cite></p>
 <p><strong>Update ACL for network</strong> <cite>/api/networks/{network id}/acl</cite>, <cite>PUT</cite></p>
-
-
-<h3 id="acl-api-call-examples">ACL API Call Examples<a class="headerlink" href="#acl-api-call-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="acl-api-call-examples">
+<h3 id="acl-api-call-examples">ACL API Call Examples<a class="headerlink" href="#acl-api-call-examples" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Get ACL for Network: curl -H "Authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/networks/skynet/acl | jq
 
 Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "authorization: Bearer YOUR_SECRET_KEY" localhost:8081/api/nodes/skynet/acl \
@@ -573,9 +575,9 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
 -d `{"20703260-4b0e-4f2d-8d74-bf28e21cc682":{"75721e5b-f2ac-4cca-b648-fa1d83712287":1},"75721e5b-f2ac-4cca-b648-fa1d83712287":{"20703260-4b0e-4f2d-8d74-bf28e21cc682":1}}`
 </pre></div>
 </div>
-
-
-<h3 id="nodes-api">Nodes API<a class="headerlink" href="#nodes-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="nodes-api">
+<h3 id="nodes-api">Nodes API<a class="headerlink" href="#nodes-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Get All Nodes:</strong> <cite>/api/nodes</cite>, <cite>GET</cite></p>
 <p><strong>Get Network Nodes:</strong> <cite>/api/nodes/{network id}</cite>, <cite>GET</cite></p>
 <p><strong>Create Node:</strong> <cite>/api/nodes/{network id}</cite>, <cite>POST</cite></p>
@@ -588,9 +590,9 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
 <p><strong>Uncordon (Approve) a Pending Node:</strong> <cite>/api/nodes/{network id}/{macaddress}/uncordon</cite>, <cite>POST</cite></p>
 <p><strong>Get Last Modified Date (Last Modified Node in Network):</strong> <cite>/api/nodes/adm/{network id}/lastmodified</cite>, <cite>GET</cite></p>
 <p><strong>Authenticate:</strong> <cite>/api/nodes/adm/{network id}/authenticate</cite>, <cite>POST</cite></p>
-
-
-<h3 id="nodes-api-call-examples">Nodes API Call Examples<a class="headerlink" href="#nodes-api-call-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="nodes-api-call-examples">
+<h3 id="nodes-api-call-examples">Nodes API Call Examples<a class="headerlink" href="#nodes-api-call-examples" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Get</span> <span class="n">All</span> <span class="n">Nodes</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">nodes</span> <span class="o">|</span> <span class="n">jq</span>
 
 <span class="n">Get</span> <span class="n">Network</span> <span class="n">Nodes</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">nodes</span><span class="o">/</span><span class="n">skynet</span> <span class="o">|</span> <span class="n">jq</span>
@@ -614,9 +616,9 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
 <span class="n">Authenticate</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span>  <span class="s1">'{"macaddress": "8c:90:b5:06:f1:d9", "password": "YOUR_PASSWORD"}'</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">nodes</span><span class="o">/</span><span class="n">adm</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">authenticate</span>
 </pre></div>
 </div>
-
-
-<h3 id="users-api">Users API<a class="headerlink" href="#users-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="users-api">
+<h3 id="users-api">Users API<a class="headerlink" href="#users-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Note:</strong> Only able to create Admin user at this time. The “user” is only used by the <a class="reference external" href="https://github.com/gravitl/netmaker-ui">user interface</a> to authenticate the single admin user.</p>
 <p><strong>Get User:</strong> <cite>/api/users/{username}</cite>, <cite>GET</cite></p>
 <p><strong>Update User:</strong> <cite>/api/users/{username}</cite>, <cite>PUT</cite></p>
@@ -624,9 +626,9 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
 <p><strong>Check for Admin User:</strong> <cite>/api/users/adm/hasadmin</cite>, <cite>GET</cite></p>
 <p><strong>Create Admin User:</strong> <cite>/api/users/adm/createadmin</cite>, <cite>POST</cite></p>
 <p><strong>Authenticate:</strong> <cite>/api/users/adm/authenticate</cite>, <cite>POST</cite></p>
-
-
-<h3 id="users-api-calls-examples">Users API Calls Examples<a class="headerlink" href="#users-api-calls-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="users-api-calls-examples">
+<h3 id="users-api-calls-examples">Users API Calls Examples<a class="headerlink" href="#users-api-calls-examples" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Get</span> <span class="n">User</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"Authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="p">{</span><span class="n">username</span><span class="p">}</span> <span class="o">|</span> <span class="n">jq</span>
 
 <span class="n">Update</span> <span class="n">User</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="o">-</span><span class="n">d</span> <span class="s1">'{"password":"noonewillguessthis"}'</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="o">-</span><span class="n">H</span> <span class="s2">"authorization: Bearer YOUR_SECRET_KEY"</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="p">{</span><span class="n">username</span><span class="p">}</span>
@@ -640,22 +642,22 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
 <span class="n">Authenticate</span><span class="p">:</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span>  <span class="s1">'{"username": "smartguy", "password": "YOUR_PASS"}'</span> <span class="o">-</span><span class="n">H</span> <span class="s1">'Content-Type: application/json'</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">nodes</span><span class="o">/</span><span class="n">adm</span><span class="o">/</span><span class="n">skynet</span><span class="o">/</span><span class="n">authenticate</span>
 </pre></div>
 </div>
-
-
-<h3 id="server-management-api">Server Management API<a class="headerlink" href="#server-management-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="server-management-api">
+<h3 id="server-management-api">Server Management API<a class="headerlink" href="#server-management-api" title="Permalink to this heading">¶</a></h3>
 <p>The Server Mgmt. API allows you to add and remove the server from networks.</p>
 <p><strong>Add to Network:</strong> <cite>/api/server/addnetwork/{network id}</cite>, <cite>POST</cite></p>
 <p><strong>Remove from Network:</strong> <cite>/api/server/removenetwork/{network id}</cite>, <cite>DELETE</cite></p>
 <p><strong>Add to Network:</strong> <cite>curl -X POST -H “authorization: Bearer YOUR_SECRET_KEY” localhost:8081/api/server/addnetwork/{network id}</cite></p>
 <p><strong>Remove from Network:</strong> <cite>curl -X DELETE -H “authorization: Bearer YOUR_SECRET_KEY” localhost:8081/api/server/removenetwork/{network id}</cite></p>
-
-
-<h3 id="file-server-api">File Server API<a class="headerlink" href="#file-server-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="file-server-api">
+<h3 id="file-server-api">File Server API<a class="headerlink" href="#file-server-api" title="Permalink to this heading">¶</a></h3>
 <p><strong>Get File:</strong> <cite>/meshclient/files/{filename}</cite>, <cite>GET</cite></p>
 <p><strong>Example:</strong> <cite>curl localhost:8081/meshclient/files/meshclient</cite></p>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -704,7 +706,7 @@ Update ACL for Network: curl -X PUT -H 'Content-Type: application/json' -H "auth
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

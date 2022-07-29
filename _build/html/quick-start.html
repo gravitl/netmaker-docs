@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -52,6 +53,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -483,21 +485,21 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  
-<h1 id="quick-start--page-root">Quick Install<a class="headerlink" href="#quick-start--page-root" title="Permalink to this headline">¶</a></h1>
+  <section id="quick-install">
+<h1 id="quick-start--page-root">Quick Install<a class="headerlink" href="#quick-start--page-root" title="Permalink to this heading">¶</a></h1>
 <p>This quick install guide is an <strong>opinionated</strong> guide for getting up and running with Netmaker as quickly as possible.</p>
 <p>If you are just looking to trial netmaker, we <strong>highly recommend</strong> using the 5-minute installer of Netmaker in the README on GitHub: <a class="reference external" href="https://github.com/gravitl/netmaker">https://github.com/gravitl/netmaker</a></p>
 <p>The following is a guided version of that script, with the option to add a custom domain (instead of nip.io):</p>
-
-<h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h2>
+<section id="assumptions">
+<h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this heading">¶</a></h2>
 <p>We assume for this installation that you want all of the Netmaker features enabled, and you want your server to be accessible from anywhere.</p>
 <p>This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.</p>
 <p>If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact us: <a class="reference external" href="https://www.netmaker.org/contact">https://www.netmaker.org/contact</a></p>
 <p>By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Traefik reverse proxy.</p>
 <p>For information about deploying more advanced configurations, see the <a class="reference internal" href="server-installation.html"><span class="doc">Advanced Installation</span></a> docs.</p>
-
-
-<h2 id="prerequisites">0. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="prerequisites">
+<h2 id="prerequisites">0. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Virtual Machine</strong></p>
 <ul>
@@ -518,27 +520,27 @@
 </ul>
 </li>
 </ul>
-
-
-<h2 id="prepare-dns">1. Prepare DNS<a class="headerlink" href="#prepare-dns" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="prepare-dns">
+<h2 id="prepare-dns">1. Prepare DNS<a class="headerlink" href="#prepare-dns" title="Permalink to this heading">¶</a></h2>
 <p>Create a wildcard A record pointing to the public IP of your VM. As an example, *.netmaker.example.com. Alternatively, create records for these specific subdomains:</p>
 <ul class="simple">
 <li><p>dashboard.domain</p></li>
 <li><p>api.domain</p></li>
 <li><p>broker.domain</p></li>
 </ul>
-
-
-<h2 id="install-dependencies">2. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="install-dependencies">
+<h2 id="install-dependencies">2. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">root</span><span class="nd">@your</span><span class="o">-</span><span class="n">host</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">docker</span><span class="o">.</span><span class="n">io</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">wireguard</span>
 </pre></div>
 </div>
 <p>At this point you should have all the system dependencies you need.</p>
-
-
-<h2 id="open-firewall">3. Open Firewall<a class="headerlink" href="#open-firewall" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="open-firewall">
+<h2 id="open-firewall">3. Open Firewall<a class="headerlink" href="#open-firewall" title="Permalink to this heading">¶</a></h2>
 <p>Make sure firewall settings are set for Netmaker both on the VM and with your cloud security groups (AWS, GCP, etc).</p>
 <p>Make sure the following ports are open both on the VM and in the cloud security groups:</p>
 <ul class="simple">
@@ -559,11 +561,11 @@
 </ul>
 </dd>
 </dl>
-
-
-<h2 id="install-netmaker">4. Install Netmaker<a class="headerlink" href="#install-netmaker" title="Permalink to this headline">¶</a></h2>
-
-<h3 id="prepare-docker-compose">Prepare Docker Compose<a class="headerlink" href="#prepare-docker-compose" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="install-netmaker">
+<h2 id="install-netmaker">4. Install Netmaker<a class="headerlink" href="#install-netmaker" title="Permalink to this heading">¶</a></h2>
+<section id="prepare-docker-compose">
+<h3 id="prepare-docker-compose">Prepare Docker Compose<a class="headerlink" href="#prepare-docker-compose" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ip</span> <span class="n">route</span> <span class="n">get</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/^.*src \([0-9.]*\) .*$/</span><span class="se">\1</span><span class="s1">/p'</span>
 </pre></div>
 </div>
@@ -580,24 +582,24 @@
 </pre></div>
 </div>
 <p>You may want to save this key for future use with the API.</p>
-
-
-<h3 id="prepare-mq">Prepare MQ<a class="headerlink" href="#prepare-mq" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="prepare-mq">
+<h3 id="prepare-mq">Prepare MQ<a class="headerlink" href="#prepare-mq" title="Permalink to this heading">¶</a></h3>
 <p>You must retrieve the MQ configuration file for Mosquitto.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">.</span><span class="n">conf</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">docker</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
-
-
-<h3 id="start-netmaker">Start Netmaker<a class="headerlink" href="#start-netmaker" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="start-netmaker">
+<h3 id="start-netmaker">Start Netmaker<a class="headerlink" href="#start-netmaker" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">-d</span></code></p>
 <p>navigate to dashboard.&lt;your base domain&gt; to begin using Netmaker.</p>
 <p>To troubleshoot issues, start with:</p>
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">logs</span> <span class="pre">netmaker</span></code></p>
 <p>Or check out the <a class="reference internal" href="troubleshoot.html"><span class="doc">troubleshoooting docs</span></a>.</p>
-
-
-
+</section>
+</section>
+</section>
 
 
           </article>
@@ -646,7 +648,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
