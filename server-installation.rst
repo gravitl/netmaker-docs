@@ -225,25 +225,25 @@ Database Setup (optional)
 You can run the netmaker binary standalone and it will run an embedded SQLite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.
 
 1. Install rqlite on your server: https://github.com/rqlite/rqlite
-
 2. Run rqlite: rqlited -node-id 1 ~/node.1
 
 If using rqlite or postgres, you must change the DATABASE environment/config variable and enter connection details.
 
 Server Setup (using sqlite)
 ---------------------------
+
 1. Get the binary. https://github.com/gravitl/netmaker/releases/ 
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yaml
 
 .. code-block::
     server:
-  server: "broker.<YOUR_BASE_DOMAIN>.com"
-  apiport: "8081"
-  apiconnection: "api.<YOUR_BASE_DOMAIN>.com:443"
-  masterkey: "<SECRET_KEY>"
-  mqhost: "127.0.0.1"
-  mqport: "8883"
+        server: "broker.<YOUR_BASE_DOMAIN>"
+        apiport: "8081"
+        apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
+        masterkey: "<SECRET_KEY>"
+        mqhost: "127.0.0.1"
+        mqport: "8883"
 
 4. Update your base domain and secret key
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
@@ -266,20 +266,16 @@ Server Setup (using sqlite)
 8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yaml and then run ``sudo systemctl restart netmaker``
 
 UI Setup
------------
-
+---------
 
 The following uses Caddy as a file server/proxy.
 
-1. Download and Unzip UI asset files and put them in /var/www/netmaker
-2. Create config.js in /var/www/netmaker
-    window.REACT_APP_BACKEND='https://api.example.com'
+1. Download and Unzip UI asset files from https://github.com/gravitl/netmaker-ui/releases and put them in /var/www/netmaker
+    ``sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip``
+    ``sudo unzip /tmp/netmaker-ui.zip -d /var/www/netmaker``
 
-.. code-block::
-  
-  sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip
-  sudo unzip /tmp/netmaker-ui.zip -d /var/www/netmaker
-  sudo sh -c 'BACKEND_URL=http://<YOUR BACKEND API URL>:PORT /var/www/netmaker/generate_config_js.sh >/var/www/netmaker/config.js'
+2. Create config.js in /var/www/netmaker
+    ``window.REACT_APP_BACKEND='https://api.<YOUR_BASE_DOMAIN>'``
 
 Proxy / Http server
 ------------------------
@@ -319,7 +315,7 @@ MQ
 ----
 
 You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
-..code-block::
+.. code-block::
     per_listener_settings true
 
     listener 8883
