@@ -245,7 +245,7 @@ Server Setup (using sqlite)
         mqhost: "127.0.0.1"
         mqport: "8883"
 
-4. Update your base domain and secret key
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 .. code-block::
     [Unit]
