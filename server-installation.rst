@@ -261,7 +261,7 @@ Server Setup (using sqlite)
     [Install]
     WantedBy=multi-user.target
 
-6. systemctl daemon-reload
+6. ``systemctl daemon-reload``
 7. Check status:  ``sudo journalctl -u netmaker``
 8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yaml and then run ``sudo systemctl restart netmaker``
 
@@ -287,22 +287,22 @@ Caddy
 2. Caddy file contents
 .. code-block::
     {
-            # LetsEncrypt account
-            email <YOUR_EMAIL>
+        # LetsEncrypt account
+        email <YOUR_EMAIL>
     }
 
     # Dashboard
     https://dashboard.<YOUR_BASE_DOMAIN>/ {
-            header {
-                    Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
-                    Strict-Transport-Security "max-age=31536000;"
-                    X-XSS-Protection "1; mode=block"
-                    X-Frame-Options "SAMEORIGIN"
-                    X-Robots-Tag "none"
-                    -Server
-            }
-            root * /var/www/netmaker
-            file_server 
+        header {
+            Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
+            Strict-Transport-Security "max-age=31536000;"
+            X-XSS-Protection "1; mode=block"
+            X-Frame-Options "SAMEORIGIN"
+            X-Robots-Tag "none"
+            -Server
+        }
+        root * /var/www/netmaker
+        file_server 
     }
 
     # API
