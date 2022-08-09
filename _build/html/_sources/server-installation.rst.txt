@@ -237,7 +237,7 @@ Server Setup (using sqlite)
 3. create a config file. /etc/netmaker/netmaker.yaml
 
 .. code-block::
-    server:
+        server:
         server: "broker.<YOUR_BASE_DOMAIN>"
         apiport: "8081"
         apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
@@ -288,7 +288,6 @@ Caddy
 2. Caddy file contents
 
 .. code-block::
-
     {
         # LetsEncrypt account
         email <YOUR_EMAIL>

@@ -236,14 +236,14 @@ Server Setup (using sqlite)
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yaml
 
-.. code-block::
-        server:
-        server: "broker.<YOUR_BASE_DOMAIN>"
-        apiport: "8081"
-        apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
-        masterkey: "<SECRET_KEY>"
-        mqhost: "127.0.0.1"
-        mqport: "8883"
+.. code-block:: yaml
+    server:
+      server: "broker.<YOUR_BASE_DOMAIN>"
+      apiport: "8081"
+      apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
+      masterkey: "<SECRET_KEY>"
+      mqhost: "127.0.0.1"
+      mqport: "8883"
 
 4. Update YOUR_BASE_DOMAIN and SECRET_KEY
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
