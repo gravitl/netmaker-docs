@@ -225,52 +225,114 @@ Database Setup (optional)
 You can run the netmaker binary standalone and it will run an embedded SQLite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.
 
 1. Install rqlite on your server: https://github.com/rqlite/rqlite
-
 2. Run rqlite: rqlited -node-id 1 ~/node.1
 
 If using rqlite or postgres, you must change the DATABASE environment/config variable and enter connection details.
 
-Server Setup
--------------
-1. **Run the install script:** 
+Server Setup (using sqlite)
+---------------------------
 
-``sudo curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker-server.sh | sh -``
-
-2. Check status:  ``sudo journalctl -u netmaker``
-3. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/config/environments/< your env >.yaml and then run ``sudo systemctl restart netmaker``
-
-UI Setup
------------
-
-The following uses Nginx as an http server. Alternatively, you may use Apache or any other web server that serves static web files.
-
-1. Download and Unzip UI asset files
-2. Copy Config to Nginx or other reverse proxy
-3. Modify Default Config Path
-4. Change Backend URL
-5. Start Nginx
+1. Get the binary. https://github.com/gravitl/netmaker/releases/ 
+2. Move the binary to /usr/sbin and make it executable.
+3. create a config file. /etc/netmaker/netmaker.yaml
 
 .. code-block::
-  
-  sudo wget -O /usr/share/nginx/html/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip
-  sudo unzip /usr/share/nginx/html/netmaker-ui.zip -d /usr/share/nginx/html
-  sudo cp /usr/share/nginx/html/nginx.conf /etc/nginx/conf.d/default.conf
-  sudo sed -i 's/root \/var\/www\/html/root \/usr\/share\/nginx\/html/g' /etc/nginx/sites-available/default
-  sudo sh -c 'BACKEND_URL=http://<YOUR BACKEND API URL>:PORT /usr/share/nginx/html/generate_config_js.sh >/usr/share/nginx/html/config.js'
-  sudo systemctl start nginx
+    server:
+        server: "broker.<YOUR_BASE_DOMAIN>"
+        apiport: "8081"
+        apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
+        masterkey: "<SECRET_KEY>"
+        mqhost: "127.0.0.1"
+        mqport: "8883"
 
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY
+5. create your netmaker.service file /etc/systemd/system/netmaker.service
+.. code-block::
+    [Unit]
+    Description=Netmaker Server
+    After=network.target
 
-Proxy / Load Balancer
+    [Service]
+    Type=simple
+    Restart=on-failure
+
+    ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yaml
+
+    [Install]
+    WantedBy=multi-user.target
+
+6. ``systemctl daemon-reload``
+7. Check status:  ``sudo journalctl -u netmaker``
+8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yaml and then run ``sudo systemctl restart netmaker``
+
+UI Setup
+---------
+
+The following uses Caddy as a file server/proxy.
+
+1. Download and Unzip UI asset files from https://github.com/gravitl/netmaker-ui/releases and put them in /var/www/netmaker
+    ``sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip``
+    ``sudo unzip /tmp/netmaker-ui.zip -d /var/www/netmaker``
+
+2. Create config.js in /var/www/netmaker
+    ``window.REACT_APP_BACKEND='https://api.<YOUR_BASE_DOMAIN>'``
+
+Proxy / Http server
 ------------------------
 
-You will need to proxy connections to your UI and Server. By default, the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Traefik, Caddy, or Nginx (you can follow the Nginx guide in these docs).
+Caddy
+-----
+
+1. Install Caddy
+2. Caddy file contents
+.. code-block::
+    {
+        # LetsEncrypt account
+        email <YOUR_EMAIL>
+    }
+
+    # Dashboard
+    https://dashboard.<YOUR_BASE_DOMAIN>/ {
+        header {
+            Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
+            Strict-Transport-Security "max-age=31536000;"
+            X-XSS-Protection "1; mode=block"
+            X-Frame-Options "SAMEORIGIN"
+            X-Robots-Tag "none"
+            -Server
+        }
+        root * /var/www/netmaker
+        file_server 
+    }
+
+    # API
+    https://api.<YOUR_BASE_DOMAIN> {
+        reverse_proxy http://127.0.0.1:8081/
+    }
+3. start Caddy
 
 MQ
 ----
 
-You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file found here: https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf
+You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
+.. code-block::
+    per_listener_settings true
 
-Netmaker env vars must be configured to reach the MQ broker
+    listener 8883
+    allow_anonymous false
+    require_certificate true
+    use_identity_as_username false
+    cafile /etc/mosquitto/certs/root.pem
+    certfile /etc/mosquitto/certs/server.pem
+    keyfile /etc/mosquitto/certs/server.key
+
+    listener 1883
+    allow_anonymous true
+
+Start netmaker
+copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
+restart mosquitto
+
 
 
 .. _KubeInstall:

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -319,11 +319,13 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#database-setup-optional" class="md-nav__link">Database Setup (optional)</a>
         </li>
-        <li class="md-nav__item"><a href="#server-setup" class="md-nav__link">Server Setup</a>
+        <li class="md-nav__item"><a href="#server-setup-using-sqlite" class="md-nav__link">Server Setup (using sqlite)</a>
         </li>
         <li class="md-nav__item"><a href="#ui-setup" class="md-nav__link">UI Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#proxy-load-balancer" class="md-nav__link">Proxy / Load Balancer</a>
+        <li class="md-nav__item"><a href="#proxy-http-server" class="md-nav__link">Proxy / Http server</a>
+        </li>
+        <li class="md-nav__item"><a href="#caddy" class="md-nav__link">Caddy</a>
         </li>
         <li class="md-nav__item"><a href="#mq" class="md-nav__link">MQ</a>
         </li></ul>
@@ -540,11 +542,13 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#database-setup-optional" class="md-nav__link">Database Setup (optional)</a>
         </li>
-        <li class="md-nav__item"><a href="#server-setup" class="md-nav__link">Server Setup</a>
+        <li class="md-nav__item"><a href="#server-setup-using-sqlite" class="md-nav__link">Server Setup (using sqlite)</a>
         </li>
         <li class="md-nav__item"><a href="#ui-setup" class="md-nav__link">UI Setup</a>
         </li>
-        <li class="md-nav__item"><a href="#proxy-load-balancer" class="md-nav__link">Proxy / Load Balancer</a>
+        <li class="md-nav__item"><a href="#proxy-http-server" class="md-nav__link">Proxy / Http server</a>
+        </li>
+        <li class="md-nav__item"><a href="#caddy" class="md-nav__link">Caddy</a>
         </li>
         <li class="md-nav__item"><a href="#mq" class="md-nav__link">MQ</a>
         </li></ul>
@@ -925,44 +929,115 @@
 </ol>
 <p>If using rqlite or postgres, you must change the DATABASE environment/config variable and enter connection details.</p>
 </section>
-<section id="server-setup">
-<h3 id="server-setup">Server Setup<a class="headerlink" href="#server-setup" title="Permalink to this heading">¶</a></h3>
+<section id="server-setup-using-sqlite">
+<h3 id="server-setup-using-sqlite">Server Setup (using sqlite)<a class="headerlink" href="#server-setup-using-sqlite" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Run the install script:</strong></p></li>
+<li><p>Get the binary. <a class="reference external" href="https://github.com/gravitl/netmaker/releases/">https://github.com/gravitl/netmaker/releases/</a></p></li>
+<li><p>Move the binary to /usr/sbin and make it executable.</p></li>
+<li><p>create a config file. /etc/netmaker/netmaker.yaml</p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">-sfL</span> <span class="pre">https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker-server.sh</span> <span class="pre">|</span> <span class="pre">sh</span> <span class="pre">-</span></code></p>
-<ol class="arabic simple" start="2">
+<ol class="arabic simple" start="4">
+<li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
+</ol>
+<p>5. create your netmaker.service file /etc/systemd/system/netmaker.service
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">Netmaker</span> <span class="n">Server</span>
+<span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span>
+
+<span class="p">[</span><span class="n">Service</span><span class="p">]</span>
+<span class="n">Type</span><span class="o">=</span><span class="n">simple</span>
+<span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">failure</span>
+
+<span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">netmaker</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">netmaker</span><span class="o">.</span><span class="n">yaml</span>
+
+<span class="p">[</span><span class="n">Install</span><span class="p">]</span>
+<span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></p></li>
 <li><p>Check status:  <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">netmaker</span></code></p></li>
-<li><p>If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/config/environments/&lt; your env &gt;.yaml and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">netmaker</span></code></p></li>
+<li><p>If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yaml and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">netmaker</span></code></p></li>
 </ol>
 </section>
 <section id="ui-setup">
 <h3 id="ui-setup">UI Setup<a class="headerlink" href="#ui-setup" title="Permalink to this heading">¶</a></h3>
-<p>The following uses Nginx as an http server. Alternatively, you may use Apache or any other web server that serves static web files.</p>
+<p>The following uses Caddy as a file server/proxy.</p>
 <ol class="arabic simple">
-<li><p>Download and Unzip UI asset files</p></li>
-<li><p>Copy Config to Nginx or other reverse proxy</p></li>
-<li><p>Modify Default Config Path</p></li>
-<li><p>Change Backend URL</p></li>
-<li><p>Start Nginx</p></li>
+<li><dl class="simple">
+<dt>Download and Unzip UI asset files from <a class="reference external" href="https://github.com/gravitl/netmaker-ui/releases">https://github.com/gravitl/netmaker-ui/releases</a> and put them in /var/www/netmaker</dt><dd><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">wget</span> <span class="pre">-O</span> <span class="pre">/tmp/netmaker-ui.zip</span> <span class="pre">https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip</span></code>
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">unzip</span> <span class="pre">/tmp/netmaker-ui.zip</span> <span class="pre">-d</span> <span class="pre">/var/www/netmaker</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Create config.js in /var/www/netmaker</dt><dd><p><code class="docutils literal notranslate"><span class="pre">window.REACT_APP_BACKEND='https://api.&lt;YOUR_BASE_DOMAIN&gt;'</span></code></p>
+</dd>
+</dl>
+</li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">netmaker</span><span class="o">-</span><span class="n">ui</span><span class="o">.</span><span class="n">zip</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">-</span><span class="n">ui</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">netmaker</span><span class="o">-</span><span class="n">ui</span><span class="o">.</span><span class="n">zip</span>
-<span class="n">sudo</span> <span class="n">unzip</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">netmaker</span><span class="o">-</span><span class="n">ui</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span>
-<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">default</span><span class="o">.</span><span class="n">conf</span>
-<span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">'s/root \/var\/www\/html/root \/usr\/share\/nginx\/html/g'</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">default</span>
-<span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">'BACKEND_URL=http://&lt;YOUR BACKEND API URL&gt;:PORT /usr/share/nginx/html/generate_config_js.sh &gt;/usr/share/nginx/html/config.js'</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">nginx</span>
+</section>
+<section id="proxy-http-server">
+<h3 id="proxy-http-server">Proxy / Http server<a class="headerlink" href="#proxy-http-server" title="Permalink to this heading">¶</a></h3>
+</section>
+<section id="caddy">
+<h3 id="caddy">Caddy<a class="headerlink" href="#caddy" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Install Caddy</p></li>
+</ol>
+<p>2. Caddy file contents
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="c1"># LetsEncrypt account</span>
+    <span class="n">email</span> <span class="o">&lt;</span><span class="n">YOUR_EMAIL</span><span class="o">&gt;</span>
+<span class="p">}</span>
+
+<span class="c1"># Dashboard</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dashboard</span><span class="o">.&lt;</span><span class="n">YOUR_BASE_DOMAIN</span><span class="o">&gt;/</span> <span class="p">{</span>
+    <span class="n">header</span> <span class="p">{</span>
+        <span class="n">Access</span><span class="o">-</span><span class="n">Control</span><span class="o">-</span><span class="n">Allow</span><span class="o">-</span><span class="n">Origin</span> <span class="o">*.&lt;</span><span class="n">YOUR_BASE_DOMAIN</span><span class="o">&gt;</span>
+        <span class="n">Strict</span><span class="o">-</span><span class="n">Transport</span><span class="o">-</span><span class="n">Security</span> <span class="s2">"max-age=31536000;"</span>
+        <span class="n">X</span><span class="o">-</span><span class="n">XSS</span><span class="o">-</span><span class="n">Protection</span> <span class="s2">"1; mode=block"</span>
+        <span class="n">X</span><span class="o">-</span><span class="n">Frame</span><span class="o">-</span><span class="n">Options</span> <span class="s2">"SAMEORIGIN"</span>
+        <span class="n">X</span><span class="o">-</span><span class="n">Robots</span><span class="o">-</span><span class="n">Tag</span> <span class="s2">"none"</span>
+        <span class="o">-</span><span class="n">Server</span>
+    <span class="p">}</span>
+    <span class="n">root</span> <span class="o">*</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">netmaker</span>
+    <span class="n">file_server</span>
+<span class="p">}</span>
+
+<span class="c1"># API</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.&lt;</span><span class="n">YOUR_BASE_DOMAIN</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">reverse_proxy</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="proxy-load-balancer">
-<h3 id="proxy-load-balancer">Proxy / Load Balancer<a class="headerlink" href="#proxy-load-balancer" title="Permalink to this heading">¶</a></h3>
-<p>You will need to proxy connections to your UI and Server. By default, the ports are 8081, 8082. This proxy should handle SSL certificates. We recommend Traefik, Caddy, or Nginx (you can follow the Nginx guide in these docs).</p>
+<ol class="arabic simple" start="3">
+<li><p>start Caddy</p></li>
+</ol>
 </section>
 <section id="mq">
 <h3 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this heading">¶</a></h3>
-<p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file found here: <a class="reference external" href="https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf">https://github.com/gravitl/netmaker/blob/master/docker/mosquitto.conf</a></p>
-<p>Netmaker env vars must be configured to reach the MQ broker</p>
+<p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">per_listener_settings</span> <span class="n">true</span>
+
+<span class="n">listener</span> <span class="mi">8883</span>
+<span class="n">allow_anonymous</span> <span class="n">false</span>
+<span class="n">require_certificate</span> <span class="n">true</span>
+<span class="n">use_identity_as_username</span> <span class="n">false</span>
+<span class="n">cafile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">root</span><span class="o">.</span><span class="n">pem</span>
+<span class="n">certfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">pem</span>
+<span class="n">keyfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
+
+<span class="n">listener</span> <span class="mi">1883</span>
+<span class="n">allow_anonymous</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>Start netmaker
+copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
+restart mosquitto</p>
 </section>
 </section>
 <section id="kubernetes-install">
@@ -1336,7 +1411,7 @@ This install has some notable exceptions:
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
