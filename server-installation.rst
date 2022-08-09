@@ -235,7 +235,6 @@ Server Setup (using sqlite)
 1. Get the binary. https://github.com/gravitl/netmaker/releases/ 
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yaml
-
 .. code-block:: yaml
     server:
       server: "broker.<YOUR_BASE_DOMAIN>"
