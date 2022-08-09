@@ -938,23 +938,8 @@
 </ol>
 <ol class="arabic simple" start="4">
 <li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
+<li><p>create your netmaker.service file /etc/systemd/system/netmaker.service</p></li>
 </ol>
-<p>5. create your netmaker.service file /etc/systemd/system/netmaker.service
-.. code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span>
-<span class="n">Description</span><span class="o">=</span><span class="n">Netmaker</span> <span class="n">Server</span>
-<span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span>
-
-<span class="p">[</span><span class="n">Service</span><span class="p">]</span>
-<span class="n">Type</span><span class="o">=</span><span class="n">simple</span>
-<span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">failure</span>
-
-<span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">netmaker</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">netmaker</span><span class="o">.</span><span class="n">yaml</span>
-
-<span class="p">[</span><span class="n">Install</span><span class="p">]</span>
-<span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>
-</pre></div>
-</div>
 <ol class="arabic simple" start="6">
 <li><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></p></li>
 <li><p>Check status:  <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">netmaker</span></code></p></li>
@@ -985,9 +970,8 @@
 <h3 id="caddy">Caddy<a class="headerlink" href="#caddy" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Install Caddy</p></li>
+<li><p>Caddy file contents</p></li>
 </ol>
-<p>2. Caddy file contents
-.. code-block:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="c1"># LetsEncrypt account</span>
     <span class="n">email</span> <span class="o">&lt;</span><span class="n">YOUR_EMAIL</span><span class="o">&gt;</span>
@@ -1019,22 +1003,7 @@
 </section>
 <section id="mq">
 <h3 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this heading">¶</a></h3>
-<p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
-.. code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">per_listener_settings</span> <span class="n">true</span>
-
-<span class="n">listener</span> <span class="mi">8883</span>
-<span class="n">allow_anonymous</span> <span class="n">false</span>
-<span class="n">require_certificate</span> <span class="n">true</span>
-<span class="n">use_identity_as_username</span> <span class="n">false</span>
-<span class="n">cafile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">root</span><span class="o">.</span><span class="n">pem</span>
-<span class="n">certfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">pem</span>
-<span class="n">keyfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mosquitto</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
-
-<span class="n">listener</span> <span class="mi">1883</span>
-<span class="n">allow_anonymous</span> <span class="n">true</span>
-</pre></div>
-</div>
+<p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.</p>
 <p>Start netmaker
 copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
 restart mosquitto</p>

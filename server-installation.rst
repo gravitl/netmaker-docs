@@ -288,7 +288,6 @@ Caddy
 2. Caddy file contents
 
 .. code-block::
-
     {
         # LetsEncrypt account
         email <YOUR_EMAIL>
