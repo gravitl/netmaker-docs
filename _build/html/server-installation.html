@@ -949,6 +949,20 @@
 <li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
 <li><p>create your netmaker.service file /etc/systemd/system/netmaker.service</p></li>
 </ol>
+<div class="highlight-service notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=Netmaker Server
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yaml
+
+[Install]
+WantedBy=multi-user.target
+</pre></div>
+</div>
 <ol class="arabic simple" start="6">
 <li><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></p></li>
 <li><p>Check status:  <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">netmaker</span></code></p></li>
