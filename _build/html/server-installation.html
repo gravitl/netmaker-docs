@@ -936,6 +936,15 @@
 <li><p>Move the binary to /usr/sbin and make it executable.</p></li>
 <li><p>create a config file. /etc/netmaker/netmaker.yaml</p></li>
 </ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"broker.&lt;YOUR_BASE_DOMAIN&gt;"</span><span class="w"></span>
+<span class="w">  </span><span class="nt">apiport</span><span class="p">:</span><span class="w"> </span><span class="s">"8081"</span><span class="w"></span>
+<span class="w">  </span><span class="nt">apiconnection</span><span class="p">:</span><span class="w"> </span><span class="s">"api.&lt;YOUR_BASE_DOMAIN&gt;:443"</span><span class="w"></span>
+<span class="w">  </span><span class="nt">masterkey</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;SECRET_KEY&gt;"</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mqhost</span><span class="p">:</span><span class="w"> </span><span class="s">"127.0.0.1"</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mqport</span><span class="p">:</span><span class="w"> </span><span class="s">"8883"</span><span class="w"></span>
+</pre></div>
+</div>
 <ol class="arabic simple" start="4">
 <li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
 <li><p>create your netmaker.service file /etc/systemd/system/netmaker.service</p></li>

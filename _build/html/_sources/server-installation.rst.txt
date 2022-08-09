@@ -237,6 +237,7 @@ Server Setup (using sqlite)
 3. create a config file. /etc/netmaker/netmaker.yaml
 
 .. code-block:: yaml
+    
     server:
       server: "broker.<YOUR_BASE_DOMAIN>"
       apiport: "8081"

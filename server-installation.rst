@@ -237,7 +237,7 @@ Server Setup (using sqlite)
 3. create a config file. /etc/netmaker/netmaker.yaml
 
 .. code-block:: yaml
-    
+
     server:
       server: "broker.<YOUR_BASE_DOMAIN>"
       apiport: "8081"
@@ -249,7 +249,8 @@ Server Setup (using sqlite)
 4. Update YOUR_BASE_DOMAIN and SECRET_KEY
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
-.. code-block::
+.. code-block:: service
+
     [Unit]
     Description=Netmaker Server
     After=network.target
