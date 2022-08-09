@@ -249,7 +249,7 @@ Server Setup (using sqlite)
 4. Update YOUR_BASE_DOMAIN and SECRET_KEY
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
-.. code-block:: unit
+.. code-block:: cfg
 
     [Unit]
     Description=Netmaker Server
