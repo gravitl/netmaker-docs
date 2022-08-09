@@ -289,7 +289,7 @@ Caddy
 1. Install Caddy
 2. Caddyfile contents
 
-.. code-block:: Caddyfile
+.. code-block:: cfg
 
     {
         # LetsEncrypt account
@@ -314,6 +314,7 @@ Caddy
     https://api.<YOUR_BASE_DOMAIN> {
         reverse_proxy http://127.0.0.1:8081/
     }
+
 3. start Caddy
 
 MQ
@@ -321,7 +322,7 @@ MQ
 
 You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
 
-.. code-block:: conf
+.. code-block:: cfg
 
     per_listener_settings true
 

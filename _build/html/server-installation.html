@@ -949,18 +949,18 @@
 <li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
 <li><p>create your netmaker.service file /etc/systemd/system/netmaker.service</p></li>
 </ol>
-<div class="highlight-unit notranslate"><div class="highlight"><pre><span></span>[Unit]
-Description=Netmaker Server
-After=network.target
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span><span class="w"></span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Netmaker Server</span><span class="w"></span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span><span class="w"></span>
 
-[Service]
-Type=simple
-Restart=on-failure
+<span class="k">[Service]</span><span class="w"></span>
+<span class="na">Type</span><span class="o">=</span><span class="s">simple</span><span class="w"></span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span><span class="w"></span>
 
-ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yaml
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/sbin/netmaker -c /etc/netmaker/netmaker.yaml</span><span class="w"></span>
 
-[Install]
-WantedBy=multi-user.target
+<span class="k">[Install]</span><span class="w"></span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span><span class="w"></span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
