@@ -934,8 +934,20 @@
 <ol class="arabic simple">
 <li><p>Get the binary. <a class="reference external" href="https://github.com/gravitl/netmaker/releases/">https://github.com/gravitl/netmaker/releases/</a></p></li>
 <li><p>Move the binary to /usr/sbin and make it executable.</p></li>
-<li><p>create a config file. /etc/netmaker/netmaker.yaml</p></li>
 </ol>
+<p>3. create a config file. /etc/netmaker/netmaker.yaml
+.. code-block:: yaml</p>
+<blockquote>
+<div><dl class="simple">
+<dt>server:</dt><dd><p>server: “broker.&lt;YOUR_BASE_DOMAIN&gt;”
+apiport: “8081”
+apiconnection: “api.&lt;YOUR_BASE_DOMAIN&gt;:443”
+masterkey: “&lt;SECRET_KEY&gt;”
+mqhost: “127.0.0.1”
+mqport: “8883”</p>
+</dd>
+</dl>
+</div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>Update YOUR_BASE_DOMAIN and SECRET_KEY</p></li>
 <li><p>create your netmaker.service file /etc/systemd/system/netmaker.service</p></li>
