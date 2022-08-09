@@ -249,7 +249,7 @@ Server Setup (using sqlite)
 4. Update YOUR_BASE_DOMAIN and SECRET_KEY
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
-.. code-block:: service
+.. code-block:: SERVICE
 
     [Unit]
     Description=Netmaker Server
@@ -322,7 +322,7 @@ MQ
 You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
 
 .. code-block:: conf
-    
+
     per_listener_settings true
 
     listener 8883
