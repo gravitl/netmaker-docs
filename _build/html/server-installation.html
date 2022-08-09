@@ -995,29 +995,29 @@
 <li><p>Install Caddy</p></li>
 <li><p>Caddyfile contents</p></li>
 </ol>
-<div class="highlight-Caddyfile notranslate"><div class="highlight"><pre><span></span>{
-    # LetsEncrypt account
-    email &lt;YOUR_EMAIL&gt;
-}
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="na">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># LetsEncrypt account</span><span class="w"></span>
+<span class="w">    </span><span class="na">email &lt;YOUR_EMAIL&gt;</span><span class="w"></span>
+<span class="na">}</span><span class="w"></span>
 
-# Dashboard
-https://dashboard.&lt;YOUR_BASE_DOMAIN&gt;/ {
-    header {
-        Access-Control-Allow-Origin *.&lt;YOUR_BASE_DOMAIN&gt;
-        Strict-Transport-Security "max-age=31536000;"
-        X-XSS-Protection "1; mode=block"
-        X-Frame-Options "SAMEORIGIN"
-        X-Robots-Tag "none"
-        -Server
-    }
-    root * /var/www/netmaker
-    file_server
-}
+<span class="c1"># Dashboard</span><span class="w"></span>
+<span class="na">https://dashboard.&lt;YOUR_BASE_DOMAIN&gt;/ {</span><span class="w"></span>
+<span class="w">    </span><span class="na">header {</span><span class="w"></span>
+<span class="w">        </span><span class="na">Access-Control-Allow-Origin *.&lt;YOUR_BASE_DOMAIN&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="na">Strict-Transport-Security "max-age</span><span class="o">=</span><span class="s">31536000;"</span><span class="w"></span>
+<span class="w">        </span><span class="na">X-XSS-Protection "1; mode</span><span class="o">=</span><span class="s">block"</span><span class="w"></span>
+<span class="w">        </span><span class="na">X-Frame-Options "SAMEORIGIN"</span><span class="w"></span>
+<span class="w">        </span><span class="na">X-Robots-Tag "none"</span><span class="w"></span>
+<span class="w">        </span><span class="na">-Server</span><span class="w"></span>
+<span class="w">    </span><span class="na">}</span><span class="w"></span>
+<span class="w">    </span><span class="na">root * /var/www/netmaker</span><span class="w"></span>
+<span class="w">    </span><span class="na">file_server</span><span class="w"></span>
+<span class="na">}</span><span class="w"></span>
 
-# API
-https://api.&lt;YOUR_BASE_DOMAIN&gt; {
-    reverse_proxy http://127.0.0.1:8081/
-}
+<span class="c1"># API</span><span class="w"></span>
+<span class="na">https://api.&lt;YOUR_BASE_DOMAIN&gt; {</span><span class="w"></span>
+<span class="w">    </span><span class="na">reverse_proxy http://127.0.0.1:8081/</span><span class="w"></span>
+<span class="na">}</span><span class="w"></span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -1027,18 +1027,18 @@ https://api.&lt;YOUR_BASE_DOMAIN&gt; {
 <section id="mq">
 <h3 id="mq">MQ<a class="headerlink" href="#mq" title="Permalink to this heading">¶</a></h3>
 <p>You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.</p>
-<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>per_listener_settings true
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="na">per_listener_settings true</span><span class="w"></span>
 
-listener 8883
-allow_anonymous false
-require_certificate true
-use_identity_as_username false
-cafile /etc/mosquitto/certs/root.pem
-certfile /etc/mosquitto/certs/server.pem
-keyfile /etc/mosquitto/certs/server.key
+<span class="na">listener 8883</span><span class="w"></span>
+<span class="na">allow_anonymous false</span><span class="w"></span>
+<span class="na">require_certificate true</span><span class="w"></span>
+<span class="na">use_identity_as_username false</span><span class="w"></span>
+<span class="na">cafile /etc/mosquitto/certs/root.pem</span><span class="w"></span>
+<span class="na">certfile /etc/mosquitto/certs/server.pem</span><span class="w"></span>
+<span class="na">keyfile /etc/mosquitto/certs/server.key</span><span class="w"></span>
 
-listener 1883
-allow_anonymous true
+<span class="na">listener 1883</span><span class="w"></span>
+<span class="na">allow_anonymous true</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Start netmaker
