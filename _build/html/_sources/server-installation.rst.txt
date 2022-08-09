@@ -287,9 +287,10 @@ Caddy
 -----
 
 1. Install Caddy
-2. Caddy file contents
+2. Caddyfile contents
 
-.. code-block::
+.. code-block:: Caddyfile
+
     {
         # LetsEncrypt account
         email <YOUR_EMAIL>
@@ -320,7 +321,8 @@ MQ
 
 You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
 
-.. code-block::
+.. code-block:: conf
+    
     per_listener_settings true
 
     listener 8883
