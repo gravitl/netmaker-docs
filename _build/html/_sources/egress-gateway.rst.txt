@@ -44,12 +44,13 @@ Finally, once you have determined the interface, the subnet, and deployed your n
 
 At this point simply insert the range(s) into the first field, and the interface name into the second field, and click "create".
 
-.. image:: images/ui-6.jpg
+.. image:: images/ui-6.png
    :width: 80%
    :alt: Gateway
    :align: center
 
 Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).
+Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.
 
 Use Cases
 ============
@@ -78,17 +79,24 @@ Most people think of a VPN as a remote server that keeps your internet traffic s
 
 These are not typical use cases for Netmaker, but can be easily enabled.
 
-**The most important note is this: Do not use 0.0.0.0/0 as your egress gateway.** This is how you typically set up a "standard" VPN with WireGuard, however, it will not work with Netmaker. The Netclient specifically ignores gateways that overlap with local ranges (for efficiency ranges). 0.0.0.0 overlaps with everything, so it is always ignored.
+To avoid DNS leaks, navigate to the networks tab and click on the ID of the network you created. Edit the default ext client DNS tab.
 
-Instead, use the following list of ranges:
+.. image:: images/default-dns.png
+   :width: 80%
+   :alt: Gateway
+   :align: center
 
+In this example, I put the IP address of the netmaker server node.
+
+After that, set up an egress gateway with ``0.0.0.0/0,::/0`` as the ranges with the public interface (eth0 most likely). Your clients should now begin routing public-facing traffic over the gateway.
+
+Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
+simply type:
 .. code-block::
+   
+   wget -qO - https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh | sudo bash -s -- -v true
 
-   0.0.0.0/5,8.0.0.0/7,11.0.0.0/8,12.0.0.0/6,16.0.0.0/4,32.0.0.0/3,64.0.0.0/2,128.0.0.0/3,160.0.0.0/5,168.0.0.0/6,172.0.0.0/12,172.32.0.0/11,172.64.0.0/10,172.128.0.0/9,173.0.0.0/8,174.0.0.0/7,176.0.0.0/4,192.0.0.0/9,192.128.0.0/11,192.160.0.0/13,192.169.0.0/16,192.170.0.0/15,192.172.0.0/14,192.176.0.0/12,192.192.0.0/10,193.0.0.0/8,194.0.0.0/7,196.0.0.0/6,200.0.0.0/5,208.0.0.0/4
-
-This list encompasses the standard "public" network ranges, and ignores the standard "private" network ranges.
-
-Simply paste this list into your "egress gateway ranges" and your clients should begin routing public-facing traffic over the gateway.
+This will configure a VPN with a default of 5 external clients for you.
 
 .. image:: images/egress5.png
    :width: 50%
