@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -618,9 +618,9 @@
 <h2 id="server-configuration-reference">Server Configuration Reference<a class="headerlink" href="#server-configuration-reference" title="Permalink to this heading">¶</a></h2>
 <p>Netmaker sets its configuration in the following order of precedence:</p>
 <ol class="arabic simple">
-<li><p><strong>Defaults:</strong> Default values set on the server if no value is provided in configuration.</p></li>
-<li><p><strong>Config File:</strong> Values set in the <cite>config/environments/*.yaml`</cite> file</p></li>
 <li><p><strong>Environment Variables:</strong> Typically values set in the Docker Compose. This is the most common way of setting server values.</p></li>
+<li><p><strong>Config File:</strong> Values set in the <cite>config/environments/*.yaml`</cite> file</p></li>
+<li><p><strong>Defaults:</strong> Default values set on the server if no value is provided in configuration.</p></li>
 </ol>
 <p>In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run “docker kill netmaker” and “docker-compose up -d”.</p>
 <section id="variable-description">
@@ -1336,7 +1336,7 @@ This install has some notable exceptions:
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

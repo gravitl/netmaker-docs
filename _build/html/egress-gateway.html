@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -475,8 +475,9 @@
 <p>Finally, once you have determined the interface, the subnet, and deployed your netclient, you can go to your Netmaker UI and set the node as a gateway.</p>
 <a class="reference internal image-reference" href="_images/egress7.png"><img alt="Gateway" class="align-center" src="_images/egress7.png" style="width: 80%;"/></a>
 <p>At this point simply insert the range(s) into the first field, and the interface name into the second field, and click “create”.</p>
-<a class="reference internal image-reference" href="_images/ui-6.jpg"><img alt="Gateway" class="align-center" src="_images/ui-6.jpg" style="width: 80%;"/></a>
-<p>Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).</p>
+<a class="reference internal image-reference" href="_images/ui-6.png"><img alt="Gateway" class="align-center" src="_images/ui-6.png" style="width: 80%;"/></a>
+<p>Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).
+Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.</p>
 </section>
 <section id="use-cases">
 <h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">¶</a></h2>
@@ -498,6 +499,13 @@
 </div>
 <p>This list encompasses the standard “public” network ranges, and ignores the standard “private” network ranges.</p>
 <p>Simply paste this list into your “egress gateway ranges” and your clients should begin routing public-facing traffic over the gateway.</p>
+<p>Our 5-minute installer of Netmaker in the README on GitHub: <a class="reference external" href="https://github.com/gravitl/netmaker">https://github.com/gravitl/netmaker</a> also offers an option to configure a VPN if you have not built your server yet.
+simply add:
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">qO</span> <span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gravitl</span><span class="o">/</span><span class="n">netmaker</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">nm</span><span class="o">-</span><span class="n">quick</span><span class="o">.</span><span class="n">sh</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">bash</span> <span class="o">-</span><span class="n">s</span> <span class="o">--</span> <span class="o">-</span><span class="n">v</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>This will configure a VPN with a default of 5 external clients for you.</p>
 <a class="reference internal image-reference" href="_images/egress5.png"><img alt="Gateway" class="align-center" src="_images/egress5.png" style="width: 50%;"/></a>
 </section>
 </section>
@@ -550,7 +558,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
