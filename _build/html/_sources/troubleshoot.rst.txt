@@ -116,7 +116,9 @@ Netclient
     sudo restorecon -R -v /etc/netclient/netclient
 
 **I have a handshake with a peer but can't ping it, what gives?**
-  This is commonly due to incorrect MTU settings. Typically, it will be because MTU is too high. Try setting MTU lower on the node. This can be done via netconfig, or by editing the node in the UI. 
+  This is commonly due to incorrect MTU settings. Typically, it will be because MTU is too high. Try setting MTU lower on the node. This can be done via netconfig, or by editing the node in the UI.
+  
+  Note: We recommend a minimum MTU of 1280 due to most router configs having an expectation of a standard MTU setting and IPv6 requiring 1280 as a minimum. going lower than that may cause issues.
 
 **I have a hard to reach machine behind a firewall or a corporate NAT, what can I do?**
   In this situation, you can use the Relay Server functionality introduced in Netmaker v0.8 to designate a node as a relay to your "stuck" machine. Simply click the button to make a node into a relay and tell it to relay traffic to this hard-to-reach peer. 

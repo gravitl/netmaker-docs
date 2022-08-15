@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -308,6 +308,8 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#introduction-to-netclient" class="md-nav__link">Introduction to Netclient</a>
         </li>
+        <li class="md-nav__item"><a href="#note-on-mtu-settings" class="md-nav__link">Note on MTU Settings</a>
+        </li>
         <li class="md-nav__item"><a href="#notes-on-windows" class="md-nav__link">Notes on Windows</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#running-the-install-script" class="md-nav__link">Running the install script</a>
@@ -365,6 +367,13 @@
     
     
       <a href="#introduction-to-netclient" class="md-nav__link">Introduction to Netclient</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#note-on-mtu-settings" class="md-nav__link">Note on MTU Settings</a>
       
     
     </li>
@@ -500,6 +509,8 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#introduction-to-netclient" class="md-nav__link">Introduction to Netclient</a>
         </li>
+        <li class="md-nav__item"><a href="#note-on-mtu-settings" class="md-nav__link">Note on MTU Settings</a>
+        </li>
         <li class="md-nav__item"><a href="#notes-on-windows" class="md-nav__link">Notes on Windows</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#running-the-install-script" class="md-nav__link">Running the install script</a>
@@ -570,6 +581,10 @@
 <p>The netmaker server holds configuration details about every machine in your network and how other machines should connect to it.</p>
 <p>The netclient agent connects to the server, pushing and pulling information when the network (or its local configuration) changes.</p>
 <p>The netclient agent then configures WireGuard (and other network properties) locally, so that the network stays intact.</p>
+</section>
+<section id="note-on-mtu-settings">
+<h2 id="note-on-mtu-settings">Note on MTU Settings<a class="headerlink" href="#note-on-mtu-settings" title="Permalink to this heading">¶</a></h2>
+<p>IPv6 requires a minimum MTU of 1280. A lot of router configurations expect a standard MTU setting. You can adjust the MTU to whatever fits your needs, but setting the MTU below the standardized 1280 may cause wireguard to have issues when setting up interfaces with some systems like Windows for example.</p>
 </section>
 <section id="notes-on-windows">
 <h2 id="notes-on-windows">Notes on Windows<a class="headerlink" href="#notes-on-windows" title="Permalink to this heading">¶</a></h2>
@@ -854,7 +869,7 @@ If a key is provided (-k), then a token is unnecessary, but grpc, server, ports,
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

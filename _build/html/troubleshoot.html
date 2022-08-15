@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -565,6 +565,7 @@ You can also see the current WireGuard configuration with <code class="docutils 
 </div>
 </dd>
 <dt><strong>I have a handshake with a peer but can’t ping it, what gives?</strong></dt><dd><p>This is commonly due to incorrect MTU settings. Typically, it will be because MTU is too high. Try setting MTU lower on the node. This can be done via netconfig, or by editing the node in the UI.</p>
+<p>Note: We recommend a minimum MTU of 1280 due to most router configs having an expectation of a standard MTU setting and IPv6 requiring 1280 as a minimum. going lower than that may cause issues.</p>
 </dd>
 <dt><strong>I have a hard to reach machine behind a firewall or a corporate NAT, what can I do?</strong></dt><dd><p>In this situation, you can use the Relay Server functionality introduced in Netmaker v0.8 to designate a node as a relay to your “stuck” machine. Simply click the button to make a node into a relay and tell it to relay traffic to this hard-to-reach peer.</p>
 </dd>
@@ -647,7 +648,7 @@ You can also see the current WireGuard configuration with <code class="docutils 
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
