@@ -44,12 +44,13 @@ Finally, once you have determined the interface, the subnet, and deployed your n
 
 At this point simply insert the range(s) into the first field, and the interface name into the second field, and click "create".
 
-.. image:: images/ui-6.jpg
+.. image:: images/ui-6.png
    :width: 80%
    :alt: Gateway
    :align: center
 
 Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).
+Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.
 
 Use Cases
 ============
@@ -89,6 +90,15 @@ Instead, use the following list of ranges:
 This list encompasses the standard "public" network ranges, and ignores the standard "private" network ranges.
 
 Simply paste this list into your "egress gateway ranges" and your clients should begin routing public-facing traffic over the gateway.
+
+Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
+simply add:
+
+.. code-block::
+   
+   wget -qO - https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh | sudo bash -s -- -v true
+
+This will configure a VPN with a default of 5 external clients for you.
 
 .. image:: images/egress5.png
    :width: 50%
