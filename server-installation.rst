@@ -23,9 +23,9 @@ Server Configuration Reference
 
 Netmaker sets its configuration in the following order of precedence:  
 
-1. **Defaults:** Default values set on the server if no value is provided in configuration.  
+1. **Environment Variables:** Typically values set in the Docker Compose. This is the most common way of setting server values.
 2. **Config File:** Values set in the `config/environments/*.yaml`` file 
-3. **Environment Variables:** Typically values set in the Docker Compose. This is the most common way of setting server values.
+3. **Defaults:** Default values set on the server if no value is provided in configuration.  
 
 In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run "docker kill netmaker" and "docker-compose up -d".
 
