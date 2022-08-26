@@ -19,6 +19,11 @@ The netclient agent connects to the server, pushing and pulling information when
 
 The netclient agent then configures WireGuard (and other network properties) locally, so that the network stays intact.
 
+Note on MTU Settings
+==================================
+
+IPv6 requires a minimum MTU of 1280. A lot of router configurations expect a standard MTU setting. You can adjust the MTU to whatever fits your needs, but setting the MTU below the standardized 1280 may cause wireguard to have issues when setting up interfaces with some systems like Windows for example.
+
 Notes on Windows
 ==================================
 
