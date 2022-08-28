@@ -49,7 +49,7 @@ At this point simply insert the range(s) into the first field, and the interface
    :alt: Gateway
    :align: center
 
-Netmaker will set iptables rules on the node, which will then implement these rules, allowing it to route traffic from the network to the specified range(s).
+Netmaker will set either iptables or nftables rules on the node depending on which one you have installed on your client. This will then implement these rules, allowing it to route traffic from the network to the specified range(s).
 Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.
 
 Use Cases
