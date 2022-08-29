@@ -75,7 +75,7 @@ In some scenarios, a single node will act as both ingress and egress! For instan
 2)  / NAT Gateway
 -----------------------
 
-Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country,using a VPN server based in that country.
+Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country, using a VPN server based in that country.
 
 These are not typical use cases for Netmaker, but can be easily enabled.
 

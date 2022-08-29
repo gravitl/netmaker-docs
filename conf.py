@@ -22,7 +22,7 @@ copyright = '2021, Alex Feiszli'
 author = 'Alex Feiszli'
 
 # The full version, including alpha/beta/rc tags
-release = '0.14.5'
+release = '0.15.0'
 
 
 # -- General configuration ---------------------------------------------------
