@@ -88,7 +88,9 @@ To avoid DNS leaks, navigate to the networks tab and click on the ID of the netw
 
 In this example, I put the IP address of the netmaker server node.
 
-After that, set up an egress gateway with ``0.0.0.0/0,::/0`` as the ranges with the public interface (eth0 most likely). Your clients should now begin routing public-facing traffic over the gateway.
+After that, set up an egress gateway with ``0.0.0.0/0`` as the ranges with the public interface (eth0 most likely). Your clients should now begin routing public-facing traffic over the gateway.
+
+Note: using ``0.0.0.0/0`` is only effective as of version 0.15.0. Any version before that requires a big list of ranges to work around ``0.0.0.0/0``. Make sure you have your netmaker server and client updated to ba able to use that range.
 
 Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
 simply type:
