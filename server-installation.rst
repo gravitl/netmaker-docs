@@ -241,7 +241,7 @@ Server Setup (using sqlite)
     server:
       server: "broker.<YOUR_BASE_DOMAIN>"
       apiport: "8081"
-      apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
+      apiconn: "api.<YOUR_BASE_DOMAIN>:443"
       masterkey: "<SECRET_KEY>"
       mqhost: "127.0.0.1"
       mqport: "8883"
