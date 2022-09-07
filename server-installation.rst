@@ -241,7 +241,7 @@ Server Setup (using sqlite)
     server:
       server: "broker.<YOUR_BASE_DOMAIN>"
       apiport: "8081"
-      apiconnection: "api.<YOUR_BASE_DOMAIN>:443"
+      apiconn: "api.<YOUR_BASE_DOMAIN>:443"
       masterkey: "<SECRET_KEY>"
       mqhost: "127.0.0.1"
       mqport: "8883"
@@ -725,6 +725,31 @@ If deploying HA with PostgreSQL, you will connect with the following settings:
 
 This is enough to get a functioning HA installation of Netmaker. However, you may also want to make the Netmaker UI or the CoreDNS server HA as well. The Netmaker UI can simply be added to the same servers and load balanced appropriately. For some load balancers, you may be able to do this with CoreDNS as well.
 
+Security Settings
+==================
 
+In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in the netmaker-ui section of your docker-compose.yml file.
+
+1. In the labels section, add the following line:
+
+.. code-block:: yaml
+
+    traefik.http.middlewares.nmui-security-1.ipwhitelist.sourcerange=YOUR_IP_CIDR
+
+2. Then look for this line:
+
+.. code-block:: yaml
+
+    traefik.http.routers.netmaker-ui.middlewares=nmui-security@docker
+
+and change it to this:
+
+.. code-block:: yaml
+
+    traefik.http.routers.netmaker-ui.middlewares=nmui-security-1@docker,nmui-security@docker
+
+Replace YOUR_IP_CIDR with the whitelist ip range (can be multiple ranges).
+
+After that, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
 
 
