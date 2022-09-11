@@ -26,7 +26,7 @@ Requests take the format of
 API Documentation
 =================
 
-Now located `here <https://app.swaggerhub.com/apis-docs/Netmaker/netmaker/0.15.1>`_.
+Now located `here <https://app.swaggerhub.com/apis-docs/Netmaker/netmaker/0.15.2>`_.
 
 
 Networks API Call Examples
