@@ -66,8 +66,7 @@ Also change the netmaker image to ``image: gravitl/netmaker:v0.16.0-ee``. After 
 
 You should see a new Dashboard with an Admin tab added. On the arrow will be tabs for the server logs and metrics.
 
-.. image:: images/ee-new-dashboard
+.. image:: images/ee-new-dashboard.png
     :width: 80%
     :alt: new dashboard
     :align: center
-    
