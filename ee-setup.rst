@@ -19,3 +19,16 @@ You can then navigate to the plans section to choose which plan fits your needs.
    :width: 80%
    :alt: Plans to choose
    :align: center
+
+On the next page, you will have the option of choosing to pay yearly or monthly. You will also see a layout of the cost of each node, server, user, and ext client.
+
+.. image:: images/ee-purchase-license.png
+    :width: 80%
+    :alt: Purchase yearly or monthly
+    :align: center
+On the payment page you will be able to choose how many of each node, server, user, ext clients, that you need. You can also change these amounts in the license tab should you need to adjust those numbers later.
+
+.. image:: images/ee-payment.png
+    :width: 80%
+    :alt: Checkout screen
+    :align: center
