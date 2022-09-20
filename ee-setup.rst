@@ -58,9 +58,16 @@ Also in this same tab, you can click on the license key and add or remove any se
 Once you have your license key and account ID, go to your netmaker server and add the following to your docker-compose.yml environment variables
 
 .. code-block:: yaml
+
     LICENSE_KEY: “<license key>”
     NETMAKER_ACCOUNT_ID: "<account id>"
 
 Also change the netmaker image to ``image: gravitl/netmaker:v0.16.0-ee``. After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
 
 You should see a new Dashboard with an Admin tab added. On the arrow will be tabs for the server logs and metrics.
+
+.. image:: images/ee-new-dashboard
+    :width: 80%
+    :alt: new dashboard
+    :align: center
+    
