@@ -5,7 +5,7 @@ Netmaker Enterprise Metrics
 Navigation
 ===============
 
-Netmaker EE offers metrics. With Metrics Admin users can view connectivity, 
+Netmaker EE offers metrics. With Metrics, admin users can view connectivity, 
 latency and data transferred between two peers or nodes on a Netmaker network.  
 All of this data may be visualised in the Netmaker UI. In addition, Netmaker 
 has included a custom exporter for Prometheus/Grafana integration to view 
@@ -13,17 +13,20 @@ the data as well.
 
 Below are the steps in order to view metrics on your Netmaker EE instance.
 
-NOTE: Metrics currently relies on ICMP to be allowed between nodes.
+**NOTE: Metrics currently relies on ICMP to be allowed between nodes.**
 
 First, there are two ways for a Netmaker Admin to view metrics. 
 - Using the `Admin Tools` card on their dashboard.
+
 .. image:: images/metrics/metrics-select-1.png
-   :width: 80%
+   :width: 40%
    :alt: Metrics Select 1
    :align: center
+
 - Or by using the Metrics link in their side Drawer.
+
 .. image:: images/metrics/metrics-select-2.png
-   :width: 80%
+   :width: 40%
    :alt: Metrics Select 2
    :align: center
 
@@ -45,7 +48,7 @@ NOTE: Metrics may take up to 5 minutes for nodes to report data.
    :alt: Metrics View 1
    :align: center
 
-Then if the Admin wishes to see more details, they can select a specific node from the 
+Then, if the Admin wishes to see more details, they can select a specific node from the 
 `Node Name` column or row in the metrics table to view more details of that node's connections. 
 
 .. image:: images/metrics/metrics-view-2.png

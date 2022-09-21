@@ -101,6 +101,15 @@ Kubernetes Documentation
 `Netmaker Kubernetes Documentation <https://k8s.netmaker.org>`_
 
 
+Enterprise Documentation
+---------------------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   ee/index
+
+
 Advanced Server Installation
 -------------------------------
 
