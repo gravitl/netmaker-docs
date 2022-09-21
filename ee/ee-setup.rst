@@ -1,7 +1,23 @@
 =================================
 Netmaker Enterprise
 =================================
-Netmaker Enterprise is our paid version Netmaker. It offers all the great features of our community edition plus metrics, easier access to server logs, and the ability to set users with different access levels.
+
+This guide covers how to get setup with Netmaker Enterprise.
+
+Notes on Free Tier
+=======================
+
+Netmaker Enterprise includes a generous free tier, which should cover most use cases for individual users. To use Netmaker Enterprise with the free tier, simply follow the same instructions, but use the included license in your license dashboard, instead of buying one.
+
+**Free Tier License Limits:**  
+
+- Netmaker Servers: 1 
+
+- Netmaker Users: 1  
+
+- Netclients: 50  
+
+- Ext Clients: 20  
 
 Get a License
 =================================
@@ -62,7 +78,7 @@ Once you have your license key and account ID, go to your netmaker server and ad
     LICENSE_KEY: “<license key>”
     NETMAKER_ACCOUNT_ID: "<account id>"
 
-Also change the netmaker image to ``image: gravitl/netmaker:v0.16.0-ee``. After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
+Also change the netmaker image to ``image: gravitl/netmaker:<version>-ee``. For example: ``image: gravitl/netmaker:v0.16.0-ee`` After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
 
 You should see a new Dashboard with an Admin tab added. On the arrow will be tabs for the server logs and metrics.
 
@@ -70,3 +86,43 @@ You should see a new Dashboard with an Admin tab added. On the arrow will be tab
     :width: 80%
     :alt: new dashboard
     :align: center
+
+(Optional) Setup your server for Prometheus and Grafana
+==========================================================
+
+If you would like to use Netmaker's custom Prometheus exporter and Grafana dashboard, you must make some modifications to your docker-compose.
+
+Use the EE Compose file as a reference:
+
+https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
+
+You must add in sections (as in the above) for :
+  
+- Grafana  
+  
+- Prometheus  
+  
+- Netmaker Exporter  
+
+Additionally, you must make the following changes to Netmaker and MQ:
+
+
+In Netmaker, Add the following env var:
+
+.. code-block::
+
+    METRICS_EXPORTER: "on"
+
+In MQ, add the following volume mount:
+
+.. code-block::
+
+    - /root/mosquitto.passwords:/etc/mosquitto.passwords
+
+Additionally, add mosquitto.passwords and mosquitto.conf (must be modified) to your local filesystem using the following files:
+
+Passwords file: https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.passwords  
+  
+Conf file: https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto-ee.conf 
+  
+These changes allow the Netmaker Exporter to access metrics data, via MQ.
