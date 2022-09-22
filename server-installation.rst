@@ -232,7 +232,7 @@ If using rqlite or postgres, you must change the DATABASE environment/config var
 Server Setup (using sqlite)
 ---------------------------
 
-1. Get the binary. https://github.com/gravitl/netmaker/releases/ 
+1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/download/$VERSION/netmaker``
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yaml
 
