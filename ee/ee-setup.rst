@@ -22,7 +22,7 @@ Netmaker Enterprise includes a generous free tier, which should cover most use c
 Get a License
 =================================
 
-Visit `<https://license.netmaker.io>`_ to get a license. After creating an account, you will be taken to the dashboard.
+Visit `<https://dashboard.license.netmaker.io>`_ to get a license. After creating an account, you will be taken to the dashboard.
 
 .. image:: images/ee-dashboard.png
    :width: 80%
