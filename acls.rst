@@ -38,9 +38,46 @@ Alternatively, you can reach the individual node ACLs by clicking on a Node in e
    :align: center
 
 
-Important Note about UDP Hole Punching
--------------------------------------------
+Default Node-Level ACLs
+============================
 
-As of 0.12.0, we allow you to disable any p2p connection, including a node's connection to the server (e.g. netmaker-1). **If you disable this connection and you use UDP Hole Punching, your network will break.** Why? The netmaker server collects the endpoints/ports necessary to reach every node and then sends this information to the network. If this connection is disabled, the server will not know how to reach the given node.
+When you create a network, you set a "default ACL" of either "Allow" or "Deny." This means all nodes either reach each other by default, or cannot reach each other by default.
 
-As an alternative, you can turn off UDP Hole Punching on the individual node if you do not wish for it to communicate with the server.
+As of 0.16.0, there is another option, the default node-level ACL.
+
+.. image:: images/acls-4.png
+   :width: 80%
+   :alt: ACLs
+   :align: center
+
+This allows you to set the default connectivity status of an individual node. This is useful for two scenarios.
+
+Scenario 1: Remote Access to/from Client devices
+-------------------------------------------------------
+
+In many cases, you have many machines which should be reachable from one machine. OR, you have one machine which should be reachable from many machines.
+
+Example 1: A file server for employees. Employees need to access the file server from their individual devices, but should not have access to each other.
+
+Example 2: Managing client devices. An MSP or IT Shop needs to remote into client devices, but those devices definitely should not have access to each other.
+
+For either of these scenarios, we should do the following:
+
+1. Create a network with default "DENY" policy
+
+2. Create a node with default "ALLOW" policy
+
+Once this is done, all devices in the network will have access only to the device with the default "ALLOW" policy. However, you can still override this to allow access for specific other machines.
+
+Scenario 2: Priviledged Access to Device
+-------------------------------------------------------
+
+In some cases, you want a machine in your network to be accessible from some, but not all, of your devices. Or maybe you have an Egress Gateway on a device, and only want some devices to use it.
+
+In this case, we can set up a network as follows:
+
+1. Create a network with default "ALLOW" policy
+
+2. Create a node with default "DENY" policy
+
+Once this is done, all devices in the network will have access to everything except the device(s) with a defult DENY policy, which can be manually overridden in the ACL management pane.

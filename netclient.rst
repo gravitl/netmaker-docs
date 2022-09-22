@@ -105,9 +105,25 @@ A FreeBSD package is coming soon. In the meantime, please use this install scrip
 Joining a Network
 ******************
 
+With a token:
+
 .. code-block::
 
   netclient join -t <token>
+
+With username/password:
+
+.. code-block::
+
+  netclient join -n <net name> -u <username> -s api.<netmaker domain>
+  (example: netclient join -n mynet -u admin -s api.nm.example-domain.io)
+
+With SSO (oauth must be configured):
+
+.. code-block::
+
+  netclient join -n <net name> -s api.<netmaker domain>
+
 
 Use the -vvv flag if installation fails and report logs.
 
@@ -115,11 +131,24 @@ Use the -vvv flag if installation fails and report logs.
 Managing Netclient
 *********************
 
+Connecting/Disconnecting from a network:
+
+.. code-block::
+
+  netclient connect -n network
+  netclient disconnect -n network
+
 Leave a network:
 
 .. code-block::
 
   netclient leave -n network
+
+List Networks:
+
+.. code-block::
+
+  netclient list | jq
 
 
 ******************
@@ -128,13 +157,13 @@ Uninstalling
 
 Leave a network:
 
-First, uninstall from CLI:
+Uninstall from CLI:
 
 .. code-block::
 
   netclient uninstall
 
-Then, Uninstall from system (use equivalent command for your OS):
+Uninstall using package manager (use equivalent command for your OS):
 
 .. code-block::
 
