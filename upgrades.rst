@@ -77,14 +77,14 @@ Then make the following changes to the docker-compose.yml file.
 
 
 
-You should be all set to ``docker-compose down && docker-compose up -d`` 
+You should be all set to ``docker-compose up -d`` 
 
 Note: Your clients will show in warning until they are also upgraded. The upgrade for clients is the regular upgrade, then do a ``netclient pull``
 
 Your ``docker logs mq`` should be showing logs like this:
 
 .. code-block::
-    
+
 
 	Waiting for netmaker server to startup
 
