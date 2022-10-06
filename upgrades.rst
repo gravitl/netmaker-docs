@@ -34,30 +34,100 @@ To upgrade the server, you only need to change the docker image versions:
 Upgrade the server after v0.16.1
 =================================
 
-There have been changes to the MQ after v0.16.1. You will need to grab a new version of the docker-compose.yml and mosquitto.conf files.
+There have been changes to the MQ after v0.16.1. You will need to make changes to the docker-compose.yml and get the new mosquitto.conf files. We recommend upgrading your server first before any clients.
 
-Remember to save your master key so you can apply it to the new compose. You will also need to add a Mosquitto password to the file.
+Start by shutting down your server with ``docker-compose down``
+
+You then need to get the updated mosquitto.conf file. You will also need to get the wait.sh file and make sure it is executable
 
 .. code-block::
 
-    wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
     wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
-    sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
-    sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
-    sed -i 's/YOUR_EMAIL/<your email>/g' docker-compose.yml
-    sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
-    sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/$MQ_ADMIN_PASSWORD/g" /root/docker-compose.yml
-
-You will also need to get the wait.sh file and make sure it is executable
-
-.. code-block::
-
     wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
     chmod +x wait.sh
 
+Then make the following changes to the docker-compose.yml file.
+
+1. change image tags in netmaker and netmaker-ui to v.0.16.1.
+
+2. In your netmaker service section:
+    a. Change the following in the volumes ``- shared_certs:/etc/netmaker`` to ``- mosquitto_data:/etc/netmaker``
+
+    b. In the environment section, add ``MQ_ADMIN_PASSWORD: <CHOOSE_A_PASSWORD_YOU_WOULD_LIKE_TO_USE>``
+
+
+3. In the mq service section:
+    a. Add ``command: ["/mosquitto/config/wait.sh"]``
+
+    b. In the environment, add ``NETMAKER_SERVER_HOST: "https://api.NETMAKER_BASE_DOMAIN"``
+
+    c. In the volumes, add ``- /root/wait.sh:/mosquitto/config/wait.sh``
+
+    d. Replace all the traefik files in this section with:
+
+    .. code-block::
+
+        - traefik.tcp.routers.mqtt.rule=HostSNI(`broker.NETMAKER_BASE_DOMAIN`)
+
+        - traefik.tcp.routers.mqtt.tls.certresolver=http
+
+      	- traefik.tcp.services.mqtt.loadbalancer.server.port=8883
+
+      	- traefik.tcp.routers.mqtt.entrypoints=websecure
+
+
+
 You should be all set to ``docker-compose down && docker-compose up -d`` 
 
-Note: Your clients will show in warning until they are also upgraded.
+Note: Your clients will show in warning until they are also upgraded. The upgrade for clients is the regular upgrade, then do a ``netclient pull``
+
+Your ``docker logs mq`` should be showing logs like this:
+
+.. code-block::
+    
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Waiting for netmaker server to startup
+
+	Starting MQ...
+
+	1665067766: mosquitto version 2.0.11 starting
+
+	1665067766: Config loaded from /mosquitto/config/mosquitto.conf.
+
+	1665067766: Loading plugin: /usr/lib/mosquitto_dynamic_security.so
+
+	1665067766: Opening ipv4 listen socket on port 8883.
+
+	1665067766: Opening ipv6 listen socket on port 8883.
+
+	1665067766: Opening ipv4 listen socket on port 1883.
+
+	1665067766: Opening ipv6 listen socket on port 1883.
+
+	1665067766: mosquitto version 2.0.11 running
+
+	1665067769: New connection from 172.21.0.2:34004 on port 1883.
+
+	1665067769: New client connected from 172.21.0.2:34004 as L0vUDgN0IZFru9VaS6HoRL5 (p2, c1, k60, u'Netmaker-Admin').
+
+	1665067769: New connection from 172.21.0.2:34006 on port 1883.
+
+	1665067769: New client connected from 172.21.0.2:34006 as ydmOjmIcw9nNaT1GB1q97Se (p2, c1, k60, u'Netmaker-Server').
+
+If you see mq logs about waiting for netmaker server to startup after longer period than usual, check if your traefik certs are generated correctly. You can try to resolve with ``docker restart traefik``
+
 
 Upgrade the Clients (prior to 0.10.0)
 ======================================
