@@ -31,6 +31,34 @@ To upgrade the server, you only need to change the docker image versions:
 5. Save and close the file
 6. `docker-compose up -d`
 
+Upgrade the server after v0.16.1
+=================================
+
+There have been changes to the MQ after v0.16.1. You will need to grab a new version of the docker-compose.yml and mosquitto.conf files.
+
+Remember to save your master key so you can apply it to the new compose. You will also need to add a Mosquitto password to the file.
+
+.. code-block::
+
+    wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
+    wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
+    sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
+    sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
+    sed -i 's/YOUR_EMAIL/<your email>/g' docker-compose.yml
+    sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
+    sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/$MQ_ADMIN_PASSWORD/g" /root/docker-compose.yml
+
+You will also need to get the wait.sh file and make sure it is executable
+
+.. code-block::
+
+    wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
+    chmod +x wait.sh
+
+You should be all set to ``docker-compose down && docker-compose up -d`` 
+
+Note: Your clients will show in warning until they are also upgraded.
+
 Upgrade the Clients (prior to 0.10.0)
 ======================================
 
