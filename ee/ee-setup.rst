@@ -22,14 +22,14 @@ Netmaker Enterprise includes a generous free tier, which should cover most use c
 Get a License
 =================================
 
-Visit `<https://dashboard.license.netmaker.io>`_ to get a license. After creating an account, you will be taken to the dashboard.
+Visit `<https://dashboard.license.netmaker.io>`_ to get a license. When you first visit the site, You should be prompted to create an account. After you make one, You will get a free tier licence key. You will also recieve an email that contains this key along with your user ID. Your keys can be found by clicking on the license key tab on the dashboard. Your user id can be found by clicking on the user profile tab on the side menu.
 
 .. image:: images/ee-dashboard.png
    :width: 80%
    :alt: License Dashboard
    :align: center
 
-Choose which plan fits your needs. 
+If you want to get a new key, You can click on the plans tab. You will be taken to a screen wich shows our plans we offer. The free tier is the one that is initially given when you create your account. You can upgrade to the paid tier on this page, or if you need more of an enterprise level plan, there is a button to contact us to set that up.
 
 .. image:: images/ee-plans.png
    :width: 80%
@@ -50,16 +50,16 @@ Choose how many of each node, server, user, ext clients, that you need. You can 
     :alt: Checkout screen
     :align: center
 
-After a successful payment, you will get a confirmation email.
+After a successful payment, you will get a confirmation email containing your new license key. The next section will show how to get that key and setup your server.
 
 Setup your server
 =================================
 
 You will first need to get your license key and account ID. Your confirmation email after you make an account will have a license key for a free trial version and your user ID. The confirmation email after buying a licence will have your new license key.
 
-You can also find your license keys in the license key tab. The copy icon on the left will have the license key.
+You can also find your license keys in the license key tab. The copy icon on the left will copy the license key to your clipboard.
 
-.. image:: images/ee-licenses.png
+.. image:: images/ee-license_key2.jpg
     :width: 80%
     :alt: License keys
     :align: center
@@ -71,7 +71,14 @@ Also in this same tab, you can click on the license key and add or remove any se
     :alt: edit plan
     :align: center
 
-Once you have your license key and account ID, go to your netmaker server and add the following to your docker-compose.yml environment variables
+Your user ID will be located in your user profile found on the side menu
+
+.. image:: images/ee-userid.jpg
+    :width: 80%
+    :alt: userid location
+    :align: center
+
+Once you have your license key and account ID, go to your netmaker server and add the following to your docker-compose.yml environment variables.
 
 .. code-block:: yaml
 
