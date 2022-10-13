@@ -232,7 +232,7 @@ If using rqlite or postgres, you must change the DATABASE environment/config var
 Server Setup (using sqlite)
 ---------------------------
 
-1. Get the binary. https://github.com/gravitl/netmaker/releases/ 
+1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/download/$VERSION/netmaker``
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yaml
 
@@ -297,7 +297,7 @@ Caddy
     }
 
     # Dashboard
-    https://dashboard.<YOUR_BASE_DOMAIN>/ {
+    https://dashboard.<YOUR_BASE_DOMAIN> {
         header {
             Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
             Strict-Transport-Security "max-age=31536000;"
@@ -312,7 +312,7 @@ Caddy
 
     # API
     https://api.<YOUR_BASE_DOMAIN> {
-        reverse_proxy http://127.0.0.1:8081/
+        reverse_proxy http://127.0.0.1:8081
     }
 
 3. start Caddy

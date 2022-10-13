@@ -58,14 +58,14 @@ Adding nodes to the network typically requires a key.
 #. Click ADD NEW ACCESS KEY
 #. Give it a name (ex: "mykey") and a number of uses (ex: 25)
 #. Click CREATE KEY (**Important:** Do not click out of the following screen until you have saved your key details. It will appear only once.)
-#. Copy the bottom command under "Your agent install command with access token" and save it somewhere locally. E.x: ``curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | KEY=vm3ow4thatogiwnsla3thsl3894ths sh -``.
+#. Visit https://docs.netmaker.org/netclient.html#install to install netclient on your nodes.
 
 .. image:: images/access-key.png
    :width: 80%
    :alt: Access Key Screen
    :align: center
 
-You will use this command to install the netclient on your nodes. There are three different values for three different scenarios: 
+There are three different values for three different scenarios: 
 
 * The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient join -k <access key> -s grpc.myserver.com -p 50051``
 * The **Access Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the access key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient join -t <access token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
