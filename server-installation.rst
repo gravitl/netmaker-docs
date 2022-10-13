@@ -297,7 +297,7 @@ Caddy
     }
 
     # Dashboard
-    https://dashboard.<YOUR_BASE_DOMAIN>/ {
+    https://dashboard.<YOUR_BASE_DOMAIN> {
         header {
             Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
             Strict-Transport-Security "max-age=31536000;"
@@ -312,7 +312,7 @@ Caddy
 
     # API
     https://api.<YOUR_BASE_DOMAIN> {
-        reverse_proxy http://127.0.0.1:8081/
+        reverse_proxy http://127.0.0.1:8081
     }
 
 3. start Caddy
