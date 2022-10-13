@@ -123,6 +123,12 @@ Generate a unique master key and insert it:
 
 You may want to save this key for future use with the API.
 
+After v0.16.1 Your docker-compose file should also contain an environment variable for a Mosquitto password. You will need to set it with whatever password you like.
+
+.. code-block::
+
+  sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/$MQ_ADMIN_PASSWORD/g" /root/docker-compose.yml
+
 
 Prepare MQ
 ------------------------
@@ -133,6 +139,13 @@ You must retrieve the MQ configuration file for Mosquitto.
 .. code-block::
 
   wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
+
+After v0.16.1 You will also need to grab the wait.sh file and make sure it is executable
+
+.. code-block::
+
+  wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
+  chmod +x wait.sh
 
 
 Start Netmaker
