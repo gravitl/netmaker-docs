@@ -38,7 +38,7 @@ There have been changes to the MQ after v0.16.1. You will need to make changes t
 
 Start by shutting down your server with ``docker-compose down``
 
-You then need to get the updated mosquitto.conf file. You will also need to get the wait.sh file and make sure it is executable
+You then need to get the updated mosquitto.conf file. You will also need to get the wait.sh file and make sure it is executable.
 
 .. code-block::
 
@@ -48,35 +48,59 @@ You then need to get the updated mosquitto.conf file. You will also need to get 
 
 Then make the following changes to the docker-compose.yml file.
 
-1. change image tags in netmaker and netmaker-ui to v.0.16.1.
+1. change image tags in netmaker and netmaker-ui service sections to ``gravitl/netmaker:v.0.16.1``.
 
 2. In your netmaker service section:
-    a. Change the following in the volumes ``- shared_certs:/etc/netmaker`` to ``- mosquitto_data:/etc/netmaker``
+    a. In the volumes section, change ``- shared_certs:/etc/netmaker`` to ``- mosquitto_data:/etc/netmaker``
 
-    b. In the environment section, add ``MQ_ADMIN_PASSWORD: <CHOOSE_A_PASSWORD_YOU_WOULD_LIKE_TO_USE>``
+    b. In the environment section, add ``MQ_ADMIN_PASSWORD: "<CHOOSE_A_PASSWORD_YOU_WOULD_LIKE_TO_USE>"``
 
 
 3. In the mq service section:
     a. Add ``command: ["/mosquitto/config/wait.sh"]``
 
-    b. In the environment, add ``NETMAKER_SERVER_HOST: "https://api.NETMAKER_BASE_DOMAIN"``
+    b. Add an environment section and add ``NETMAKER_SERVER_HOST: "https://api.NETMAKER_BASE_DOMAIN"``
 
     c. In the volumes, add ``- /root/wait.sh:/mosquitto/config/wait.sh``
 
-    d. Replace all the traefik files in this section with:
+    d. You need to make some changes to the labels. a few of them just need ``mqtts`` to be ``mqtt``. The labels should look like this:
 
     .. code-block::
 
+        - traefik.enable=true
         - traefik.tcp.routers.mqtt.rule=HostSNI(`broker.NETMAKER_BASE_DOMAIN`)
-
         - traefik.tcp.routers.mqtt.tls.certresolver=http
-
       	- traefik.tcp.services.mqtt.loadbalancer.server.port=8883
-
       	- traefik.tcp.routers.mqtt.entrypoints=websecure
 
+Your MQ section should look like this after the changes.
 
+.. code-block:: yaml
 
+    mq:
+    container_name: mq
+    image: eclipse-mosquitto:2.0.11-openssl
+    depends_on:
+      - netmaker
+    restart: unless-stopped
+    command: ["/mosquitto/config/wait.sh"]
+    environment:
+      NETMAKER_SERVER_HOST: "https://api.NETMAKER_BASE_DOMAIN"
+    volumes:
+      - /root/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /root/wait.sh:/mosquitto/config/wait.sh
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    expose:
+      - "8883"
+    labels:
+      - traefik.enable=true
+      - traefik.tcp.routers.mqtt.rule=HostSNI(`broker.NETMAKER_BASE_DOMAIN`)
+      - traefik.tcp.routers.mqtt.tls.certresolver=http
+      - traefik.tcp.services.mqtt.loadbalancer.server.port=8883
+      - traefik.tcp.routers.mqtt.entrypoints=websecure
+
+      
 You should be all set to ``docker-compose up -d`` 
 
 Note: Your clients will show in warning until they are also upgraded. The upgrade for clients is the regular upgrade, then do a ``netclient pull``
