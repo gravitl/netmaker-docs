@@ -116,7 +116,7 @@ SQL_DB:
 SQL_USER:
     **Default:** "postgres"
 
-    **Description:** User for posgres.
+    **Description:** User for postgres.
 
 SQL_PASS:
     **Default:** "nopass"
