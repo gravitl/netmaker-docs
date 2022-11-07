@@ -138,6 +138,17 @@ Connecting/Disconnecting from a network:
   netclient connect -n network
   netclient disconnect -n network
 
+You can also disconnect and reconnect from the UI. Click on the node you want to disconnect/reconnect and click on edit.
+
+On the bottom, you should see a switch labeled connected like this one. toggle the switch to what you like, and hit submit. That client will connect or disconnect accordingly
+
+.. image:: images/disconnect.png
+  :width: 80%
+  :alt: connect/disconnect button
+  :align: center
+
+If you disconnected from the CLI, This switch should be off.
+
 Leave a network:
 
 .. code-block::
