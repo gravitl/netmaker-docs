@@ -111,7 +111,7 @@ You must add in sections (as in the above) for :
   
 - Netmaker Exporter  
 
-Additionally, you must make the following changes to Netmaker and MQ:
+Additionally, you must make the following changes to Netmaker:
 
 
 In Netmaker, Add the following env var:
@@ -119,17 +119,3 @@ In Netmaker, Add the following env var:
 .. code-block::
 
     METRICS_EXPORTER: "on"
-
-In MQ, add the following volume mount:
-
-.. code-block::
-
-    - /root/mosquitto.passwords:/etc/mosquitto.passwords
-
-Additionally, add mosquitto.passwords and mosquitto.conf (must be modified) to your local filesystem using the following files:
-
-Passwords file: https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.passwords  
-  
-Conf file: https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto-ee.conf 
-  
-These changes allow the Netmaker Exporter to access metrics data, via MQ.
