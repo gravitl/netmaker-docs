@@ -4,6 +4,38 @@ UI Reference
 
 This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.
 
+Authentication
+=================
+
+Signup
+--------
+
+When you start Netmaker for the first time, you will be prompted to create an admin account from the UI like below
+
+.. image:: images/ui-signup.png
+   :width: 80%
+   :alt: sign up
+   :align: center
+
+(1) **Username:** Enter a unique username for the admin user.
+(2) **Password:** Enter a secure password for your new user.
+(3) **Password Confirmation:** Repeat the password for verification.
+(4) **Create admin:** Button to create the new admin user.
+(5) **Signup with OAuth:** Button to signup with OAuth.
+
+Login
+--------
+
+.. image:: images/ui-login.png
+   :width: 80%
+   :alt: log in
+   :align: center
+
+(1) **Username:** Enter your username.
+(2) **Password:** Enter your password.
+(3) **Login:** Button to login.
+(4) **Login with OAuth:** Button to login with OAuth.
+
 Dashboard
 =================
 
