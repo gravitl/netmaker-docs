@@ -165,6 +165,15 @@ For first time installations, you can run the Install Command. For additional ne
 Managing Netclient
 =====================
 
+Connect / Disconnect
+----------------------
+
+**to disconnect from a network previously joined (without leaving the network):**
+  ``netclient disconnect -n <net name>``
+
+**to connect with a network previously disconnected:**
+  ``netclient connect -n <net name>``
+
 Viewing Logs
 ---------------
 
