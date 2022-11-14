@@ -51,6 +51,18 @@ Red Hat Distros (fedora/redhat/centos/rocky)
   sudo rpm --import /tmp/gpg.key
   sudo dnf check-update
   sudo dnf install netclient
+  
+
+OpenSUSE (leap/tumbleweed)
+---------------------------------------------------------------------
+
+.. code-block::
+
+  sudo rpm --import https://rpm.netmaker.org/gpg.key
+  curl -sL 'https://rpm.netmaker.org/netclient-repo' | sudo tee /etc/zypp/repos.d/netclient.repo
+  sudo zypper refresh
+  sudo zypper install netclient
+
 
 Arch Distros (arch/manjaro/endeavouros)
 ------------------------------------------------
