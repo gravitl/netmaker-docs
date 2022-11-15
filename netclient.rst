@@ -10,7 +10,7 @@ The netclient is supported on the following operating systems:
 - Mac
 - FreeBSD
 
-For unsupported devices, please use the external client, wich is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
+For unsupported devices, please use the external client, which is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
 
 ******************
 Installation
