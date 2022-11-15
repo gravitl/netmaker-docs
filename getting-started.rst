@@ -45,9 +45,17 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 
 **Is Point to Site:** Create a network in which all clients have only one, central peer.
 
-**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if server is on same network (LAN) as you.
+**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if the server is on the same network (LAN) as you.
 
-Once your network is created, you should see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
+Once your network is created, you should the network (wg-net here but it will be the name you chose when creating the network):
+
+.. image:: images/network-created.png
+   :width: 80%
+   :alt: Node Screen
+   :align: center
+
+
+When you click on the NetId and then the Nodes button (or go direct via the left-hand menu and then Nodes) you see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
 
 .. image:: images/netmaker-node.png
    :width: 80%
