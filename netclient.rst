@@ -4,7 +4,7 @@ Netclient Setup
 
 The Netclient manages WireGuard on client devices (nodes). This document walks through setting up the netclient on machines, including install, management, and uninstall.
 
-The netclient is supported on the following operating systems:
+The Netclient is supported on the following operating systems:
 - Linux (most distributions)
 - Windows
 - Mac
