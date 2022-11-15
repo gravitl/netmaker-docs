@@ -35,11 +35,17 @@ Network Settings Description
 
 The Network creation form has a few fields which may seem unfamiliar. Here is a brief description:
 
-**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily.  **This setting is usually good to turn on, with some noteable exceptions.** This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.
+**IPv4:** Adds private IPv4 to all nodes in a network
 
-**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.
+**IPv6:** Adds private IPv6 to all nodes in a network
 
-**Is Dual Stack:** This setting adds ipv6 private addresses to nodes, in addition to ipv4 addresses. Usually, this is unnecessary, but in some cases, you may have a requirement for ipv6 and can enable this setting.
+**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily.  **This setting is usually good to turn on, with some noteable exceptions.** This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.  This can enhance connectivity in cases where NAT may block communication.
+
+**Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
+
+**Is Point to Site:** Create a network in which all clients have only one, central peer.
+
+**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if server is on same network (LAN) as you.
 
 Once your network is created, you should see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
 
