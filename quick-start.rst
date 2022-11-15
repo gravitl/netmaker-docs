@@ -44,7 +44,7 @@ For information about deploying more advanced configurations, see the :doc:`Adva
 
   - A publicly owned domain (e.x. example.com, mysite.biz) 
   - Permission and access to modify DNS records via DNS service (e.x: Route53)
-  - **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudlare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
+  - **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudflare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
 
 1. Prepare DNS
 ================
