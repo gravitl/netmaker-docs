@@ -57,7 +57,7 @@ Adding nodes to the network typically requires a key.
 #. Click on the ACCESS KEYS tab and select the network you created.
 #. Click ADD NEW ACCESS KEY
 #. Give it a name (ex: "mykey") and a number of uses (ex: 25)
-#. Click CREATE KEY (**Important:** Do not click out of the following screen until you have saved your key details. It will appear only once.)
+#. Click CREATE KEY 
 #. Visit https://docs.netmaker.org/netclient.html#install to install netclient on your nodes.
 
 .. image:: images/access-key.png
