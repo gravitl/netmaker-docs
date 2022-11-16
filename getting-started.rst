@@ -141,8 +141,8 @@ Nodes can be added/removed/modified on the network at any time. Nodes can also b
 Uninstalling the netclient
 =============================
 
-1. To remove your nodes from the default network, run the following on each node: ``sudo netclient leave -n default``
-2. To remove the netclient entirely from each node, run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient`` (after running the first step)
+1. To remove your nodes from a network (default here), run the following on each node: ``sudo netclient leave -n default`` (replacing default with the actual name of the network eg wg-net)
+2. To remove the netclient entirely from each node (after running the above step), run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient``
 
 Uninstalling Netmaker
 ===========================
