@@ -28,7 +28,7 @@ Configuring an Ingress Gateway
 
 External Clients must attach to an Ingress Gateway. By default, your network will not have an ingress gateway. To configure an ingress gateway, you can use any node in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be an ingress gateway and makes for a good default choice if you are unsure of which node to select.
 
-.. image:: images/exclient1.png
+.. image:: images/extclient1.png
    :width: 80%
    :alt: Gateway
    :align: center
