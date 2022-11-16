@@ -107,12 +107,6 @@ You should get output similar to the below. The netclient retrieves local settin
    :align: center
 
 
-.. image:: images/nm-node-success.png
-   :width: 80%
-   :alt: Node Success
-   :align: center
-
-
 Repeat the above steps for every machine you would like to add to your network. You can re-use the same install command so long as you do not run out of uses on your access key (after which it will be invalidated and deleted).
 
 Once installed on all nodes, you can test the connection by pinging the private address of any node from any other node.
