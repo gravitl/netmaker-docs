@@ -234,7 +234,7 @@ Server Setup (using sqlite)
 
 1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/download/$VERSION/netmaker``
 2. Move the binary to /usr/sbin and make it executable.
-3. create a config file. /etc/netmaker/netmaker.yaml
+3. create a config file. /etc/netmaker/netmaker.yml
 
 .. code-block:: yaml
 
@@ -245,8 +245,9 @@ Server Setup (using sqlite)
       masterkey: "<SECRET_KEY>"
       mqhost: "127.0.0.1"
       mqport: "8883"
+      mqadminpassword: "<CHOOSE_A_PASSWORD>"
 
-4. Update YOUR_BASE_DOMAIN and SECRET_KEY
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY. After v0.16.1, a dynamic mq is implemented. The ``mqadminpassword`` is needed if you use a netmaker binary after v0.16.1.
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
 .. code-block:: cfg
@@ -259,14 +260,14 @@ Server Setup (using sqlite)
     Type=simple
     Restart=on-failure
 
-    ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yaml
+    ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yml
 
     [Install]
     WantedBy=multi-user.target
 
 6. ``systemctl daemon-reload``
 7. Check status:  ``sudo journalctl -u netmaker``
-8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yaml and then run ``sudo systemctl restart netmaker``
+8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yml and then run ``sudo systemctl restart netmaker``
 
 UI Setup
 ---------
@@ -287,7 +288,7 @@ Caddy
 -----
 
 1. Install Caddy
-2. Caddyfile contents
+2. You should have a Caddy file from installing caddy. Replace the contents of that file with this configuration.
 
 .. code-block:: cfg
 
@@ -320,9 +321,11 @@ Caddy
 MQ
 ----
 
-You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file.
+You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file. Depending on The version, you will use one of the two files.
 
 .. code-block:: cfg
+
+    # use this config for versions earlier than v0.16.1
 
     per_listener_settings true
 
@@ -338,8 +341,25 @@ You will need an MQTT broker on the host. We recommend Mosquitto. In addition, i
     allow_anonymous true
 
 Start netmaker
-copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
-restart mosquitto
+Copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
+
+.. code-block::
+
+    #use this config file for v0.16.1 and later.
+    per_listener_settings false
+    listener 8883
+    allow_anonymous false
+
+    listener 1883
+    allow_anonymous false
+
+    plugin /usr/lib/x86_64-linux-gnu/mosquitto_dynamic_security.so
+    plugin_opt_config_file /etc/mosquitto/data/dynamic-security.json
+
+Copy dynamic-security.json from etc/netmaker to /etc/mosquitto/data.
+Restart netmaker.
+Restart mosquitto.
+You can check the status of caddy, mosquitto, and netmaker with ``journalctl -fu <ONE_OF_THOSE_THREE>`` to make sure everything is working.
 
 
 
