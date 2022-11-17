@@ -12,7 +12,7 @@ Introduction
 
 Netmaker allows your clients to reach external networks via an Egress Gateway. The Egress Gateway is a netclient which has been deployed to a server or router with access to a given subnet.
 
-In the netmaker UI, that node is set as an "egress gateway." Range(s) are specified which this node has access to. Once created, all clients (and all new ext clients) in the network will be able to reach those ranges via the gateway.
+In the Netmaker UI, that node is set as an "egress gateway." Range(s) are specified which this node has access to. Once created, all clients (and all new ext clients) in the network will be able to reach those ranges via the gateway.
 
 Configuring an Egress Gateway
 ==================================
@@ -58,7 +58,7 @@ Use Cases
 1) Remote Access
 -------------------
 
-A common scenario would be to combine this with an "Ingress Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the ingress and egress gateways. The Ingress Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the netmaker server as the Ingress, and one additional machine (in the private network you wish to reach), as the Egress.
+A common scenario would be to combine this with an "Ingress Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the ingress and egress gateways. The Ingress Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the Netmaker server as the Ingress, and one additional machine (in the private network you wish to reach), as the Egress.
 
 .. image:: images/egress2.png
    :width: 80%
@@ -86,13 +86,13 @@ To avoid DNS leaks, navigate to the networks tab and click on the ID of the netw
    :alt: Gateway
    :align: center
 
-In this example, I put the IP address of the netmaker server node.
+In this example, I put the IP address of the Netmaker server node.
 
 After that, set up an egress gateway with ``0.0.0.0/0`` as the ranges with the public interface (eth0 most likely). Your clients should now begin routing public-facing traffic over the gateway.
 
 If you are using an egress gateway with ipv6 enabled, you can also route ipv6 traffic by adding ``::/0`` to the gateway ranges.
 
-Note: using ``0.0.0.0/0`` is only effective as of version 0.15.0. Any version before that requires a big list of ranges to work around ``0.0.0.0/0``. Make sure you have your netmaker server and client updated to ba able to use that range.
+Note: using ``0.0.0.0/0`` is only effective as of version 0.15.0. Any version before that requires a big list of ranges to work around ``0.0.0.0/0``. Make sure you have your Netmaker server and client updated to be able to use that range.
 
 Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
 simply type:
