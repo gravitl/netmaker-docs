@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Netmaker'
-copyright = '2021, Alex Feiszli'
-author = 'Alex Feiszli'
+copyright = '2022, Netmaker Inc.'
+author = 'Netmaker'
 
 # The full version, including alpha/beta/rc tags
 release = '0.16.1'

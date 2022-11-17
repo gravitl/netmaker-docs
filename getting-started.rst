@@ -35,13 +35,27 @@ Network Settings Description
 
 The Network creation form has a few fields which may seem unfamiliar. Here is a brief description:
 
-**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily. This has two benefits. For one, it%. It also means, you dont usually have to worry about opening up the local firewall for ports (for instance, 51821). **This setting is usually good to turn on, with some noteable exceptions.** This setting cannot be enabled if "client mode" is turned off. This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.
+**IPv4:** Adds private IPv4 to all nodes in a network
 
-**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.
+**IPv6:** Adds private IPv6 to all nodes in a network
 
-**Is Dual Stack:** This setting adds ipv6 private addresses to nodes, in addition to ipv4 addresses. Usually, this is unnecessary, but in some cases, you may have a requirement for ipv6 and can enable this setting.
+**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily.  **This setting is usually good to turn on, with some noteable exceptions.** This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.  This can enhance connectivity in cases where NAT may block communication.
 
-Once your network is created, you should see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
+**Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
+
+**Is Point to Site:** Create a network in which all clients have only one, central peer.
+
+**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if the server is on the same network (LAN) as you.
+
+Once your network is created, you should the network (wg-net here but it will be the name you chose when creating the network):
+
+.. image:: images/network-created.png
+   :width: 80%
+   :alt: Node Screen
+   :align: center
+
+
+When you click on the NetId and then the Nodes button (or go direct via the left-hand menu and then Nodes) you see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
 
 .. image:: images/netmaker-node.png
    :width: 80%
@@ -55,9 +69,9 @@ Create a Key
 Adding nodes to the network typically requires a key.
 
 #. Click on the ACCESS KEYS tab and select the network you created.
-#. Click ADD NEW ACCESS KEY
+#. Click CREATE ACCESS KEY
 #. Give it a name (ex: "mykey") and a number of uses (ex: 25)
-#. Click CREATE KEY (**Important:** Do not click out of the following screen until you have saved your key details. It will appear only once.)
+#. Click CREATE 
 #. Visit https://docs.netmaker.org/netclient.html#install to install netclient on your nodes.
 
 .. image:: images/access-key.png
@@ -65,13 +79,15 @@ Adding nodes to the network typically requires a key.
    :alt: Access Key Screen
    :align: center
 
-There are three different values for three different scenarios: 
+There are different values for difference scenarios.  The top 3 values cover these scenarios:
 
 * The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient join -k <access key> -s grpc.myserver.com -p 50051``
 * The **Access Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the access key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient join -t <access token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
-* The **install command** value is a curl command that can be run on Linux systems. It is a simple script that downloads the netclient binary and runs the install command all in one.
+* The **Join Command** value is a command that can be run on Linux systems after installing the Netclient.  It will join the network directly from the command line.
   
-Networks can also be enabled to allow nodes to sign up without keys at all. In this scenario, nodes enter a "pending state" and are not permitted to join the network until an admin approves them.
+Other variations (eg Docker) are covered with the remaining values.
+
+Networks can also be enabled to allow nodes to sign up without keys at all. In this scenario, nodes enter a "pending state" and are not permitted to join the network until an admin approves them.  To enable this option, visit the Network Details for the network and turn on the "Allow Node Signup Without Keys" option.
 
 Deploy Nodes
 =================
@@ -88,12 +104,6 @@ You should get output similar to the below. The netclient retrieves local settin
 .. image:: images/nc-install-output.png
    :width: 80%
    :alt: Output from Netclient Install
-   :align: center
-
-
-.. image:: images/nm-node-success.png
-   :width: 80%
-   :alt: Node Success
    :align: center
 
 
@@ -131,8 +141,8 @@ Nodes can be added/removed/modified on the network at any time. Nodes can also b
 Uninstalling the netclient
 =============================
 
-1. To remove your nodes from the default network, run the following on each node: ``sudo netclient leave -n default``
-2. To remove the netclient entirely from each node, run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient`` (after running the first step)
+1. To remove your nodes from a network (default here), run the following on each node: ``sudo netclient leave -n default`` (replacing default with the actual name of the network eg wg-net)
+2. To remove the netclient entirely from each node (after running the above step), run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient``
 
 Uninstalling Netmaker
 ===========================
