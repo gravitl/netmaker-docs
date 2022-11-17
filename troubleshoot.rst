@@ -140,6 +140,16 @@ Netclient
   - ./token-convert <token value>
   - Run the output on your OpenWRT machine
 
+**I am unable to run Netclient on Windows due to an error that mentions Fyne and a window creation error**
+
+Older versions of Windows and/or virtualized environments may not support the Netclient UI.  To fix this, download and install Mesa 3D.  One way is follow these steps:
+
+- Download Mesa 3D (e.g., from `here <https://fdossena.com/?p=mesa/index.frag>`_) to get OpenGL for your OS
+- Get `7-zip <https://www.7-zip.org/download.html>`_, install it and extract the .7z Mesa 3D download (unless you download outside of Windows and extract there)
+- Drop the resulting .dll in the location of the .exe you're trying to run
+- Double click the netclient.exe
+- Netclient should start normally (the Fyne error should not appear)
+
 
 CoreDNS
 --------
