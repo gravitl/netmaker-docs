@@ -87,7 +87,7 @@ Configuring DNS for Ext Clients (OPTIONAL)
 ============================================
 
 If you wish to have a DNS field on your ext clients conf, simply edit the network field as shown below to 1.1.1.1 or 8.8.8.8 for example.
-If you do not want DNS on your ext client conf files, leave it blank.
+If you do not want DNS on your ext client conf files, leave it blank.  
 
 .. image:: images/extclient5.png
    :width: 80%
@@ -95,3 +95,7 @@ If you do not want DNS on your ext client conf files, leave it blank.
    :align: center
 
 Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.
+
+By default, netmaker will forward all DNS requests to the server. If you want to use an external or private DNS server, you need to change the following config (e.g., in your docker-compose.yml on the server followed by a docker-compose down and docker-compose up -d):
+
+``PORT_FORWARD_SERVICES="dns" --> PORT_FORWARD_SERVICES=""``
