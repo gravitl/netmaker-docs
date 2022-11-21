@@ -40,21 +40,21 @@ Once you have configured a node as a gateway, you can then add clients to that g
 
 .. image:: images/exclient2.png
    :width: 80%
-   :alt: Gateway
+   :alt: Add External Client
    :align: center
 
 After creating a client, you can edit the name to something more logical.
 
 .. image:: images/exclient3.png
    :width: 80%
-   :alt: Gateway
+   :alt: Edit External Client Name
    :align: center
 
 Then, you can either download the configuration file directly or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.
 
 .. image:: images/exclient4.png
    :width: 80%
-   :alt: Gateway
+   :alt: Client List
    :align: center
 
 Example config file: 
@@ -62,6 +62,26 @@ Example config file:
 .. literalinclude:: ./examplecode/myclient.conf
 
 Your client should now be able to access the network! A client can be invalidated at any time by simply deleting it from the UI.
+
+Disabling External Clients
+==========================
+
+To (temporarily) disable an external client's access to the Netmaker network that it belongs to, click the checkmark below "Enabled" on the line with the Client ID that you would like to disable.  Click "Accept" when asked "Are you sure you want to change access for this Ext. Client?"
+
+.. image:: images/extclient-disable.png
+   :width: 80%
+   :alt: Disable an External Client
+   :align: center
+
+After you click the checkbox and click Accept the checkmark will turn into a red circle that is crossed out as shown below.
+
+.. image:: images/extclient-disabled.png
+   :width: 80%
+   :alt: Disabled External Client
+   :align: center
+
+To re-enable the client click the crossed-out red circle.  It will turn into a checkmark and the client will be re-enabled.
+
 
 Configuring DNS for Ext Clients (OPTIONAL)
 ============================================
