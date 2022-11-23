@@ -100,6 +100,20 @@ A FreeBSD package is coming soon. In the meantime, please use this install scrip
 
   curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | VERSION="<your netmaker version>" sh -
 
+Docker
+=============
+
+You can contain your netclient in a docker with the following to set up
+
+.. code-block::
+
+  apt-get update
+  apt-get install wireguard-tools docker -y
+  apt upgrade -y
+  reboot
+  Pgrep netclient
+
+After that, You should be set up to join a network. 
 
 ******************
 Joining a Network
@@ -126,6 +140,12 @@ With SSO (oauth must be configured):
 
 
 Use the -vvv flag if installation fails and report logs.
+
+With docker:
+
+.. code-block::
+
+  docker run -d --network host  --privileged -e TOKEN=<TOKEN> -v /etc/netclient:/etc/netclient --name netclient gravitl/netclient:<CURRENT_VERSION>
 
 *********************
 Managing Netclient
