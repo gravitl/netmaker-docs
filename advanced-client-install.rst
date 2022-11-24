@@ -66,10 +66,14 @@ Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware be
 1. This community-run package for OpenWRT: https://github.com/sbilly/netmaker-openwrt
 
 2. Manual installation:
-
-- download (wget) the netclient package for your hardware from the netclient releases: https://github.com/gravitl/netmaker/releases
+  
+- download the latest release source and create netclient binaries by executing netmaker/netclient/bin-maker.sh
+- execute `uname -m` in the OpenWRT os
+- copy the netclient binary generated with respect to the above architecture output to OpenWRT.
 - rename to "netclient"
 - Run as root from a bash shell on OpenWRT
+
+   For netclient daemon some hardware might support https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/openwrt-daemon.sh rather than the one comes up by using https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh
 
 3. You may experience an issue with the length of the token, which has limits on some OpenWRT shells. If you run into this problem, you can use the following script to convert your token into a "netclient join" command:
 
