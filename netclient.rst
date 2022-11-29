@@ -103,17 +103,93 @@ A FreeBSD package is coming soon. In the meantime, please use this install scrip
 Docker
 =============
 
-You can contain your netclient in a docker with the following to set up
+You can run Netclient using Docker instead of installing it on your local machine.  To ensure that the correct commands are present in order to use Docker use these steps:
 
 .. code-block::
 
-  apt-get update
-  apt-get install wireguard-tools docker -y
-  apt upgrade -y
-  reboot
-  Pgrep netclient
+  sudo apt-get update
+  sudo apt-get install -y docker.io docker-compose 
 
-After that, You should be set up to join a network. 
+After that you can proceed to join the network using the docker command from the access key for the network you wish to join.  The docker command is available from the access key view in the Netmaker UI.  To have the netclient docker container restart (eg after the system reboots) you'll want to use the following option when running docker run:
+
+.. code-block::
+
+  --restart=always
+
+
+If you prefer (e.g., when specifying a lot of environment variables), you can use a docker-compose.yml file such as the following instead of the docker run command:
+
+.. code-block::
+
+  version: "3.4"
+
+  services:
+      netclient:
+          network_mode: host
+          privileged: true
+          restart: always
+          environment:
+              - TOKEN=<networktoken>
+          volumes:
+              - '/etc/netclient:/etc/netclient'
+          container_name: netclient
+          image: 'gravitl/netclient:v0.16.3'
+
+where <networktoken> is the Access Token available from the "Viewing your Access Key Details" window in the Netmaker UI.
+
+
+
+
+Environment Variables
+===================================
+
+In order to provide additional options to Netclient you can use the following environment variables in lieu of the listed command-line option (these options are provided by running 
+
+.. code-block::
+
+  netclient <command> --help 
+  
+where <command> is a command such as join.
+
+===========================================                 =======================                                     ==================================================================================================================================================             
+Command-line option                                         Environment Variable                                        Description                                                                                                                                                            
+===========================================                 =======================                                     ==================================================================================================================================================             
+--network value, -n value                                   NETCLIENT_NETWORK                                           Network to perform specified action against. (default: "all")                                                                                                          
+--password value, -p value                                  NETCLIENT_PASSWORD                                          Password for authenticating with netmaker.                                                                                                                             
+--endpoint value, -e value                                  NETCLIENT_ENDPOINT                                          Reachable (usually public) address for WireGuard (not the private WG address).                                                                                         
+--macaddress value, -m value                                NETCLIENT_MACADDRESS                                        Mac Address for this machine. Used as a unique identifier within Netmaker network.                                                                                     
+--publickey value, --pubkey value                           NETCLIENT_PUBLICKEY                                         Public Key for WireGuard Interface.                                                                                                                                    
+--privatekey value, --privkey value                         NETCLIENT_PRIVATEKEY                                        Private Key for WireGuard Interface.                                                                                                                                   
+--port value                                                NETCLIENT_PORT                                              Port for WireGuard Interface.                                                                                                                                          
+--keepalive value                                           NETCLIENT_KEEPALIVE                                         Default PersistentKeepAlive for Peers in WireGuard Interface. (default: 0)                                                                                             
+--operatingsystem value, --os value                         NETCLIENT_OS                                                Identifiable name for machine within Netmaker network.                                                                                                                 
+--publicipservice value, --ip-service value                 NETCLIENT_IP_SERVICE                                        The service to call to obtain the public IP of the machine that is running netclient.                                                                                  
+--name value                                                NETCLIENT_NAME                                              Identifiable name for machine within Netmaker network. (default: "do-docs-netclient")                                                                                  
+--localaddress value                                        NETCLIENT_LOCALADDRESS                                      Local address for machine. Can be used in place of Endpoint for machines on the same LAN.                                                                              
+--isstatic value, --st value                                NETCLIENT_IS_STATIC                                         Indicates if client is static by default (will not change addresses automatically).                                                                                    
+--address value, -a value                                   NETCLIENT_ADDRESS                                           WireGuard address for machine within Netmaker network.                                                                                                                 
+--addressIPv6 value, --a6 value                             NETCLIENT_ADDRESSIPV6                                       WireGuard address for machine within Netmaker network.                                                                                                                 
+--interface value, -i value                                 NETCLIENT_INTERFACE                                         WireGuard local network interface name.                                                                                                                                
+--apiserver value                                           NETCLIENT_API_SERVER                                        Address + API Port (e.g. 1.2.3.4:8081) of Netmaker server.                                                                                                             
+--key value, -k value                                       NETCLIENT_ACCESSKEY                                         Access Key for signing up machine with Netmaker server during initial 'add'.                                                                                           
+--token value, -t value                                     NETCLIENT_ACCESSTOKEN                                       Access Token for signing up machine with Netmaker server during initial 'add'.                                                                                         
+--server value, -s value                                    HOST_SERVER                                                 Host server (domain of API) [Example: api.example.com]. Do not include "http(s)://" use it for the Single Sign-on along with the network parameter                     
+--user value, -u value                                      USER_NAME                                                   User name provided upon joins if joining over basic auth is desired.                                                                                                   
+--localrange value                                          NETCLIENT_LOCALRANGE                                        Local Range if network is local, for instance 192.168.1.0/24.                                                                                                          
+--dnson value                                               NETCLIENT_DNS                                               Sets private dns if 'yes'. Ignores if 'no'. Will retrieve from network if unset. (default: "yes")                                                                      
+--islocal value                                             NETCLIENT_IS_LOCAL                                          Sets endpoint to local address if 'yes'. Ignores if 'no'. Will retrieve from network if unset.                                                                         
+--udpholepunch value                                        NETCLIENT_UDP_HOLEPUNCH                                     Turns on udp holepunching if 'yes'. Ignores if 'no'. Will retrieve from network if unset.                                                                              
+--ipforwarding value                                        NETCLIENT_IPFORWARDING                                      Sets ip forwarding on if 'on'. Ignores if 'off'. On by default. (default: "on")                                                                                        
+--postup value                                              NETCLIENT_POSTUP                                            Sets PostUp command for WireGuard.                                                                                                                                     
+--postdown value                                            NETCLIENT_POSTDOWN                                          Sets PostDown command for WireGuard.                                                                                                                                   
+--daemon value                                              NETCLIENT_DAEMON                                            Installs daemon if 'on'. Ignores if 'off'. On by default. (default: "on")                                                                                              
+--roaming value                                             NETCLIENT_ROAMING                                           Checks for IP changes if 'yes'. Ignores if 'no'. Yes by default. (default: "yes")                                                                                      
+--verbosity-level-1, -v                                     VERBOSITY=1                                                 Netclient Verbosity level 1. (default: false)                                                                                                                          
+--verbosity-level-2, --vv                                   VERBOSITY=2                                                 Netclient Verbosity level 2. (default: false)                                                                                                                          
+--verbosity-level-3, --vvv                                  VERBOSITY=3                                                 Netclient Verbosity level 3. (default: false)                                                                                                                          
+--verbosity-level-4, --vvvv                                 VERBOSITY=4                                                 Netclient Verbosity level 4. (default: false)                                                                                                                          
+===========================================                 =======================                                     ==================================================================================================================================================             
+
 
 ******************
 Joining a Network
