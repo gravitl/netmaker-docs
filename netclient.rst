@@ -59,6 +59,15 @@ Arch Distros (arch/manjaro/endeavouros)
 
   yay -S netclient
 
+OpenWRT Distros (mips/mipsle)
+------------------------------------------------
+
+.. code-block::
+
+  curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | VERSION="<your netmaker version>" sh -
+
+In case of failure refer to Advanced Client Installation :ref:`advanced-client-install:Notes on OpenWRT` 
+
 Windows
 ===============
 
