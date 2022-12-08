@@ -44,7 +44,7 @@ For information about deploying more advanced configurations, see the :doc:`Adva
 
   - A publicly owned domain (e.x. example.com, mysite.biz) 
   - Permission and access to modify DNS records via DNS service (e.x: Route53)
-  - **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudlare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
+  - **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudflare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
 
 1. Prepare DNS
 ================
@@ -93,8 +93,27 @@ It is also important to make sure the server does not block forwarding traffic (
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 51821-51830/udp from all
+  
+4. Prepare MQ
+========================
 
-4. Install Netmaker
+
+You must retrieve the MQ configuration file for Mosquitto.
+
+.. code-block::
+
+  wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
+
+After v0.16.1 You will also need to grab the wait.sh file and make sure it is executable
+
+.. code-block::
+
+  wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
+  chmod +x wait.sh
+
+
+
+5. Install Netmaker
 ========================
 
 Prepare Docker Compose 
@@ -129,23 +148,6 @@ After v0.16.1 Your docker-compose file should also contain an environment variab
 
   sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/$MQ_ADMIN_PASSWORD/g" /root/docker-compose.yml
 
-
-Prepare MQ
-------------------------
-
-
-You must retrieve the MQ configuration file for Mosquitto.
-
-.. code-block::
-
-  wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
-
-After v0.16.1 You will also need to grab the wait.sh file and make sure it is executable
-
-.. code-block::
-
-  wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
-  chmod +x wait.sh
 
 
 Start Netmaker

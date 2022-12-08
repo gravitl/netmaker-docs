@@ -130,15 +130,54 @@ Netclient
 
   2. Manual installation:
 
-  - download (wget) the netclient package for your hardware from the netclient releases: https://github.com/gravitl/netmaker/releases
+  - Download the latest release source and create the Netclient binaries by executing netmaker/netclient/bin-maker.sh
+  - Execute `uname -m` in the OpenWRT os
+  - Execute  `lscpu` to determine byte order or try below code.
+  .. code-block:: bash
+
+    if [[ `printf '\0\1' | hexdump -e '/2 "%04x"'` -eq 0100 ]]; then
+     echo "Little Endian"
+    else
+     echo "Big Endian"
+    fi
+
+  - copy the netclient binary generated with respect to the above architecture output to OpenWRT.
   - rename to "netclient"
   - Run as root from a bash shell on OpenWRT
 
-  3. You may experience an issue with the length of the token, which has limits on some OpenWRT shells. If you run into this problem, you can use the following script to convert your token into a "netclient join" command:
+  .. list-table:: Binary mapping
+   :widths: 50 30 50
+   :header-rows: 1
+
+   * - Bianry File
+     - Arch
+     - Byte order
+   * - | netclient-mipsle-softfloat
+       | netclient-mipsle-softfloat-upx
+     - mips
+     - Little Endian
+   * - | netclient-mips-softfloat
+       | netclient-mips-softfloat-upx
+     - mips
+     - Big Endian
+
+  3. Default Netclient daemon configured through https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh, if its not working clean it and execute https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/openwrt-daemon.sh .
+
+  4. You may experience an issue with the length of the token, which has limits on some OpenWRT shells. If you run into this problem, you can use the following script to convert your token into a "netclient join" command:
 
   - `wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/token-convert.sh`
   - ./token-convert <token value>
   - Run the output on your OpenWRT machine
+
+**I am unable to run Netclient on Windows due to an error that mentions Fyne and a window creation error**
+
+Older versions of Windows and/or virtualized environments may not support the Netclient UI.  To fix this, download and install Mesa 3D.  One way is follow these steps:
+
+- Download Mesa 3D (e.g., from `here <https://fdossena.com/?p=mesa/index.frag>`_) to get OpenGL for your OS
+- Get `7-zip <https://www.7-zip.org/download.html>`_, install it and extract the .7z Mesa 3D download (unless you download outside of Windows and extract there)
+- Drop the resulting .dll in the location of the .exe you're trying to run
+- Double click the netclient.exe
+- Netclient should start normally (the Fyne error should not appear)
 
 
 CoreDNS

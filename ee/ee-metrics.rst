@@ -93,3 +93,9 @@ Or hover an edge to view information about the connection between two nodes. The
     :width: 80%
     :alt: Netmaker Grafana View 2
     :align: center
+
+Also you can view your metrics on `prometheus dashboard`,for the first time you will be prompted for credentials in your brower when you visit your prometheus dashboard.
+.. code-block::
+
+    UserName: "Netmaker-Prometheus"
+    Password: "<YOUR_LICENSE_KEY>" 
