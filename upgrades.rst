@@ -152,6 +152,37 @@ Your ``docker logs mq`` should be showing logs like this:
 
 If you see mq logs about waiting for netmaker server to startup after longer period than usual, check if your traefik certs are generated correctly. You can try to resolve with ``docker restart traefik``
 
+Upgrade the server to use 0.17.0 after Upgrading for 0.16.3
+============================================================
+
+Version 0.17.0 uses Caddy instead of traefik.
+
+Open a Terminal window (shell prompt).  To set up Caddy you'll need to configure the Caddyfile as follows.
+
+If you are using the Community Edition of Netmaker use this command:
+.. code-block::
+
+	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile"
+
+
+If you are using the Enterprise Edition of Netmaker use this command:
+.. code-block::
+
+	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE"
+
+
+
+Once you have a Caddyfile you'll need to run these two commands:
+
+.. code-block::
+
+  sed -i "s/NETMAKER_BASE_DOMAIN/$NETMAKER_BASE_DOMAIN/g" /root/Caddyfile
+  sed -i "s/YOUR_EMAIL/$EMAIL/g" /root/Caddyfile
+
+Where $NETMAKER_BASE_DOMAIN is the base domain you used for your Netmaker setup (the part after "dashboard." in your Dockerfile) and $YOUR_EMAIL is your email address.
+
+
+
 
 Upgrade the Clients (prior to 0.10.0)
 ======================================

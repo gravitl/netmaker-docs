@@ -129,14 +129,14 @@ However, we still maintain CoreDNS in the default deployment for two reasons:
   2. You may wish to integrate the Netmaker nameserver with your existing DNS setup.  
 
 
-Traefik
+Caddy
 -------
 
-As of 0.14.2, Traefik is the default proxy for Netmaker if you set it up via Quick Start. Caddy was previously the default proxy, but is unable to handle MQTT by default, which is why the switch to Traefik was made. Traefik is a simple and docker-friendly proxy, which can be compared to Nginx, Caddy, or HAProxy.
+As of 0.17.0, Caddy is the default proxy for Netmaker if you set it up via Quick Start. Caddy is a simple and docker-friendly proxy, which can be compared to Nginx, Traefik, or HAProxy.
 
-Traefik simplifies management because the configuration can be embedded into the docker compose. In addition, it can request certificates automatically, and it can handle MQ traffic, which many proxies (such as Caddy) cannot handle by default.
+Caddy simplifies management because the configuration file is very short, several lines compared to dozens of lines for Traefik or Nginx. In addition, it can request certificates automatically.
 
-Caddy is still a functioning proxy with configs available for Netmaker. We are moving guidance towards Traefik by default, but if you are maintaining an installation that relies on Caddy, you can continue to use it with Netmaker.
+Traefik was previously the default and is still a functioning option, but We are moving guidance towards Caddy by default. If you are maintaining an installation that relies on Traefik, you can continue to use it with Netmaker.
 
 
 External Client
