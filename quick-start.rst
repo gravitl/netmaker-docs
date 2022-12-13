@@ -2,25 +2,20 @@
 Quick Install
 ===============
 
-This quick install guide is an **opinionated** guide for getting up and running with Netmaker as quickly as possible.
-
-If you are just looking to trial netmaker, we **highly recommend** using the 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker 
-
-The following is a guided version of that script, with the option to add a custom domain (instead of nip.io):  
-
-Assumptions
+Important Notes
 ============================
 
-We assume for this installation that you want all of the Netmaker features enabled, and you want your server to be accessible from anywhere.
+1. **WE RECCOMMEND USING THE NM-QUICK-INTERACTIVE SCRIPT INSTEAD OF THIS GUIDE. It can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh>`_ **).**
 
-This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.
+2. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
 
-If you are deploying for a business or enterprise use case and this setup will not fit your needs, please contact us: https://www.netmaker.org/contact
+3. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free tier, but it does require `an account <https://dashboard.license.netmaker.io>`_.
 
-By the end of this guide, you will have Netmaker installed on a public VM linked to your custom domain, secured behind a Traefik reverse proxy.
+4. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
 
-For information about deploying more advanced configurations, see the :doc:`Advanced Installation <./server-installation>` docs. 
+5. This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.
 
+6. For information about deploying more advanced configurations, see the :doc:`Advanced Installation <./server-installation>` docs. 
 
 0. Prerequisites
 ==================
@@ -38,7 +33,7 @@ For information about deploying more advanced configurations, see the :doc:`Adva
    
    - 2GB+ of storage 
    
-   - Ubuntu 20.04 Installed
+   - Ubuntu 21.04 Installed
 
 - **Domain**
 
@@ -56,6 +51,15 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 - api.domain
 
 - broker.domain
+
+If deploying EE, you will also need records for the following:
+
+- grafana.domain
+
+- prometheus.domain
+
+- netmaker-exporter.domain
+
 
 2. Install Dependencies
 ========================
@@ -75,13 +79,12 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
-- **443 (tcp):** for Traefik, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
+- **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
-
 
 .. code-block::
 
-  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow 51821:51830/udp
+  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow proto tcp from any to any port 80 && sudo ufw allow 51821:51830/udp
 
 It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
 
@@ -92,26 +95,20 @@ It is also important to make sure the server does not block forwarding traffic (
 
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
+  - allow 80/tcp from all
   - allow 51821-51830/udp from all
   
 4. Prepare MQ
 ========================
 
 
-You must retrieve the MQ configuration file for Mosquitto.
+You must retrieve the MQ configuration file for Mosquitto and the wait script.
 
 .. code-block::
 
   wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
-
-After v0.16.1 You will also need to grab the wait.sh file and make sure it is executable
-
-.. code-block::
-
   wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
   chmod +x wait.sh
-
-
 
 5. Install Netmaker
 ========================
@@ -119,19 +116,27 @@ After v0.16.1 You will also need to grab the wait.sh file and make sure it is ex
 Prepare Docker Compose 
 ------------------------
 
+Get The public IP (server ip).
+
 .. code-block::
 
   ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'
+
 
 Now, insert the values for your base (wildcard) domain, public ip.
 
 .. code-block::
 
   wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
-  sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
-  sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
-  sed -i 's/YOUR_EMAIL/<your email>/g' docker-compose.yml
+  # (if installing the EE version) wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
 
+  wget -O Caddyfile https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile
+  # (if installing the EE version) wget -O Caddyfile https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE
+
+  sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
+  sed -i "s/NETMAKER_BASE_DOMAIN/<your base domain>/g" /root/Caddyfile
+  sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
+  sed -i 's/YOUR_EMAIL/<your email>/g' Caddyfile
 
 Generate a unique master key and insert it:
 
@@ -140,15 +145,24 @@ Generate a unique master key and insert it:
   tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
   sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
 
-You may want to save this key for future use with the API.
-
-After v0.16.1 Your docker-compose file should also contain an environment variable for a Mosquitto password. You will need to set it with whatever password you like.
+You will also need to set an admin password for MQ, which may also be generated randomly.
 
 .. code-block::
 
-  sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/$MQ_ADMIN_PASSWORD/g" /root/docker-compose.yml
+  tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
+  sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
 
+Extre Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
+-----------------------------------------------------------------------------------------------------
 
+1. Log into https://dashboard.license.netmaker.io"
+2. Copy License Key Value: https://dashboard.license.netmaker.io/license-keys"
+3. Retrieve Account ID: https://dashboard.license.netmaker.io/user"
+
+.. code-block::
+
+	sed -i "s~YOUR_LICENSE_KEY~<your license key value>~g" docker-compose.yml 
+	sed -i "s/YOUR_ACCOUNT_ID/<your account ID>/g" docker-compose.yml 
 
 Start Netmaker
 ----------------

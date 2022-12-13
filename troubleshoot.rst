@@ -133,6 +133,7 @@ Netclient
   - Download the latest release source and create the Netclient binaries by executing netmaker/netclient/bin-maker.sh
   - Execute `uname -m` in the OpenWRT os
   - Execute  `lscpu` to determine byte order or try below code.
+  
   .. code-block:: bash
 
     if [[ `printf '\0\1' | hexdump -e '/2 "%04x"'` -eq 0100 ]]; then
