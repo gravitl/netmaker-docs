@@ -151,7 +151,7 @@ Example:-
   Manage nodes associated with a network
 
   Usage:
-    netmaker node [command]
+    nmctl node [command]
 
   Available Commands:
     create_egress  Turn a Node into a Egress
@@ -170,4 +170,4 @@ Example:-
     -h, --help     help for node
     -t, --toggle   Help message for toggle
 
-  Use "netmaker node [command] --help" for more information about a command.
+  Use "nmctl node [command] --help" for more information about a command.
