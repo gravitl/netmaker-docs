@@ -182,6 +182,15 @@ Upgrading the Netmaker server and clients.
 
    upgrades
 
+NMCTL
+----------------
+
+A reference document for the Netmaker CLI tool nmctl.
+
+.. toctree::
+   :maxdepth: 1
+
+   nmctl.rst
 
 Troubleshooting
 ----------------
