@@ -67,6 +67,7 @@ You can see a list of all your networks that you have set with the following.
  nmctl context list
 
 That list also tells you what network is currently set.
+
 Network
 =============
 
