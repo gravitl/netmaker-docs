@@ -8,18 +8,65 @@ NMCTL is a CLI tool for interacting with the Netmaker API.
 Quick Start
 ******************
 
+Start with getting the binary
+
+.. code-block::
+
+   wget https://github.com/gravitl/netmaker/releases/download/v0.17.1/nmctl
+
+Make sure the binary is executable with ``chmod +x nmctl`` and then move it into your /usr/sbin folder.
+
+If everything is setup ok, you should be able to type ``nmctl`` and see the following:
+
+.. code-block::
+
+  CLI for interacting with Netmaker Server
+
+  Usage:
+    netmaker [command]
+
+  Available Commands:
+    acl          Manage Access Control Lists (ACLs)
+    completion   Generate the autocompletion script for the specified shell
+    context      Manage various netmaker server configurations
+    dns          Manage DNS entries associated with a network
+    ext_client   Manage External Clients
+    help         Help about any command
+    keys         Manage access keys associated with a network
+    logs         Retrieve server logs
+    metrics      Fetch metrics of nodes/networks
+    network      Manage Netmaker Networks
+    network_user Manage Network Users
+    node         Manage nodes associated with a network
+    server       Get netmaker server information
+    user         Manage users and permissions
+    usergroup    Manage User Groups
+
+  Flags:
+    -h, --help     help for netmaker
+    -t, --toggle   Help message for toggle
+
+  Use "netmaker [command] --help" for more information about a command.
+
+Your netmaker CLI should be ready to go at this point.
+
+
 Before running any commands, a context has to be set which stores the API endpoint information.
 
+You can use your `username` and `password` that you use to sign in to the dashboard UI to set the context. Then you can set the CLI to use that context.
+
 .. code-block::
 
-  nmctl context set dev --endpoint=https://api.netmaker.domain.com  --master_key=YOUR_MASTER_KEY
+   nmctl context set dev --endpoint=https://api.netmaker.domain.com  --username=admin --password=YOUR_PASSWORD
   nmctl context use dev # this sets any defined context as the current context
 
-Apart from `master_key` authentication, `username` and `password` authentication is also supported.
+You can see a list of all your networks that you have set with the following.
 
 .. code-block::
 
-  nmctl context set dev --endpoint=https://api.netmaker.domain.com  --username=admin --password=YOUR_PASSWORD
+ nmctl context list
+
+That list also tells you what network is currently set.
 
 Network
 =============
