@@ -748,7 +748,7 @@ This is enough to get a functioning HA installation of Netmaker. However, you ma
 Security Settings
 ==================
 
-In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in the netmaker-ui section of your docker-compose.yml file.
+In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in Your Caddyfile if you are using caddy, or the netmaker-ui section of your docker-compose.yml file if you are using traefik.
 
 For Caddy
 -----------
