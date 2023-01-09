@@ -757,7 +757,7 @@ In your /root/Caddyfile look in the Dashboard section for ``reverse_proxy http:/
 
 Above that line add the following
 
-.. code-block::
+.. code-block:: cfg
 
     @blocked not remote_ip <ip1> <ip2> <ip3>
     respond @blocked "Nope" 403
