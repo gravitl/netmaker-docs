@@ -762,7 +762,7 @@ Above that line add the following
     @blocked not remote_ip <ip1> <ip2> <ip3>
     respond @blocked "Nope" 403
 
-Replace the <ip> placeholders whith your whitelist IP ranges
+Replace the <ip> placeholders with your whitelist IP ranges
 
 For Traefik
 -----------
