@@ -2,9 +2,9 @@
 Netclient Setup
 ================================
 
-.. image:: 
+.. image:: images/netclientcli
   :width: 80%
-  :alt: connect/disconnect button
+  :alt: netclient CLI
   :align: center
 
 The Netclient manages WireGuard on client devices (nodes). This document walks through setting up the netclient on machines, including install, management, and uninstall.
