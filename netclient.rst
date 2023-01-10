@@ -4,12 +4,20 @@ Netclient Setup
 
 As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
 
-The UI has been updated
+The UI has been updated for Mac and Windows,
 
-.. image:: images/netclientcli
+.. image:: images/netclientUI
   :width: 80%
   :alt: netclient CLI
   :align: center
+
+And the CLI has been updated.
+
+.. image:: images/netclientUI
+  :width: 80%
+  :alt: netclient CLI
+  :align: center
+
 
 The Netclient manages WireGuard on client devices (nodes). This document walks through setting up the netclient on machines, including install, management, and uninstall.
 
