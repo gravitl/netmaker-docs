@@ -207,11 +207,12 @@ VERBOSITY              	-e VERBOSITY='4'                                        
 Joining a Network
 ******************
 
+The join command provides the following flags with short descriptions on what each one does.
+
 .. image:: images/netclientjoincli.png
   :width: 80%
   :alt: netclient CLI
   :align: center
-
 
 With a token:
 
@@ -232,14 +233,43 @@ With SSO (oauth must be configured):
 
   netclient join -n <net name> -s api.<netmaker domain>
 
-
-Use the -vvv flag if installation fails and report logs.
-
 With docker:
 
 .. code-block::
 
   docker run -d --network host  --privileged -e TOKEN=<TOKEN> -v /etc/netclient:/etc/netclient --name netclient gravitl/netclient:<CURRENT_VERSION>
+
+These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the command ``netclient -v <number 0-4>`` if you need more info about the join.
+
+To join on the GUI with Windows or Mac, just click the ADD NEW button and you will be given a choice of token or Username/Password.
+
+.. image:: images/netclientjoinGUI.png
+  :width: 80%
+  :alt: netclient join through GUI
+  :align: center
+
+Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
+
+.. image:: images/netclienttokenGUI.png
+  :width: 80%
+  :alt: netclient token screen
+  :align: center
+
+Choose Username/Password and you will be taken to this screen:
+
+.. image:: images/netclientauthGUI.png
+  :width: 80%
+  :alt: netclient username and password screen
+  :align: center
+
+You can fill out these fields by parsing out theJoin via Basic Auth part of the Access Key Details
+
+.. image:: images/netclientjoinauthsnippet.png
+  :width: 80%
+  :alt: netclient snippet of access key details
+  :align: center
+
+The Server name will be in the <netmaker api domain> and the network will be in the <network-name> placeholder. Username and password is the same as you would use to sign into your netmaker dashboard.
 
 *********************
 Managing Netclient
