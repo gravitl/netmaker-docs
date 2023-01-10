@@ -2,6 +2,10 @@
 Netclient Setup
 ================================
 
+As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
+
+The UI has been updated
+
 .. image:: images/netclientcli
   :width: 80%
   :alt: netclient CLI
