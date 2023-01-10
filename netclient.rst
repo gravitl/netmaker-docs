@@ -6,14 +6,14 @@ As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker
 
 The UI has been updated for Mac and Windows,
 
-.. image:: images/netclientUI
+.. image:: images/netclientUI.png
   :width: 80%
   :alt: netclient CLI
   :align: center
 
 And the CLI has been updated.
 
-.. image:: images/netclientUI
+.. image:: images/netclientcli.png
   :width: 80%
   :alt: netclient CLI
   :align: center
@@ -206,6 +206,12 @@ VERBOSITY              	-e VERBOSITY='4'                                        
 ******************
 Joining a Network
 ******************
+
+.. image:: images/netclientjoincli.png
+  :width: 80%
+  :alt: netclient CLI
+  :align: center
+
 
 With a token:
 
