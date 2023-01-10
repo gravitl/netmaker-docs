@@ -12,7 +12,7 @@ Start with getting the binary
 
 .. code-block::
 
-   wget https://github.com/gravitl/netmaker/releases/download/v0.17.1/nmctl
+  wget https://github.com/gravitl/netmaker/releases/latest/download/nmctl
 
 Make sure the binary is executable with ``chmod +x nmctl`` and then move it into your /usr/sbin folder.
 
