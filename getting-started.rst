@@ -43,8 +43,6 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 
 **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
 
-**Is Point to Site:** Create a network in which all clients have only one, central peer.
-
 **Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if the server is on the same network (LAN) as you.
 
 Once your network is created, you should the network (wg-net here but it will be the name you chose when creating the network):
@@ -117,15 +115,30 @@ Once installed on all nodes, you can test the connection by pinging the private 
    :alt: Node Success
    :align: center
 
-Manage Nodes
-===============
+Manage Nodes/Hosts
+==================
 
-Your machines should now be visible in the control pane. 
+Your machines should now be visible in the control panel. 
 
 .. image:: images/nodes.png
    :width: 80%
    :alt: Node Success
    :align: center
+
+As of v0.18.0 each node has an associated host. The Hosts can be found in the Hosts tab on the UI. You should be taken to a screen like this.
+
+.. image:: images/netmakerhostpage.png
+   :width: 80%
+   :alt: Host page
+   :align: center
+
+I here you can see the host's name, the endpoint of the server running netclient, the public key for that host, the version number, and a switch to set that host's node as the default node. When this is switched on, that node will serve as the default node when a network is created (similar to netmaker-1 in versions before v0.18.0). Clicking on a host will bring you to the host's details.
+
+.. image:: images/hostdetails.png
+   :width: 80%
+   :alt: details screen of the host
+   :align: center
+
 
 You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 
