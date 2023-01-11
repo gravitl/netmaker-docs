@@ -262,7 +262,7 @@ Choose Username/Password and you will be taken to this screen:
   :alt: netclient username and password screen
   :align: center
 
-You can fill out these fields by parsing out theJoin via Basic Auth part of the Access Key Details
+You can fill out these fields by parsing out the Join via Basic Auth part of the Access Key Details
 
 .. image:: images/netclientjoinauthsnippet.png
   :width: 80%
