@@ -6,7 +6,7 @@ As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker
 
 The UI has been updated for Mac and Windows,
 
-.. image:: images/netclientUI.png
+.. image:: images/netclientGUI.png
   :width: 80%
   :alt: netclient CLI
   :align: center
