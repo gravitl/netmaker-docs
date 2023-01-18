@@ -94,6 +94,70 @@ Edit
 Hosts
 ======
 
+In simple terms, a host is a netclient or a machine running the netclient software. Netmaker UI allows an admin to conviniently view and configure some host settings remotely.
+
+Host List
+---------
+
+.. image:: images/hosts.png
+   :width: 80%
+   :alt: hosts list
+   :align: center
+
+(1) **Hosts Tab:** Opens a view to allow admins manage hosts.
+(2) **Relay Status:** Indicates whether a host is a relay or is being relayed by a different host on any network.
+(3) **Version:** Indicates the version of netclient the host is running.
+(4) **Default Node:** Click to make the host a default node or not. Hosts that are default nodes will automatically join any created network.
+(5) **Search:** Search for a host by name.
+
+
+Host Create
+-----------
+
+A host is automatically created on a server once a netclient (a machine running netclient) joins any network on the server.
+
+Host Details
+------------
+
+.. image:: images/host-details.png
+   :width: 80%
+   :alt: host details
+   :align: center
+
+The following information is present under the host details tab:
+
+(1) **ID:** Unique identifier for the host
+(2) **Name:** Name of the host. Defaults to the machine's name.
+(3) **Version:** Version of netclient the host is running.
+(4) **Operating System:** Operating system (OS) the machine is running.
+(5) **Public Key:** Public key of the host. distributed to other hosts.
+(6) **MTU:** Maximum Transmission Unit (MTU) of the host
+(7) **Listen Port:** The wiregaurd listen port.
+(8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`.
+(9) **Verbosity:** Log verbosity (ranges from 1-4). Indicates detailed the host (netclient) will output logs.
+(10) **Default Interface:** Default network interface used by the host.
+(11) **MAC Address:** Media Access Control (MAC) address of the host machine.
+(12) **Is Default:** Indicates whether the host is a default node. Hosts that are default nodes will automatically join any created network.
+(13) **Debug:** Flag to enable additional logging on client.
+(14) **Proxy Enabled:** Indicates whether a host is running netclient proxy.
+(15) **Is Static:** Indicaates whether the host's endpoint is static or not.
+(16) **Interfaces:** Lists the available network interface for the host.
+
+A host can be deleted from the UI. All associated nodes must be manually removed however, before deleting a host.
+
+
+.. image:: images/host-nets.png
+   :width: 80%
+   :alt: host details
+   :align: center
+
+Under the host's networks tab, you can see all the networks on the current server the host is connected to. You can also view all networks on the server and connect to or disconnect from them.
+
+
+Host Relays
+------------
+
+
 
 
 Nodes
@@ -104,10 +168,10 @@ Node List
 
 .. image:: images/nodes-1.png
    :width: 80%
-   :alt: dashboard
+   :alt: nodes list
    :align: center
 
-(1) **Sort Nodes:** Stor nodes by criterion.
+(1) **Sort Nodes:** Sort nodes by criterion.
 (2) **Search Nodes:** Look up a node by name.
 (3) **Select Network:** Filter nodes by network.
 (4) **Node Name:** Name of node. By default set to hostname of machine.
@@ -137,7 +201,7 @@ Create Egress
 Create Relay
 -------------
 
-Check host section on hosts_
+Check host section on hosts_. A relay can be created under host settings.
 
 Edit Node / Node Details
 --------------------------
