@@ -157,7 +157,30 @@ Under the host's networks tab, you can see all the networks on the current serve
 Host Relays
 ------------
 
+Netclients (host machines) can be configured to relay network traffic.
 
+.. image:: images/create-relay-1.png
+   :width: 80%
+   :alt: create relay step 1
+   :align: center
+
+You can make a host a relay under the `RELAY STATUS` tab. Click on the `Is Relay` switch to enable. 
+
+.. image:: images/create-relay-2.png
+   :width: 80%
+   :alt: create relay step 2
+   :align: center
+
+From the dropdown, select the hosts you want to relay to.
+
+**NB** Chained relays are currently unsupported. You can only relay to a host which is not a relay itself, or is not already being relayed.
+
+.. image:: images/create-relay-3.png
+   :width: 80%
+   :alt: create relay step 3
+   :align: center
+
+You can update the relayed hosts via the switches in the `Relay hosts` table.
 
 
 Nodes
