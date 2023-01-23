@@ -94,7 +94,7 @@ Edit
 Hosts
 ======
 
-In simple terms, a host is a netclient or a machine running the netclient software. Netmaker UI allows an admin to conviniently view and configure some host settings remotely.
+In simple terms, a host is a computer or machine running the netclient software. Netmaker UI allows an admin to conviniently view and configure some host settings remotely.
 
 Host List
 ---------
@@ -134,7 +134,7 @@ The following information is present under the host details tab:
 (6) **MTU:** Maximum Transmission Unit (MTU) of the host
 (7) **Listen Port:** The wiregaurd listen port.
 (8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`.
-(9) **Verbosity:** Log verbosity (ranges from 1-4). Indicates detailed the host (netclient) will output logs.
+(9) **Verbosity:** Log verbosity (ranges from 1-4). Indicates level of detail the host (netclient) will output to logs.
 (10) **Default Interface:** Default network interface used by the host.
 (11) **MAC Address:** Media Access Control (MAC) address of the host machine.
 (12) **Is Default:** Indicates whether the host is a default node. Hosts that are default nodes will automatically join any created network.
