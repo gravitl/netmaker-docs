@@ -12,7 +12,7 @@ Start with getting the binary
 
 .. code-block::
 
-   wget https://github.com/gravitl/netmaker/releases/download/v0.17.1/nmctl
+  wget https://github.com/gravitl/netmaker/releases/latest/download/nmctl
 
 Make sure the binary is executable with ``chmod +x nmctl`` and then move it into your /usr/sbin folder.
 
@@ -23,7 +23,7 @@ If everything is setup ok, you should be able to type ``nmctl`` and see the foll
   CLI for interacting with Netmaker Server
 
   Usage:
-    netmaker [command]
+    nmctl [command]
 
   Available Commands:
     acl          Manage Access Control Lists (ACLs)
@@ -32,6 +32,7 @@ If everything is setup ok, you should be able to type ``nmctl`` and see the foll
     dns          Manage DNS entries associated with a network
     ext_client   Manage External Clients
     help         Help about any command
+    host         Manage hosts
     keys         Manage access keys associated with a network
     logs         Retrieve server logs
     metrics      Fetch metrics of nodes/networks
@@ -43,12 +44,11 @@ If everything is setup ok, you should be able to type ``nmctl`` and see the foll
     usergroup    Manage User Groups
 
   Flags:
-    -h, --help     help for netmaker
-    -t, --toggle   Help message for toggle
+    -h, --help   help for nmctl
 
-  Use "netmaker [command] --help" for more information about a command.
+  Use "nmctl [command] --help" for more information about a command.
 
-Your netmaker CLI should be ready to go at this point.
+Your CLI should be ready to go at this point.
 
 
 Before running any commands, a context has to be set which stores the API endpoint information.
@@ -57,7 +57,7 @@ You can use your `username` and `password` that you use to sign in to the dashbo
 
 .. code-block::
 
-   nmctl context set dev --endpoint=https://api.netmaker.domain.com  --username=admin --password=YOUR_PASSWORD
+  nmctl context set dev --endpoint=https://api.netmaker.domain.com  --username=admin --password=YOUR_PASSWORD
   nmctl context use dev # this sets any defined context as the current context
 
 You can see a list of all your networks that you have set with the following.
@@ -215,6 +215,5 @@ Example:-
 
   Flags:
     -h, --help     help for node
-    -t, --toggle   Help message for toggle
 
   Use "nmctl node [command] --help" for more information about a command.
