@@ -748,7 +748,24 @@ This is enough to get a functioning HA installation of Netmaker. However, you ma
 Security Settings
 ==================
 
-In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in the netmaker-ui section of your docker-compose.yml file.
+In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in Your Caddyfile if you are using caddy, or the netmaker-ui section of your docker-compose.yml file if you are using traefik.
+
+For Caddy
+-----------
+
+In your /root/Caddyfile look in the Dashboard section for ``reverse_proxy http://netmaker-ui``
+
+Above that line add the following
+
+.. code-block:: cfg
+
+    @blocked not remote_ip <ip1> <ip2> <ip3>
+    respond @blocked "Nope" 403
+
+Replace the <ip> placeholders with your whitelist IP ranges.
+
+For Traefik
+-----------
 
 1. In the labels section, add the following line:
 
@@ -768,8 +785,8 @@ and change it to this:
 
     traefik.http.routers.netmaker-ui.middlewares=nmui-security-1@docker,nmui-security@docker
 
-Replace YOUR_IP_CIDR with the whitelist ip range (can be multiple ranges).
+Replace YOUR_IP_CIDR with the whitelist IP range (can be multiple ranges).
 
-After that, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
+After changes are made for your reverse proxy, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
 
 

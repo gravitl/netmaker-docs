@@ -107,7 +107,7 @@ You must retrieve the MQ configuration file for Mosquitto and the wait script.
 .. code-block::
 
   wget -O /root/mosquitto.conf https://raw.githubusercontent.com/gravitl/netmaker/master/docker/mosquitto.conf
-  wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/develop/docker/wait.sh
+  wget -q -O /root/wait.sh https://raw.githubusercontent.com/gravitl/netmaker/master/docker/wait.sh
   chmod +x wait.sh
 
 5. Install Netmaker
@@ -152,7 +152,7 @@ You will also need to set an admin password for MQ, which may also be generated 
   tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
   sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
 
-Extre Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
+Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
 -----------------------------------------------------------------------------------------------------
 
 1. Log into https://dashboard.license.netmaker.io"
