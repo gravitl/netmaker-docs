@@ -2,7 +2,25 @@
 Netclient Setup
 ================================
 
+As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
+
+The UI has been updated for Mac and Windows,
+
+.. image:: images/netclientGUI.png
+  :width: 80%
+  :alt: netclient CLI
+  :align: center
+
+And the CLI has been updated.
+
+.. image:: images/netclientcli.png
+  :width: 80%
+  :alt: netclient CLI
+  :align: center
+
+
 The Netclient manages WireGuard on client devices (nodes). This document walks through setting up the netclient on machines, including install, management, and uninstall.
+
 
 The Netclient is supported on the following operating systems:
 - Linux (most distributions)
@@ -189,6 +207,13 @@ VERBOSITY              	-e VERBOSITY='4'                                        
 Joining a Network
 ******************
 
+The join command provides the following flags with short descriptions on what each one does.
+
+.. image:: images/netclientjoincli.png
+  :width: 80%
+  :alt: netclient CLI
+  :align: center
+
 With a token:
 
 .. code-block::
@@ -208,29 +233,77 @@ With SSO (oauth must be configured):
 
   netclient join -n <net name> -s api.<netmaker domain>
 
-
-Use the -vvv flag if installation fails and report logs.
-
 With docker:
 
 .. code-block::
 
   docker run -d --network host  --privileged -e TOKEN=<TOKEN> -v /etc/netclient:/etc/netclient --name netclient gravitl/netclient:<CURRENT_VERSION>
 
+These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
+
+To join on the GUI with Windows or Mac, just click the ADD NEW button and you will be given a choice of token or Username/Password.
+
+.. image:: images/netclientjoinGUI.png
+  :width: 80%
+  :alt: netclient join through GUI
+  :align: center
+
+Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
+
+.. image:: images/netclienttokenGUI.png
+  :width: 80%
+  :alt: netclient token screen
+  :align: center
+
+Choose Username/Password and you will be taken to this screen:
+
+.. image:: images/netclientauthGUI.png
+  :width: 80%
+  :alt: netclient username and password screen
+  :align: center
+
+You can fill out these fields by parsing out the Join via Basic Auth part of the Access Key Details
+
+.. image:: images/netclientjoinauthsnippet.png
+  :width: 80%
+  :alt: netclient snippet of access key details
+  :align: center
+
+The Server name will be in the <netmaker api domain> and the network will be in the <network-name> placeholder. Username and password is the same as you would use to sign into your netmaker dashboard.
+
+If the join was successful, you should see the network on the GUI.
+
+.. image:: images/netclientconnectedGUI.png
+  :width: 80%
+  :alt: netclient GUI showing a connected network
+  :align: center
+
+You should be able to click on that network and see the details page on that network.
+
+.. image:: images/netclientdetailsGUI.png
+  :width: 80%
+  :alt: netclient GUI network details
+  :align: center
+
 *********************
 Managing Netclient
 *********************
 
-Connecting/Disconnecting from a network:
+Connecting/Disconnecting from a network
+=======================================
+
+You can connect/disconnect from the network from either the netclient, or from the UI. in the last image above, you can see the connect/disconnect switch is located in the network details of the GUI.
+
+From the CLI, you can use the following:
 
 .. code-block::
 
-  netclient connect -n network
-  netclient disconnect -n network
+  netclient connect <network_name>
+  netclient disconnect <network_name>
 
 You can also disconnect and reconnect from the UI. Click on the node you want to disconnect/reconnect and click on edit.
 
-On the bottom, you should see a switch labeled connected like this one. toggle the switch to what you like, and hit submit. That client will connect or disconnect accordingly
+On the bottom, you should see a switch labeled connected like this one. toggle the switch and hit submit. That client will connect or disconnect accordingly.
 
 .. image:: images/disconnect.png
   :width: 80%
@@ -239,18 +312,33 @@ On the bottom, you should see a switch labeled connected like this one. toggle t
 
 If you disconnected from the CLI, This switch should be off.
 
-Leave a network:
+
+Leave a network
+===============
+
+In the GUI, the leave network button is located in the network details. You can also leave from the CLI with the following command.
 
 .. code-block::
 
-  netclient leave -n network
+  netclient leave <network>
 
-List Networks:
+List Networks
+=============
 
 .. code-block::
 
-  netclient list | jq
+  netclient list
 
+Use a different version
+=======================
+
+Netclient as of v0.18.0 has an option to choose which version of netclient you would like to use. This only applies to versions v0.18.0 and later.
+
+.. code-block::
+
+  netclient use <version>
+
+Netclient also has an auto-update feature as of v0.18.0
 
 ******************
 Uninstalling
@@ -269,3 +357,13 @@ Uninstall using package manager (use equivalent command for your OS):
 .. code-block::
 
   apt remove netclient
+
+With a Mac, just go to applications in your finder and throw netclient in the trash bin, or use
+
+.. code-block::
+
+  brew uninstall netclient
+
+if it was installed through Homebrew
+
+With windows go to "Add or remove programs" in your system settings and remove netclient.
