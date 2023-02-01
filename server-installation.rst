@@ -196,6 +196,58 @@ All environment variables and options are enabled in this file. It is the equiva
 .. literalinclude:: ./examplecode/docker-compose.reference.yml
   :language: YAML
 
+As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints. There are also some environment variables that have been changed, or removed. Your updated docker-compose file should look like this.
+
+.. literalinclude:: ./examplecode/docker-compose.reference.v18.yml
+  :language: YAML
+
+Our Caddy file has gone through some minor changes as well. We now use zerossl for certificates instead of letsencrypt. There also needs to be a block for the stun server. The file should look like this.
+
+.. code-block:: cfg
+
+    {
+        # ZeroSSL account
+        acme_ca https://acme.zerossl.com/v2/DV90
+        email YOUR_EMAIL
+    }
+
+    # Dashboard
+    https://dashboard.NETMAKER_BASE_DOMAIN {
+        # Apply basic security headers
+        header {
+                # Enable cross origin access to *.NETMAKER_BASE_DOMAIN
+                Access-Control-Allow-Origin *.NETMAKER_BASE_DOMAIN
+                # Enable HTTP Strict Transport Security (HSTS)
+                Strict-Transport-Security "max-age=31536000;"
+                # Enable cross-site filter (XSS) and tell browser to block detected attacks
+                X-XSS-Protection "1; mode=block"
+                # Disallow the site to be rendered within a frame on a foreign domain (clickjacking protection)
+                X-Frame-Options "SAMEORIGIN"
+                # Prevent search engines from indexing
+                X-Robots-Tag "none"
+                # Remove the server name
+                -Server
+        }
+
+        reverse_proxy http://netmaker-ui
+    }
+
+    # API
+    https://api.NETMAKER_BASE_DOMAIN {
+            reverse_proxy http://netmaker:8081
+    }
+
+    # STUN
+    https://stun.NETMAKER_BASE_DOMAIN {
+        reverse_proxy netmaker:3478
+    }
+
+
+    # MQ
+    wss://broker.NETMAKER_BASE_DOMAIN {
+            reverse_proxy ws://mq:8883
+    }
+
 Available docker-compose files
 ---------------------------------
 
@@ -203,7 +255,8 @@ The default options for docker-compose can be found here: https://github.com/gra
 
 The following is a brief description of each:
 
-- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the Traefik proxy.
+- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
+- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
 - `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
 
 No DNS - CoreDNS Disabled
