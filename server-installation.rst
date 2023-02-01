@@ -193,13 +193,11 @@ Compose File - Annotated
 
 All environment variables and options are enabled in this file. It is the equivalent to running the "full install" from the above section. However, all environment variables are included and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.
 
-.. literalinclude:: ./examplecode/docker-compose.reference.yml
-  :language: YAML
-
 As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints. There are also some environment variables that have been changed, or removed. Your updated docker-compose file should look like this.
 
 .. literalinclude:: ./examplecode/docker-compose.reference.v18.yml
   :language: YAML
+
 
 Our Caddy file has gone through some minor changes as well. We now use zerossl for certificates instead of letsencrypt. There also needs to be a block for the stun server. The file should look like this.
 
