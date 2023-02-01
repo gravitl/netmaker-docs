@@ -1,0 +1,94 @@
+version: "3.4"
+
+services:
+  netmaker: # The Primary Server for running Netmaker
+    container_name: netmaker
+    image: gravitl/netmaker:v0.18.0
+    restart: always
+    volumes: # Volume mounts necessary for sql, coredns, and mqtt
+      - dnsconfig:/root/config/dnsconfig
+      - sqldata:/root/data
+      - shared_certs:/etc/netmaker
+    environment: # Necessary capabilities to set iptables when running in container
+      BROKER_NAME: "broker.NETMAKER_BASE_DOMAIN" # The domain/host IP indicating the mq broker address
+      SERVER_NAME: "NETMAKER_BASE_DOMAIN" # The base domain of your server
+      STUN_DOMAIN: "stun.NETMAKER_BASE_DOMAIN" # The IP for the stun server
+      SERVER_HOST: "SERVER_PUBLIC_IP" # Set to public IP of machine.
+      SERVER_API_CONN_STRING: "api.NETMAKER_BASE_DOMAIN:443"
+      COREDNS_ADDR: "SERVER_PUBLIC_IP" # Address of the CoreDNS server. Defaults to SERVER_HOST
+      DNS_MODE: "on" # Enables DNS Mode, meaning all nodes will set hosts file for private dns settings.
+      SERVER_HTTP_HOST: "api.NETMAKER_BASE_DOMAIN"
+      API_PORT: "8081" # The HTTP API port for Netmaker. Used for API calls / communication from front end. If changed, need to change port of BACKEND_URL for netmaker-ui.
+      MASTER_KEY: "REPLACE_MASTER_KEY" # The admin master key for accessing the API. Change this in any production installation.
+      CORS_ALLOWED_ORIGIN: "*" # The "allowed origin" for API requests. Change to restrict where API requests can come from.
+      DISPLAY_KEYS: "on" # Show keys permanently in UI (until deleted) as opposed to 1-time display.
+      DATABASE: "sqlite" # Database to use - sqlite, postgres, or rqlite
+      NODE_ID: "netmaker-server-1" # used for HA - identifies this server vs other servers
+      MQ_HOST: "mq"  # the address of the mq server. If running from docker compose it will be "mq". Otherwise, need to input address. If using "host networking", it will find and detect the IP of the mq container.
+      MQ_PORT: "443" # the reachable port of MQ - change if external MQ port changes (port on proxy, not necessarily the one exposed in docker-compose)
+      MQ_SERVER_PORT: "1883" # the reachable port of MQ by the server - change if internal MQ port changes (or use external port if MQ is not on the same machine)
+      VERBOSITY: "1" # logging verbosity level - 1, 2, 3, or 4
+      MQ_ADMIN_PASSWORD: "REPLACE_MQ_ADMIN_PASSWORD" # password for the MQ
+      STUN_PORT: "3478" #port used for the stun server
+      PROXY: "on"
+      # this section is for OAuth
+      AUTH_PROVIDER: "" # "<azure-ad|github|google|oidc>"
+      CLIENT_ID: "" # "<client id of your oauth provider>"
+      CLIENT_SECRET: "" # "<client secret of your oauth provider>"
+      FRONTEND_URL: "" # "https://dashboard.<netmaker base domain>"
+      AZURE_TENANT: "" # "<only for azure, you may optionally specify the tenant for the OAuth>"
+      OIDC_ISSUER: "" # https://oidc.yourprovider.com - URL of oidc provider
+    ports:
+      - "51821-51830:51821-51830/udp" # wireguard ports
+      - "3478:3478/udp" # stun ports
+  netmaker-ui:  # The Netmaker UI Component
+    container_name: netmaker-ui
+    image: gravitl/netmaker-ui:v0.18.0
+    depends_on:
+      - netmaker
+    links:
+      - "netmaker:api"
+    restart: always
+    environment:
+      BACKEND_URL: "https://api.NETMAKER_BASE_DOMAIN" # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
+  caddy:  # the default proxy - can be replaced with traefik or nginx, but requires careful configuration
+    image: caddy:2.6.2
+    container_name: caddy
+    restart: unless-stopped
+    volumes:
+      - /root/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_conf:/config
+    ports:
+      - "80:80"
+      - "443:443"
+  coredns:
+    container_name: coredns
+    image: coredns/coredns
+    command: -conf /root/dnsconfig/Corefile
+    depends_on:
+      - netmaker
+    restart: always
+    volumes:
+      - dnsconfig:/root/dnsconfig
+  mq: # the MQTT broker for netmaker
+    container_name: mq
+    image: eclipse-mosquitto:2.0.15-openssl
+    depends_on:
+      - netmaker
+    restart: unless-stopped
+    command: ["/mosquitto/config/wait.sh"]
+    environment:
+      NETMAKER_SERVER_HOST: "https://api.NETMAKER_BASE_DOMAIN"
+    volumes:
+      - /root/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /root/wait.sh:/mosquitto/config/wait.sh
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+volumes:
+  caddy_data: {} # storage for caddy data
+  caddy_conf: {} # storage for caddy configuration
+  sqldata: {}  # storage for embedded sqlite
+  dnsconfig: {} # storage for coredns
+  mosquitto_data: {} # storage for mqtt data
+  mosquitto_logs: {} # storage for mqtt logs
