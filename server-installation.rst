@@ -345,7 +345,8 @@ Caddy
 .. code-block:: cfg
 
     {
-        # LetsEncrypt account
+        # ZeroSSL account
+        acme_ca https://acme.zerossl.com/v2/DV90
         email <YOUR_EMAIL>
     }
 
