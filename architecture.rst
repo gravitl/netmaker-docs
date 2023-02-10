@@ -47,7 +47,7 @@ Netmaker
 
 Netmaker is a platform built off of WireGuard enabling users to create mesh networks between their devices. Netmaker can create both full and partial mesh networks depending on the use case.
 
-When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, SQLite,  Mosquitto (MQ Broker), and UI webserver. There is also almost always a proxy server / LB, which by default is Traefik, but could be any number of tools.
+When we refer to Netmaker in aggregate, we are typically referring to Netmaker and the netclient, as well as other supporting services such as CoreDNS, SQLite,  Mosquitto (MQ Broker), and UI webserver. There is also almost always a proxy server / LB, which by default is Caddy, but could be any number of tools.
 
 From an end user perspective, they typically interact with the Netmaker UI, or even just run the install script for the netclient on their devices. The other components run in the background invisibly. 
 
