@@ -160,9 +160,30 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           volumes:
               - '/etc/netclient:/etc/netclient'
           container_name: netclient
-          image: 'gravitl/netclient:v0.16.3'
+          image: 'gravitl/netclient:v0.18.0'
 
 where <networktoken> is the Access Token available from the "Viewing your Access Key Details" window in the Netmaker UI.
+
+If you are making a docker container on a server that already has a baremetal version of netclient on there, this will create a conflict. Netmaker will only make one host for that machine and not see the container as another node. Meanwhile on the client, both daemons will be running (bare metal and container), causing conflicts (both receive the peer updates) and the node becomes unreachable.
+
+You can work around this by running the docker netclient using a seperate netclient folder and having host networking NOT enabled. so your compose would look more like this:
+
+.. code-block::
+
+  version: "3.4"
+
+  services:
+      netclient:
+          privileged: true
+          restart: always
+          environment:
+              - TOKEN=<networktoken>
+          volumes:
+              - '/etc/netclient2:/etc/netclient'
+          container_name: netclient2
+          image: 'gravitl/new-netclient:v0.18.0'
+
+By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
 
 =======================	==================================================================	==================================================================================================================================================
 Environment Variable   	Docker Option Example                                             	Description                                                                                                                                       
@@ -238,6 +259,13 @@ With docker:
 .. code-block::
 
   docker run -d --network host  --privileged -e TOKEN=<TOKEN> -v /etc/netclient:/etc/netclient --name netclient gravitl/netclient:<CURRENT_VERSION>
+
+Again, if you are making a docker container on an already existing baremetal netclient, you will have to modify the join command like this for example:
+
+.. code-block::
+
+  docker run -d --privileged -e TOKEN=<TOKEN> -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
+
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
