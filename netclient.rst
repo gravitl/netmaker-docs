@@ -166,7 +166,9 @@ where <networktoken> is the Access Token available from the "Viewing your Access
 
 If you are making a docker container on a server that already has a baremetal version of netclient on there, this will create a conflict. Netmaker will only make one host for that machine and not see the container as another node. Meanwhile on the client, both daemons will be running (bare metal and container), causing conflicts (both receive the peer updates) and the node becomes unreachable.
 
-You can work around this by running the docker netclient using a seperate netclient folder and having host networking NOT enabled. so your compose would look more like this:
+You can work around this by running the docker netclient using a seperate netclient folder and having host networking NOT enabled. Host networking must be turned off when running with multiple netclients. This means that the host will not have the private address of the container and it will be segmented.
+
+Your compose would look more like this:
 
 .. code-block::
 
@@ -266,6 +268,7 @@ Again, if you are making a docker container on an already existing baremetal net
 
   docker run -d --privileged -e TOKEN=<TOKEN> -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
 
+And again host networking will be turned off in this case and will not have the private address of the contianer and it will be segmented.
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
