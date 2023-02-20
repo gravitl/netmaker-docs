@@ -85,9 +85,9 @@ AGENT_BACKEND:
     **Description:** Enables the AGENT backend (GRPC running on GRPC_PORT at SERVER_GRPC_HOST). Change to "off" to turn off.
 
 DNS_MODE:  
-    **Default:** "off"
+    **Default:** "on"
 
-    **Description:** Enables DNS Mode, meaning config files will be generated for CoreDNS.
+    **Description:** Enables DNS Mode, meaning config files will be generated for CoreDNS. Change to "off" to turn off.
 
 DATABASE:  
     **Default:** "sqlite"
