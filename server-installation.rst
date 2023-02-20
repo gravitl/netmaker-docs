@@ -140,7 +140,7 @@ DISPLAY_KEYS
     **Description:** If "on", will allow you to always show the key values of "access keys". This could be considered a vulnerability, so if turned "off", will only display key values once, and it is up to the users to store the key values locally.
 
 NODE_ID
-    **Default:** <system mac addres>
+    **Default:** (os.Hostname)
 
     **Description:** This setting is used for HA configurations of the server, to identify between different servers. Nodes are given ID's like netmaker-1, netmaker-2, and netmaker-3. If the server is not HA, there is no reason to set this field.
 

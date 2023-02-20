@@ -14,7 +14,7 @@ server:
   version: "" # version of server
   rce: "" # defaults to "off"
   mqhost: "" # defaults to "mq"
-  nodeid: "" # defaults to macaddress of machine
+  nodeid: "" # defaults to hostname of machine
   messagequeuebackend: "" # default to "on"
   database: "" # defaults to "sqlite"
   verbosity: "" # defaults to 0
