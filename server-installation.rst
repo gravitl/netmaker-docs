@@ -65,7 +65,7 @@ API_PORT:
     **Description:** Should be the same as the port on SERVER_API_CONN_STRING in most cases. Sets the port for the API on the server.
 
 MASTER_KEY:  
-    **Default:** "secretkey" 
+    **Default:** "" 
 
     **Description:** The admin master key for accessing the API. Change this in any production installation.
 
