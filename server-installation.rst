@@ -124,11 +124,6 @@ RCE:
 
     **Description:** The server enables you to set PostUp and PostDown commands for nodes, which is standard for WireGuard with wg-quick, but is also **Remote Code Execution**, which is a critical vulnerability if the server is exploited. Because of this, it's turned off by default, but if turned on, PostUp and PostDown become editable.
 
-DEFAULT_NODE_LIMIT
-    **Default:** "999999999"
-
-    **Description:** Limits the number of nodes allowed on the server (total).
-
 DISPLAY_KEYS
     **Default:** "on"
 
