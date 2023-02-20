@@ -49,7 +49,7 @@ SERVER_API_CONN_STRING
     **Description:**  MUST SET THIS VALUE. This is the public, resolvable address of the API, including the port. For instance: api.netmaker.example.com:443.
 
 COREDNS_ADDR
-    **Default:** ""
+    **Default:** (Server detects the public IP address of machine)
 
     **Description:** The public IP of the CoreDNS server. Will typically be the same as the server where Netmaker is running (same as SERVER_HOST).
 
