@@ -79,11 +79,6 @@ REST_BACKEND:
 
     **Description:** Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST). Change to "off" to turn off.
 
-AGENT_BACKEND:  
-    **Default:** "on" 
-
-    **Description:** Enables the AGENT backend (GRPC running on GRPC_PORT at SERVER_GRPC_HOST). Change to "off" to turn off.
-
 DNS_MODE:  
     **Default:** "off"
 
