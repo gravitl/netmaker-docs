@@ -98,13 +98,11 @@ After your enrollment key is created, you can click on that key to get the regis
 
 
 
-* The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient register -k <enrollment key> -s grpc.myserver.com -p 50051``
+* The **Enrollment Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient register -k <enrollment key> -s grpc.myserver.com -p 50051``
 * The **Registration Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the enrollment key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient register -t <registration token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
 * The **Register Command** value is a command that can be run on Linux systems after installing the Netclient.  It will register with the server directly from the command line.
   
 Other variations (eg Docker) are covered with the remaining values.
-
-Networks can also be enabled to allow nodes to sign up without keys at all. In this scenario, nodes enter a "pending state" and are not permitted to join the network until an admin approves them.  To enable this option, visit the Network Details for the network and turn on the "Allow Node Signup Without Keys" option.
 
 Deploy Nodes
 =================
