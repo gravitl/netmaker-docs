@@ -199,13 +199,12 @@ As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for 
   :language: YAML
 
 
-Our Caddy file has gone through some minor changes as well. We now use zerossl for certificates instead of letsencrypt. There also needs to be a block for the stun server. The file should look like this.
+Our Caddy file has gone through some minor changes as well. There needs to be a block for the stun server. The file should look like this.
 
 .. code-block:: cfg
 
     {
-        # ZeroSSL account
-        acme_ca https://acme.zerossl.com/v2/DV90
+       
         email YOUR_EMAIL
     }
 
