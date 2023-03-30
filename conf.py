@@ -22,7 +22,7 @@ copyright = '2022, Netmaker Inc.'
 author = 'Netmaker'
 
 # The full version, including alpha/beta/rc tags
-release = '0.17.1'
+release = '0.18.5'
 
 
 # -- General configuration ---------------------------------------------------
