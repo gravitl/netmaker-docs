@@ -43,11 +43,9 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 
 **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
 
-**Is Point to Site:** Create a network in which all clients have only one, central peer.
-
 **Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if the server is on the same network (LAN) as you.
 
-Once your network is created, you should the network (wg-net here but it will be the name you chose when creating the network):
+Once your network is created, you should see the network (wg-net here but it will be the name you chose when creating the network):
 
 .. image:: images/network-created.png
    :width: 80%
@@ -55,7 +53,9 @@ Once your network is created, you should the network (wg-net here but it will be
    :align: center
 
 
-When you click on the NetId and then the Nodes button (or go direct via the left-hand menu and then Nodes) you see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network.
+When you click on the NetId and then the Nodes button (or go direct via the left-hand menu and then Nodes) you see that the netmaker server has added itself to the network. From here, you can move on to adding additional nodes to the network. 
+
+As of v0.18.0, netclient has been moved out of the netmaker repo and into its own repo. This means that the netmaker server will no longer create its own default node. To recreate that default node, Netclient will also have to be installed on the netmaker server and joined to the network. You can then set that node as a default node in the Hosts tab. This will make every new network have that node automatically on creation. More on hosts are mentioned in the manage Nodes/Hosts section of this page.
 
 .. image:: images/netmaker-node.png
    :width: 80%
@@ -66,28 +66,43 @@ When you click on the NetId and then the Nodes button (or go direct via the left
 Create a Key
 ===============
 
-Adding nodes to the network typically requires a key.
+Adding nodes to the network typically requires a key. If You are on version 0.18 or newer, you will use the enrollment key to acces a netmaker server. Enrollment keys offer different ways to register with a server.
 
-#. Click on the ACCESS KEYS tab and select the network you created.
-#. Click CREATE ACCESS KEY
-#. Give it a name (ex: "mykey") and a number of uses (ex: 25)
-#. Click CREATE 
-#. Visit https://docs.netmaker.org/netclient.html#install to install netclient on your nodes.
+Navigate to the enrollment keys tab on the side menu. You should see a create button in the top right corner. After clicking that, you should be brought to a window like this.
 
-.. image:: images/access-key.png
+.. image:: images/enrollmentkeycreate.png
    :width: 80%
-   :alt: Access Key Screen
+   :alt: Enrollment Key Screen
    :align: center
 
-There are different values for difference scenarios.  The top 3 values cover these scenarios:
+This will give you a few different options on how you want to set up your enrollment key. you can set it up with unlimited uses, limited uses, or timebound uses. You can also setup one or multiple networks to join, or you can set it to no networks and then join a network through the UI in the hosts tab. Click on newly registered host and go to the networks tab. Then click on show all networks. You can also create any tags you would like for that key
 
-* The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient join -k <access key> -s grpc.myserver.com -p 50051``
-* The **Access Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the access key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient join -t <access token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
-* The **Join Command** value is a command that can be run on Linux systems after installing the Netclient.  It will join the network directly from the command line.
+.. image:: images/networkjoinui.png
+   :width: 80%
+   :alt: Join network through UI
+   :align: center
+
+If an enrollment key runs out of uses, or is expired, the key will show as invalid like in the image below.
+
+.. image:: images/enrollmentkeyinvalid.png
+   :width: 80%
+   :alt: Enrollment Key Screen with invalid keys
+   :align: center
+
+After your enrollment key is created, you can click on that key to get the registration token.
+
+.. image:: images/enrollmentkeytoken.png
+   :width: 80%
+   :alt: Enrollment Key token window
+   :align: center
+
+
+
+* The **Enrollment Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient register -k <enrollment key> -s grpc.myserver.com -p 50051``
+* The **Registration Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the enrollment key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient register -t <registration token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
+* The **Register Command** value is a command that can be run on Linux systems after installing the Netclient.  It will register with the server directly from the command line.
   
 Other variations (eg Docker) are covered with the remaining values.
-
-Networks can also be enabled to allow nodes to sign up without keys at all. In this scenario, nodes enter a "pending state" and are not permitted to join the network until an admin approves them.  To enable this option, visit the Network Details for the network and turn on the "Allow Node Signup Without Keys" option.
 
 Deploy Nodes
 =================
@@ -117,15 +132,38 @@ Once installed on all nodes, you can test the connection by pinging the private 
    :alt: Node Success
    :align: center
 
-Manage Nodes
-===============
+Manage Nodes/Hosts
+==================
 
-Your machines should now be visible in the control pane. 
+Your machines should now be visible in the control panel. 
 
 .. image:: images/nodes.png
    :width: 80%
    :alt: Node Success
    :align: center
+
+As of v0.18.0 each node has an associated host. The host is a structure that encapsulates the node and gives it the information it needs like the name and network. The host will have features like creating a proxy, setting the hosted node as a default node, joining the hosted node to new networks without the need for another access key, setting verbosity, and changing listening ports and default interfaces. Server relays will also be handled by the host. The Hosts can be found in the Hosts tab on the UI. You should be taken to a screen like this.
+
+.. image:: images/netmakerhostpage.png
+   :width: 80%
+   :alt: Host page
+   :align: center
+
+In here you can see the host's name, the endpoint of the server running netclient, the public key for that host, the version number, and a switch to set that host's node as the default node. When this is switched on, that node will serve as the default node when a network is created (similar to netmaker-1 in versions before v0.18.0). Clicking on a host will bring you to the host's details.
+
+.. image:: images/hostdetails.png
+   :width: 80%
+   :alt: details screen of the host
+   :align: center
+
+This will give you more information like the firewall in use, MTUs, and listening port. You can also see networks associated with that host and options to edit or delete the host. If you are going to delete a Host, you need to delete the associated node first.
+
+.. image:: images/hostedit.png
+   :width: 80%
+   :alt: Edit screen of a host
+   :align: center
+
+In the edit screen, you can make changes to the logging verbosity, listening port and proxy listening port, local range, MTU, and name. These fields will also update in the node, as the node gets this info from the host. If you want to change the endpoint, the associated node has to be static.
 
 You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 

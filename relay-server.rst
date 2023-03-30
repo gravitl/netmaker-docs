@@ -17,20 +17,33 @@ For this reason, Netmaker has a Relay Server functionality. At any time you may 
 Configuring a Relay
 ==================================
 
-To create a relay, you can use any node in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be a relay server and makes for a good default choice if you are unsure of which node to select.
+To create a relay, you can use any host in your network, but it should have a public IP address (not behind a NAT).
 
-Simply click the relay button in the nodes list. Then, specify the nodes which it should relay. You can either enter the IP's directly, select from a list, or click "Select All."
+Simply navigate to the Hosts tab and click on the name of the host you would like to use to relay another server. You should see three butons at the top like in the picture below. Navigate to the relay status tab.
 
-.. image:: images/ui-7.jpg
+.. image:: images/relaystatusbutton.png
    :width: 80%
    :alt: Relay
    :align: center
 
-If you choose "select all" this essentially turns your network into a hub-and-spoke network. All traffic now routes over the relay node. This can create a bottleneck and slow down your network, but in some scenarios may simplify network operations.
+You should see this.
 
-After creation, you can change the list of relayed nodes by clicking "edit node" and editing the list (Field #12 below).
+.. image:: images/relaystatuspage.png
+   :width: 80%
+   :alt: Relay
+   :align: center
 
-.. image:: images/ui-5.jpg
-   :width: 40%
+click on the Is Relay switch and you should see a window pop up asking what server you sould like to relay. Choose from the dropdown menu.
+
+.. image:: images/ui-7.png
+   :width: 80%
+   :alt: Relay
+   :align: center
+
+
+After creation, you should see your relayed host show up on a list of relayed hosts at the bottom of the page. You should also see the list of hosts showing if a host is relaying or being relayed with green lettering. (figure below)
+
+.. image:: images/hostafterrelay.png
+   :width: 80%
    :alt: Relay
    :align: center

@@ -160,12 +160,14 @@ Version 0.17.0 uses Caddy instead of traefik.
 Open a Terminal window (shell prompt).  To set up Caddy you'll need to configure the Caddyfile as follows.
 
 If you are using the Community Edition of Netmaker use this command:
+
 .. code-block::
 
 	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile"
 
 
 If you are using the Enterprise Edition of Netmaker use this command:
+
 .. code-block::
 
 	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE"
@@ -181,8 +183,22 @@ Once you have a Caddyfile you'll need to run these two commands:
 
 Where $NETMAKER_BASE_DOMAIN is the base domain you used for your Netmaker setup (the part after "dashboard." in your Dockerfile) and $YOUR_EMAIL is your email address.
 
+If users still want to keep using Traefik as the reverse-proxy instead of Caddy for v0.17.0 and above, refer to this docker-compose file https://gist.github.com/alphadose/1602e5dcba500f75ab0b873d4441236b
 
+Edit the above docker-compose file
 
+.. code-block::
+
+  sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
+  sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
+  sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
+  sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
+
+After that finally start the netmaker server
+
+.. code-block::
+
+  sudo docker-compose up -d
 
 Upgrade the Clients (prior to 0.10.0)
 ======================================

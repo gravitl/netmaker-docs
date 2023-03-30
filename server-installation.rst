@@ -17,6 +17,7 @@ Each of these components has its own individual requirements and the management 
 
 For first-time installs, we recommend the quick install guide. The following documents are meant for more advanced installation environments and are not recommended for most users. However, these documents can be helpful in customizing or troubleshooting your own installation. 
 
+.. _server-configuration-reference:
 
 Server Configuration Reference
 ==========================================
@@ -24,7 +25,7 @@ Server Configuration Reference
 Netmaker sets its configuration in the following order of precedence:  
 
 1. **Environment Variables:** Typically values set in the Docker Compose. This is the most common way of setting server values.
-2. **Config File:** Values set in the `config/environments/*.yaml`` file 
+2. **Config File:** Values set in the ``config/environments/*.yaml`` file.
 3. **Defaults:** Default values set on the server if no value is provided in configuration.  
 
 In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run "docker kill netmaker" and "docker-compose up -d".
@@ -192,8 +193,57 @@ Compose File - Annotated
 
 All environment variables and options are enabled in this file. It is the equivalent to running the "full install" from the above section. However, all environment variables are included and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.
 
-.. literalinclude:: ./examplecode/docker-compose.reference.yml
+As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints. There are also some environment variables that have been changed, or removed. Your updated docker-compose file should look like this.
+
+.. literalinclude:: ./examplecode/docker-compose.reference.v18.yml
   :language: YAML
+
+
+Our Caddy file has gone through some minor changes as well. There needs to be a block for the stun server. The file should look like this.
+
+.. code-block:: cfg
+
+    {
+       
+        email YOUR_EMAIL
+    }
+
+    # Dashboard
+    https://dashboard.NETMAKER_BASE_DOMAIN {
+        # Apply basic security headers
+        header {
+                # Enable cross origin access to *.NETMAKER_BASE_DOMAIN
+                Access-Control-Allow-Origin *.NETMAKER_BASE_DOMAIN
+                # Enable HTTP Strict Transport Security (HSTS)
+                Strict-Transport-Security "max-age=31536000;"
+                # Enable cross-site filter (XSS) and tell browser to block detected attacks
+                X-XSS-Protection "1; mode=block"
+                # Disallow the site to be rendered within a frame on a foreign domain (clickjacking protection)
+                X-Frame-Options "SAMEORIGIN"
+                # Prevent search engines from indexing
+                X-Robots-Tag "none"
+                # Remove the server name
+                -Server
+        }
+
+        reverse_proxy http://netmaker-ui
+    }
+
+    # API
+    https://api.NETMAKER_BASE_DOMAIN {
+            reverse_proxy http://netmaker:8081
+    }
+
+    # STUN
+    https://stun.NETMAKER_BASE_DOMAIN {
+        reverse_proxy netmaker:3478
+    }
+
+
+    # MQ
+    wss://broker.NETMAKER_BASE_DOMAIN {
+            reverse_proxy ws://mq:8883
+    }
 
 Available docker-compose files
 ---------------------------------
@@ -202,7 +252,8 @@ The default options for docker-compose can be found here: https://github.com/gra
 
 The following is a brief description of each:
 
-- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the Traefik proxy.
+- `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
+- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
 - `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
 
 No DNS - CoreDNS Disabled
@@ -293,7 +344,8 @@ Caddy
 .. code-block:: cfg
 
     {
-        # LetsEncrypt account
+        # ZeroSSL account
+        acme_ca https://acme.zerossl.com/v2/DV90
         email <YOUR_EMAIL>
     }
 
@@ -748,7 +800,24 @@ This is enough to get a functioning HA installation of Netmaker. However, you ma
 Security Settings
 ==================
 
-In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in the netmaker-ui section of your docker-compose.yml file.
+In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in Your Caddyfile if you are using caddy, or the netmaker-ui section of your docker-compose.yml file if you are using traefik.
+
+For Caddy
+-----------
+
+In your /root/Caddyfile look in the Dashboard section for ``reverse_proxy http://netmaker-ui``
+
+Above that line add the following
+
+.. code-block:: cfg
+
+    @blocked not remote_ip <ip1> <ip2> <ip3>
+    respond @blocked "Nope" 403
+
+Replace the <ip> placeholders with your whitelist IP ranges.
+
+For Traefik
+-----------
 
 1. In the labels section, add the following line:
 
@@ -768,8 +837,8 @@ and change it to this:
 
     traefik.http.routers.netmaker-ui.middlewares=nmui-security-1@docker,nmui-security@docker
 
-Replace YOUR_IP_CIDR with the whitelist ip range (can be multiple ranges).
+Replace YOUR_IP_CIDR with the whitelist IP range (can be multiple ranges).
 
-After that, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
+After changes are made for your reverse proxy, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
 
 
