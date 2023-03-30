@@ -66,7 +66,35 @@ As of v0.18.0, netclient has been moved out of the netmaker repo and into its ow
 Create a Key
 ===============
 
-Adding nodes to the network typically requires a key.
+Adding nodes to the network typically requires a key. If You are on version 0.18 or newer, you will use the enrollment key to acces a netmaker server. Enrollment keys offer different ways to register with a server.
+
+Navigate to the enrollment keys tab on the side menu. You should see a create button in the top right corner. After clicking that, you should be brought to a window like this.
+
+.. image:: images/enrollmentkeycreate.png
+   :width: 80%
+   :alt: Enrollment Key Screen
+   :align: center
+
+This will give you a few different options on how you want to set up your enrollment key. you can set it up with unlimited uses, limited uses, or timebound uses. You can also setup one or multiple networks to join, or you can set it to no networks and then join a network through the UI in the hosts tab. Click on newly registered host and go to the networks tab. Then click on show all networks. You can also create any tags you would like for that key
+
+.. image:: images/networkjoinui.png
+   :width: 80%
+   :alt: Join network through UI
+   :align: center
+
+If an enrollment key runs out of uses, or is expired, the key will show as invalid like in the image below.
+
+.. image:: images/enrollmentkeyinvalid.png
+   :width: 80%
+   :alt: Enrollment Key Screen with invalid keys
+   :align: center
+
+After your enrollment key is created, you can click on that key to get the registration token.
+
+.. image:: images/enrollmentkeytoken.png
+   :width: 80%
+   :alt: Enrollment Key token window
+   :align: center
 
 #. Click on the ACCESS KEYS tab and select the network you created.
 #. Click CREATE ACCESS KEY
