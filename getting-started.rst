@@ -96,22 +96,11 @@ After your enrollment key is created, you can click on that key to get the regis
    :alt: Enrollment Key token window
    :align: center
 
-#. Click on the ACCESS KEYS tab and select the network you created.
-#. Click CREATE ACCESS KEY
-#. Give it a name (ex: "mykey") and a number of uses (ex: 25)
-#. Click CREATE 
-#. Visit https://docs.netmaker.org/netclient.html#install to install netclient on your nodes.
 
-.. image:: images/access-key.png
-   :width: 80%
-   :alt: Access Key Screen
-   :align: center
 
-There are different values for difference scenarios.  The top 3 values cover these scenarios:
-
-* The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient join -k <access key> -s grpc.myserver.com -p 50051``
-* The **Access Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the access key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient join -t <access token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
-* The **Join Command** value is a command that can be run on Linux systems after installing the Netclient.  It will join the network directly from the command line.
+* The **Access Key** value is the secret string that will allow your node to authenticate with the Netmaker network. This can be used with existing netclient installations where additional configurations (such as setting the server IP manually) may be required. This is not typical. E.g. ``netclient register -k <enrollment key> -s grpc.myserver.com -p 50051``
+* The **Registration Token** value is a base64 encoded string that contains the server IP and grpc port, as well as the enrollment key. This is decoded by the netclient and can be used with existing netclient installations like this: ``netclient register -t <registration token>``. You should use this method for adding a network to a node that is already on a network. For instance, Node A is in the **mynet** network and now you are adding it to **default**.
+* The **Register Command** value is a command that can be run on Linux systems after installing the Netclient.  It will register with the server directly from the command line.
   
 Other variations (eg Docker) are covered with the remaining values.
 
