@@ -236,7 +236,8 @@ Steps to upgrade
 
    1. Manually go to each client machine and download new netclient binary from `here <https://github.com/gravitl/netclient/releases/tag/v0.18.5>`_
    2. Run ``./netclient install`` (Windows users must run with Admin Powershell first. Also use ``.\netclient.exe install`` to install)
-      NB: Windows and Mac users, do not use GUI
+      
+      NB: Windows and Mac users, do not Open GUI until above steps are completed.
 
 
 5. If ``Dynamic Port`` was on, you may need to manually adjust port to ``51821`` after upgrading the client
