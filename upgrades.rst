@@ -219,3 +219,25 @@ This last step helps ensure any newly added fields are now present. You may run 
 or
 
 2. Leave and rejoin the network
+
+
+Upgrading server and client to 0.18.5
+======================================
+
+NB: Upgrading to this version requires your server to be currently running v0.17.1
+
+Steps to upgrade
+
+1. SSH to your Netmaker server
+2. Run the upgrade script: ``wget https://raw.githubusercontent.com/gravitl/netmaker/release_v0.18.5/scripts/nm-upgrade.sh && chmod +x nm-upgrade.sh && ./nm-upgrade.sh`` (for v0.18.x, check `releases page <https://github.com/gravitl/netmaker/releases>`_)
+3. Follow prompts until the upgrade process on the server is completed.
+4. Upgrade all netclients.
+
+
+   1. Manually go to each client machine and download new netclient binary from `here <https://github.com/gravitl/netclient/releases/tag/v0.18.5>`_
+   2. Run ``./netclient install`` (Windows users must run with Admin Powershell first. Also use ``.\netclient.exe install`` to install)
+      
+      NB: Windows and Mac users, do not Open GUI until above steps are completed.
+
+
+5. If ``Dynamic Port`` was on, you may need to manually adjust port to ``51821`` after upgrading the client
