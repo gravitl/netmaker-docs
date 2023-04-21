@@ -20,7 +20,7 @@ Create a Network
    :alt: Create Network Screen
    :align: center
 
-This network should have a sensible name (nodes will use it to set their interfaces).
+This network should have a sensible name.
 
 More importantly, it should have a non-overlapping, private address range. 
 
@@ -42,8 +42,6 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 **UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily.  **This setting is usually good to turn on, with some noteable exceptions.** This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.  This can enhance connectivity in cases where NAT may block communication.
 
 **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
-
-**Is Local Network:**  This is almost always best to leave this turned off and is left for very special circumstances. If you are running a data center or a private WAN, you may want to enable this setting. It defines the range that nodes will set for Endpoints. Usually, Endpoints are just the public IP. But in some cases, you don't want any nodes to be reachable via a public IP, and instead want to use a private range.  Use if the server is on the same network (LAN) as you.
 
 Once your network is created, you should see the network (wg-net here but it will be the name you chose when creating the network):
 
