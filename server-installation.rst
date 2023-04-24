@@ -270,7 +270,7 @@ Netmaker offers an EMQX option as a broker for your server. The main configurati
 
 You can find the EMQX docker-compose file `in the netmaker repo <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose-emqx.yml>`_. if you are switching from an existing mosquitto setup to EMQX, it would be good to backup your old docker-compose.yml and Caddyfile before switching over.
 
-You can get the raw file and sed your information into the file.
+You can get the raw file and sed your information into the file. this would be the easiest way to switch over your docker-compose.yml
 
 .. code-block::
 
@@ -281,7 +281,7 @@ You can get the raw file and sed your information into the file.
     sed -i "s/REPLACE_MQ_ADMIN_USERNAME/<your username>/g" docker-compose.yml
     sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
 
-The main changes between the emqx docker-compose and mosquitto are going to be in the netmaker section and the mq section.
+If you prefer to change it manually, the main changes between the emqx docker-compose and mosquitto are going to be in the netmaker section and the mq section.
 
 .. code-block:: yaml
 
