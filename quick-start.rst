@@ -5,7 +5,7 @@ Quick Install
 Important Notes
 ============================
 
-1. **WE RECCOMMEND USING THE NM-QUICK-INTERACTIVE SCRIPT INSTEAD OF THIS GUIDE. It can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh>`_ **).**
+1. **WE RECOMMEND USING THE NM-QUICK-INTERACTIVE SCRIPT INSTEAD OF THIS GUIDE. It can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh>`_ **).**
 
 2. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
 
@@ -150,7 +150,8 @@ You will also need to set an admin password for MQ, which may also be generated 
 .. code-block::
 
   tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
-  sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
+  sed -i "s/REPLACE_MQ_PASSWORD/<your generated password>/g" docker-compose.yml
+  sed -i "s/REPLACE_MQ_USERNAME/<your username>/g" docker-compose.yml
 
 Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
 -----------------------------------------------------------------------------------------------------
