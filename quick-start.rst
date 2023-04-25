@@ -7,15 +7,17 @@ Important Notes
 
 1. **WE RECOMMEND USING THE NM-QUICK-INTERACTIVE SCRIPT INSTEAD OF THIS GUIDE. It can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh>`_ **).**
 
-2. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
+2. Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-3. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free tier, but it does require `an account <https://dashboard.license.netmaker.io>`_.
+3. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
 
-4. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
+4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free tier, but it does require `an account <https://dashboard.license.netmaker.io>`_.
 
-5. This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.
+5. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
 
-6. For information about deploying more advanced configurations, see the :doc:`Advanced Installation <./server-installation>` docs. 
+6. This instance will not be HA. However, it should comfortably handle 100+ concurrent clients and support the most common use cases.
+
+7. For information about deploying more advanced configurations, see the :doc:`Advanced Installation <./server-installation>` docs. 
 
 0. Prerequisites
 ==================

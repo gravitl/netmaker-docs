@@ -50,7 +50,7 @@ Networks
 Create
 --------
 
-.. image:: images/ui-2.jpg
+.. image:: images/ui-2.png
    :width: 80%
    :alt: create network
    :align: center
@@ -61,34 +61,10 @@ Create
 (2) **Network Name:** The name of the network. Character limited, as this translates to the interface name on hosts (nm-<network name>)
 (3) **Address Range:** The CIDR of the network. Must be a valid IPv4 Subnet and should be a private address range.
 (4) **Udp Hole Punching:** Enables or disables "UDP Hole Punching" on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will "roam" frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.
-(5) **Is Local Network:** Turn on if all clients in the network will be in the same "local" network. This is a very rare situation and depends on the use case. Almost always leave this off. Turn on if you are in a large data center with a large private address space over which clients should communicate. Can also enable if using a VPC and are treating a single client as "egress" for the VPC. If enabled, fill out the address range of the local network which should determine endpoints.
-(6) **Is Dual Stack:** Turn on to add private ipv6 addresses to all clients in addition to their ipv4 addresses. Not typically necessary. If on, enter a private ipv6 address range to pull from.
-
-Edit
---------
-
-.. image:: images/ui-3.jpg
-   :width: 80%
-   :alt: edit network
-   :align: center
-
-**NOTE:** With the exception of Address Ranges (1-2) any setting that affects nodes will not take effect on existing nodes. It will only set the settings on any **new** node, after the setting has been changed.
-
-(1) **Address Range (ipv4):** The ipv4 private network CIDR. If edited, Netmaker will go through all nodes and update private addresses based on the new range.** 
-(2) **Address Range (ipv6):** The ipv6 private network CIDR. If edited, Netmaker will go through all nodes and update private addresses based on the new range.**
-(3) **Local Range:** Only relevant if "Is Local" was switched on during creation. Specifies the local range that nodes will base their Endpoint off of (note: if a node cannot find an enpoint within the range it will fallback to public ip).
-(4) **Display Name:** The display name of the network. Network Name cannot be changed (acts as a unique ID) but display name can be changed. Only effects appearance in UI.
-(5) **Default Interface:** The default network interface name configured on each node. This defaults to "nm-<network name>".
-(6) **Default Port:** The default WireGuard port each node will attempt to use. Nodes will iterate up from this port until they find a free port.
-(7) **Default PostUp:** A default post-up command to run on each node (after interface has been configured). Disabled by default to prevent RCE vulnerabilities.
-(8) **Default PostDown:** A default post-down command to run on each node (after interface has been removed). Disabled by default to prevent RCE vulnerabilities.
-(9) **Default Keepalive:** How often nodes should send packets to keep connection alive with all peers (in seconds).
-(10) **Default Ext Client DNS:** If set, adds a "DNS=<value>" line to each ext client config. Set this to add DNS to clients. Typically will set this to the server's public IP.
-(11) **Default MTU:** Default MTU for interfaces of all clients in network. Can be useful to set lower in certain difficult environments such as Kubernetes.
-(12) **Allow Node Signup Without Keys:** Allows nodes to join the network without a valid Access Key. Nodes will be put in "pending" status until approved via UI by an admin. Useful if an arbitrary number of people need to join the network and there is no easy way to distribute keys to users.
-(13) **Is Dual Stack:** Enable the Dual Stack feature of networks and add ipv6 addresses to nodes.
-(14) **Default Saveconfig:** Typically ignore this. Sets the SaveConfig field on wireguard config.
-(15) **UDP Hole Punching:** Whether or not UDP Hole Punching is turned on (see Network Create notes). Only effects new nodes. Enables or disables "UDP Hole Punching" on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will "roam" frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.
+(5) **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
+(6) **Default Access Level (enterprise only)** This sets the default level that non admin users have access to. Access level 3 cannot create any resources. Access level 2 is able to create ext clients, but not nodes. Access level 1 can create nodes. access level 0 is able to have admin level priveleges.
+(7) **Default User Node Limit (enterprise only)** The total amount of nodes that users with access levels 1 or 0 can create.
+(8) **Default User Client Limit (enterprise only)** The total amount of ext clients that users with access levels 2, 1, or 0 can create.
 
 
 Hosts
