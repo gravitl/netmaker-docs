@@ -137,6 +137,8 @@ Now, insert the values for your base (wildcard) domain, public ip.
   sed -i "s/NETMAKER_BASE_DOMAIN/<your base domain>/g" /root/Caddyfile
   sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
   sed -i 's/YOUR_EMAIL/<your email>/g' Caddyfile
+  sed -i 's/REPLACE_SERVER_IMAGE_TAG/<current version>/g' docker-compose.yml
+  sed -i 's/REPLACE_UI_IMAGE_TAG/<current version>/g' docker-compose.yml
 
 Generate a unique master key and insert it:
 
@@ -152,6 +154,15 @@ You will also need to set an admin password for MQ, which may also be generated 
   tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
   sed -i "s/REPLACE_MQ_PASSWORD/<your generated password>/g" docker-compose.yml
   sed -i "s/REPLACE_MQ_USERNAME/<your username>/g" docker-compose.yml
+
+A username and password is needed for using a TURN server as well.
+
+.. code-block::
+
+  tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
+  sed -i "s/REPLACE_TURN_PASSWORD/<your generated password>/g" docker-compose.yml
+  sed -i "s/REPLACE_TURN_USERNAME/<your username>/g" docker-compose.yml
+
 
 Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
 -----------------------------------------------------------------------------------------------------
