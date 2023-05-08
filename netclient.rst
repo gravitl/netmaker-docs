@@ -23,10 +23,11 @@ The Netclient manages WireGuard on client devices (nodes). This document walks t
 
 
 The Netclient is supported on the following operating systems:
-- Linux (most distributions)
-- Windows
-- Mac
-- FreeBSD
+
+* Linux (most distributions)
+* Windows
+* macOS
+* FreeBSD
 
 For unsupported devices, please use the external client, which is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
 
