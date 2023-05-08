@@ -199,7 +199,7 @@ As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for 
   :language: YAML
 
 
-Our Caddy file has gone through some minor changes as well. There needs to be a block for the stun server. The file should look like this.
+Our Caddy file has gone through some minor changes as well. There needs to be a block for the STUN and TURN server. The file should look like this.
 
 .. code-block:: cfg
 
@@ -239,6 +239,15 @@ Our Caddy file has gone through some minor changes as well. There needs to be a 
         reverse_proxy netmaker:3478
     }
 
+    # TURN
+    https://turn.NETMAKER_BASE_DOMAIN {
+        reverse_proxy host.docker.internal:3479
+    }
+
+    #TURN API
+    https://turnapi.NETMAKER_BASE_DOMAIN {
+            reverse_proxy http://host.docker.internal:8089
+    }
 
     # MQ
     wss://broker.NETMAKER_BASE_DOMAIN {
