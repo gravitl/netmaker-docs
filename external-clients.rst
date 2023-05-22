@@ -26,9 +26,16 @@ Important to note, that an external client is not **reachable** by the network, 
 Configuring an Ingress Gateway
 ==================================
 
-External Clients must attach to an Ingress Gateway. By default, your network will not have an ingress gateway. To configure an ingress gateway, you can use any node in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be an ingress gateway and makes for a good default choice if you are unsure of which node to select.
+External Clients must attach to an Ingress Gateway. By default, your network will not have an ingress gateway. To configure an ingress gateway, navigate to the network name and go to the clients tab.
 
 .. image:: images/extclient1.png
+   :width: 80%
+   :alt: Gateway
+   :align: center
+
+After clicking the create client button, a modal window will pop up asking you which host you would like to use as an ingress gateway. You can use any host in your network, but it should have a public IP address (not behind a NAT). Your Netmaker server can be an ingress gateway and makes for a good default choice if you are unsure of which node to select.
+
+.. image:: images/extclient2.png
    :width: 80%
    :alt: Gateway
    :align: center
@@ -36,26 +43,27 @@ External Clients must attach to an Ingress Gateway. By default, your network wil
 Adding Clients to a Gateway
 =============================
 
-Once you have configured a node as a gateway, you can then add clients to that gateway. Clients will be able to access other nodes in the network just as the gateway node does.
+Once you have figured out your gateway, You can fill in any other info you need for your client. You can give it a name. You can use your own public key if you like. You can set a default DNS for the client, and any specific addresses you would need for the client. You can also leave these fields blank and the name, address, and public key will be automatically configured for you. Clients will be able to access other nodes in the network just as the gateway node does.
 
-.. image:: images/exclient2.png
-   :width: 80%
-   :alt: Add External Client
-   :align: center
-
-After creating a client, you can edit the name to something more logical.
-
-.. image:: images/exclient3.png
+.. image:: images/extclient3.png
    :width: 80%
    :alt: Edit External Client Name
    :align: center
 
+After clicking create, your external client will be ready for your device.
+
+.. image:: images/extclient4.png
+   :width: 80%
+   :alt: ext client pop up
+   :align: center
+
 Then, you can either download the configuration file directly or scan the QR code from your phone (assuming you have the WireGuard app installed). It will accept the configuration just as it would accept a typical WireGuard configuration file.
 
-.. image:: images/exclient4.png
+.. image:: images/extclient5.png
    :width: 80%
-   :alt: Client List
+   :alt: Gateway
    :align: center
+
 
 Example config file: 
 
@@ -66,36 +74,18 @@ Your client should now be able to access the network! A client can be invalidate
 Disabling External Clients
 ==========================
 
-To (temporarily) disable an external client's access to the Netmaker network that it belongs to, click the checkmark below "Enabled" on the line with the Client ID that you would like to disable.  Click "Accept" when asked "Are you sure you want to change access for this Ext. Client?"
+To (temporarily) disable an external client's access to the Netmaker network that it belongs to, click the switch below "Enabled" on the line with the Client ID that you would like to disable.  Click "Accept" when asked "Are you sure you want to disable access to this Ext. Client?"
 
 .. image:: images/extclient-disable.png
    :width: 80%
    :alt: Disable an External Client
    :align: center
 
-After you click the checkbox and click Accept the checkmark will turn into a red circle that is crossed out as shown below.
+After you click the switch and click Accept the ext client will no longer be reachable and the switch will be turned off.
 
 .. image:: images/extclient-disabled.png
    :width: 80%
    :alt: Disabled External Client
    :align: center
 
-To re-enable the client click the crossed-out red circle.  It will turn into a checkmark and the client will be re-enabled.
-
-
-Configuring DNS for Ext Clients (OPTIONAL)
-============================================
-
-If you wish to have a DNS field on your ext clients conf, simply edit the network field as shown below to 1.1.1.1 or 8.8.8.8 for example.
-If you do not want DNS on your ext client conf files, leave it blank.  
-
-.. image:: images/extclient5.png
-   :width: 80%
-   :alt: Gateway
-   :align: center
-
-Important to note, your client automatically adds egress gateway ranges (if any on the same network) to its allowed IPs.
-
-By default, netmaker will forward all DNS requests to the server. If you want to use an external or private DNS server, you need to change the following config (e.g., in your docker-compose.yml on the server followed by a docker-compose down and docker-compose up -d):
-
-``PORT_FORWARD_SERVICES="dns" --> PORT_FORWARD_SERVICES=""``
+To re-enable the client click the switch again and accept.  It will turn on again and the client will be re-enabled.
