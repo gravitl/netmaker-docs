@@ -188,7 +188,7 @@ A node pending deletion will be grayed out.
 Create Egress
 ---------------
 
-.. image:: images/ui-6.jpg
+.. image:: images/ui-6.png
    :width: 80%
    :alt: dashboard
    :align: center
