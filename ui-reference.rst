@@ -4,6 +4,9 @@ UI Reference
 
 This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.
 
+
+`Here is an arcade showing a walkthrough of our new UI. <https://app.arcade.software/share/Jdl7PnnqIbot3IkqvIaf>`_
+
 Authentication
 =================
 
@@ -20,8 +23,7 @@ When you start Netmaker for the first time, you will be prompted to create an ad
 (1) **Username:** Enter a unique username for the admin user.
 (2) **Password:** Enter a secure password for your new user.
 (3) **Password Confirmation:** Repeat the password for verification.
-(4) **Create admin:** Button to create the new admin user.
-(5) **Signup with OAuth:** Button to signup with OAuth.
+(4) **Signup with OAuth:** Button to signup with OAuth.
 
 Login
 --------
@@ -60,12 +62,7 @@ Create
 (1) **Autofill:** Provides sensible defaults for network details and makes up a name.
 (2) **Network Name:** The name of the network. Character limited, as this translates to the interface name on hosts (nm-<network name>)
 (3) **Address Range:** The CIDR of the network. Must be a valid IPv4 Subnet and should be a private address range.
-(4) **Udp Hole Punching:** Enables or disables "UDP Hole Punching" on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will "roam" frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.
-(5) **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
-(6) **Default Access Level (enterprise only)** This sets the default level that non admin users have access to. Access level 3 cannot create any resources. Access level 2 is able to create ext clients, but not nodes. Access level 1 can create nodes. access level 0 is able to have admin level priveleges.
-(7) **Default User Node Limit (enterprise only)** The total amount of nodes that users with access levels 1 or 0 can create.
-(8) **Default User Client Limit (enterprise only)** The total amount of ext clients that users with access levels 2, 1, or 0 can create.
-
+(4) **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
 
 Hosts
 ======
@@ -127,38 +124,6 @@ A host can be deleted from the UI. All associated nodes must be manually removed
    :alt: host details
    :align: center
 
-Under the host's networks tab, you can see all the networks on the current server the host is connected to. You can also view all networks on the server and connect to or disconnect from them.
-
-
-Host Relays
-------------
-
-Netclients (host machines) can be configured to relay network traffic.
-
-.. image:: images/create-relay-1.png
-   :width: 80%
-   :alt: create relay step 1
-   :align: center
-
-You can make a host a relay under the `RELAY STATUS` tab. Click on the `Is Relay` switch to enable. 
-
-.. image:: images/create-relay-2.png
-   :width: 80%
-   :alt: create relay step 2
-   :align: center
-
-From the dropdown, select the hosts you want to relay to.
-
-**NB** Chained relays are currently unsupported. You can only relay to a host which is not a relay itself, or is not already being relayed.
-
-.. image:: images/create-relay-3.png
-   :width: 80%
-   :alt: create relay step 3
-   :align: center
-
-You can update the relayed hosts via the switches in the `Relay hosts` table.
-
-
 Nodes
 ========
 
@@ -170,18 +135,14 @@ Node List
    :alt: nodes list
    :align: center
 
-(1) **Sort Nodes:** Sort nodes by criterion.
-(2) **Search Nodes:** Look up a node by name.
-(3) **Select Network:** Filter nodes by network.
-(4) **Node Name:** Name of node. By default set to hostname of machine.
-(5) **IP Addresses:** Private IPs of node within network.
-(6) **Version:** Version of netclient the node's host is running.
-(7) **Network:** Network the node is in.
-(8) **Egress:** Indicates if node is an egress gateway. Click to convert into egress gateway. Egress gateways route traffic from the network into a specific subnet or subnets. Egress gateways should be servers in a static location with a reliable IP.
-(9) **Ingress:** Indicates if the node is an ingress. Click to convert into ingress gateway. Ingress gateways route traffic into the network over the WireGuard interface using "ext clients," which are static WireGuard config files. Ingress gateways should be servers in a static location with a reliable IP.
-(10) **Status:** Indicates how recently the node checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** indicate the health of the node's virtual network connections.
-(11) **View:** View the node's details.
-(12) **Delete:** Delete the node.
+(1) **Search Nodes:** Look up a node by name.
+(2) **Node Name:** Name of node. By default set to hostname of machine.
+(3) **IP Addresses:** Private IPs of node within network.
+(4) **Network:** Network the node is in.
+(5) **Egress:** Indicates if node is an egress gateway. Click to convert into egress gateway. Egress gateways route traffic from the network into a specific subnet or subnets. Egress gateways should be servers in a static location with a reliable IP.
+(6) **Ingress:** Indicates if the node is an ingress. Click to convert into ingress gateway. Ingress gateways route traffic into the network over the WireGuard interface using "ext clients," which are static WireGuard config files. Ingress gateways should be servers in a static location with a reliable IP.
+(7) **Status:** Indicates how recently the node checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** indicate the health of the node's virtual network connections.
+(8) **Delete:** Delete the node.
 
 A node pending deletion will be grayed out.
 
@@ -205,10 +166,16 @@ Check host section on hosts_. A relay can be created under host settings.
 Edit Node / Node Details
 --------------------------
 
-.. image:: images/node-edit.png
+.. image:: images/ui-5.jpg
    :width: 80%
    :alt: dashboard
    :align: center
+
+.. image:: images/ui-5-5.png
+   :width: 80%
+   :alt: dashboard
+   :align: center
+
 
 (1) **Edit** Edit the node's details
 (2) **ACLs** View the node's Access Control List (ACL)
@@ -293,22 +260,16 @@ Node Graph
    :alt: dashboard
    :align: center
 
-View all nodes in your network, zoom in, zoom out, and search for node names. A legend is on the side to identify each node status / configuration.
+View all nodes in your network, zoom in, zoom out, and search for node names.
+**hover:** Hover over a node to see its direct connections.
 
-.. image:: images/node-graph-2.png
-   :width: 80%
-   :alt: dashboard
-   :align: center
-
-(1) **hover:** Hover over a node to see its direct connections.
-(2) **Configuration Pane:** Manage the node in this pane just like you would in the Nodes pane. See the "Node List" and "Edit Node" sections for more details.
 
 
 Access Control Lists
 =====================
 
 
-.. image:: images/acls-3.jpg
+.. image:: images/acls-3.png
    :width: 80%
    :alt: ACLs
    :align: center
