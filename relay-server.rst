@@ -19,31 +19,31 @@ Configuring a Relay
 
 To create a relay, you can use any host in your network, but it should have a public IP address (not behind a NAT).
 
-Simply navigate to the Hosts tab and click on the name of the host you would like to use to relay another server. You should see three butons at the top like in the picture below. Navigate to the relay status tab.
+Navigate to the network name and click on the relay tab
 
 .. image:: images/relaystatusbutton.png
    :width: 80%
    :alt: Relay
    :align: center
 
-You should see this.
+When clicking on the create button, you should be prompted to select a host to use as the relaying server.
 
-.. image:: images/relaystatuspage.png
+.. image:: images/selectrelaying.png
    :width: 80%
    :alt: Relay
    :align: center
 
-click on the Is Relay switch and you should see a window pop up asking what server you sould like to relay. Choose from the dropdown menu.
+After that, select the server you would like to be relayed. Choose from the dropdown menu.
 
-.. image:: images/ui-7.png
+.. image:: images/selectrelayed.png
    :width: 80%
    :alt: Relay
    :align: center
 
 
-After creation, you should see your relayed host show up on a list of relayed hosts at the bottom of the page. You should also see the list of hosts showing if a host is relaying or being relayed with green lettering. (figure below)
+After creation, you should see your relayed host show up on a list of relayed hosts on the page.
 
-.. image:: images/hostafterrelay.png
+.. image:: images/relaystatus.png
    :width: 80%
    :alt: Relay
    :align: center

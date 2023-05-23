@@ -27,22 +27,15 @@ Configuring an Egress Gateway is very straight forward. As a prerequisite, you m
 
 After you have determined this, you must next deploy a netclient in a compatible location where the network is accessible. For instance, a Linux server or router in the office, or a Kubernetes worker node. This machine should be stable and relatively static (not expected to change its IP frequently or shut down unexpectedly).
 
-Next, you must determine which interface to use in order to reach the internal network. As an example, lets say there is a machine in the network at 10.10.10.2, and you have deployed the netclient on a different machine. You can run 
 
-.. code-block::
-
-   ip route get 10.10.10.2
-
-This should return the interface used to reach that address (e.x. "eth2")
-
-Finally, once you have determined the interface, the subnet, and deployed your netclient, you can go to your Netmaker UI and set the node as a gateway.
+Once you have determined the subnet, and deployed your netclient, you can go to your Netmaker UI and set the node as a gateway. click on the network on the sidebar and navigate to the egress section.
 
 .. image:: images/egress7.png
    :width: 80%
    :alt: Gateway
    :align: center
 
-At this point simply insert the range(s) into the first field, and the interface name into the second field, and click "create".
+At this point you will choose your selected host to use as an egress. You can choose if you would like to use NAT or not with the switch. You also have a choice of using this host as an internet gateway. more on that in a bit. You can put the selected CIDR for your egress range(s) in the field. click the add range button to add more egress ranges for the host. The interface is automatically chosen and will not be shown in this window. With everything filled out, click the create button.
 
 .. image:: images/ui-6.png
    :width: 80%
@@ -50,7 +43,7 @@ At this point simply insert the range(s) into the first field, and the interface
    :align: center
 
 Netmaker will set either iptables or nftables rules on the node depending on which one you have installed on your client. This will then implement these rules, allowing it to route traffic from the network to the specified range(s).
-Alternatively, if you would like to maintain the source IPs yourself, you can disable the NAT for egress gateways with the toggle switch.
+
 
 Use Cases
 ============
@@ -79,29 +72,15 @@ Most people think of a VPN as a remote server that keeps your internet traffic s
 
 These are not typical use cases for Netmaker, but can be easily enabled.
 
-To avoid DNS leaks, navigate to the networks tab and click on the ID of the network you created. Edit the default ext client DNS tab.
+Navigate to the egress setup mentioned above. Instead of inputting a range, just click the internet gateway switch. the range of ``0.0.0.0/0`` will be automatically put in for you. (The IPv6 version ``::/0`` is still under construction) Click create.
 
-.. image:: images/default-dns.png
+.. image:: images/internet-gateway.png
    :width: 80%
-   :alt: Gateway
+   :alt: Internet Gateway
    :align: center
 
-In this example, I put the IP address of the Netmaker server node.
+After that, your public traffic will be routed through your egressing client.
 
-After that, set up an egress gateway with ``0.0.0.0/0`` as the ranges with the public interface (eth0 most likely). Your clients should now begin routing public-facing traffic over the gateway.
-
-If you are using an egress gateway with ipv6 enabled, you can also route ipv6 traffic by adding ``::/0`` to the gateway ranges.
-
-Note: using ``0.0.0.0/0`` is only effective as of version 0.15.0. Any version before that requires a big list of ranges to work around ``0.0.0.0/0``. Make sure you have your Netmaker server and client updated to be able to use that range.
-
-Our 5-minute installer of Netmaker in the README on GitHub: https://github.com/gravitl/netmaker also offers an option to configure a VPN if you have not built your server yet.
-simply type:
-
-.. code-block::
-   
-   wget -qO - https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh | sudo bash -s -- -v true
-
-This will configure a VPN with a default of 5 external clients for you.
 
 .. image:: images/egress5.png
    :width: 50%

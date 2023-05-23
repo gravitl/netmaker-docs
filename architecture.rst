@@ -112,7 +112,7 @@ Additional database support (besides SQLite and rqlite) is very easy to implemen
 Netmaker UI
 ---------------
 
-The Netmaker UI is a ReactJS-based static website which can be run on top of standard webservers such as Apache and Nginx. Source code can be found `here <https://github.com/gravitl/netmaker-ui>`_. In a typical configuration, the Netmaker UI is run on Nginx as a Docker container.
+The Netmaker UI is a ReactJS-based static website which can be run on top of standard webservers such as Apache and Nginx. Source code can be found `here <https://github.com/gravitl/netmaker-ui-2>`_. In a typical configuration, the Netmaker UI is run on Nginx as a Docker container.
 
 Netmaker can be used in its entirety without the UI, but the UI makes things a lot easier for most users. It has a sensible flow and layout for managing Networks, Nodes, Access Keys, and DNS.
 
@@ -203,4 +203,4 @@ Limitations
 
 Install limitations mostly include platform-specific dependencies. A failed netclient install should display information about which command is failing, or which libraries are missing. This can often be solved via machine upgrade, installing missing dependencies, or setting kernel headers on the machine for WireGuard (e.x.: `Installing Kernel Headers on Debian <https://stackoverflow.com/questions/62356581/wireguard-vpn-how-to-fix-operation-not-supported-if-it-worked-before>`_) 
 
-It is very helpful if an install fails to run "netclient join -t <token> -vvv". By default, the install runs with minimal logging. The -vvv flags will display any encountered errors.
+It is very helpful if an install fails to run "netclient join -t <token> -v 4". By default, the install runs with minimal logging. The -v flags will display any encountered errors. You can set the verbosity fron 0-4.
