@@ -135,6 +135,16 @@ You must retrieve the MQ configuration file for Mosquitto and the wait script.
 Prepare Docker Compose 
 ------------------------
 
+As of 0.20.0, our docker-compose and Caddyfile now contains references to a netmaker.env file. This will cut down on repetitive entries like inserting your base domain multiple times. You only insert it once in your netmaker.env file and the backend handles placing it in the right places. The EMQX and EE docker-composes are now extensions of the regular docker-compose file, so switching to EE or EMQX doesn't involve recreating an entire docker-compose file.
+
+You can grab the netmaker.env file here.
+
+.. code-block::
+
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker.env
+
+You can then use a text editor like vim or nano to go in there and fill out the fields. (TODO left off here. may need to ask tobias about certs part.)
+
 Get The public IP (server ip).
 
 .. code-block::
