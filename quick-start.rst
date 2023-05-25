@@ -88,11 +88,22 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
+- **3478 (STUN):** Port 3478 is reserved for UDP traffic related to STUN. By using the standard port 3478, STUN servers can work effectively with most firewall and NAT configurations, as they typically allow traffic on well-known ports.
+- **3479, 8089 (TURN, TURN api):** Port 3479 is commonly used for UDP traffic related to TURN. Similar to STUN, TURN servers need to work effectively with firewalls and NAT devices. By using the reserved port 3479, TURN servers can better handle communication across various network configurations. Port 8089 is not reserved specifically for TURN but is commonly associated with TURN server deployments.
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
+- **8085 (exporter EE):** If you are building an EE server, you need this port open.
+- **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
+
 
 .. code-block::
 
-  sudo ufw allow proto tcp from any to any port 443 && sudo ufw allow proto tcp from any to any port 80 && sudo ufw allow 51821:51830/udp
+  sudo ufw allow proto tcp from any to any port 443 
+  sudo ufw allow proto tcp from any to any port 80 
+  udo ufw allow port 3478
+  udo ufw allow port 3479
+  udo ufw allow port 8089 
+  sudo ufw allow 51821:51830/udp
+  
 
 It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
 
