@@ -54,6 +54,12 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 
 - broker.domain
 
+- stun.domain
+
+- turn.domain
+
+- turnapi.domain
+
 If deploying EE, you will also need records for the following:
 
 - grafana.domain
