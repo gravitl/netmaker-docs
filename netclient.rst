@@ -188,6 +188,14 @@ Your compose would look more like this:
 
 By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
 
+
+**IMPORTANT:**
+ For docker netclient to function correctly as either ingress/egress gateway, you need to additionally run the following commands on the host machine:
+
+  1. `iptables -I DOCKER-USER -i netmaker  -j ACCEPT`
+  2. `iptables -I DOCKER-USER -o netmaker  -j ACCEPT`
+
+
 =======================	==================================================================	==================================================================================================================================================
 Environment Variable   	Docker Option Example                                             	Description                                                                                                                                       
 =======================	==================================================================	==================================================================================================================================================
