@@ -5,7 +5,7 @@ Quick Install
 Important Notes
 ============================
 
-1. **WE RECOMMEND USING THE NM-QUICK-INTERACTIVE SCRIPT INSTEAD OF THIS GUIDE. Our docker-compose files have changed sizeably and the install script now uses a different process to obtain certificates. The manual installation will not work. The script can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh>`_ **).**
+1. **WE RECOMMEND USING THE NM-QUICK SCRIPT INSTEAD OF THIS GUIDE. Our docker-compose files have changed sizeably and the install script now uses a different process to obtain certificates. The script can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh>`_ **). If you would like to install netmaker manually, You can use the instructions below.**
 
 2. Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
@@ -99,9 +99,9 @@ Make sure the following ports are open both on the VM and in the cloud security 
 
   sudo ufw allow proto tcp from any to any port 443 
   sudo ufw allow proto tcp from any to any port 80 
-  udo ufw allow port 3478
-  udo ufw allow port 3479
-  udo ufw allow port 8089 
+  sudo ufw allow proto tcp from any to any port 3478
+  sudo ufw allow proto tcp from any to any port 3479
+  sudo ufw allow proto tcp from any to any port 8089 
   sudo ufw allow 51821:51830/udp
   
 
@@ -115,6 +115,9 @@ It is also important to make sure the server does not block forwarding traffic (
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
+  - allow 3478/tcp from all
+  - allow 3479/tcp from all
+  - allow 8089/tcp from all
   - allow 51821-51830/udp from all
   
 4. Prepare MQ
@@ -137,43 +140,59 @@ Prepare Docker Compose
 
 As of 0.20.0, our docker-compose and Caddyfile now contains references to a netmaker.env file. This will cut down on repetitive entries like inserting your base domain multiple times. You only insert it once in your netmaker.env file and the backend handles placing it in the right places. The EMQX and EE docker-composes are now extensions of the regular docker-compose file, so switching to EE or EMQX doesn't involve recreating an entire docker-compose file.
 
+Get the base docker-compose and Caddyfile.
+
+.. code-block::
+
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile
+
+If you plan on using an Enterprise server (EE), then you will need to grab the Caddyfile-EE file instead. There will be more EE related instructions below in "Extra Steps for EE".
+
+.. code-block::
+
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE
+
 You can grab the netmaker.env file here.
 
 .. code-block::
 
-  wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker.env
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker.default.env
+  cp netmaker.default.env netmaker.env
 
-You can then use a text editor like vim or nano to go in there and fill out the fields. (TODO left off here. may need to ask tobias about certs part.)
-
-The file should look like this.
+You can then use a text editor like vim or nano to go in there and fill out the fields. There is an example below to reference. You can get your ip with the command ``ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'``. You can also generate random strings for the master key and TURN and MQ passwords with the command ``tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''`` or you can enter them manually if desired. For the base domain again, we advise you use your own domain, because nip.io can hit rate limiting easily from the high volume when obtaining certificates. If you do want to use nip.io, just enter ``nm.<YOUR_IP_WITH_DASHES_INSTEAD_OF_DOTS>.nip.io``.
 
 .. code-block:: cfg
 
   # Email used for SSL certificates
-  NM_EMAIL=
+  NM_EMAIL=example@email.com
   # The base domain of netmaker
-  NM_DOMAIN=
+  NM_DOMAIN=nm.123-456-789-012.nip.io 
   # Public IP of machine
-  SERVER_HOST=
+  SERVER_HOST=<YOUR_IP_ADDRESS>
   # The admin master key for accessing the API. Change this in any production installation.
-  MASTER_KEY=
+  MASTER_KEY=<RANDOM_STRING>
   # The username to set for turn api access
-  TURN_USERNAME=
+  TURN_USERNAME=<EXAMPLE_USERNAME>
   # The password to set for turn api access
-  TURN_PASSWORD=
+  TURN_PASSWORD=<EXAMPLE_PASSWORD>
   # The username to set for MQ access
-  MQ_USERNAME=
+  MQ_USERNAME=<EXAMPLE_USERNAME>
   # The password to set for MQ access
-  MQ_PASSWORD=
-  INSTALL_TYPE=
-  NETMAKER_ACCOUNT_ID=
-  LICENSE_KEY=
-  SERVER_IMAGE_TAG=
-  UI_IMAGE_TAG=
+  MQ_PASSWORD=<EXAMPLE_PASSWORD>
+  # Specify the type of server to install. Use ee for enterprise and ce for community edition
+  INSTALL_TYPE=ce
+  # The next two are for Enterprise edition. You can find that info below on "Extra steps for EE"
+  NETMAKER_ACCOUNT_ID= (for EE version)
+  LICENSE_KEY= (for EE version)
+  # The version for the netmaker and netmaker-ui servers. current version is v0.20.2. 
+  # Some versions of docker may try to include quotation marks in this reference, so don't put them in.
+  SERVER_IMAGE_TAG=v0.20.2
+  UI_IMAGE_TAG=v0.20.2
   # used for HA - identifies this server vs other servers
   NODE_ID="netmaker-server-1"
-  METRICS_EXPORTER="off"
-  PROMETHEUS="off"
+  METRICS_EXPORTER="off" (turn on for EE)
+  PROMETHEUS="off"  (turn on for EE)
   # Enables DNS Mode, meaning all nodes will set hosts file for private dns settings
   DNS_MODE="on"
   # Enable auto update of netclient ? ENUM:- enabled,disabled | default=enabled
@@ -232,70 +251,46 @@ The file should look like this.
   # https://oidc.yourprovider.com - URL of oidc provider
   OIDC_ISSUER=
 
-Get The public IP (server ip).
-
-.. code-block::
-
-  ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'
-
-
-Now, insert the values for your base (wildcard) domain, public ip.
-
-.. code-block::
-
-  wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
-  # (if installing the EE version) wget -O docker-compose.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
-
-  wget -O Caddyfile https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile
-  # (if installing the EE version) wget -O Caddyfile https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE
-
-  sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
-  sed -i "s/NETMAKER_BASE_DOMAIN/<your base domain>/g" /root/Caddyfile
-  sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
-  sed -i 's/YOUR_EMAIL/<your email>/g' Caddyfile
-  sed -i 's/REPLACE_SERVER_IMAGE_TAG/<current version>/g' docker-compose.yml
-  sed -i 's/REPLACE_UI_IMAGE_TAG/<current version>/g' docker-compose.yml
-
-Generate a unique master key and insert it:
-
-.. code-block::
-
-  tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
-  sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
-
-You will also need to set an admin password for MQ, which may also be generated randomly.
-
-.. code-block::
-
-  tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
-  sed -i "s/REPLACE_MQ_PASSWORD/<your generated password>/g" docker-compose.yml
-  sed -i "s/REPLACE_MQ_USERNAME/<your username>/g" docker-compose.yml
-
-A username and password is needed for using a TURN server as well.
-
-.. code-block::
-
-  tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''
-  sed -i "s/REPLACE_TURN_PASSWORD/<your generated password>/g" docker-compose.yml
-  sed -i "s/REPLACE_TURN_USERNAME/<your username>/g" docker-compose.yml
-
-
 Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
 -----------------------------------------------------------------------------------------------------
 
 1. Log into https://dashboard.license.netmaker.io"
 2. Copy License Key Value: https://dashboard.license.netmaker.io/license-keys"
 3. Retrieve Account ID: https://dashboard.license.netmaker.io/user"
+4. Place the licence key and account ID in the netmaker.env file.
+5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
+6. Grab the docker-compose.ee extension file from the repo.
 
 .. code-block::
 
-	sed -i "s~YOUR_LICENSE_KEY~<your license key value>~g" docker-compose.yml 
-	sed -i "s/YOUR_ACCOUNT_ID/<your account ID>/g" docker-compose.yml 
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
 
-Start Netmaker
-----------------
 
-``sudo docker-compose up -d``
+You will not need to make any changes to this file. It will reference the current netmaker.env file.
+
+6. Get Certificates
+===================
+
+Start by grabbing our nm-certs shell script, make it executable, and run it.
+
+.. code-block::
+
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-certs.sh
+  chmod +x nm-certs.sh
+  bash nm-certs.sh 
+
+If the script runs successfully, you should see a message like ``SSL certificates ready``.
+
+Then run 
+
+.. code-block::
+
+  ln -fs /root/netmaker.env /root/.env
+
+7. Start Netmaker
+==================
+
+``sudo docker-compose -f docker-compose.yml up -d --force-recreate``
 
 navigate to dashboard.<your base domain> to begin using Netmaker.
 
