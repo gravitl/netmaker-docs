@@ -100,7 +100,7 @@ PowerShell script
 MSI Installer
 --------------
 
-Download Link: https://fileserver.netmaker.org/latest/windows/netclient_x86.msi 
+Download Link: https://fileserver.netmaker.org/latest/netclient_x86.msi 
 
 Mac
 ============
@@ -117,7 +117,9 @@ Brew Install
 GUI Installer
 ---------------
 
-Download Link: https://fileserver.netmaker.org/latest/darwin/Netclient.pkg
+Download Link for Apple silicon: https://fileserver.netmaker.org/latest/Netclient-M1.pkg
+
+Download Link for Apple Intel: https://fileserver.netmaker.org/latest/Netclient-Intel.pkg
 
 FreeBSD
 =============
