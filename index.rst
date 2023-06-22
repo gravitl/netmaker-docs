@@ -76,10 +76,7 @@ How to give machines inside the Netmaker network access to external network reso
 
 How to make machines inside the network reachable if they are blocked by NAT/Firewall:
 
-.. toctree::
-   :maxdepth: 2
-   
-   relay-server
+
 
 .. toctree::
    :maxdepth: 2

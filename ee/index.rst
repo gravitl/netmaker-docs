@@ -31,15 +31,13 @@ How to set up Netmaker Enterprise
 
    ee-setup
 
-Users
-------------------------------------
-
-How to manage users in Netmaker Enterprise
+Relays
+---------------
 
 .. toctree::
    :maxdepth: 2
-
-   ee-users
+   
+   ee-relay-server
 
 Metrics
 ------------------------------------
