@@ -78,16 +78,28 @@ Your user ID will be located in your user profile found on the side menu
     :alt: userid location
     :align: center
 
-Once you have your license key and account ID, go to your netmaker server and add the following to your docker-compose.yml environment variables.
+Once you have your license key and account ID, go to your netmaker server and add the following to your netmaker.env file.
 
 .. code-block:: yaml
 
     LICENSE_KEY: “<license key>”
     NETMAKER_ACCOUNT_ID: "<account id>"
 
-Also change the netmaker image to ``image: gravitl/netmaker:<version>-ee``. For example: ``image: gravitl/netmaker:v0.16.0-ee`` After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
+Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.2-ee`` 
 
-You should see a new Dashboard with an Admin tab added. On the arrow will be tabs for the server logs and metrics.
+Also change the ``INSTALL_TYPE`` from ce to ee.
+
+Then you will need to get the docker-compose ee file from here
+
+.. code-block::
+
+    wget -O docker-compose.override.yml https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml
+
+No changes will need to be made to that file. It will use the configs listed in your netmaker.env file.
+
+After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
+
+You should see a new Dashboard. The top menu bar will have relays and metrics added.
 
 .. image:: images/ee-new-dashboard.png
     :width: 80%
@@ -97,25 +109,10 @@ You should see a new Dashboard with an Admin tab added. On the arrow will be tab
 (Optional) Setup your server for Prometheus and Grafana
 ==========================================================
 
-If you would like to use Netmaker's custom Prometheus exporter and Grafana dashboard, you must make some modifications to your docker-compose.
+If you would like to use Netmaker's custom Prometheus exporter and Grafana dashboard, your docker-compose.override.yml file will already have those section.
 
-Use the EE Compose file as a reference:
-
-https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
-
-You must add in sections (as in the above) for :
-  
-- Grafana  
-  
-- Prometheus  
-  
-- Netmaker Exporter  
-
-Additionally, you must make the following changes to Netmaker:
-
-
-In Netmaker, Add the following env var:
+In Netmaker.env, change the following:
 
 .. code-block::
 
-    METRICS_EXPORTER: "on"
+    METRICS_EXPORTER=on
