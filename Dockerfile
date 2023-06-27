@@ -14,8 +14,6 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/license.html\"\ />' /usr/share/nginx/html/license.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-failover.html\"\ />' /usr/share/nginx/html/ee/ee-failover.html
-
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-metrics.html\"\ />' /usr/share/nginx/html/ee/ee-metrics.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-setup.html\"\ />' /usr/share/nginx/html/ee/ee-setup.html
