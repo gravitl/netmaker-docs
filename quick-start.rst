@@ -11,7 +11,7 @@ Important Notes
 
 3. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
 
-4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free tier, but it does require `an account <https://dashboard.license.netmaker.io>`_.
+4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free limits, but it does require `an account <https://app.netmaker.io>`_.
 
 5. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
 
@@ -251,7 +251,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # https://oidc.yourprovider.com - URL of oidc provider
   OIDC_ISSUER=
 
-Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
+Extra Steps for EE
 -----------------------------------------------------------------------------------------------------
 
 1. Log into https://dashboard.license.netmaker.io"
