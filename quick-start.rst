@@ -183,7 +183,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # Specify the type of server to install. Use ee for enterprise and ce for community edition
   INSTALL_TYPE=ce
   # The next two are for Enterprise edition. You can find that info below on "Extra steps for EE"
-  NETMAKER_ACCOUNT_ID= (for EE version)
+  NETMAKER_TENANT_ID= (for EE version)
   LICENSE_KEY= (for EE version)
   # The version for the netmaker and netmaker-ui servers. current version is v0.20.2. 
   # Some versions of docker may try to include quotation marks in this reference, so don't put them in.
@@ -254,12 +254,12 @@ You can then use a text editor like vim or nano to go in there and fill out the 
 Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
 -----------------------------------------------------------------------------------------------------
 
-1. Log into https://dashboard.license.netmaker.io"
-2. Copy License Key Value: https://dashboard.license.netmaker.io/license-keys"
-3. Retrieve Account ID: https://dashboard.license.netmaker.io/user"
-4. Place the licence key and account ID in the netmaker.env file.
+1. Log into our SAAS platform at https://app.netmaker.io" and create an account.
+2. make a self-hosted tenant. details in our :doc:`Netmaker Enterprise setup <./ee/ee-setup>`
+3. Retrieve Tenant ID and license key from the tenant's settings tab.
+4. Place the licence key and tenant ID in the netmaker.env file.
 5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
-6. Grab the docker-compose.ee extension file from the repo.
+6. Grab the docker-compose.ee extension file from the repo and change its name to docker-compose.override.yml.
 
 .. code-block::
 
