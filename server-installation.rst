@@ -262,7 +262,7 @@ The default options for docker-compose can be found here: https://github.com/gra
 The following is a brief description of each:
 
 - `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
-- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
+- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and tenant id from `Netmaker's SAAS platform <https://app.netmaker.io/>`_ .
 - `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
 
 No DNS - CoreDNS Disabled
