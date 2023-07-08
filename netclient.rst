@@ -23,10 +23,11 @@ The Netclient manages WireGuard on client devices (nodes). This document walks t
 
 
 The Netclient is supported on the following operating systems:
-- Linux (most distributions)
-- Windows
-- Mac
-- FreeBSD
+
+* Linux (most distributions)
+* Windows
+* macOS
+* FreeBSD
 
 For unsupported devices, please use the external client, which is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
 
@@ -99,7 +100,7 @@ PowerShell script
 MSI Installer
 --------------
 
-Download Link: https://fileserver.netmaker.org/latest/windows/netclient_x86.msi 
+Download Link: https://fileserver.netmaker.org/latest/netclient_x86.msi 
 
 Mac
 ============
@@ -116,7 +117,9 @@ Brew Install
 GUI Installer
 ---------------
 
-Download Link: https://fileserver.netmaker.org/latest/darwin/Netclient.pkg
+Download Link for Apple silicon: https://fileserver.netmaker.org/latest/Netclient-M1.pkg
+
+Download Link for Apple Intel: https://fileserver.netmaker.org/latest/Netclient-Intel.pkg
 
 FreeBSD
 =============
@@ -186,6 +189,14 @@ Your compose would look more like this:
           image: 'gravitl/new-netclient:v0.18.0'
 
 By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
+
+
+**IMPORTANT:**
+ For docker netclient to function correctly as either ingress/egress gateway, you need to additionally run the following commands on the host machine:
+
+  1. `iptables -I DOCKER-USER -i netmaker  -j ACCEPT`
+  2. `iptables -I DOCKER-USER -o netmaker  -j ACCEPT`
+
 
 =======================	==================================================================	==================================================================================================================================================
 Environment Variable   	Docker Option Example                                             	Description                                                                                                                                       

@@ -4,6 +4,9 @@ UI Reference
 
 This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.
 
+
+`Here is an arcade showing a walkthrough of our new UI. <https://app.arcade.software/share/Jdl7PnnqIbot3IkqvIaf>`_
+
 Authentication
 =================
 
@@ -20,8 +23,7 @@ When you start Netmaker for the first time, you will be prompted to create an ad
 (1) **Username:** Enter a unique username for the admin user.
 (2) **Password:** Enter a secure password for your new user.
 (3) **Password Confirmation:** Repeat the password for verification.
-(4) **Create admin:** Button to create the new admin user.
-(5) **Signup with OAuth:** Button to signup with OAuth.
+(4) **Signup with OAuth:** Button to signup with OAuth.
 
 Login
 --------
@@ -50,7 +52,7 @@ Networks
 Create
 --------
 
-.. image:: images/ui-2.jpg
+.. image:: images/ui-2.png
    :width: 80%
    :alt: create network
    :align: center
@@ -60,36 +62,7 @@ Create
 (1) **Autofill:** Provides sensible defaults for network details and makes up a name.
 (2) **Network Name:** The name of the network. Character limited, as this translates to the interface name on hosts (nm-<network name>)
 (3) **Address Range:** The CIDR of the network. Must be a valid IPv4 Subnet and should be a private address range.
-(4) **Udp Hole Punching:** Enables or disables "UDP Hole Punching" on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will "roam" frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.
-(5) **Is Local Network:** Turn on if all clients in the network will be in the same "local" network. This is a very rare situation and depends on the use case. Almost always leave this off. Turn on if you are in a large data center with a large private address space over which clients should communicate. Can also enable if using a VPC and are treating a single client as "egress" for the VPC. If enabled, fill out the address range of the local network which should determine endpoints.
-(6) **Is Dual Stack:** Turn on to add private ipv6 addresses to all clients in addition to their ipv4 addresses. Not typically necessary. If on, enter a private ipv6 address range to pull from.
-
-Edit
---------
-
-.. image:: images/ui-3.jpg
-   :width: 80%
-   :alt: edit network
-   :align: center
-
-**NOTE:** With the exception of Address Ranges (1-2) any setting that affects nodes will not take effect on existing nodes. It will only set the settings on any **new** node, after the setting has been changed.
-
-(1) **Address Range (ipv4):** The ipv4 private network CIDR. If edited, Netmaker will go through all nodes and update private addresses based on the new range.** 
-(2) **Address Range (ipv6):** The ipv6 private network CIDR. If edited, Netmaker will go through all nodes and update private addresses based on the new range.**
-(3) **Local Range:** Only relevant if "Is Local" was switched on during creation. Specifies the local range that nodes will base their Endpoint off of (note: if a node cannot find an enpoint within the range it will fallback to public ip).
-(4) **Display Name:** The display name of the network. Network Name cannot be changed (acts as a unique ID) but display name can be changed. Only effects appearance in UI.
-(5) **Default Interface:** The default network interface name configured on each node. This defaults to "nm-<network name>".
-(6) **Default Port:** The default WireGuard port each node will attempt to use. Nodes will iterate up from this port until they find a free port.
-(7) **Default PostUp:** A default post-up command to run on each node (after interface has been configured). Disabled by default to prevent RCE vulnerabilities.
-(8) **Default PostDown:** A default post-down command to run on each node (after interface has been removed). Disabled by default to prevent RCE vulnerabilities.
-(9) **Default Keepalive:** How often nodes should send packets to keep connection alive with all peers (in seconds).
-(10) **Default Ext Client DNS:** If set, adds a "DNS=<value>" line to each ext client config. Set this to add DNS to clients. Typically will set this to the server's public IP.
-(11) **Default MTU:** Default MTU for interfaces of all clients in network. Can be useful to set lower in certain difficult environments such as Kubernetes.
-(12) **Allow Node Signup Without Keys:** Allows nodes to join the network without a valid Access Key. Nodes will be put in "pending" status until approved via UI by an admin. Useful if an arbitrary number of people need to join the network and there is no easy way to distribute keys to users.
-(13) **Is Dual Stack:** Enable the Dual Stack feature of networks and add ipv6 addresses to nodes.
-(14) **Default Saveconfig:** Typically ignore this. Sets the SaveConfig field on wireguard config.
-(15) **UDP Hole Punching:** Whether or not UDP Hole Punching is turned on (see Network Create notes). Only effects new nodes. Enables or disables "UDP Hole Punching" on the network. When on, clients will first reach out to the server. The server will keep track of public addresses / ports and send these to all other clients in the network. This increases NAT traversibility, but can also cause issues depending on the server environment (if server is in a private network, for example). Typically good to enable if clients will "roam" frequently or are user devices. Typically better to disable if most clients will be servers with well-defined endpoints / ports. If enabled, you can also disable UDP Hole Punching on any individual machine via the UI (see Node section) but it will be enabled by default.
-
+(4) **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
 
 Hosts
 ======
@@ -151,38 +124,6 @@ A host can be deleted from the UI. All associated nodes must be manually removed
    :alt: host details
    :align: center
 
-Under the host's networks tab, you can see all the networks on the current server the host is connected to. You can also view all networks on the server and connect to or disconnect from them.
-
-
-Host Relays
-------------
-
-Netclients (host machines) can be configured to relay network traffic.
-
-.. image:: images/create-relay-1.png
-   :width: 80%
-   :alt: create relay step 1
-   :align: center
-
-You can make a host a relay under the `RELAY STATUS` tab. Click on the `Is Relay` switch to enable. 
-
-.. image:: images/create-relay-2.png
-   :width: 80%
-   :alt: create relay step 2
-   :align: center
-
-From the dropdown, select the hosts you want to relay to.
-
-**NB** Chained relays are currently unsupported. You can only relay to a host which is not a relay itself, or is not already being relayed.
-
-.. image:: images/create-relay-3.png
-   :width: 80%
-   :alt: create relay step 3
-   :align: center
-
-You can update the relayed hosts via the switches in the `Relay hosts` table.
-
-
 Nodes
 ========
 
@@ -194,25 +135,21 @@ Node List
    :alt: nodes list
    :align: center
 
-(1) **Sort Nodes:** Sort nodes by criterion.
-(2) **Search Nodes:** Look up a node by name.
-(3) **Select Network:** Filter nodes by network.
-(4) **Node Name:** Name of node. By default set to hostname of machine.
-(5) **IP Addresses:** Private IPs of node within network.
-(6) **Version:** Version of netclient the node's host is running.
-(7) **Network:** Network the node is in.
-(8) **Egress:** Indicates if node is an egress gateway. Click to convert into egress gateway. Egress gateways route traffic from the network into a specific subnet or subnets. Egress gateways should be servers in a static location with a reliable IP.
-(9) **Ingress:** Indicates if the node is an ingress. Click to convert into ingress gateway. Ingress gateways route traffic into the network over the WireGuard interface using "ext clients," which are static WireGuard config files. Ingress gateways should be servers in a static location with a reliable IP.
-(10) **Status:** Indicates how recently the node checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** indicate the health of the node's virtual network connections.
-(11) **View:** View the node's details.
-(12) **Delete:** Delete the node.
+(1) **Search Nodes:** Look up a node by name.
+(2) **Node Name:** Name of node. By default set to hostname of machine.
+(3) **IP Addresses:** Private IPs of node within network.
+(4) **Network:** Network the node is in.
+(5) **Egress:** Indicates if node is an egress gateway. Click to convert into egress gateway. Egress gateways route traffic from the network into a specific subnet or subnets. Egress gateways should be servers in a static location with a reliable IP.
+(6) **Ingress:** Indicates if the node is an ingress. Click to convert into ingress gateway. Ingress gateways route traffic into the network over the WireGuard interface using "ext clients," which are static WireGuard config files. Ingress gateways should be servers in a static location with a reliable IP.
+(7) **Status:** Indicates how recently the node checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** indicate the health of the node's virtual network connections.
+(8) **Delete:** Delete the node.
 
 A node pending deletion will be grayed out.
 
 Create Egress
 ---------------
 
-.. image:: images/ui-6.jpg
+.. image:: images/ui-6.png
    :width: 80%
    :alt: dashboard
    :align: center
@@ -229,10 +166,16 @@ Check host section on hosts_. A relay can be created under host settings.
 Edit Node / Node Details
 --------------------------
 
-.. image:: images/node-edit.png
+.. image:: images/ui-5.jpg
    :width: 80%
    :alt: dashboard
    :align: center
+
+.. image:: images/ui-5-5.png
+   :width: 80%
+   :alt: dashboard
+   :align: center
+
 
 (1) **Edit** Edit the node's details
 (2) **ACLs** View the node's Access Control List (ACL)
@@ -317,22 +260,16 @@ Node Graph
    :alt: dashboard
    :align: center
 
-View all nodes in your network, zoom in, zoom out, and search for node names. A legend is on the side to identify each node status / configuration.
+View all nodes in your network, zoom in, zoom out, and search for node names.
+**hover:** Hover over a node to see its direct connections.
 
-.. image:: images/node-graph-2.png
-   :width: 80%
-   :alt: dashboard
-   :align: center
-
-(1) **hover:** Hover over a node to see its direct connections.
-(2) **Configuration Pane:** Manage the node in this pane just like you would in the Nodes pane. See the "Node List" and "Edit Node" sections for more details.
 
 
 Access Control Lists
 =====================
 
 
-.. image:: images/acls-3.jpg
+.. image:: images/acls-3.png
    :width: 80%
    :alt: ACLs
    :align: center

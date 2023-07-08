@@ -31,15 +31,13 @@ How to set up Netmaker Enterprise
 
    ee-setup
 
-Users
-------------------------------------
-
-How to manage users in Netmaker Enterprise
+Relays
+---------------
 
 .. toctree::
    :maxdepth: 2
-
-   ee-users
+   
+   ee-relay-server
 
 Metrics
 ------------------------------------
@@ -50,13 +48,3 @@ How to view network metrics in Netmaker Enterprise
    :maxdepth: 2
 
    ee-metrics
-
-Failover
-------------------------------------
-
-How to set up automated network failover for P2P connections in Netmaker Enterprise
-
-.. toctree::
-   :maxdepth: 2
-
-   ee-failover

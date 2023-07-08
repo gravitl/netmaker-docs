@@ -2,6 +2,11 @@
 Install
 =========
 
+IMPORTANT: Notes on Installation
+
+- Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
+
+
 Choose the install method that makes sense for you.
 
 **For most users, we recommend the** :doc:`Quick Install<./quick-start>` **guide.**
