@@ -2,22 +2,8 @@
 Netmaker Enterprise
 =================================
 
-This guide covers how to get setup with Netmaker Enterprise.
+This guide covers how to get setup with Netmaker Enterprise. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
 
-Notes on Free Tier
-=======================
-
-Netmaker Enterprise includes a generous free tier, which should cover most use cases for individual users. To use Netmaker Enterprise with the free tier, simply follow the same instructions, but use the included license in your license dashboard, instead of buying one.
-
-**Free Tier License Limits:**  
-
-- Netmaker Servers: 1 
-
-- Netmaker Users: 1  
-
-- Netclients: 50  
-
-- Ext Clients: 20  
 
 Get a License
 =================================

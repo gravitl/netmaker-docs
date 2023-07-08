@@ -20,7 +20,7 @@ Create a Network
    :alt: Create Network Screen
    :align: center
 
-This network should have a sensible name (nodes will use it to set their interfaces).
+This network should have a sensible name.
 
 More importantly, it should have a non-overlapping, private address range. 
 
