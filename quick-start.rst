@@ -60,7 +60,7 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 
 - turnapi.domain
 
-If deploying EE, you will also need records for the following:
+If deploying EE, you will also need records for the following:IsStatic
 
 - grafana.domain
 
@@ -76,7 +76,7 @@ If deploying EE, you will also need records for the following:
 
   ssh root@your-host
   sudo apt-get update
-  sudo apt-get install -y docker.io docker-compose wireguard
+  sudo apt-get install -y docker.io docker-compose 
 
 At this point you should have all the system dependencies you need.
  
