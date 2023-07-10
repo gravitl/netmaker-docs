@@ -44,8 +44,7 @@ Server
   Please refer to the quick-start guide to see!
 
 **Can I connect multiple nodes (mesh clients) behind a single firewall/router?**
-  Yes! As of version 0.7 Netmaker supports UDP Hole Punching to allow this, without the use of a third-party STUN server!
-  Is UDP hole punching a risk for you? Well, you can turn it off and make static nodes/ports for the server to refer to as well.
+  As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints.
 
 **What are the minimum specs to run the server?**
   We recommend at least 1 CPU and 2 GB Memory.
