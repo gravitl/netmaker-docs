@@ -88,7 +88,7 @@ The broker must be reachable over a public address.
 Netclient
 ----------------
 
-The netclient is, at its core, a golang binary. Source code can be found in the Netclient `GitHub Repository <https://github.com/gravitl/netclient`_. The binary, by itself, can be compiled for most systems. However, this binary is designed to manage a certain number of Operating Systems. 
+The netclient is, at its core, a golang binary. Source code can be found in the Netclient `GitHub Repository <https://www.github.com/gravitl/netclient>`_. The binary, by itself, can be compiled for most systems. However, this binary is designed to manage a certain number of Operating Systems. 
 
 The netclient can be installed in one of two way: using package manager for your os/DE or by downloading the binary for your operating system/architecture from the netclient github repository and running ./netclient install.
 
