@@ -14,8 +14,6 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/license.html\"\ />' /usr/share/nginx/html/license.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-failover.html\"\ />' /usr/share/nginx/html/ee/ee-failover.html
-
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-metrics.html\"\ />' /usr/share/nginx/html/ee/ee-metrics.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-setup.html\"\ />' /usr/share/nginx/html/ee/ee-setup.html
@@ -60,7 +58,7 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/oauth.html\"\ />' /usr/share/nginx/html/oauth.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/relay-server.html\"\ />' /usr/share/nginx/html/relay-server.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-relay-server.html\"\ />' /usr/share/nginx/html/ee/ee-relay-server.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/turn-server.html\"\ />' /usr/share/nginx/html/turn-server.html
 

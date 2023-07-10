@@ -11,7 +11,7 @@ Important Notes
 
 3. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
 
-4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free tier, but it does require `an account <https://dashboard.license.netmaker.io>`_.
+4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free limits, but it does require `an account <https://app.netmaker.io>`_.
 
 5. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
 
@@ -54,13 +54,11 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 
 - broker.domain
 
-- stun.domain
-
 - turn.domain
 
 - turnapi.domain
 
-If deploying EE, you will also need records for the following:
+If deploying EE, you will also need records for the following:IsStatic
 
 - grafana.domain
 
@@ -76,7 +74,7 @@ If deploying EE, you will also need records for the following:
 
   ssh root@your-host
   sudo apt-get update
-  sudo apt-get install -y docker.io docker-compose wireguard
+  sudo apt-get install -y docker.io docker-compose 
 
 At this point you should have all the system dependencies you need.
  
@@ -88,7 +86,6 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
-- **3478 (STUN):** Port 3478 is reserved for UDP traffic related to STUN. By using the standard port 3478, STUN servers can work effectively with most firewall and NAT configurations, as they typically allow traffic on well-known ports.
 - **3479, 8089 (TURN, TURN api):** Port 3479 is commonly used for UDP traffic related to TURN. Similar to STUN, TURN servers need to work effectively with firewalls and NAT devices. By using the reserved port 3479, TURN servers can better handle communication across various network configurations. Port 8089 is not reserved specifically for TURN but is commonly associated with TURN server deployments.
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
 - **8085 (exporter EE):** If you are building an EE server, you need this port open.
@@ -99,7 +96,6 @@ Make sure the following ports are open both on the VM and in the cloud security 
 
   sudo ufw allow proto tcp from any to any port 443 
   sudo ufw allow proto tcp from any to any port 80 
-  sudo ufw allow proto tcp from any to any port 3478
   sudo ufw allow proto tcp from any to any port 3479
   sudo ufw allow proto tcp from any to any port 8089 
   sudo ufw allow 51821:51830/udp
@@ -115,7 +111,6 @@ It is also important to make sure the server does not block forwarding traffic (
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
-  - allow 3478/tcp from all
   - allow 3479/tcp from all
   - allow 8089/tcp from all
   - allow 51821-51830/udp from all
@@ -251,7 +246,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # https://oidc.yourprovider.com - URL of oidc provider
   OIDC_ISSUER=
 
-Extra Steps for EE (note: there is a substantial free tier for EE, so this is often worthwhile)
+Extra Steps for EE
 -----------------------------------------------------------------------------------------------------
 
 1. Log into our SAAS platform at https://app.netmaker.io" and create an account.

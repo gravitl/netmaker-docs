@@ -20,7 +20,7 @@ Create a Network
    :alt: Create Network Screen
    :align: center
 
-This network should have a sensible name (nodes will use it to set their interfaces).
+This network should have a sensible name.
 
 More importantly, it should have a non-overlapping, private address range. 
 
@@ -38,8 +38,6 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 **IPv4:** Adds private IPv4 to all nodes in a network
 
 **IPv6:** Adds private IPv6 to all nodes in a network
-
-**UDP Hole Punching:** UDP Hole Punching enables the server to perform STUN. This means, when nodes check-in, the server will record return addresses and ports. It will then communicate this information to the other nodes when they check in, allowing them to reach their peers more easily.  **This setting is usually good to turn on, with some noteable exceptions.** This setting can also break peer-to-peer functionality if, for whatever reason, nodes are unable to reach the server.  This can enhance connectivity in cases where NAT may block communication.
 
 **Default Access Control:** Indicates the default ACL value for a node when it joins in respect to it's peers (enabled or disabled).
 

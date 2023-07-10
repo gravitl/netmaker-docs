@@ -193,13 +193,22 @@ Compose File - Annotated
 
 All environment variables and options are enabled in this file. It is the equivalent to running the "full install" from the above section. However, all environment variables are included and are set to the default values provided by Netmaker (if the environment variable was left unset, it would not change the installation). Comments are added to each option to show how you might use it to modify your installation.
 
-As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints. There are also some environment variables that have been changed, or removed. Your updated docker-compose file should look like this.
+As of v0.18.0, netmaker now uses a stun server (Session Traversal Utilities for NAT). This provides a tool for communications protocols to detect and traverse NATs that are located in the path between two endpoints. By default, netmaker uses publicly available STUN servers.  You are free to set up your own stun severs and use those to augment/replace the public STUN servers. Update the STUN_LIST to list the STUN servers you wish to use. Two resources for installing your own STUN server are:
 
-.. literalinclude:: ./examplecode/docker-compose.reference.v18.yml
+https://ourcodeworld.com/articles/read/1175/how-to-create-and-configure-your-own-stun-turn-server-with-coturn-in-ubuntu-18-04
+
+https://cloudkul.com/blog/how-to-install-turn-stun-server-on-aws-ubuntu-20-04/
+
+
+There are also some environment variables that have been changed, or removed. Your updated docker-compose and .env files should look like this.
+
+.. literalinclude:: ./examplecode/docker-compose.v0.20.3.yml
   :language: YAML
 
+.. literalinclude:: ./examplecode/netmaker.default.env
+  :language: YAML   
 
-Our Caddy file has gone through some minor changes as well. There needs to be a block for the STUN and TURN server. The file should look like this.
+Our Caddy file has gone through some minor changes as well. There needs to be a block for the TURN server. The file should look like this.
 
 .. code-block:: cfg
 
@@ -233,12 +242,7 @@ Our Caddy file has gone through some minor changes as well. There needs to be a 
     https://api.NETMAKER_BASE_DOMAIN {
             reverse_proxy http://netmaker:8081
     }
-
-    # STUN
-    https://stun.NETMAKER_BASE_DOMAIN {
-        reverse_proxy netmaker:3478
-    }
-
+    
     # TURN
     https://turn.NETMAKER_BASE_DOMAIN {
         reverse_proxy host.docker.internal:3479
@@ -262,8 +266,9 @@ The default options for docker-compose can be found here: https://github.com/gra
 The following is a brief description of each:
 
 - `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
-- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and tenant id from `Netmaker's SAAS platform <https://app.netmaker.io/>`_ .
-- `docker-compose.reference.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.reference.yml>`_ - This is the same as docker-compose.yml but with all variable options on display and annotated (it's what we show right above this section). Use this to determine which variables you should add or change in your configuration.
+
+- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
+
 
 No DNS - CoreDNS Disabled
 ----------------------------------------------

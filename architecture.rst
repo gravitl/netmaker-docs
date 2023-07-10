@@ -83,18 +83,20 @@ Message Broker (Mosquitto)
 
 The Mosquitto broker is the default MQTT broker that ships with Netmaker, though technically, any MQTT broker should work so long as the correct configuration is applied. The broker enables the establishment of a pub-sub messaging system, whereby clients subscribe to receive updates. When the server receives a change, it will publish that change to the broker that pushes out the change to the appropriate nodes. 
 
-The broker must be reachable over a public address. Unlike the API and UI, Netmaker handles certificates for MQ directly. Netmaker shares a folder for certificates with MQ, and generates root certs as well as client certs, which are distributed to each machine. This keeps MQ traffic secure on a per-peer basis. The certificate management system is still relatively new, and is often a point of initial setup failure due to either incorrect DNS, firewall, or MQ setup.
+The broker must be reachable over a public address. 
 
 Netclient
 ----------------
 
-The netclient is, at its core, a golang binary. Source code can be found in the netclient folder of the Netmaker `GitHub Repository <https://github.com/gravitl/netmaker/tree/master/netclient>`_. The binary, by itself, can be compiled for most systems. However, this binary is designed to manage a certain number of Operating Systems. 
+The netclient is, at its core, a golang binary. Source code can be found in the Netclient `GitHub Repository <https://www.github.com/gravitl/netclient>`_. The binary, by itself, can be compiled for most systems. However, this binary is designed to manage a certain number of Operating Systems. 
 
-The netclient is installed via a simple bash script, which pulls the latest binary and runs 'register' and 'join' commands.
+The netclient can be installed in one of two way: using package manager for your os/DE or by downloading the binary for your operating system/architecture from the netclient github repository and running ./netclient install.
 
-The 'join' command attempts to add the machine to the Netmaker network using sensible defaults, which can be overridden with a config file or environment variables. Assuming the netclient has a valid key (or the network allows manual node signup), it will be registered into the Netmaker network, and will be returned necessary configuration details for how to set up its local network. 
+After installation netclient commands can be executed to 'join' or 'register' with the netmaker server.
 
-The netclient automatically registers with the MQTT server running with Netmaker, which will send it periodic updates when the network changes. The netclient receives the certificates necessary to reach the broker over a secure connection.
+The 'join' and 'register' command attempts to add the machine to the Netmaker network using sensible defaults, which can be overridden with a config file or environment variables. Assuming the netclient has a valid key (or the network allows manual node signup), it will be registered into the Netmaker network, and will be returned necessary configuration details for how to set up its local network. 
+
+The netclient automatically registers with the MQTT server running with Netmaker, which will send it periodic updates when the network changes. 
 
 The netclient then sets up the system daemon (if running in daemon mode), and configures WireGuard. At this point, it should be part of the network.
 
@@ -158,14 +160,14 @@ Technical Process
 Below is a high level, step-by-step overview of the flow of communications within Netmaker (assuming Netmaker has already been installed):
 
 1. Admin creates a new network with a subnet, for instance, 10.10.10.0/24
-2. Admin creates an access key for signing up new nodes
+2. Admin creates a registration key for signing up new nodes
 3. Both of the above requests are routed to the server via an API call from the front end
-4. Admin runs the netclient install script on any given node (machine).
+4. Admin installs the netclient binary on any given node (machine) and runs netclient join or register command.
 5. Netclient decodes key, which contains the server location
 6. Netclient gathers and sets appropriate information to configure itself as a node: it generates key pairs, gets public and local addresses, and sets a port.
-7. Netclient sends this information to the server, authenticating with its access key 
+7. Netclient sends this information to the server, authenticating with its registration key 
 8. Netmaker server verifies information and creates the node, setting default values for any missing information, and returns a response.
-9. Netmaker also registers the client with MQ and generates client certificates to authenticate the traffic. 
+9. Netmaker also registers the client with MQ. 
 10. Upon successful registration, Netclient pulls the latest peers list from the server and set up a WireGuard interface.
 11. Netclient subscribes to the MQ broker.
 12. Netclient configures itself as a daemon (if joining for the first time).
