@@ -96,7 +96,6 @@ Make sure the following ports are open both on the VM and in the cloud security 
 
   sudo ufw allow proto tcp from any to any port 443 
   sudo ufw allow proto tcp from any to any port 80 
-  sudo ufw allow proto tcp from any to any port 3478
   sudo ufw allow proto tcp from any to any port 3479
   sudo ufw allow proto tcp from any to any port 8089 
   sudo ufw allow 51821:51830/udp
@@ -112,7 +111,6 @@ It is also important to make sure the server does not block forwarding traffic (
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
-  - allow 3478/tcp from all
   - allow 3479/tcp from all
   - allow 8089/tcp from all
   - allow 51821-51830/udp from all
