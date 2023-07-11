@@ -22,6 +22,10 @@ Netmaker UI allows resellers to whitelabel and customize branding by building a 
 (5) **VITE_TENANT_LOGO_LIGHT_SMALL_URL:** Small varient of logo to be used in light mode. eg: when sidenav is collapsed (optional).
 (6) **VITE_TENANT_LOGO_ALT_TEXT:** Alternative text for logo.
 
+Reference: https://github.com/gravitl/netmaker-ui-2/blob/master/Dockerfile.standalone
+
+For more information on how to go about whitelabelling, reach out to us at https://www.netmaker.io/contact
+
 
 Authentication
 =================
