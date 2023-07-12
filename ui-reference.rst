@@ -13,7 +13,9 @@ This page contains annotated screenshots of most UI components, detailing the co
 UI Branding
 =============
 
-Netmaker UI allows resellers to whitelabel and customize branding by building a custom docker image with the following environment variables set:
+Netmaker UI allows resellers to whitelabel and customize branding by building a custom docker image with the below environment variables set.
+
+Open the `Dockerfile.standalone` file and set the following environment variables:
 
 (1) **VITE_PRODUCT_NAME:** The name of the product. This is the name that will appear in the UI.
 (2) **VITE_TENANT_LOGO_DARK_URL:** Logo to be used in dark mode.
@@ -21,6 +23,8 @@ Netmaker UI allows resellers to whitelabel and customize branding by building a 
 (4) **VITE_TENANT_LOGO_DARK_SMALL_URL:** Small varient of logo to be used in dark mode. eg: when sidenav is collapsed (optional).
 (5) **VITE_TENANT_LOGO_LIGHT_SMALL_URL:** Small varient of logo to be used in light mode. eg: when sidenav is collapsed (optional).
 (6) **VITE_TENANT_LOGO_ALT_TEXT:** Alternative text for logo.
+
+You could use a URL to the logo or put the logo in the `/public` directory, then build the docker image.
 
 Reference: https://github.com/gravitl/netmaker-ui-2/blob/master/Dockerfile.standalone
 
