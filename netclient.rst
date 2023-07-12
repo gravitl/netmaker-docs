@@ -124,11 +124,13 @@ Download Link for Apple Intel: https://fileserver.netmaker.org/latest/Netclient-
 FreeBSD
 =============
 
-A FreeBSD package is coming soon. In the meantime, please use this install script:
-
+A FreeBSD package is coming soon. In the meantime, please use one of the following install commands (select the correct one for your version of FreeBSD) to install the netclient on FreeBSD. 
+To install on pfSense or OPNsense, ensure that wireguard package is installed and enabled. Use the FreeBSD version corresponding to your installation (use uname -r to check your version).
 .. code-block::
 
-  curl -sfL https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh | VERSION="<your netmaker version>" sh -
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd13-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd14-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+
 
 Docker
 =============
