@@ -23,3 +23,4 @@ Choose the install method that makes sense for you.
 
 :doc:`Advanced Install Resources <./server-installation>`
 
+:ref:`Whitelabelling and custom UI Branding <UIBranding>`
