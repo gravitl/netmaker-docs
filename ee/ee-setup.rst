@@ -58,7 +58,7 @@ If you prefer to upgrade manually, go to your netmaker server and add the follow
 .. code-block:: yaml
 
     LICENSE_KEY: “<license key>”
-    NETMAKER_ACCOUNT_ID: "<tenant id>"
+    NETMAKER_TENANT_ID: "<tenant id>"
 
 Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.3-ee`` 
 

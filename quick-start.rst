@@ -178,7 +178,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # Specify the type of server to install. Use ee for enterprise and ce for community edition
   INSTALL_TYPE=ce
   # The next two are for Enterprise edition. You can find that info below on "Extra steps for EE"
-  NETMAKER_ACCOUNT_ID= (for EE version)
+  NETMAKER_TENANT_ID= (for EE version)
   LICENSE_KEY= (for EE version)
   # The version for the netmaker and netmaker-ui servers. current version is v0.20.2. 
   # Some versions of docker may try to include quotation marks in this reference, so don't put them in.
