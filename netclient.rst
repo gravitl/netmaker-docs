@@ -124,7 +124,7 @@ Download Link for Apple Intel: https://fileserver.netmaker.org/latest/Netclient-
 FreeBSD
 =============
 
-A FreeBSD package is coming soon. In the meantime, please use one of the following install commands (select the correct one for your version of FreeBSD) to install the netclient on FreeBSD. 
+A FreeBSD package is planned. In the meantime, please use one of the following commands (select the correct one for your version of FreeBSD) to install the netclient on FreeBSD. 
 To install on pfSense or OPNsense, ensure that wireguard package is installed and enabled. Use the FreeBSD version corresponding to your installation (use uname -r to check your version).
 .. code-block::
 
