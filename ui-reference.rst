@@ -23,7 +23,7 @@ Open the `Dockerfile.standalone` file and set the following environment variable
 (4) **VITE_TENANT_LOGO_DARK_SMALL_URL:** Small varient of logo to be used in dark mode. eg: when sidenav is collapsed (optional).
 (5) **VITE_TENANT_LOGO_LIGHT_SMALL_URL:** Small varient of logo to be used in light mode. eg: when sidenav is collapsed (optional).
 (6) **VITE_TENANT_LOGO_ALT_TEXT:** Alternative text for logo.
-(6) **VITE_TENANT_FAVICON_LOGO:** Favicon to use in the web browser's tile bar or tab. Defaults to light logo if not specified.
+(7) **VITE_TENANT_FAVICON_LOGO:** Favicon to use in the web browser's tile bar or tab. Defaults to light logo if not specified.
 
 You could use a URL to the respective logos or put the logos in the `/public` directory, then build the docker image.
 
