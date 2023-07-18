@@ -249,8 +249,8 @@ You can then use a text editor like vim or nano to go in there and fill out the 
 Extra Steps for EE
 -----------------------------------------------------------------------------------------------------
 
-1. Log into our SAAS platform at https://app.netmaker.io" and create an account.
-2. make a self-hosted tenant. details in our :doc:`Netmaker Enterprise setup <./ee/ee-setup>`
+1. Visit `<https://app.netmaker.io>`_ to create your account on the Netmaker SaaS platform.
+2. Create a tenant of type ``self-hosted`` to obtain a license key. more details in :doc:`Netmaker Enterprise setup <./ee/ee-setup>`
 3. Retrieve Tenant ID and license key from the tenant's settings tab.
 4. Place the licence key and tenant ID in the netmaker.env file.
 5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
