@@ -43,12 +43,12 @@ You will need the licence key and tenant id from the settings page back at the a
     :alt: License keys
     :align: center
 
-Once you have your license key and account ID, go to your netmaker server and add the following to your netmaker.env file.
+Once you have your license key and tenant ID, go to your netmaker server and add the following to your netmaker.env file.
 
 .. code-block:: yaml
 
     LICENSE_KEY: “<license key>”
-    NETMAKER_ACCOUNT_ID: "<tenant id>"
+    NETMAKER_TENANT_ID: "<tenant id>"
 
 Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.3-ee`` 
 
