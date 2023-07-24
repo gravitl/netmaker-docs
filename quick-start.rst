@@ -213,6 +213,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # If ON, all new clients will enable proxy by default
   # If OFF, all new clients will disable proxy by default
   # If AUTO, stick with the existing logic for NAT detection
+  # This setting is no longer available from v0.20.5
   DEFAULT_PROXY_MODE="off"
   # Port to access turn server
   TURN_PORT="3479"
