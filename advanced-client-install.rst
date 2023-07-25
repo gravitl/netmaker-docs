@@ -61,25 +61,27 @@ With some versions of WireGuard on Windows, high CPU utilization has been found 
 Notes on OpenWRT
 ===========================
 
-Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used. If the primary installer does not work, there are two things you can try:
+Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used.
+1. Ensure you download the appropriate binary for your architecture.  replace ${VERSION} with the version you want to download
+a. https://github.com/gravitl/netclient/releases/download/${VERSION}/netclient-linux-amd64
+b. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-arm64
+c. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv5
+d. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv6
+e. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv7
+f. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mips-hardfloat
+g. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mips-softfloat
+h. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mipsle-hardfloat
+i. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mipsle-softfloat
 
-1. This community-run package for OpenWRT: https://github.com/sbilly/netmaker-openwrt
+2. run netclient install  (note: all netclient commands must be run as root) 
+  will install the netclient binary to /usr/bin/netclient and service file to /etc/init.d/netclient
 
-2. Manual installation:
-  
-- Download the latest release source and create the Netclient binaries by executing netmaker/netclient/bin-maker.sh
-- Execute `uname -m` in the OpenWRT os
-- Copy the netclient binary generated with respect to the above architecture output to OpenWRT.
-- Rename to "netclient"
-- Run as root from a bash shell on OpenWRT
+3. to start/stop the netclient daemon run 
+   /sbin/rc-service netclient start/stop
 
-3. Default Netclient daemon configured through https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh, if its not working clean it and execute https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/openwrt-daemon.sh . 
+4. run other netclient commands (join, list, connect, disconnec, etc ) as required
 
-4. You may experience an issue with the length of the token, which has limits on some OpenWRT shells. If you run into this problem, you can use the following script to convert your token into a "netclient join" command:
 
-- `wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/token-convert.sh`
-- ./token-convert <token value>
-- Run the output on your OpenWRT machine
 
 Modes and System Compatibility
 ==================================
