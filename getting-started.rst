@@ -172,6 +172,8 @@ You can view/modify/delete any node by selecting it in the NODES tab. For instan
 
 Nodes can be added/removed/modified on the network at any time. Nodes can also be added to multiple Netmaker networks. Any changes will get picked up by any nodes on a given network and will take about ~30 seconds to take effect.
 
+Netclient (host) proxy has been removed in v0.20.5.
+
 Uninstalling the netclient
 =============================
 

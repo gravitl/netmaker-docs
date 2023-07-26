@@ -132,13 +132,13 @@ The following information is present under the host details tab:
 (5) **Public Key:** Public key of the host. distributed to other hosts.
 (6) **MTU:** Maximum Transmission Unit (MTU) of the host
 (7) **Listen Port:** The wiregaurd listen port.
-(8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`.
+(8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`. (No longer available from v0.20.5)
 (9) **Verbosity:** Log verbosity (ranges from 1-4). Indicates level of detail the host (netclient) will output to logs.
 (10) **Default Interface:** Default network interface used by the host.
 (11) **MAC Address:** Media Access Control (MAC) address of the host machine.
 (12) **Is Default:** Indicates whether the host is a default node. Hosts that are default nodes will automatically join any created network.
 (13) **Debug:** Flag to enable additional logging on client.
-(14) **Proxy Enabled:** Indicates whether a host is running netclient proxy.
+(14) **Proxy Enabled:** Indicates whether a host is running netclient proxy. (No longer available from v0.20.5)
 (15) **Is Static:** Indicaates whether the host's endpoint is static or not.
 (16) **Interfaces:** Lists the available network interface for the host.
 
