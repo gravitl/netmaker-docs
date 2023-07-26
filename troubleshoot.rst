@@ -122,53 +122,6 @@ Netclient
 **I have a hard to reach machine behind a firewall or a corporate NAT, what can I do?**
   In this situation, you can use the Relay Server functionality introduced in Netmaker v0.8 to designate a node as a relay to your "stuck" machine. Simply click the button to make a node into a relay and tell it to relay traffic to this hard-to-reach peer. 
 
-**I am unable to run the netclient on my OpenWRT machine, what's wrong?**
-  Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used. If the primary installer does not work, there are two things you can try:
-
-  1. This community-run package for OpenWRT: https://github.com/sbilly/netmaker-openwrt
-
-  2. Manual installation:
-
-  - Download the latest release source and create the Netclient binaries by executing netmaker/netclient/bin-maker.sh
-  - Execute `uname -m` in the OpenWRT os
-  - Execute  `lscpu` to determine byte order or try below code.
-  
-  .. code-block:: bash
-
-    if [[ `printf '\0\1' | hexdump -e '/2 "%04x"'` -eq 0100 ]]; then
-     echo "Little Endian"
-    else
-     echo "Big Endian"
-    fi
-
-  - copy the netclient binary generated with respect to the above architecture output to OpenWRT.
-  - rename to "netclient"
-  - Run as root from a bash shell on OpenWRT
-
-  .. list-table:: Binary mapping
-   :widths: 50 30 50
-   :header-rows: 1
-
-   * - Bianry File
-     - Arch
-     - Byte order
-   * - | netclient-mipsle-softfloat
-       | netclient-mipsle-softfloat-upx
-     - mips
-     - Little Endian
-   * - | netclient-mips-softfloat
-       | netclient-mips-softfloat-upx
-     - mips
-     - Big Endian
-
-  3. Default Netclient daemon configured through https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.sh, if its not working clean it and execute https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/openwrt-daemon.sh .
-
-  4. You may experience an issue with the length of the token, which has limits on some OpenWRT shells. If you run into this problem, you can use the following script to convert your token into a "netclient join" command:
-
-  - `wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/token-convert.sh`
-  - ./token-convert <token value>
-  - Run the output on your OpenWRT machine
-
 **I am unable to run Netclient on Windows due to an error that mentions Fyne and a window creation error**
 
 Older versions of Windows and/or virtualized environments may not support the Netclient UI.  To fix this, download and install Mesa 3D.  One way is follow these steps:
