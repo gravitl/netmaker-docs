@@ -213,6 +213,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # If ON, all new clients will enable proxy by default
   # If OFF, all new clients will disable proxy by default
   # If AUTO, stick with the existing logic for NAT detection
+  # This setting is no longer available from v0.20.5
   DEFAULT_PROXY_MODE="off"
   # Port to access turn server
   TURN_PORT="3479"
@@ -249,12 +250,12 @@ You can then use a text editor like vim or nano to go in there and fill out the 
 Extra Steps for EE
 -----------------------------------------------------------------------------------------------------
 
-1. Log into https://dashboard.license.netmaker.io"
-2. Copy License Key Value: https://dashboard.license.netmaker.io/license-keys"
-3. Retrieve Account ID: https://dashboard.license.netmaker.io/user"
-4. Place the licence key and account ID in the netmaker.env file.
+1. Visit `<https://app.netmaker.io>`_ to create your account on the Netmaker SaaS platform.
+2. Create a tenant of type ``self-hosted`` to obtain a license key. more details in :doc:`Netmaker Enterprise setup <./ee/ee-setup>`
+3. Retrieve Tenant ID and license key from the tenant's settings tab.
+4. Place the licence key and tenant ID in the netmaker.env file.
 5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
-6. Grab the docker-compose.ee extension file from the repo.
+6. Grab the docker-compose.ee extension file from the repo and change its name to docker-compose.override.yml.
 
 .. code-block::
 

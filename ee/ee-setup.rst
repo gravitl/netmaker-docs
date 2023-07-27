@@ -51,6 +51,7 @@ You will need the licence key and tenant id from the settings page back at the a
     :alt: License keys
     :align: center
 
+
 Once you have your license key and account ID, you can get the nm-quick installer and run it. 
 
 .. code-block::
@@ -62,6 +63,7 @@ Once you have your license key and account ID, you can get the nm-quick installe
 You can upgrade from an existing community server to an ee server with this script. Follow the prompts to setup an ee server and the script will make the necessary changes to your netmaker.env file and grab the ee docker-compose.override.yml file.
 
 If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file.
+
 
 .. code-block:: yaml
 
