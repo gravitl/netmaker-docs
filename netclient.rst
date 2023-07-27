@@ -374,7 +374,8 @@ List Networks
 Multi-Server
 ============
 
-Netclient can be used with multiple netmaker servers. You can switch between different netmaker servers using netclient switch command. Swithing to another server will disconnect netclient from all the networks of the current server.
+Netclient can be registered with multiple netmaker servers. You can switch between different netmaker servers using netclient switch command.
+*Warning: Switching to another server will disconnect netclient from all the networks on the current server, but you can always switch back using the netclient switch command.*
 .. code-block::
 
   netclient switch <server name>
