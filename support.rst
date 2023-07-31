@@ -42,7 +42,7 @@ If you believe the SSPL will negatively impact your ability to use the project, 
 Telemetry
 ==============
 
-As of v0.10.0, Netmaker collects "opt-out" telemetry data. To opt out, simply set "TELEMETRY=off" in your docker-compose file.
+As of v0.10.0, Netmaker collects "opt-out" telemetry data. To opt out, simply set "TELEMETRY=off" in your netmaker.env file.
 
 Please consider participating in telemetry, as it helps us focus on the features and bug fixes that are most useful to users. Netmaker is a broad platform, and without this data, it is difficult to know where the team should spend its limited resources.
 

@@ -28,7 +28,7 @@ Netmaker sets its configuration in the following order of precedence:
 2. **Config File:** Values set in the ``config/environments/*.yaml`` file.
 3. **Defaults:** Default values set on the server if no value is provided in configuration.  
 
-In most situations, if you wish to modify a server setting, set it in the docker-compose.yml file, then run "docker kill netmaker" and "docker-compose up -d".
+In most situations, if you wish to modify a server setting, set it in the netmaker.env file, then run "docker kill netmaker" and "docker-compose up -d".
 
 Variable Description
 ----------------------
@@ -273,7 +273,7 @@ The following is a brief description of each:
 No DNS - CoreDNS Disabled
 ----------------------------------------------
 
-CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your docker-compose env for netmaker, set DNS_MODE="off"
+CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your netmaker.env for netmaker, set DNS_MODE="off"
 
 .. _Emqx:
 
@@ -282,69 +282,15 @@ EMQX
 
 Netmaker offers an EMQX option as a broker for your server. The main configuration changes between mosquitto and EMQX is going to take place in the docker-compose.yml and the Caddyfile.
 
-You can find the EMQX docker-compose file `in the netmaker repo <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose-emqx.yml>`_. if you are switching from an existing mosquitto setup to EMQX, it would be good to backup your old docker-compose.yml and Caddyfile before switching over.
+You can find the EMQX docker-compose file `in the netmaker repo <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose-emqx.yml>`_.
 
-You can get the raw file and sed your information into the file. this would be the easiest way to switch over your docker-compose.yml
+You should not need to make any changes to this file. It will grab information from the netmaker.env file.
 
 .. code-block::
 
-    wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose-emqx.yml -o docker-compose.yml
-    sed -i 's/NETMAKER_BASE_DOMAIN/<your base domain>/g' docker-compose.yml
-    sed -i 's/SERVER_PUBLIC_IP/<your server ip>/g' docker-compose.yml
-    sed -i 's/REPLACE_MASTER_KEY/<your generated key>/g' docker-compose.yml
-    sed -i "s/REPLACE_MQ_ADMIN_USERNAME/<your username>/g" docker-compose.yml
-    sed -i "s/REPLACE_MQ_ADMIN_PASSWORD/<your generated password>/g" docker-compose.yml
+    wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose-emqx.yml
 
-If you prefer to change it manually, the main changes between the emqx docker-compose and mosquitto are going to be in the netmaker section and the mq section.
-
-.. code-block:: yaml
-
-    netmaker:
-        container_name: netmaker
-        image: gravitl/netmaker:v0.18.6
-        restart: always
-        volumes:
-            - dnsconfig:/root/config/dnsconfig
-            - sqldata:/root/data
-        environment:
-            BROKER_ENDPOINT: "wss://broker.NETMAKER_BASE_DOMAIN/mqtt"
-            BROKER_TYPE: "emqx"
-            EMQX_REST_ENDPOINT: "http://mq:18083"
-            SERVER_NAME: "NETMAKER_BASE_DOMAIN"
-            STUN_LIST: "stun.NETMAKER_BASE_DOMAIN:3478,stun1.netmaker.io:3478,stun2.netmaker.io:3478,stun1.l.google.com:19302,stun2.l.google.com:19302"
-            SERVER_HOST: "SERVER_PUBLIC_IP"
-            SERVER_API_CONN_STRING: "api.NETMAKER_BASE_DOMAIN:443"
-            COREDNS_ADDR: "SERVER_PUBLIC_IP"
-            DNS_MODE: "on"
-            SERVER_HTTP_HOST: "api.NETMAKER_BASE_DOMAIN"
-            API_PORT: "8081"
-            MASTER_KEY: "REPLACE_MASTER_KEY"
-            CORS_ALLOWED_ORIGIN: "*"
-            DISPLAY_KEYS: "on"
-            DATABASE: "sqlite"
-            NODE_ID: "netmaker-server-1"
-            SERVER_BROKER_ENDPOINT: "ws://mq:8083/mqtt"
-            STUN_PORT: "3478"      
-            VERBOSITY: "1"
-            MQ_PASSWORD: "REPLACE_MQ_PASSWORD"
-            MQ_USERNAME: "REPLACE_MQ_USERNAME"
-            DEFAULT_PROXY_MODE: "off"
-
-    mq:
-        container_name: mq
-        image: emqx/emqx:5.0.9
-        restart: unless-stopped
-        environment:
-        EMQX_NAME: "emqx"
-        EMQX_DASHBOARD__DEFAULT_PASSWORD: "REPLACE_MQ_PASSWORD"
-        EMQX_DASHBOARD__DEFAULT_USERNAME: "REPLACE_MQ_USERNAME"
-        ports:
-            - "1883:1883" # MQTT
-            - "8883:8883" # SSL MQTT
-            - "8083:8083" # Websockets
-            - "18083:18083" # Dashboard/REST_API
-
-If you are using an enterprise server, you will need to make changes to your netmaker-exporter section as well.
+If you are using an enterprise server, you will need to make changes to your netmaker-exporter section in your docker-compose.override.yml file.
 
 .. code-block:: yaml
 
@@ -356,12 +302,8 @@ If you are using an enterprise server, you will need to make changes to your net
             - netmaker
         environment:
             SERVER_BROKER_ENDPOINT: "ws://mq:8083/mqtt"
-            BROKER_ENDPOINT: "wss://broker.nm.NETMAKER_BASE_DOMAIN/mqtt"
-            PROMETHEUS: "on"
-            VERBOSITY: "4"
-            API_PORT: "8085"
-            LICENSE_KEY: "YOUR_LICENCE_KEY"
-            PROMETHEUS_HOST: "https://prometheus.NETMAKER_BASE_DOMAIN"
+            BROKER_ENDPOINT: "wss://broker.nm.${NM_DOMAIN}/mqtt"
+            PROMETHEUS_HOST: "https://prometheus.${NM_DOMAIN}"
 
 
 In your Caddyfile, the only change you need to make is in the mq block.
@@ -369,7 +311,7 @@ In your Caddyfile, the only change you need to make is in the mq block.
 .. code-block:: cfg
     
     # MQ
-    wss://broker.NETMAKER_BASE_DOMAIN/mqtt {
+    wss://broker.${NM_DOMAIN}/mqtt {
         reverse_proxy ws://mq:8083
     }
 
@@ -386,7 +328,7 @@ At this point you should be able to ``docker-compose down && docker-compose up -
     Listener http:dashboard on :18083 started.
     EMQX 5.0.9 is running now!
 
-Your server is now running on an EMQX broker. you can view your EMQX dashboard with ``http://<serverip>:18083/``. The signin credentials are the EMQX_DASHBOARD__DEFAULT_USERNAME and EMQX_DASHBOARD__DEFAULT_PASSWORD located in your docker-compose.yml. This dashboard will give you all the information about your mq activity going on in your netmaker server.
+Your server is now running on an EMQX broker. you can view your EMQX dashboard with ``http://<serverip>:18083/``. The signin credentials are the EMQX_DASHBOARD__DEFAULT_USERNAME and EMQX_DASHBOARD__DEFAULT_PASSWORD located in your netmaker.env file. This dashboard will give you all the information about your mq activity going on in your netmaker server.
 
 .. _NoDocker:
 
@@ -927,7 +869,7 @@ This is enough to get a functioning HA installation of Netmaker. However, you ma
 Security Settings
 ==================
 
-In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in Your Caddyfile if you are using caddy, or the netmaker-ui section of your docker-compose.yml file if you are using traefik.
+In some cases, it is useful to secure your web dashboard behind a firewall so it can only be accessed in that location. However, you may not want the API behind that firewall so the other nodes can interact with the network without the heightened security. This can be done in Your Caddyfile if you are using caddy.
 
 For Caddy
 -----------
