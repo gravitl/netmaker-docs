@@ -126,8 +126,8 @@ A FreeBSD package is planned. In the meantime, please use one of the following c
 To install on pfSense or OPNsense, ensure that wireguard package is installed and enabled. Use the FreeBSD version corresponding to your installation (use uname -r to check your version).
 .. code-block::
 
-  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd13-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
-  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd14-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.5/netclient-freebsd13-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.5/netclient-freebsd14-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
 
 
 Docker

@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Netmaker'
-copyright = '2022, Netmaker Inc.'
+copyright = '2023, Netmaker Inc.'
 author = 'Netmaker'
 
 # The full version, including alpha/beta/rc tags
-release = '0.20.4'
+release = '0.20.5'
 
 
 # -- General configuration ---------------------------------------------------
