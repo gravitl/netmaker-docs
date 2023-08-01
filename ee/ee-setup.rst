@@ -8,19 +8,27 @@ This guide covers how to get setup with Netmaker Enterprise. For pricing,visit `
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. click on the manage account button located on the side bar.
+Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to delete this free tier before creating a self-hosted tenant. click on the manage account button located on the side bar.
 
 .. image:: images/ee-aftersignup.png
    :width: 80%
    :alt: screeen after signup on SAAS
    :align: center
 
-You will then need to click on your username to pull up the menu and click on switch tenant.
+You will then need to click on settings and click the delete tenant button. 
 
 .. image:: images/ee-switchtenant.png
    :width: 80%
    :alt: Click on the switch tenant button
    :align: center
+
+You will then be redirected to the tennants page.
+
+.. image:: images/ee-selecttenant.png
+   :width: 80%
+   :alt: Click on the switch tenant button
+   :align: center
+
 
 Click the Create Tenant button and a modal will pop up allowing you to name your tenant. Click the switch to make the Tenant self-hosted.
 
@@ -43,7 +51,19 @@ You will need the licence key and tenant id from the settings page back at the a
     :alt: License keys
     :align: center
 
-Once you have your license key and tenant ID, go to your netmaker server and add the following to your netmaker.env file.
+
+Once you have your license key and account ID, you can get the nm-quick installer and run it. 
+
+.. code-block::
+    
+    wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh
+    chmod +x nm-quick.sh
+    bash nm-quick.sh
+
+You can upgrade from an existing community server to an ee server with this script. Follow the prompts to setup an ee server and the script will make the necessary changes to your netmaker.env file and grab the ee docker-compose.override.yml file.
+
+If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file.
+
 
 .. code-block:: yaml
 
@@ -81,3 +101,4 @@ In Netmaker.env, change the following:
 .. code-block::
 
     METRICS_EXPORTER=on
+    PROMETHEUS=on

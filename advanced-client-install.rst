@@ -62,21 +62,25 @@ Notes on OpenWRT
 ===========================
 
 Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used.
-1. Ensure you download the appropriate binary for your architecture.  replace ${VERSION} with the version you want to download
-a. https://github.com/gravitl/netclient/releases/download/${VERSION}/netclient-linux-amd64
-b. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-arm64
-c. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv5
-d. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv6
-e. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-armv7
-f. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mips-hardfloat
-g. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mips-softfloat
-h. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mipsle-hardfloat
-i. https://github.com/gravitl/netclient/releases/download/v0.20.4/netclient-linux-mipsle-softfloat
 
-2. run netclient install  (note: all netclient commands must be run as root) 
-  will install the netclient binary to /usr/bin/netclient and service file to /etc/init.d/netclient
+1. Ensure you download the appropriate binary for your architecture.  replace ${VERSION} with the version you want to download
+
+a. https://github.com/gravitl/netclient/releases/download/${VERSION}/netclient-linux-amd64
+b. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-arm64
+c. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv5
+d. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv6
+e. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv7
+f. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mips-hardfloat
+g. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mips-softfloat
+h. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mipsle-hardfloat
+i. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mipsle-softfloat
+
+2. run netclient install  (note: all netclient commands must be run as root) will install the netclient binary to /usr/bin/netclient and service file to /etc/init.d/netclient
 
 3. to start/stop the netclient daemon run 
+
+.. code-block::
+
    /sbin/rc-service netclient start/stop
 
 4. run other netclient commands (join, list, connect, disconnec, etc ) as required

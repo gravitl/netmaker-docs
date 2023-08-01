@@ -126,8 +126,8 @@ A FreeBSD package is planned. In the meantime, please use one of the following c
 To install on pfSense or OPNsense, ensure that wireguard package is installed and enabled. Use the FreeBSD version corresponding to your installation (use uname -r to check your version).
 .. code-block::
 
-  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd13-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
-  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.4/netclient-freebsd14-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.5/netclient-freebsd13-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
+  fetch -o /tmp/netclient https://fileserver.netmaker.io/releases/download/v0.20.5/netclient-freebsd14-amd64 && chmod +x /tmp/netclient && sudo /tmp/netclient install
 
 
 Docker
@@ -183,10 +183,11 @@ Your compose would look more like this:
           restart: always
           environment:
               - TOKEN=<networktoken>
+              - VERBOSITY=<0-4>
           volumes:
               - '/etc/netclient2:/etc/netclient'
           container_name: netclient2
-          image: 'gravitl/new-netclient:v0.18.0'
+          image: 'gravitl/new-netclient:v0.20.5'
 
 By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
 
@@ -198,44 +199,6 @@ By using this method, you can run many netclients on the same host and just incr
   2. `iptables -I DOCKER-USER -o netmaker  -j ACCEPT`
 
 
-=======================	==================================================================	==================================================================================================================================================
-Environment Variable   	Docker Option Example                                             	Description                                                                                                                                       
-=======================	==================================================================	==================================================================================================================================================
-NETCLIENT_NETWORK      	-e NETCLIENT_NETWORK='mynet'                                      	Network to perform specified action against. (default: "all")                                                                                     
-NETCLIENT_PASSWORD     	-e NETCLIENT_PASSWORD='passwordvalueexample'                      	Password for authenticating with netmaker.                                                                                                        
-NETCLIENT_ENDPOINT     	-e NETCLIENT_ENDPOINT='1.2.3.4'                                   	Reachable (usually public) address for WireGuard (not the private WG address).                                                                    
-NETCLIENT_MACADDRESS   	-e NETCLIENT_MACADDRESS='00:11:22:33:44:55'                       	Mac Address for this machine. Used as a unique identifier within Netmaker network.                                                                
-NETCLIENT_PUBLICKEY    	-e NETCLIENT_PUBLICKEY='pubkeyexample'                            	Public Key for WireGuard Interface.                                                                                                               
-NETCLIENT_PRIVATEKEY   	-e NETCLIENT_PRIVATEKEY='privatekeyexample'                       	Private Key for WireGuard Interface.                                                                                                              
-NETCLIENT_PORT         	-e NETCLIENT_PORT='43210'                                         	Port for WireGuard Interface.                                                                                                                     
-NETCLIENT_KEEPALIVE    	-e NETCLIENT_KEEPALIVE='15'                                       	Default PersistentKeepAlive for Peers in WireGuard Interface. (default: 0)                                                                        
-NETCLIENT_OS           	-e NETCLIENT_OS='linux'                                           	Operating system of machine (linux, darwin, windows, freebsd)                                                                                     
-NETCLIENT_IP_SERVICE   	-e NETCLIENT_IP_SERVICE='myipservice.com'                         	The service to call to obtain the public IP of the machine that is running netclient.                                                             
-NETCLIENT_NAME         	-e NETCLIENT_NAME='netmakermachinename'                           	Identifiable name for machine within Netmaker network. (default: "do-docs-netclient")                                                             
-NETCLIENT_LOCALADDRESS 	-e NETCLIENT_LOCALADDRESS='192.168.0.15'                          	Local address for machine. Can be used in place of Endpoint for machines on the same LAN.                                                         
-NETCLIENT_IS_STATIC    	-e NETCLIENT_IS_STATIC='yes'                                      	Indicates if client is static by default (will not change addresses automatically).                                                               
-NETCLIENT_ADDRESS      	-e NETCLIENT_ADDRESS='5.6.7.8'                                    	WireGuard address for machine within Netmaker network.                                                                                            
-NETCLIENT_ADDRESSIPV6  	-e NETCLIENT_ADDRESSIPV6='2001:0db8:85a3:0000:0000:8a2e:0370:7334'	WireGuard address for machine within Netmaker network.                                                                                            
-NETCLIENT_INTERFACE    	-e NETCLIENT_INTERFACE='myif'                                     	WireGuard local network interface name.                                                                                                           
-NETCLIENT_API_SERVER   	-e NETCLIENT_API_SERVER='1.2.3.4:8081'                            	Address + API Port (e.g. 1.2.3.4:8081) of Netmaker server.                                                                                        
-NETCLIENT_ACCESSKEY    	-e NETCLIENT_ACCESSKEY='47e5364ebc00dc0b'                         	Access Key for signing up machine with Netmaker server during initial 'add'.                                                                      
-NETCLIENT_ACCESSTOKEN  	-e NETCLIENT_ACCESSTOKEN='accesstokenhere'                        	Access Token for signing up machine with Netmaker server during initial 'add'.                                                                    
-HOST_SERVER            	-e HOST_SERVER='api.example.com'                                  	Host server (domain of API) [Example: api.example.com]. Do not include "http(s)://" use it for the Single Sign-on along with the network parameter
-USER_NAME              	-e USER_NAME='myuser'                                             	User name provided upon joins if joining over basic auth is desired.                                                                              
-NETCLIENT_LOCALRANGE   	-e NETCLIENT_LOCALRANGE='192.168.1.0/24'                          	Local Range if network is local, for instance 192.168.1.0/24.                                                                                     
-NETCLIENT_DNS          	-e NETCLIENT_DNS='yes'                                            	Sets private dns if 'yes'. Ignores if 'no'. Will retrieve from network if unset. (default: "yes")                                                 
-NETCLIENT_IS_LOCAL     	-e NETCLIENT_IS_LOCAL='no'                                        	Sets endpoint to local address if 'yes'. Ignores if 'no'. Will retrieve from network if unset.                                                    
-NETCLIENT_UDP_HOLEPUNCH	-e NETCLIENT_UDP_HOLEPUNCH='yes'                                  	Turns on udp holepunching if 'yes'. Ignores if 'no'. Will retrieve from network if unset.                                                         
-NETCLIENT_IPFORWARDING 	-e NETCLIENT_IPFORWARDING='on'                                    	Sets ip forwarding on if 'on'. Ignores if 'off'. On by default. (default: "on")                                                                   
-NETCLIENT_POSTUP       	-e NETCLIENT_POSTUP='postupcommandhere'                           	Sets PostUp command for WireGuard.                                                                                                                
-NETCLIENT_POSTDOWN     	-e NETCLIENT_POSTDOWN='postdowncommandhere'                       	Sets PostDown command for WireGuard.                                                                                                              
-NETCLIENT_DAEMON       	-e NETCLIENT_DAEMON='on'                                          	Installs daemon if 'on'. Ignores if 'off'. On by default. (default: "on")                                                                         
-NETCLIENT_ROAMING      	-e NETCLIENT_ROAMING='yes'                                        	Checks for IP changes if 'yes'. Ignores if 'no'. Yes by default. (default: "yes")                                                                 
-VERBOSITY              	-e VERBOSITY='1'                                                  	Netclient Verbosity level 1. (default: false)                                                                                                     
-VERBOSITY              	-e VERBOSITY='2'                                                  	Netclient Verbosity level 2. (default: false)                                                                                                     
-VERBOSITY              	-e VERBOSITY='3'                                                  	Netclient Verbosity level 3. (default: false)                                                                                                     
-VERBOSITY              	-e VERBOSITY='4'                                                  	Netclient Verbosity level 4. (default: false)                                                                                                     
-=======================	==================================================================	==================================================================================================================================================
 
 ******************
 Joining a Network
@@ -370,6 +333,15 @@ List Networks
 .. code-block::
 
   netclient list
+
+Multi-Server
+============
+
+Netclient can be registered with multiple netmaker servers. You can switch between different netmaker servers using netclient switch command.
+*Warning: Switching to another server will disconnect netclient from all the networks on the current server, but you can always switch back using the netclient switch command.*
+.. code-block::
+
+  netclient switch <server name>
 
 Use a different version
 =======================

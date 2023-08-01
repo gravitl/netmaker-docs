@@ -24,6 +24,7 @@ Open the `Dockerfile.standalone` file and set the following environment variable
 (5) **VITE_TENANT_LOGO_LIGHT_SMALL_URL:** Small varient of logo to be used in light mode. eg: when sidenav is collapsed (optional).
 (6) **VITE_TENANT_LOGO_ALT_TEXT:** Alternative text for logo.
 (7) **VITE_TENANT_FAVICON_LOGO:** Favicon to use in the web browser's tile bar or tab. Defaults to light logo if not specified.
+(8) **VITE_TENANT_PRIMARY_COLOR:** UI primary color. Replace this with your brand color. eg: red, green, "#F00", "#00FF00" (Hex values need quoting)
 
 You could use a URL to the respective logos or put the logos in the `/public` directory, then build the docker image.
 
@@ -131,13 +132,13 @@ The following information is present under the host details tab:
 (5) **Public Key:** Public key of the host. distributed to other hosts.
 (6) **MTU:** Maximum Transmission Unit (MTU) of the host
 (7) **Listen Port:** The wiregaurd listen port.
-(8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`.
+(8) **Proxy Listen Port:** The netclient proxy listen port. this is used if `Proxy Enabled` is set to `true`. (No longer available from v0.20.5)
 (9) **Verbosity:** Log verbosity (ranges from 1-4). Indicates level of detail the host (netclient) will output to logs.
 (10) **Default Interface:** Default network interface used by the host.
 (11) **MAC Address:** Media Access Control (MAC) address of the host machine.
 (12) **Is Default:** Indicates whether the host is a default node. Hosts that are default nodes will automatically join any created network.
 (13) **Debug:** Flag to enable additional logging on client.
-(14) **Proxy Enabled:** Indicates whether a host is running netclient proxy.
+(14) **Proxy Enabled:** Indicates whether a host is running netclient proxy. (No longer available from v0.20.5)
 (15) **Is Static:** Indicaates whether the host's endpoint is static or not.
 (16) **Interfaces:** Lists the available network interface for the host.
 
