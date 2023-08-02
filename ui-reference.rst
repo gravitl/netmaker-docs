@@ -98,16 +98,18 @@ In simple terms, a host is a computer or machine running the netclient software.
 Host List
 ---------
 
-.. image:: images/hosts.png
+.. image:: images/hosts-list.png
    :width: 80%
    :alt: hosts list
    :align: center
 
-(1) **Hosts Tab:** Opens a view to allow admins manage hosts.
-(2) **Relay Status:** Indicates whether a host is a relay or is being relayed by a different host on any network.
-(3) **Version:** Indicates the version of netclient the host is running.
-(4) **Default Node:** Click to make the host a default node or not. Hosts that are default nodes will automatically join any created network.
-(5) **Search:** Search for a host by name.
+(1) **Host Name:** Friendly name of the host. Clicking it opens a view to allow admins manage hosts.
+(2) **Endpoint:** The public IP address of the host.
+(3) **Public Port:** Public port of the host.
+(4) **Version:** Indicates the version of netclient the host is running.
+(5) **Health Status:** Indicates the connectivity of the host.
+(6) **Sync:** Synchronise the host with the server; this triggers the host to pull latest network/server state.
+(7) **Actions:** Quick actions that can be performed on the host.
 
 
 Host Create
