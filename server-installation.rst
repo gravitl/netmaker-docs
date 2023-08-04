@@ -79,11 +79,6 @@ REST_BACKEND:
 
     **Description:** Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST). Change to "off" to turn off.
 
-AGENT_BACKEND:  
-    **Default:** "on" 
-
-    **Description:** Enables the AGENT backend (GRPC running on GRPC_PORT at SERVER_GRPC_HOST). Change to "off" to turn off.
-
 DNS_MODE:  
     **Default:** "off"
 
@@ -129,11 +124,6 @@ RCE:
 
     **Description:** The server enables you to set PostUp and PostDown commands for nodes, which is standard for WireGuard with wg-quick, but is also **Remote Code Execution**, which is a critical vulnerability if the server is exploited. Because of this, it's turned off by default, but if turned on, PostUp and PostDown become editable.
 
-DEFAULT_NODE_LIMIT
-    **Default:** "999999999"
-
-    **Description:** Limits the number of nodes allowed on the server (total).
-
 DISPLAY_KEYS
     **Default:** "on"
 
@@ -168,12 +158,6 @@ PORT_FORWARD_SERVICES:
     **Default:** ""
 
     **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
-
-POD_IP: 
-    **Default:** "127.0.0.1"
-
-    **Description:** Specific to a Kubernetes installation. Gets the container IP address of the pod where Netmaker is running.
-
 
 VERBOSITY:
     **Default:** 0
