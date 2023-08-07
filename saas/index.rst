@@ -43,22 +43,54 @@ How to set up Netmaker as a Service
 .. toctree::
    :maxdepth: 2
 
-   ee-setup
+   saas-account-signup
 
-Relays
+Billing
+------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   saas-billing
+
+Profile Management
 ---------------
 
 .. toctree::
    :maxdepth: 2
    
-   ee-relay-server
+   saas-profile
 
-Metrics
+Tenant Management
 ------------------------------------
-
-How to view network metrics in Netmaker Enterprise
 
 .. toctree::
    :maxdepth: 2
 
-   ee-metrics
+   saas-tenant
+
+User Management
+------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   saas-user
+
+Support
+------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   saas-support
+
+
+Troubleshooting
+------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   saas-troubleshoot
+
