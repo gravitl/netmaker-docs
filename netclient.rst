@@ -206,9 +206,9 @@ Joining a Network
 
 The join command provides the following flags with short descriptions on what each one does.
 
-.. image:: images/netclientjoincli.png
+.. image:: images/netclient-join-cli.png
   :width: 80%
-  :alt: netclient CLI
+  :alt: netclient CLI join
   :align: center
 
 With a token:
@@ -229,6 +229,12 @@ With SSO (oauth must be configured):
 .. code-block::
 
   netclient join -n <net name> -s api.<netmaker domain>
+
+With Custom endpoint and/or port (for clients registering/joining for the first time):
+
+.. code-block::
+
+  netclient join -n <net name> -t <token> -e <ip address> -p <listen port>
 
 With docker:
 
@@ -253,28 +259,21 @@ To join on the GUI with Windows or Mac, just click the ADD NEW button and you wi
   :alt: netclient join through GUI
   :align: center
 
-Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
+Choose token and you will be taken to a screen where you will enter the Enrollment key found in the Enrollment keys tab of the Netmaker UI.
 
-.. image:: images/netclienttokenGUI.png
+.. image:: images/ncgui-join-by-token.png
   :width: 80%
   :alt: netclient token screen
   :align: center
 
 Choose Username/Password and you will be taken to this screen:
 
-.. image:: images/netclientauthGUI.png
+.. image:: images/ncgui-join-by-user.png
   :width: 80%
   :alt: netclient username and password screen
   :align: center
 
-You can fill out these fields by parsing out the Join via Basic Auth part of the Access Key Details
-
-.. image:: images/netclientjoinauthsnippet.png
-  :width: 80%
-  :alt: netclient snippet of access key details
-  :align: center
-
-The Server name will be in the <netmaker api domain> and the network will be in the <network-name> placeholder. Username and password is the same as you would use to sign into your netmaker dashboard.
+The server name will be in the API domain of the server you are joining (eg: api.example.net) and the network will be in the network on your Netmaker server (eg: test-net). Username and password is the same as you would use to sign into your netmaker dashboard.
 
 If the join was successful, you should see the network on the GUI.
 
