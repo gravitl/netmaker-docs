@@ -1,5 +1,5 @@
 =====================================
-Relay Servers
+Profile Management
 =====================================
 
 Introduction

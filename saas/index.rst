@@ -45,14 +45,6 @@ How to set up Netmaker as a Service
 
    saas-account-signup
 
-Billing
-------------------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   saas-billing
-
 Profile Management
 ---------------
 
@@ -62,15 +54,23 @@ Profile Management
    saas-profile
 
 Tenant Management
-------------------------------------
+------------------
 
 .. toctree::
    :maxdepth: 2
 
    saas-tenant
 
+Billing
+--------
+
+.. toctree::
+   :maxdepth: 2
+
+   saas-billing
+
 User Management
-------------------------------------
+----------------
 
 .. toctree::
    :maxdepth: 2
@@ -78,7 +78,7 @@ User Management
    saas-user
 
 Support
-------------------------------------
+--------
 
 .. toctree::
    :maxdepth: 2
@@ -87,7 +87,7 @@ Support
 
 
 Troubleshooting
-------------------------------------
+----------------
 
 .. toctree::
    :maxdepth: 2

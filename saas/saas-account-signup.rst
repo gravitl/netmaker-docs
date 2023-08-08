@@ -26,5 +26,5 @@ Once Netmaker is done with that, you will be redirected to the dashboard of your
 
 .. image:: images/saas-free-tier-dashboard.png
     :width: 80%
-    :alt: signup link at the bottom
+    :alt: dashboard for free tier NAAS instance
     :align: center
