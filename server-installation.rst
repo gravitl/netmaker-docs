@@ -356,7 +356,10 @@ Server Setup (using sqlite)
       turn_server: "turn.<YOUR_BASE_DOMAIN>"
       turn_api_server: "https://turnapi.<YOUR_BASE_DOMAIN>"
       turn_port: "3479"
-      
+      use_turn: "true"
+      serverbrokerendpoint: "ws://mq:1883"
+
+
 
 4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq and turn.
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
