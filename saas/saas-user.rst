@@ -63,4 +63,78 @@ you are initally invited as a non-admin user by default. The owner of the tenant
 Transfer Ownership to another user
 ===================================
 
+Make the newly joined user an admin
+------------------------------------
+
+Lets take our new user and transfer ownership of our tenant to it. Start by making sure the user is given admin privileges. Go to the users tab and hover over the vertical elipses. click on edit.
+
+.. image:: images/saas-update-user-permission.png
+    :width: 80%
+    :alt: update user permissions.
+    :align: center
+
+Click the isadmin switch and click the update user button. You should then see your invited user set to admin.
+
+.. image:: images/saas-user-set-to-admin.png
+    :width: 80%
+    :alt: user is admin now.
+    :align: center
+
+Transfer Ownership
+-------------------
+
+You are now ready to transfer ownership to the new user. Navigate to account management and click on your username to bring up a bottom menu. click on the switch tenants button.
+
+.. image:: images/saas-navigate-to-tenant.png
+    :width: 80%
+    :alt: navigate to switch tenants
+    :align: center
+
+Navigate to the Manage Account section and go to the settings. Click on the Transfer Ownership button and you should see an option to choose the new owner from a dropdown.
+
+.. image:: images/saas-transfer-ownership.png
+    :width: 80%
+    :alt: transfer ownership
+    :align: center
+
+After a successful transfer, you should see the new user labeled as the owner.
+
+.. image:: images/saas-new-owner.png
+    :width: 80%
+    :alt: new owner
+    :align: center
+
+Leave Tenant
+=============
+
+As an invited user to a tenant, (or after transferring ownership) you can leave a tenant. This can be done in two ways.
+
+Leave as an invited user
+-------------------------
+
+Navigate to Account Management and go to settings. click the `leave tenant` button
+
+.. image:: images/saas-leave-tenant.png
+    :width: 80%
+    :alt: leave as non-owner
+    :align: center
+
+
+Remove a User as an Owner
+--------------------------
+
+As an owner, navigate to the User section and click on the elipses of the user you would like to remove.
+
+.. image:: images/saas-remove-user.png
+    :width: 80%
+    :alt: remove user as an owner
+    :align: center
+
+After that the user should be gone from your users section and the removed user will no longer have access to that tenant.
+
+.. image:: images/saas-user-gone.png
+    :width: 80%
+    :alt: user is removed
+    :align: center
+
 
