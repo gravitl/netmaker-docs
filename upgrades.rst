@@ -19,7 +19,7 @@ Notes:
 
 Steps:
 ================================
-1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrades/nm-upgrade.sh; make the script executable and run it
+1. On netmaker server, download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrades/nm-upgrade.sh; make the script executable and run it
 2. On each client (relayed nodes should be updated first), download the latest version of netclient and run the `netclient install` command 
 
 
