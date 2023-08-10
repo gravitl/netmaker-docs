@@ -22,7 +22,7 @@ Viewing Details
 ===============
 
 To view the metrics in the Netmaker Dashboard, select a network, then click the Metrics tab.
-From here, you can switch to any metric you are interested in, includeng metrics from clients.
+From here, you can switch to any metric you are interested in, including metrics from clients.
 
 NOTE: Metrics may take up to 5 minutes for nodes to report data. 
 
