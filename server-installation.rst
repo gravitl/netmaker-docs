@@ -343,15 +343,24 @@ Server Setup (using sqlite)
 .. code-block:: yaml
 
     server:
-      server: "broker.<YOUR_BASE_DOMAIN>"
+      server: "<YOUR_BASE_DOMAIN>"
+      broker: wss://broker.<YOUR_BASE_DOMAIN>
       apiport: "8081"
       apiconn: "api.<YOUR_BASE_DOMAIN>:443"
       masterkey: "<SECRET_KEY>"
-      mqhost: "127.0.0.1"
-      mqport: "8883"
-      mqadminpassword: "<CHOOSE_A_PASSWORD>"
+      mqpassword: "<YOUR_PASSWORD>"
+      mqusername: "<YOUR_USERNAME>"
+      turn_username: "<YOUR_USERNAME>"
+      turn_password: "<YOUR_PASSWORD>"
+      turn_server: "turn.<YOUR_BASE_DOMAIN>"
+      turn_api_server: "https://turnapi.<YOUR_BASE_DOMAIN>"
+      turn_port: "3479"
+      use_turn: "true"
+      serverbrokerendpoint: "ws://mq:1883"
 
-4. Update YOUR_BASE_DOMAIN and SECRET_KEY. After v0.16.1, a dynamic mq is implemented. The ``mqadminpassword`` is needed if you use a netmaker binary after v0.16.1.
+
+
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq and turn.
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
 .. code-block:: cfg
