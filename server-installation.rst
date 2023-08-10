@@ -343,7 +343,8 @@ Server Setup (using sqlite)
 .. code-block:: yaml
 
     server:
-      server: "broker.<YOUR_BASE_DOMAIN>"
+      server: "<YOUR_BASE_DOMAIN>"
+      broker: wss://broker.<YOUR_BASE_DOMAIN>
       apiport: "8081"
       apiconn: "api.<YOUR_BASE_DOMAIN>:443"
       masterkey: "<SECRET_KEY>"
