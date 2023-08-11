@@ -6,7 +6,7 @@ Navigation
 ===============
 
 Netmaker EE offers metrics. With Metrics, admin users can view connectivity, 
-latency and data transferred between two peers or nodes on a Netmaker network.  
+latency and data transferred between two peers or nodes on a Netmaker network. Client metrics are also available.  
 All of this data may be visualised in the Netmaker UI. In addition, Netmaker 
 has included a custom exporter for Prometheus/Grafana integration to view 
 the data as well.
@@ -15,52 +15,22 @@ Below are the steps in order to view metrics on your Netmaker EE instance.
 
 **NOTE: Metrics currently relies on ICMP to be allowed between nodes.**
 
-First, there are two ways for a Netmaker Admin to view metrics. 
-- Using the `Admin Tools` card on their dashboard.
+Network metrics can be viewed under the Metrics tab within a network. 
 
-.. image:: images/metrics/metrics-select-1.png
-   :width: 40%
-   :alt: Metrics Select 1
-   :align: center
-
-- Or by using the Metrics link in their side Drawer.
-
-.. image:: images/metrics/metrics-select-2.png
-   :width: 40%
-   :alt: Metrics Select 2
-   :align: center
 
 Viewing Details
 ===============
 
-Then, once you have successfully navigated to the metrics page,
-simply select the Netmaker network you would like to view metrics for.
-The metrics of the nodes currently on that network will be presented and 
-indicate if nodes are connected with a blue check mark or red 'X' if not.
-This page is a general overview of the network. If you hover a blue-checkmark
-connection, it will tell you the latency in Tooltip fashion. 
+To view the metrics in the Netmaker Dashboard, select a network, then click the Metrics tab.
+From here, you can switch to any metric you are interested in, including metrics from clients.
 
 NOTE: Metrics may take up to 5 minutes for nodes to report data. 
 
 
-.. image:: images/metrics/metrics-view-1.png
+.. image:: images/metrics/network-metrics.png
    :width: 80%
-   :alt: Metrics View 1
+   :alt: Network Metrics
    :align: center
-
-Then, if the Admin wishes to see more details, they can select a specific node from the 
-`Node Name` column or row in the metrics table to view more details of that node's connections. 
-
-.. image:: images/metrics/metrics-view-2.png
-   :width: 80%
-   :alt: Metrics View 2
-   :align: center
-
-Once a node is selected, the Netmaker Admin will be presented with 
-total data sent and received from all connections at the top.
-The Netmaker Admin may also choose to view details of connections between
-individual peers under the `Peer Connections` table and can search
-for other nodes by name.
 
 
 Grafana Dashboard
