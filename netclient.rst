@@ -234,7 +234,7 @@ With Custom endpoint and/or port (for clients registering/joining for the first 
 
 .. code-block::
 
-  netclient join -n <net name> -t <token> -e <ip address> -p <listen port>
+  netclient join -t <token> -e <ip address> -p <listen port>
 
 With docker:
 
