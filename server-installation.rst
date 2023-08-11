@@ -264,15 +264,39 @@ CoreDNS is no longer required for most installs. You can simply remove the CoreD
 EMQX
 =====
 
-Netmaker offers an EMQX option as a broker for your server. The main configuration changes between mosquitto and EMQX is going to take place in the docker-compose.yml and the Caddyfile.
+Netmaker offers an EMQX option as a broker for your server. The main configuration changes between mosquitto and EMQX is going to take place in the docker-compose.yml, netmaker.env and the Caddyfile.
 
 You can find the EMQX docker-compose file `in the netmaker repo <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose-emqx.yml>`_.
 
-You should not need to make any changes to this file. It will grab information from the netmaker.env file.
+You should not need to make any changes to the docker-compose-emqx.yml file. Just download this file using the command provided below on the same directory as netmaker.env file. It will grab information from the netmaker.env file.
 
 .. code-block::
 
     wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose-emqx.yml
+
+In your Caddyfile, the only change you need to make is in the mq block.
+
+.. code-block:: cfg
+    
+    # MQ
+    wss://broker.{$NM_DOMAIN} {
+        tls /root/certs/fullchain.pem /root/certs/privkey.pem
+        reverse_proxy ws://mq:8083
+    }
+
+basically just replace the port number on line ``reverse_proxy ws://mq:8883`` with ``8083`` emqx websocket port number.
+
+In your netmaker.env file, just replace the line ``SERVER_BROKER_ENDPOINT="ws://mq:1883"`` with ``SERVER_BROKER_ENDPOINT=ws://mq:8083/mqtt``. Basically just change the port to 8083 and add /mqtt after that.
+
+In your docker-compose.yml file, add ``/mqtt`` at the end of this line ``BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}`` which results in ``BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt``.
+
+.. code-block:: yaml
+    
+    - BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt
+    - BROKER_TYPE=emqx
+    - EMQX_REST_ENDPOINT=http://mq:18083
+
+Then two new lines ``- BROKER_TYPE=emqx`` and ``- EMQX_REST_ENDPOINT=http://mq:18083`` needs to be added after the line ``- BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt`` as shown above.
 
 If you are using an enterprise server, you will need to make changes to your netmaker-exporter section in your docker-compose.override.yml file.
 
@@ -290,18 +314,7 @@ If you are using an enterprise server, you will need to make changes to your net
             PROMETHEUS_HOST: "https://prometheus.${NM_DOMAIN}"
 
 
-In your Caddyfile, the only change you need to make is in the mq block.
-
-.. code-block:: cfg
-    
-    # MQ
-    wss://broker.${NM_DOMAIN}/mqtt {
-        reverse_proxy ws://mq:8083
-    }
-
-basically just change the port to 8083 and add ``/mqtt`` after your domain.
-
-At this point you should be able to ``docker-compose down && docker-compose up -d``. Your ``docker logs mq`` should look something like this.
+At this point you should be able to ``docker-compose down && docker-compose up -d && docker-compose -f docker-compose-emqx.yml up -d``. Your ``docker logs mq`` should look something like this.
 
 .. code-block:: cfg
 
