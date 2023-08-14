@@ -9,19 +9,18 @@ As of 0.13.0, and up 0.17.1 upgrading Netmaker is a manual process. As of 0.20.6
 
 Notes:
 ================================
-1. The server must be upgraded before any clients.  
-2. If upgrading to CE version, any relays will be lost
-3. If upgrading from EE to EE, a new licence key and tenant id must be obtained from https://app.netmaker.io
-4. Relayed clients must be updated before the relays
-5. As the netmaker netclient node is updated when updating the server, if the netmaker node was a relay, the relayed nodes will have to be reset
-6. As each netclient is updated, a new host, nodes, and gateways will be visible in the netmaker UI.
+1. The server should be upgraded before any clients.  
+2. Relays will need to be recreated after the server and all clients are upgraded
+3. If upgrading from EE to EE, a new licence key and tennet id must be obtained from https://app.netmaker.io
+4. As each netclient is updated, a new host, nodes, and gateways will be visible in the netmaker UI.
 
 
 Steps:
 ================================
-1. On netmaker server, download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrades/nm-upgrade.sh; make the script executable and run it
-2. On each client (relayed nodes should be updated first), download the latest version of netclient and run the `netclient install` command 
-
+1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrades/nm-upgrade.sh; make the script executable and run it
+  after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
+2. On each client download the latest version of netclient and run the `netclient install` command 
+  As each netclient is updated, a new host, nodes, and gateways will be visible in the netmaker UI.
 
 Critical Notes for 0.13.X
 ================================
