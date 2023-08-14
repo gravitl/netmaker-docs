@@ -18,7 +18,7 @@ Notes:
 
 Steps:
 ================================
-1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrades/nm-upgrade.sh; make the script executable and run it
+1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh; make the script executable and run it
   after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
 2. Upgrade netclients 
   a. Linux/Freebsd: On each client download the latest version of netclient and run the `netclient install` command 
