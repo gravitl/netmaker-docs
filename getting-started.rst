@@ -108,7 +108,7 @@ Deploy Nodes
 1. SSH to each machine 
 2. ``sudo su -``
 3. **Prerequisite Check:** Every Linux machine on which you run the netclient must have WireGuard and systemd installed
-4. Follow the installation instructions for your operating system `here <https://docs.netmaker.org/netclient.html#installation>`_ 
+4. Follow the installation instructions for your operating system `here <https://docs.netmaker.io/netclient.html#installation>`_ 
 
 You should get output similar to the below. The netclient retrieves local settings, submits them to the server for processing, and retrieves updated settings. Then it sets the local network configuration. For more information about this process, see the :doc:`client installation <./netclient>` documentation. If this process failed and you do not see your node in the console (see below), then reference the :doc:`troubleshooting <./troubleshoot>` documentation.
 

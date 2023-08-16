@@ -5,38 +5,80 @@ Upgrades
 Introduction
 ===============
 
-As of 0.13.0, and up 0.17.1 upgrading Netmaker is a manual process. As of 0.20.6 the upgrade process from 0.17.1 to current version has been automated. 
+These steps will help you upgrade to the latest version of Netmaker. Note that all instructions here assume you have installed using docker-compose. You may need to modify these steps depending on your setup. 
 
-Notes:
+As of v0.20+, the server configuration is stable, meaning you should only need to:
+
+1. Change the associated docker image tags for the Netmaker server and Netmaker UI  
+2. Restart the server and UI using the new image (e.g. "docker-compose up -d")  
+
+For migrating from v0.17.1, you can use the migration steps listed below under `Upgrade from v0.17.1 to Latest <https://docs.netmaker.io/upgrades.html#upgrade-from-v0-17-1-to-latest>`_  
+
+For older versions of Netmaker (pre-v0.17.1), you must first manually upgrade to v0.17.1 before running the migration script.
+
+
+Client Upgrades (General)
+========================================
+
+As of v0.20.5, the Netclient should automatically upgrade itself when it detects a change in the server version. For prior versions of the netclient (or if this fails), you will need to manually upgrade the client. 
+
+**For Linux and Freebsd:** Download the netclient for your target version, OS, and arch, from  `the fileserver <https://fileserver.netmaker.io/releases/download>`_. Then run "./netclient install" from the downloaded executable in your terminal.  
+
+**For Mac and Windows:** Download and run the installer (.MSI for Windows, .PKG for Mac) for your target version, OS, and arch, from `the fileserver <https://fileserver.netmaker.io/releases/download>`_. Then, run the installer.  
+
+Server Upgrades (v0.20.0+)
+========================================
+
+Unless otherwise noted, for newer versions of Netmaker: 
+
+1. SSH to the server hosting Netmaker  
+2. Open the "netmaker.env" file using a text editor  
+3. Change UI_IMAGE_TAG and SERVER_IMAGE_TAG to the latest version  
+4. Run "docker-compose up -d"
+
+  a. For versions prior to v0.20.5, follow the `Client Upgrades <https://docs.netmaker.io/upgrades.html##client-upgrades-general>`_ instructions to upgrade your netclients. 
+  b. For v0.20.5 or later, check in the UI to confirm that all hosts have successfully upgraded to the new version.
+
+
+Upgrade from v0.17.1 to Latest
 ================================
+
+These steps assume you have already upgraded your server and netclients to v0.17.1.
+
+General Notes
+-----------------
+
 1. The server should be upgraded before any clients.  
-2. Relays will need to be recreated after the server and all clients are upgraded
-3. If upgrading from EE to EE, a new licence key and tennet id must be obtained from https://app.netmaker.io
+2. Relays will need to be recreated after the server and all clients are upgraded. Relays are now only available on EE.
+3. If upgrading to EE, a new license key and tennet id must be obtained from https://app.netmaker.io
 4. As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
 5. Extclient config files may have to be regenerated after the upgrade.
 
+Steps
+--------
 
-Steps:
-================================
-1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh; make the script executable and run it
-  after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
-2. Upgrade netclients 
-  a. Linux/Freebsd: On each client download the latest version of netclient and run the `netclient install` command 
-  b. Windows/MacOS: On each client download the latest installer package for netclient and run the installer
-  As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
-3. If upgrading to EE, recreate any relay gateways
-4. Verify extcient config files are correct;  delete and regenerate if incorrect
-  for each peer in config file:
+1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh
+2. Make the script executable and run it. 
+3. After the upgrade, you should see only one host in the Netmaker UI. It will have the same name as the hostname of your server, rather than netmaker-1.
+4. Upgrade your netclients 
+
+  a. Linux/Freebsd: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient and run the `netclient install` command 
+  b. Windows/MacOS: On each client download the `the latest installer package <https://fileserver.netmaker.io/releases/download>`_ (.MSI or .PKG) for netclient and run the installer
+
+5. As each netclient is updated, check that a new host, nodes, and gateways (if applicable) are visible in the Netmaker UI.
+6. If upgrading to EE, recreate any relay gateways
+7. Verify extcient config files are correct. Delete and regenerate if incorrect. For each peer in config file:
+
   a. the peer's public key should be the same as the peer's public key in the netmaker UI
   b. the peer's endpoint should be the same as the peer's endpoint in the netmaker UI
   c. the peer's allowed ips should be the same as the peer's allowed ips in the netmaker UI
+
+Your Netmaker server and clients should all now be running the latest version of Netmaker.
 
 Critical Notes for 0.13.X
 ================================
 
 If upgrading from 0.12 to 0.13, refer to this gist: https://gist.github.com/afeiszli/f53f34eb4c5654d4e16da2919540d0eb
-
-
 
 Critical Notes for 0.10.0
 =============================================
@@ -243,25 +285,3 @@ This last step helps ensure any newly added fields are now present. You may run 
 or
 
 2. Leave and rejoin the network
-
-
-Upgrading server and client to 0.18.5
-======================================
-
-NB: Upgrading to this version requires your server to be currently running v0.17.1
-
-Steps to upgrade
-
-1. SSH to your Netmaker server
-2. Run the upgrade script: ``wget https://raw.githubusercontent.com/gravitl/netmaker/release_v0.18.5/scripts/nm-upgrade.sh && chmod +x nm-upgrade.sh && ./nm-upgrade.sh`` (for v0.18.x, check `releases page <https://github.com/gravitl/netmaker/releases>`_)
-3. Follow prompts until the upgrade process on the server is completed.
-4. Upgrade all netclients.
-
-
-   1. Manually go to each client machine and download new netclient binary from `here <https://github.com/gravitl/netclient/releases/tag/v0.18.5>`_
-   2. Run ``./netclient install`` (Windows users must run with Admin Powershell first. Also use ``.\netclient.exe install`` to install)
-      
-      NB: Windows and Mac users, do not Open GUI until above steps are completed.
-
-
-5. If ``Dynamic Port`` was on, you may need to manually adjust port to ``51821`` after upgrading the client
