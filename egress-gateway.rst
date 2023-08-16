@@ -86,3 +86,29 @@ After that, your public traffic will be routed through your egressing client.
    :width: 50%
    :alt: Gateway
    :align: center
+
+Advanced Use Cases
+======================
+
+1) Segmenting Traffic Flow Through Egress Gateways
+
+   User will need to add these additional routing rules on the egress machine to segment traffic to multiple egress ranges as desired when on multiple networks
+
+.. code-block::
+   
+   iptables -t filter -N netmakeregress 
+   iptables -t filter -I FORWARD -i netmaker -d egressGwRangeA,egressGwRangeB -j netmakeregress
+
+   iptables -t filter -I netmakeregress -s networkRangeA -d egressRangeA -j ACCEPT
+   iptables -t filter -I netmakeregress -s networkRangeB -d egressRangeB -j ACCEPT
+   iptables -t filter -A netmakeregress -j DROP
+
+   # NAT Rules
+
+   iptables -t nat -I POSTROUTING -s networkRangeA -d egressGwRangeA -j MASQUERADE
+
+   iptables -t nat -I POSTROUTING -s egressGwRangeA -d networkRangeA -j MASQUERADE
+
+   iptables -t nat -I POSTROUTING -s networkRangeB -d egressGwRangeB -j MASQUERADE
+
+   iptables -t nat -I POSTROUTING -s egressGwRangeB -d networkRangeB  -j MASQUERADE 

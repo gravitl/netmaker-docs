@@ -18,6 +18,7 @@ Notes:
 
 Steps:
 ================================
+
 1. Download the nm-upgrade.sh script from `the Netmaker repo <https://fileserver.netmaker.io/upgrade/nm-upgrade.sh>`_ make the script executable and run it.
   
   after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
