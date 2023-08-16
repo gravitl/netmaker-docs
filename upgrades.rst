@@ -5,7 +5,31 @@ Upgrades
 Introduction
 ===============
 
-As of 0.13.0, upgrading Netmaker is a manual process. This is expected to be automated in the future, but for now, is still a relatively straightforward process. 
+As of 0.13.0, and up 0.17.1 upgrading Netmaker is a manual process. As of 0.20.6 the upgrade process from 0.17.1 to current version has been automated. 
+
+Notes:
+================================
+1. The server should be upgraded before any clients.  
+2. Relays will need to be recreated after the server and all clients are upgraded
+3. If upgrading from EE to EE, a new licence key and tennet id must be obtained from https://app.netmaker.io
+4. As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
+5. Extclient config files may have to be regenerated after the upgrade.
+
+
+Steps:
+================================
+1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh; make the script executable and run it
+  after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
+2. Upgrade netclients 
+  a. Linux/Freebsd: On each client download the latest version of netclient and run the `netclient install` command 
+  b. Windows/MacOS: On each client download the latest installer package for netclient and run the installer
+  As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
+3. If upgrading to EE, recreate any relay gateways
+4. Verify extcient config files are correct;  delete and regenerate if incorrect
+  for each peer in config file:
+  a. the peer's public key should be the same as the peer's public key in the netmaker UI
+  b. the peer's endpoint should be the same as the peer's endpoint in the netmaker UI
+  c. the peer's allowed ips should be the same as the peer's allowed ips in the netmaker UI
 
 Critical Notes for 0.13.X
 ================================

@@ -79,11 +79,6 @@ REST_BACKEND:
 
     **Description:** Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST). Change to "off" to turn off.
 
-AGENT_BACKEND:  
-    **Default:** "on" 
-
-    **Description:** Enables the AGENT backend (GRPC running on GRPC_PORT at SERVER_GRPC_HOST). Change to "off" to turn off.
-
 DNS_MODE:  
     **Default:** "off"
 
@@ -129,11 +124,6 @@ RCE:
 
     **Description:** The server enables you to set PostUp and PostDown commands for nodes, which is standard for WireGuard with wg-quick, but is also **Remote Code Execution**, which is a critical vulnerability if the server is exploited. Because of this, it's turned off by default, but if turned on, PostUp and PostDown become editable.
 
-DEFAULT_NODE_LIMIT
-    **Default:** "999999999"
-
-    **Description:** Limits the number of nodes allowed on the server (total).
-
 DISPLAY_KEYS
     **Default:** "on"
 
@@ -168,12 +158,6 @@ PORT_FORWARD_SERVICES:
     **Default:** ""
 
     **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
-
-POD_IP: 
-    **Default:** "127.0.0.1"
-
-    **Description:** Specific to a Kubernetes installation. Gets the container IP address of the pod where Netmaker is running.
-
 
 VERBOSITY:
     **Default:** 0
@@ -280,15 +264,39 @@ CoreDNS is no longer required for most installs. You can simply remove the CoreD
 EMQX
 =====
 
-Netmaker offers an EMQX option as a broker for your server. The main configuration changes between mosquitto and EMQX is going to take place in the docker-compose.yml and the Caddyfile.
+Netmaker offers an EMQX option as a broker for your server. The main configuration changes between mosquitto and EMQX is going to take place in the docker-compose.yml, netmaker.env and the Caddyfile.
 
 You can find the EMQX docker-compose file `in the netmaker repo <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose-emqx.yml>`_.
 
-You should not need to make any changes to this file. It will grab information from the netmaker.env file.
+You should not need to make any changes to the docker-compose-emqx.yml file. Just download this file using the command provided below on the same directory as netmaker.env file. It will grab information from the netmaker.env file.
 
 .. code-block::
 
     wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose-emqx.yml
+
+In your Caddyfile, the only change you need to make is in the mq block.
+
+.. code-block:: cfg
+    
+    # MQ
+    wss://broker.{$NM_DOMAIN} {
+        tls /root/certs/fullchain.pem /root/certs/privkey.pem
+        reverse_proxy ws://mq:8083
+    }
+
+basically just replace the port number on line ``reverse_proxy ws://mq:8883`` with ``8083`` emqx websocket port number.
+
+In your netmaker.env file, just replace the line ``SERVER_BROKER_ENDPOINT="ws://mq:1883"`` with ``SERVER_BROKER_ENDPOINT=ws://mq:8083/mqtt``. Basically just change the port to 8083 and add /mqtt after that.
+
+In your docker-compose.yml file, add ``/mqtt`` at the end of this line ``BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}`` which results in ``BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt``.
+
+.. code-block:: yaml
+    
+    - BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt
+    - BROKER_TYPE=emqx
+    - EMQX_REST_ENDPOINT=http://mq:18083
+
+Then two new lines ``- BROKER_TYPE=emqx`` and ``- EMQX_REST_ENDPOINT=http://mq:18083`` needs to be added after the line ``- BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt`` as shown above.
 
 If you are using an enterprise server, you will need to make changes to your netmaker-exporter section in your docker-compose.override.yml file.
 
@@ -306,18 +314,7 @@ If you are using an enterprise server, you will need to make changes to your net
             PROMETHEUS_HOST: "https://prometheus.${NM_DOMAIN}"
 
 
-In your Caddyfile, the only change you need to make is in the mq block.
-
-.. code-block:: cfg
-    
-    # MQ
-    wss://broker.${NM_DOMAIN}/mqtt {
-        reverse_proxy ws://mq:8083
-    }
-
-basically just change the port to 8083 and add ``/mqtt`` after your domain.
-
-At this point you should be able to ``docker-compose down && docker-compose up -d``. Your ``docker logs mq`` should look something like this.
+At this point you should be able to ``docker-compose down && docker-compose up -d && docker-compose -f docker-compose-emqx.yml up -d``. Your ``docker logs mq`` should look something like this.
 
 .. code-block:: cfg
 
@@ -359,15 +356,24 @@ Server Setup (using sqlite)
 .. code-block:: yaml
 
     server:
-      server: "broker.<YOUR_BASE_DOMAIN>"
+      server: "<YOUR_BASE_DOMAIN>"
+      broker: wss://broker.<YOUR_BASE_DOMAIN>
       apiport: "8081"
       apiconn: "api.<YOUR_BASE_DOMAIN>:443"
       masterkey: "<SECRET_KEY>"
-      mqhost: "127.0.0.1"
-      mqport: "8883"
-      mqadminpassword: "<CHOOSE_A_PASSWORD>"
+      mqpassword: "<YOUR_PASSWORD>"
+      mqusername: "<YOUR_USERNAME>"
+      turn_username: "<YOUR_USERNAME>"
+      turn_password: "<YOUR_PASSWORD>"
+      turn_server: "turn.<YOUR_BASE_DOMAIN>"
+      turn_api_server: "https://turnapi.<YOUR_BASE_DOMAIN>"
+      turn_port: "3479"
+      use_turn: "true"
+      serverbrokerendpoint: "ws://mq:1883"
 
-4. Update YOUR_BASE_DOMAIN and SECRET_KEY. After v0.16.1, a dynamic mq is implemented. The ``mqadminpassword`` is needed if you use a netmaker binary after v0.16.1.
+
+
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq and turn.
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
 .. code-block:: cfg

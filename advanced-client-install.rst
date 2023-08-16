@@ -35,14 +35,6 @@ Windows will by default have firewall rules that prevent inbound connections. If
 
 If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server.
 
-Running the install script
-----------------------------
-
-Some file locations have issues running the install script, such as running from the root C:/ folder. Users have noted the following locations work well for running the install powershell script:
-
-- `C:/Program Files/wireguard`
-- `C:/Windows/System32`
-
 Running netclient commands
 ----------------------------
 

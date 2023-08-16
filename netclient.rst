@@ -88,12 +88,6 @@ refer to Advanced Client Installation :ref:`advanced-client-install:Notes on Ope
 Windows
 ===============
 
-PowerShell script
-------------------
-
-.. code-block::
-
-  . { iwr -useb  https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netclient-install.ps1 } | iex; Netclient-Install -version "<your netmaker version>"
 
 MSI Installer
 --------------
