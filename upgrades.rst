@@ -70,7 +70,9 @@ Steps
 7. Verify extcient config files are correct. Delete and regenerate if incorrect. For each peer in config file:
 
   a. the peer's public key should be the same as the peer's public key in the netmaker UI
+
   b. the peer's endpoint should be the same as the peer's endpoint in the netmaker UI
+
   c. the peer's allowed ips should be the same as the peer's allowed ips in the netmaker UI
 
 Your Netmaker server and clients should all now be running the latest version of Netmaker.
