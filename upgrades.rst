@@ -18,17 +18,29 @@ Notes:
 
 Steps:
 ================================
-1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh; make the script executable and run it
+
+1. Download the nm-upgrade.sh script from `the Netmaker repo <https://fileserver.netmaker.io/upgrade/nm-upgrade.sh>`_ make the script executable and run it.
+  
   after the upgrade only one host will be visible in the UI.  It will named same as the hostname of the server rather than netmaker-1.
+
 2. Upgrade netclients 
+
   a. Linux/Freebsd: On each client download the latest version of netclient and run the `netclient install` command 
+
   b. Windows/MacOS: On each client download the latest installer package for netclient and run the installer
+
   As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
+
 3. If upgrading to EE, recreate any relay gateways
+
 4. Verify extcient config files are correct;  delete and regenerate if incorrect
+
   for each peer in config file:
+
   a. the peer's public key should be the same as the peer's public key in the netmaker UI
+
   b. the peer's endpoint should be the same as the peer's endpoint in the netmaker UI
+
   c. the peer's allowed ips should be the same as the peer's allowed ips in the netmaker UI
 
 Critical Notes for 0.13.X
