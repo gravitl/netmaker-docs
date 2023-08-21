@@ -2,6 +2,9 @@
 UI Branding
 =============
 
+Modifying the UI with whitelabeling.
+=====================================
+
 Netmaker UI allows resellers to whitelabel and customize branding by building a custom docker image with the below environment variables set.
 
 Open the `Dockerfile.standalone` file and set the following environment variables:
