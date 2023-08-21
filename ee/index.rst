@@ -48,3 +48,13 @@ How to view network metrics in Netmaker Enterprise
    :maxdepth: 2
 
    ee-metrics
+
+Branding
+------------------
+
+How to rebrand Netmaker with whitelabeling.
+
+.. toctree::
+   :maxdepth: 2
+
+   ee-branding
