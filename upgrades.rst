@@ -62,7 +62,12 @@ Steps
 3. After the upgrade, you should see only one host in the Netmaker UI. It will have the same name as the hostname of your server, rather than netmaker-1.
 4. Upgrade your netclients 
 
-  a. On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient and run the `netclient install` command 
+  a. Linux/Freebsd/Darwin: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient and run the `netclient install` command 
+  b. Windows: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient-windows-amd64.exe and netclient-gui-windows-amd64.exe 
+      open Powershell window as Administrator and run the following commands: 
+      ``cp c:\\Users\User\Downloads\netclient-gui-windows-amd64.exe c:\\Windows\System32\netclient-gui-windows-amd64.exe C:\\Program Files (x86)\gui.exe``
+      ``net stop netclient``
+      ``c:\\Users\User\Downloads\netclient-windows-amd64.exe install``
 
 5. As each netclient is updated, check that a new host, nodes, and gateways (if applicable) are visible in the Netmaker UI.
 6. If upgrading to EE, recreate any relay gateways
