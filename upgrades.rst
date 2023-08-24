@@ -60,7 +60,8 @@ Steps
 1. Download the nm-upgrade.sh script from https://fileserver.netmaker.io/upgrade/nm-upgrade.sh
 2. Make the script executable and run it. 
 3. After the upgrade, you should see only one host in the Netmaker UI. It will have the same name as the hostname of your server, rather than netmaker-1.
-4. Upgrade your netclients 
+4. Upgrade your netclients
+   *do not use packages to upgrade on window/darwin, use the netclient binary to update*
 
   a. Linux/Freebsd/Darwin: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient and run the `netclient install` command 
   b. Windows: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient-windows-amd64.exe and netclient-gui-windows-amd64.exe 
