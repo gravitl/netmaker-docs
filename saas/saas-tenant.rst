@@ -18,5 +18,11 @@ You can only have one free Tier tenant at a time per account. If you would like 
 Paid Tier
 -----------
 
-Our paid tier 
+Our paid tier has the same limits as the free tier. Instead, you will be charged for usage outside of those tier limits. pricing listed on link above.
+
+The paid tier has all the features of the pro version like meterics and relays. Once you create a paid tier tenant, you will have to enter payment information before you can use the paid tenant. Info on how to do that will be in our :doc:`billing section <./saas-billing>`.
+
+
+Self Hosted
+-------------
 
