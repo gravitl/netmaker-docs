@@ -39,8 +39,9 @@ Unless otherwise noted, for newer versions of Netmaker:
   a. For versions prior to v0.20.5, follow the `Client Upgrades <https://docs.netmaker.io/upgrades.html##client-upgrades-general>`_ instructions to upgrade your netclients. 
   b. For v0.20.5 or later, check in the UI to confirm that all hosts have successfully upgraded to the new version.
 
+test line 
 
-Upgrade from v0.17.1 to Latest
+Upgrade to latest from v0.17.1
 ================================
 
 These steps assume you have already upgraded your server and netclients to v0.17.1.
