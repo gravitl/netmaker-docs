@@ -103,13 +103,13 @@ Kubernetes Documentation
 `Netmaker Kubernetes Documentation <https://k8s.netmaker.org>`_
 
 
-Enterprise Documentation
+Professional Documentation
 ---------------------------
 
 .. toctree::
    :maxdepth: 2
    
-   ee/index
+   pro/index
 
 
 Advanced Server Installation
