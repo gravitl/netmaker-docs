@@ -50,4 +50,25 @@ This will bring you to a screen where you will see a list of all your tenants.
 Creating a Tenant
 ===================
 
-To create a tenant, go to account managemant and bring up the menu in the bottom, and click on switch tenant.
+To create a tenant, start at your switch tenant screen. There is a ``+ create tenant`` button. clicking that will pop up this modal.
+
+.. image:: images/saas-select-tier.png
+    :width: 80%
+    :alt: select tier modal
+    :align: center
+
+You'll have three choices of which tier to choose. If you already have a free tier, you will not be allowed to create another one unless you delete the existing free tier.
+
+You'll notice as well that the paid tier and self-hosted tier also have pricing info listed. After you make your selection, click on the 2 button above the self-hosted box to name your tenant. This name can be changed at any point in the settings.
+
+.. image:: images/saas-name-tenant.png
+    :width: 80%
+    :alt: name your tenant
+    :align: center
+
+After you enter a name, click the ``create`` button and your tenant is now in the list. You may see a status of ``unavailable`` at first. This is normal. Netmaker is building your instance at that time. After a few minutes, click the ``refresh status`` button above the list to see if that status goes away. If the ``unavailable`` status persists after a few minutes, contact us to troubleshoot the issue.
+
+Once the ``unavailable`` status goes away, the tenant is ready for use. If you made a free tier, You can click on that tenant and use it right away. If you made a paid or self-hosted tier, you must enter payment information before the tier is ready to use. You will see a ``payment missing`` status on that tenant. Our :doc:`billing section <./saas-billing>` will cover how to enter payment information for your tenant.
+
+
+
