@@ -28,3 +28,26 @@ Self Hosted
 
 Our self-hosted tier is where you will get your license key and tenant id to build a Netmaker Pro server. Instead of using a paid tier that is hosted on our cluster, you provide the server.
 
+Accessing Your tenants
+=======================
+
+To access tenant management, navigate to manage account,
+
+.. image:: images/saas-manage-account.png
+    :width: 80%
+    :alt: manage account button
+    :align: center
+
+and bring up the bottom menu where you will see a ``switch tenant`` button.
+
+.. image:: images/saas-switch-tenant-button.png
+    :width: 80%
+    :alt: switch tenant button
+    :align: center
+
+This will bring you to a screen where you will see a list of all your tenants.
+
+Creating a Tenant
+===================
+
+To create a tenant, go to account managemant and bring up the menu in the bottom, and click on switch tenant.
