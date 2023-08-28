@@ -11,7 +11,7 @@ Introduction to Netclient
 
 At its heart, the netclient is a simple CLI for managing access to various WireGuard-based networks. It manages WireGuard on the host system, so that you don't have to. Why is this necessary?
 
-If you are setting up a WireGuard-based virtual network, you must configure each machine with very specific settings, so that every machine can reach it, and it can reach every machine. Any changes to the settings of any one of these machines can break those connections. Any machine that is added, removed, or modified on the network requires reconfiguring every peer in the network. This can be very time consuming.
+If you are setting up a WireGuard-based virtual network, you must configure each machine with very specific settings, so that every machine can reach it, and it can reach every other machine. Any changes to the settings of any one of these machines can break those connections. Any machine that is added, removed, or modified on the network requires reconfiguring of every peer in the network. This can be very time consuming.
 
 The netmaker server holds configuration details about every machine in your network and how other machines should connect to it.
 
@@ -22,7 +22,7 @@ The netclient agent then configures WireGuard (and other network properties) loc
 Note on MTU Settings
 ==================================
 
-IPv6 requires a minimum MTU of 1280. A lot of router configurations expect a standard MTU setting. You can adjust the MTU to whatever fits your needs, but setting the MTU below the standardized 1280 may cause wireguard to have issues when setting up interfaces with some systems like Windows for example.
+IPv6 requires a minimum MTU of 1280. A lot of router configurations expect a standard MTU setting. You can adjust the MTU to whatever fits your needs, but setting the MTU below the standardized 1280 may cause wireguard to have issues when setting up interfaces with some systems like "Windows" for example.
 
 Notes on Windows
 ==================================
@@ -33,12 +33,12 @@ Windows will by default have firewall rules that prevent inbound connections. If
 
 ``netsh advfirewall firewall add rule name="Allow from <peer private addr>" dir=in action=allow protocol=ANY remoteip=<peer private addr>``
 
-If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server.
+If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server from Netmaker GUI.
 
 Running netclient commands
 ----------------------------
 
-If running the netclient manually ("netclient join", "netclient checkin", "netclient pull") it should be run from outside of the installed directory, which will be either:
+If running the netclient manually ("netclient install", "netclient join", "netclient pull") it should be run from outside of the installed directory, which will be either:
 
 - `C:/Program Files/netclient`
 - `C:/ProgramData/netclient`
@@ -75,7 +75,7 @@ i. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linu
 
    /sbin/rc-service netclient start/stop
 
-4. run other netclient commands (join, list, connect, disconnec, etc ) as required
+4. run other netclient commands (join, list, connect, disconnect, pull etc ) as required
 
 
 
@@ -89,7 +89,7 @@ The netclient can be run in a few "modes". System compatibility depends on which
 CLI
 ------------
 
-In its simplest form, the netclient can be treated as just a simple, manual, CLI tool, which a user can call to configure the machine. The cli can be compiled from source code to run on most systems, and has already been compiled for x86 and ARM devices.
+In its simplest form, the netclient can be treated as just a simple, manual, CLI tool, which a user can call to configure the machine. The cli can be compiled from source code to run on most systems, and has already been compiled for x86 and ARM architectures.
 
 As a CLI, the netclient should function on any Linux or Unix based system that has the wireguard utility (callable with **wg**) installed.
 
@@ -110,7 +110,7 @@ A user may choose to manually set a private DNS nameserver of <netmaker server>:
 Prerequisites
 =============
 
-To obtain the netclient, go to the GitHub releases: https://github.com/gravitl/netmaker/releases
+To obtain the netclient, go to the GitHub releases: https://github.com/gravitl/netclient/releases
 
 **For netclient cli:** Linux/Unix with WireGuard installed (wg command available)
 
@@ -151,17 +151,21 @@ Installation
 ======================
 
 
-To install netmaker, you need a server token for a particular network, unless you're joining a network that allows manual signup, in which case you can join without a token, but the server will quarantine the machine until the admin approves it.
+To install netmaker, you need an enrollment key for a particular network, unless you're joining a network that allows manual signup, in which case you can join without an enrolment key, but the server will quarantine the machine until the admin approves it.
 
-An admin creates a token in the ACCESS KEYS section of the UI. Upon creating a token, it generates 3 values:
+An admin creates an enrollment key in the "Enrollment Keys" section of the UI. Upon creating a key, it can be viewed by clicking onto the key from UI. Some details regarding the key will be visible:
 
-**Access Key:** The secret key to authenticate as a node in the network
+**Key:** The enrollment key to join and authenticate to a netmaker network
 
-**Access Token:** The secret key plus information about how to access the server (addresses, ports), all decoded by the netclient to register with the server
+**Type:** Type of key determines the usage limitation of a particular key. Possible values are: Unlimited, Time Bound, Limited Number of Uses
 
-**Install Command:** A short script that will obtain the netclient binary, register with the server, and join the network, all in one
+**Expires at:** Shows the expiration date of the particular enrollment key
 
-For first time installations, you can run the Install Command. For additional networks, simply run ``netclient join -t <access token>``. The raw access key will not be needed unless there are special circumstances, mostly troubleshooting incorrect information in the token (you can instead manually specify the server location).
+**Networks:** Shows which netmaker networks can be joined by using the particular enrollment key
+
+**Install Command:** The CLI command to register with the server using the enrollment key, and join the networks
+
+For first time installations, you can run the Install Command. For additional networks, simply run ``netclient join -t <enrollment key>``.
 
 
 Managing Netclient
@@ -171,10 +175,10 @@ Connect / Disconnect
 ----------------------
 
 **to disconnect from a network previously joined (without leaving the network):**
-  ``netclient disconnect -n <net name>``
+  ``netclient disconnect <netmaker network name>``
 
 **to connect with a network previously disconnected:**
-  ``netclient connect -n <net name>``
+  ``netclient connect <netmaker network name>``
 
 Viewing Logs
 ---------------
@@ -191,7 +195,7 @@ Viewing Logs
 Re-syncing netclient (basic troubleshooting)
 -----------------------------------------------
 
-If the daemon is not running correctly run, try restarting the daemon, or pulling changes directly (don't do both at once)
+If the daemon is not running correctly, try restarting the daemon, or pulling changes directly (don't do both at once)
 
   ``systemctl restart netclient``
 
@@ -211,15 +215,15 @@ For instance, change the private address, endpoint, or name. See above example c
 Adding/Removing Networks
 ---------------------------
 
-``netclient join -t <token>``
+``netclient join -t <enrollment key>``
 
 Set any of the above flags (netclient join --help) to override settings for joining the network. 
-If a key is provided (-k), then a token is unnecessary, but grpc, server, ports, and network must all be provided via flags.
 
 
 Uninstalling
 ---------------
 
 ``netclient uninstall``
+
 
 
