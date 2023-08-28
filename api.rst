@@ -30,4 +30,4 @@ Requests take the format of:
 API Documentation
 =================
 
-Check the documentation for all available `endpoints <https://fileserver.netmaker.io/api>_.'
+Check the documentation for all available `endpoints <https://app.swaggerhub.com/apis-docs/Netmaker/netmaker/0.15.2>`_.
