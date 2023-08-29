@@ -33,7 +33,7 @@ Windows will by default have firewall rules that prevent inbound connections. If
 
 ``netsh advfirewall firewall add rule name="Allow from <peer private addr>" dir=in action=allow protocol=ANY remoteip=<peer private addr>``
 
-If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server from Netmaker GUI.
+If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server(Enterprise Edition Feature) from Netmaker GUI. In order to achieve this, self-hosted netmaker enterprise edition server is required.
 
 Running netclient commands
 ----------------------------
