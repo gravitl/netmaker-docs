@@ -26,7 +26,7 @@ The paid tier has all the features of the pro version like meterics and relays. 
 Self Hosted
 -------------
 
-Our self-hosted tier is where you will get your license key and tenant id to build a Netmaker Pro server. Instead of using a paid tier that is hosted on our cluster, you provide the server.
+Our self-hosted tier is where you will get your license key and tenant id to build a Netmaker Pro server. Instead of using a paid tier that is hosted on our cluster, you provide the server. This is paid only. There is no free tier for netmaker pro.
 
 Accessing Your tenants
 =======================

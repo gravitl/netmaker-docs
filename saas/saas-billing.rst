@@ -42,12 +42,36 @@ Enter your card information and submit. You should see your payment info on the 
     :alt: successful payment. go back to netmaker button
     :align: center
 
+Each tenant needs its own payment. If you make another paid tier or self-hosted tenant, you will need to enter payment info for each tenant.
 
 Usage 
 ========
 
+You can see your tenant's usage on the right side of the screen.
 
+.. image:: images/saas-usage.png
+    :width: 80%
+    :alt: tenant usage section
+    :align: center
 
+This is updated hourly and will tell you how many of each resource is on that instance.
 
+Invoices
+=========
 
+Invoices are sent out monthly. You can view your invoices on the billing and usage tab. 
+
+.. image:: images/saas-invoice.png
+    :width: 80%
+    :alt: invoice section
+    :align: center
+
+You can see the invoice number, the amount, the date the invoice is issued and a status. If it is a failed status, you may need to double check your payment info for accuracy, or contact us for troubleshooting. 
+
+You will also get an email when your invoice is ready.
+
+.. image:: images/saas-invoice-email.png
+    :width: 80%
+    :alt: invoice section
+    :align: center
 
