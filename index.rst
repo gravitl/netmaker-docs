@@ -193,6 +193,7 @@ A reference document for the Netmaker CLI tool nmctl.
    :maxdepth: 1
 
    nmctl.rst
+   nmctl-standalone.rst
 
 Troubleshooting
 ----------------
