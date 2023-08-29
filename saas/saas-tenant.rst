@@ -118,4 +118,45 @@ To view the name and id of the tenant, simply go to account management and click
 Upgrade and Downgrade Your Tenant
 ===================================
 
-On a free tier tenant, you have the option to upgrade to a paid tier tenant.
+Upgrade
+---------
+
+On a free tier tenant, you have the option to upgrade to a paid tier tenant. In the same account managemant -> settings tab there should be an upgrade option.
+
+.. image:: images/saas-upgrade-tenant.png
+    :width: 80%
+    :alt: upgrade tenant button
+    :align: center
+
+clicking on that should bring up a modal.
+
+.. image:: images/saas-upgrade-modal.png
+    :width: 80%
+    :alt: modal for tenant upgrade
+    :align: center
+
+Once you upgrade, Your netmaker instance will be disables until you enter :doc:`your payment information <./saas-billing>`. After that, you can begin using your upgraded tenant.
+
+Downgrade
+----------
+
+Before considering to downgrade, you must make sure your tenant is within the limits of the free tier. If you downgrade and are using more resources that the free tier allows, you may end up losing resources as a result. You must also make sure you do not already have a free tier on your account. You can only have one free tier at a time.
+
+In the same account managemant -> settings page on your paid tier. click the downgrade button.
+
+.. image:: images/saas-downgrade-tenant.png
+    :width: 80%
+    :alt: button to downgrade your tenant
+    :align: center
+
+A confirmation box will pop up to confirm your desision.
+
+Delete a Tenant
+================
+
+To delete a tenant, go to the same account management -> settings page and click the delete tenant button.
+
+.. image:: images/saas-delete-tenant.png
+    :width: 80%
+    :alt: delete your tenant
+    :align: center
