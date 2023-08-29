@@ -46,7 +46,7 @@ How to set up Netmaker as a Service
    saas-account-signup
 
 Profile Management
----------------
+--------------------
 
 .. toctree::
    :maxdepth: 2

@@ -70,5 +70,52 @@ After you enter a name, click the ``create`` button and your tenant is now in th
 
 Once the ``unavailable`` status goes away, the tenant is ready for use. If you made a free tier, You can click on that tenant and use it right away. If you made a paid or self-hosted tier, you must enter payment information before the tier is ready to use. You will see a ``payment missing`` status on that tenant. Our :doc:`billing section <./saas-billing>` will cover how to enter payment information for your tenant.
 
+Tenant Status
+===============
 
+Status indicators for each tenant are shown in the status column.
 
+OK
+------
+
+Tenant is running and functioning normally
+
+Payment Missing 
+----------------
+
+There is no payment on file for that tenant. Our :doc:`billing section <./saas-billing>` will show you how to enter your payment information.
+
+Payment Method Invalid
+------------------------
+
+Double check if your payment info is correct.
+
+No Admin
+---------
+
+Your tenant does not have an admin yet. That should go away when you first sign into the tenant. If it does not, contact us to get the issue fixed.
+
+Error
+--------
+
+Could be any of multiple different issues that would cause this status. Contact us to troubleshoot.
+
+Unavailable
+-------------
+
+The instance is down. This could be due to an error that caused the instance to shut down, or we could be doing maintainance on our servers.
+
+Manage and View Name and id
+=============================
+
+To view the name and id of the tenant, simply go to account management and click on the settings tab. You can change the name of the tenant by clicking on the pencil icon. You can change the name to whatever you like.
+
+.. image:: images/saas-view-name.png
+    :width: 80%
+    :alt: name your tenant
+    :align: center
+
+Upgrade and Downgrade Your Tenant
+===================================
+
+On a free tier tenant, you have the option to upgrade to a paid tier tenant.
