@@ -193,6 +193,15 @@ A reference document for the Netmaker CLI tool nmctl.
    :maxdepth: 1
 
    nmctl.rst
+
+NMCTL - Standalone
+----------------
+
+A reference document for using Netmaker without a UI.
+
+.. toctree::
+   :maxdepth: 1
+
    nmctl-standalone.rst
 
 Troubleshooting
