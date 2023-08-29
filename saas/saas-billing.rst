@@ -66,7 +66,7 @@ Invoices are sent out monthly. You can view your invoices on the billing and usa
     :alt: invoice section
     :align: center
 
-You can see the invoice number, the amount, the date the invoice is issued and a status. If it is a failed status, you may need to double check your payment info for accuracy, or contact us for troubleshooting. 
+You can see the invoice number, the amount, the date the invoice is issued and a status. If it is a failed status like the one in the example above, you may need to double check your payment info for accuracy, or contact us for troubleshooting. 
 
 You will also get an email when your invoice is ready.
 
