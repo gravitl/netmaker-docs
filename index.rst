@@ -195,7 +195,7 @@ A reference document for the Netmaker CLI tool nmctl.
    nmctl.rst
 
 NMCTL - Standalone
-----------------
+--------------------
 
 A reference document for using Netmaker without a UI.
 
