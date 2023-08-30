@@ -24,7 +24,7 @@ Do you have an 'Exit Nodes' feature?
 
 Please see the :doc:`Egress Gateway <./egress-gateway>` documentation.
 
-Do you offer any business or enterprise support?
+Do you offer any business or professional support?
 ---------------------------------------------------
 
 Yes, please contact info@gravitl.com or visit https://gravitl.com/plans.
