@@ -112,6 +112,17 @@ Enterprise Documentation
    ee/index
 
 
+SAAS Documentation
+---------------------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   saas/index
+
+
+
+
 Advanced Server Installation
 -------------------------------
 
