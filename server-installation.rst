@@ -251,7 +251,7 @@ The following is a brief description of each:
 
 - `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
 
-- `docker-compose.ee.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml>`_ -= This is the compose file needed for Netmaker Enterprise. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
+- `docker-compose.pro.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml>`_ -= This is the compose file needed for Netmaker Professional. You will need a licence and user id from `Netmaker's licence dashboard <https://dashboard.license.netmaker.io/>`_ .
 
 
 No DNS - CoreDNS Disabled
@@ -298,7 +298,7 @@ In your docker-compose.yml file, add ``/mqtt`` at the end of this line ``BROKER_
 
 Then two new lines ``- BROKER_TYPE=emqx`` and ``- EMQX_REST_ENDPOINT=http://mq:18083`` needs to be added after the line ``- BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt`` as shown above.
 
-If you are using an enterprise server, you will need to make changes to your netmaker-exporter section in your docker-compose.override.yml file.
+If you are using a professional server, you will need to make changes to your netmaker-exporter section in your docker-compose.override.yml file.
 
 .. code-block:: yaml
 
@@ -800,13 +800,13 @@ To view all options for the chart, please visit the README in the code repo `her
 Highly Available Installation (VMs/Bare Metal)
 ==================================================
 
-For an enterprise Netmaker installation, you will need a server that is highly available, to ensure redundant WireGuard routing when any server goes down. To do this, you will need:
+For a professional Netmaker installation, you will need a server that is highly available, to ensure redundant WireGuard routing when any server goes down. To do this, you will need:
 
 1. A load balancer
 2. 3+ Netmaker server instances
 3. rqlite or PostgreSQL as the backing database
 
-These documents outline general HA installation guidelines. Netmaker is highly customizable to meet a wide range of enterprise environments. If you would like support with an enterprise-grade Netmaker installation, you can `schedule a consultation here <https://gravitl.com/book>`_ . 
+These documents outline general HA installation guidelines. Netmaker is highly customizable to meet a wide range of professional environments. If you would like support with a professional-grade Netmaker installation, you can `schedule a consultation here <https://gravitl.com/book>`_ .
 
 The main consideration for this document is how to configure rqlite. Most other settings and procedures match the standardized way of making applications HA: Load balancing to multiple instances, and sharing a DB. In our case, the DB (rqlite) is distributed, making HA data more easily achievable.
 

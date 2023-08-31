@@ -1,7 +1,7 @@
 =================================
-Users in Netmaker Enterprise
+Users in Netmaker Professional
 =================================
-Netmaker Enterprise offers advanced user management. This includes the ability to create and manage groups of users, set default access levels on networks, and manage individual access levels. This also comes with an updated UI, which will display access to components based on access level.
+Netmaker Professional offers advanced user management. This includes the ability to create and manage groups of users, set default access levels on networks, and manage individual access levels. This also comes with an updated UI, which will display access to components based on access level.
 
 
 Access Levels, Explained
@@ -32,7 +32,7 @@ This can be modified so that, for instance, any user joining will have an access
 Setting Access Levels (Users)
 ----------------------------------
 
-In the Users tab of enterprise, there is a new section for "User Permissions."
+In the Users tab of professional, there is a new section for "User Permissions."
 
 .. image:: images/users/users-1.png
    :width: 80%
