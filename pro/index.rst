@@ -29,7 +29,7 @@ How to set up Netmaker Enterprise
 .. toctree::
    :maxdepth: 2
 
-   ee-setup
+   pro-setup
 
 Relays
 ---------------
@@ -37,7 +37,7 @@ Relays
 .. toctree::
    :maxdepth: 2
    
-   ee-relay-server
+   pro-relay-server
 
 Metrics
 ------------------------------------
@@ -47,7 +47,7 @@ How to view network metrics in Netmaker Enterprise
 .. toctree::
    :maxdepth: 2
 
-   ee-metrics
+   pro-metrics
 
 Branding
 ------------
@@ -55,4 +55,4 @@ Branding
 .. toctree::
    :maxdepth: 2
 
-   ee-branding
+   pro-branding
