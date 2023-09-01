@@ -111,6 +111,13 @@ Professional Documentation
    
    pro/index
 
+Users in Netmaker Professional
+------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   pro/pro-users
 
 Advanced Server Installation
 -------------------------------
