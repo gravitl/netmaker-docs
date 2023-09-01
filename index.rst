@@ -111,6 +111,13 @@ Enterprise Documentation
    
    ee/index
 
+Users in Netmaker Enterprise
+----------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   ee/ee-users
 
 Advanced Server Installation
 -------------------------------
