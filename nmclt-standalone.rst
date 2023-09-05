@@ -43,7 +43,7 @@ Create Admin User
 ******************
 .. code-block::
                 
-            nmctl create --admin --name $USER --password $PASSWORD
+            nmctl user create --admin --name $USER --password $PASSWORD
 
 ******************
 Create Network
