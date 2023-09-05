@@ -63,7 +63,7 @@ Create Network
 ******************
 .. code-block::
 
-        nmcltl network create --name mynetwork --ip4v_addr 10.10.10.0/24
+        nmctl network create --name mynetwork --ip4v_addr 10.10.10.0/24
 
 **********************
 Create Enrollment Key
