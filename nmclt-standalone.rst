@@ -14,9 +14,8 @@ Assumptions
 
 
 ***********************
-Set username/password/masterkey
+Set username/password
 ***********************
-*masterkey* must match the masterkey on server
 .. code-block::
     
         export USER=admin
@@ -50,6 +49,14 @@ Create Admin User
 .. code-block::
                 
             nmctl user create --admin --name $USER --password $PASSWORD
+
+******************
+ReSet Context
+******************
+.. code-block::
+            
+            nmctl context set commandline --endpoint https://api.$NM_DOMAIN --username $USER --password $PASSWORD
+            nmctl context use commandline
 
 ******************
 Create Network
