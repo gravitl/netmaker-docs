@@ -14,14 +14,20 @@ Assumptions
 
 
 ***********************
-Set username/password
+Set username/password/masterkey
 ***********************
-
+*masterkey* must match the masterkey on server
 .. code-block::
     
         export USER=admin
         export PASSWORD=somelongpassword
 
+***********************
+Set masterkey
+***********************
+*masterkey* must match the masterkey on server
+.. code-block::
+        export MASTERKEY=masterkey
 
 ******************
 Set base domain
@@ -35,7 +41,7 @@ Set Context
 ******************
 .. code-block::
             
-            nmctl context set commandline --endpoint https://api.$NM_DOMAIN -- username $USER --password $PASSWORD
+            nmctl context set commandline --endpoint https://api.$NM_DOMAIN --master_key $MASTERKEY
             nmctl context use commandline
 
 ******************
