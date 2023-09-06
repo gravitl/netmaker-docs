@@ -52,13 +52,15 @@ You will need the licence key and tenant id from the settings page back at the a
     :align: center
 
 
-Once you have your license key and account ID, you can get the nm-quick installer and run it. 
+Once you have your license key and tenant ID, you can get the nm-quick installer and run it. 
 
 .. code-block::
     
     wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh
     chmod +x nm-quick.sh
     bash nm-quick.sh
+
+Follow the prompts for a pro edition server. provide the license key and tenant id when prompted. 
 
 Upgrade to Pro from Community Edition
 ======================================
