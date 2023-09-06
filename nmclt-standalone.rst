@@ -81,18 +81,18 @@ Create Enrollment Key
 Unlimited
 ============
 .. code-block::
-        export KEY=$(nmctl key create --network mynetwork --unlimited | jq .token)
+        export KEY=$(nmctl enrollment_key create --network mynetwork --unlimited | jq .token)
 
 Limited Use (3)
 ================
 .. code-block::
-        export KEY=$(nmctl key create --network mynetwork --uses 3 | jq .token)
+        export KEY=$(nmctl enrollment_key create --network mynetwork --uses 3 | jq .token)
 
 With Expiration Time (2 days)
 ==============================
 .. code-block::
         export EXPIRES=$(date -d "+2 days" +$s)
-        export KEY=$(nmctl key create --network mynetwork --expires $EXPIRES | jq .token)
+        export KEY=$(nmctl enrollment_key create --network mynetwork --expires $EXPIRES | jq .token)
 
 ******************
 Join network
