@@ -12,79 +12,85 @@ Assumptions
 2. netclient, nmctl and jq have been installed
 3. netmaker server has been set up at example.com without UI  (netmaker-ui section of docker-compose.yml has been deleted)
 
+***********************
+Setup admin user 
+***********************
+*Note:  this step must be executed by the superAdmin who has access to the netwmaker server, specifically the masterkey*
+
+Set masterkey
+===============
+*masterkey* must match the masterkey on server
+.. code-block::
+        export MASTERKEY=masterkey
+
+Set base domain
+================
+.. code-block::
+            export NN_DOMAIN=example.com
+
+Set Context
+================
+.. code-block::
+            nmctl context set commandline --endpoint https://api.$NM_DOMAIN --master_key $MASTERKEY
+            
+Create Admin User
+==================
+.. code-block::
+            nmctl user create --admin --name $USER --password $PASSWORD
+            
+Create Normal User
+==================
+.. code-block::
+            nmctl user create --name <user> --password <user-password>
+
+*************************
+Normal Operations by user 
+*************************
+*assume that users have been created by superAdmin
 
 ***********************
 Set username/password
 ***********************
 .. code-block::
-    
-        export USER=admin
-        export PASSWORD=somelongpassword
-
-***********************
-Set masterkey
-***********************
-*masterkey* must match the masterkey on server
-.. code-block::
-        export MASTERKEY=masterkey
+        export USER=<user>
+        export PASSWORD=<user-password>
 
 ******************
 Set base domain
 ******************
 .. code-block::
-        
             export NN_DOMAIN=example.com
 
 ******************
 Set Context
 ******************
 .. code-block::
-            
-            nmctl context set commandline --endpoint https://api.$NM_DOMAIN --master_key $MASTERKEY
-            nmctl context use commandline
-
-******************
-Create Admin User
-******************
-.. code-block::
-                
-            nmctl user create --admin --name $USER --password $PASSWORD
-
-******************
-ReSet Context
-******************
-.. code-block::
-            
             nmctl context set commandline --endpoint https://api.$NM_DOMAIN --username $USER --password $PASSWORD
-            nmctl context use commandline
 
 ******************
 Create Network
 ******************
 .. code-block::
-
         nmctl network create --name mynetwork --ip4v_addr 10.10.10.0/24
 
 **********************
-Create Enrollment Key
+Create Enrollment Key 
 **********************
+*create one of Unlimited/LimitedUse/Expiration*
 
 Unlimited
 ============
 .. code-block::
-    
         export KEY=$(nmctl key create --network mynetwork --unlimited | jq .token)
 
 Limited Use (3)
 ================
 .. code-block::
-        
         export KEY=$(nmctl key create --network mynetwork --uses 3 | jq .token)
 
-With Expiration Time
-=====================
+With Expiration Time (2 days)
+==============================
 .. code-block::
-
         export EXPIRES=$(date -d "+2 days" +$s)
         export KEY=$(nmctl key create --network mynetwork --expires $EXPIRES | jq .token)
 
@@ -92,5 +98,4 @@ With Expiration Time
 Join network
 ******************
 .. code-block::
-
         sudo netclient join -t $KEY
