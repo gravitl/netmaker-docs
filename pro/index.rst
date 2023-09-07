@@ -19,9 +19,7 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
   
 - **Users:** Community netmaker has rudimentary users, but Professional gives you the ability to create access levels to control network access, and even create groups to organize users. This allows users to log into the dashboard who can only manage ext clients for themselves, or nodes.
 
-  
-- **HA Networking (coming soon):** This feature has not been released yet, but allows you to set automated failover for network routes using "auto relays," meaning nodes will relay and p2p connections that aren't working on their own.   
-  
+
 Setup
 --------
 
