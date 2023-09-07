@@ -15,7 +15,7 @@ Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netma
    :alt: screeen after signup on SAAS
    :align: center
 
-You will then need to click on settings and click the delete tenant button. 
+You will then need to navigate to click on the ``switch tenant`` button. 
 
 .. image:: images/pro-switchtenant.png
    :width: 80%
