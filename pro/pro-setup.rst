@@ -8,14 +8,14 @@ This guide covers how to get setup with Netmaker Professional. For pricing,visit
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to delete this free tier before creating a self-hosted tenant. click on the manage account button located on the side bar.
+Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to go to account managemement. Click on the manage account button located on the side bar.
 
 .. image:: images/pro-aftersignup.png
    :width: 80%
    :alt: screeen after signup on SAAS
    :align: center
 
-You will then need to click on settings and click the delete tenant button. 
+You will then need to navigate to click on the ``switch tenant`` button. 
 
 .. image:: images/pro-switchtenant.png
    :width: 80%
@@ -52,7 +52,7 @@ You will need the licence key and tenant id from the settings page back at the a
     :align: center
 
 
-Once you have your license key and account ID, you can get the nm-quick installer and run it. 
+Once you have your license key and tenant ID, you can get the nm-quick installer and run it. 
 
 .. code-block::
     
@@ -60,10 +60,14 @@ Once you have your license key and account ID, you can get the nm-quick installe
     chmod +x nm-quick.sh
     bash nm-quick.sh
 
+Follow the prompts for a pro edition server. provide the license key and tenant id when prompted. 
+
+Upgrade to Pro from Community Edition
+======================================
+
 You can upgrade from an existing community server to a pro server with this script. Follow the prompts to setup a pro server and the script will make the necessary changes to your netmaker.env file and grab the pro docker-compose.override.yml file.
 
 If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file.
-
 
 .. code-block:: yaml
 
