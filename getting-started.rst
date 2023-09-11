@@ -177,7 +177,7 @@ Netclient (host) proxy has been removed in v0.20.5.
 Uninstalling the netclient
 =============================
 
-1. To remove your nodes from a network (default here), run the following on each node: ``sudo netclient leave -n default`` (replacing default with the actual name of the network eg wg-net)
+1. To remove your nodes from a network (default here), run the following on each node: ``sudo netclient leave default`` (replacing default with the actual name of the network eg wg-net)
 2. To remove the netclient entirely from each node (after running the above step), run ``sudo systemctl stop netclient && sudo systemctl disable netclient && sudo systemctl daemon-reload && sudo rm -rf /etc/netclient /etc/systemd/system/netclient.service /usr/sbin/netclient``
 
 Uninstalling Netmaker
