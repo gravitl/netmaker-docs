@@ -33,7 +33,7 @@ Windows will by default have firewall rules that prevent inbound connections. If
 
 ``netsh advfirewall firewall add rule name="Allow from <peer private addr>" dir=in action=allow protocol=ANY remoteip=<peer private addr>``
 
-If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server(Enterprise Edition Feature) from Netmaker GUI. In order to achieve this, self-hosted netmaker enterprise edition server is required.
+If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server(Professional Edition Feature) from Netmaker GUI. In order to achieve this, netmaker pro edition is required.
 
 Running netclient commands
 ----------------------------
@@ -137,21 +137,11 @@ CLI Reference
   :language: YAML
 
 
-Config File Reference
-------------------------
-
-There is a config file for each node under /etc/netconfig-<network name>. You can change these values and then set "postchanges" to "true", or go to the CLI and run ``netclient push -n <network>``
-
-
-.. literalinclude:: ./examplecode/netconfig-example.yml
-  :language: YAML
-
-
 Installation
 ======================
 
 
-To install netmaker, you need an enrollment key for a particular network, unless you're joining a network that allows manual signup, in which case you can join without an enrolment key, but the server will quarantine the machine until the admin approves it.
+To install netclient and join a network, you need to use ``netclient install`` command and get an enrollment key for a particular network from netmaker.
 
 An admin creates an enrollment key in the "Enrollment Keys" section of the UI. Upon creating a key, it can be viewed by clicking onto the key from UI. Some details regarding the key will be visible:
 
@@ -175,10 +165,10 @@ Connect / Disconnect
 ----------------------
 
 **to disconnect from a network previously joined (without leaving the network):**
-  ``netclient disconnect <netmaker network name>``
+  ``netclient disconnect <network>``
 
 **to connect with a network previously disconnected:**
-  ``netclient connect <netmaker network name>``
+  ``netclient connect <network>``
 
 Viewing Logs
 ---------------
@@ -224,6 +214,5 @@ Uninstalling
 ---------------
 
 ``netclient uninstall``
-
 
 
