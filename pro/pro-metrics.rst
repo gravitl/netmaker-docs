@@ -1,17 +1,17 @@
 =================================
-Netmaker Enterprise Metrics
+Netmaker Professional Metrics
 =================================
 
 Navigation
 ===============
 
-Netmaker EE offers metrics. With Metrics, admin users can view connectivity, 
+Netmaker Pro offers metrics. With Metrics, admin users can view connectivity,
 latency and data transferred between two peers or nodes on a Netmaker network. Client metrics are also available.  
 All of this data may be visualised in the Netmaker UI. In addition, Netmaker 
 has included a custom exporter for Prometheus/Grafana integration to view 
 the data as well.
 
-Below are the steps in order to view metrics on your Netmaker EE instance.
+Below are the steps in order to view metrics on your Netmaker Pro instance.
 
 **NOTE: Metrics currently relies on ICMP to be allowed between nodes.**
 

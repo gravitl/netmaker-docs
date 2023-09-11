@@ -1,30 +1,30 @@
 =================================
-Netmaker Enterprise
+Netmaker Professional
 =================================
 
-This guide covers how to get setup with Netmaker Enterprise. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
+This guide covers how to get setup with Netmaker Professional. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
 
 
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to delete this free tier before creating a self-hosted tenant. click on the manage account button located on the side bar.
+Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to go to account managemement. Click on the manage account button located on the side bar.
 
-.. image:: images/ee-aftersignup.png
+.. image:: images/pro-aftersignup.png
    :width: 80%
    :alt: screeen after signup on SAAS
    :align: center
 
-You will then need to click on settings and click the delete tenant button. 
+You will then need to navigate to click on the ``switch tenant`` button. 
 
-.. image:: images/ee-switchtenant.png
+.. image:: images/pro-switchtenant.png
    :width: 80%
    :alt: Click on the switch tenant button
    :align: center
 
 You will then be redirected to the tennants page.
 
-.. image:: images/ee-selecttenant.png
+.. image:: images/pro-selecttenant.png
    :width: 80%
    :alt: Click on the switch tenant button
    :align: center
@@ -32,7 +32,7 @@ You will then be redirected to the tennants page.
 
 Click the Create Tenant button and a modal will pop up allowing you to name your tenant. Click the switch to make the Tenant self-hosted.
 
-.. image:: images/ee-selfhostedswitch.png
+.. image:: images/pro-selfhostedswitch.png
    :width: 80%
    :alt: selfhosted switch
    :align: center
@@ -46,13 +46,13 @@ Setup your server
 
 You will need the licence key and tenant id from the settings page back at the account management page on the settings tab.
 
-.. image:: images/ee-license-key2.png
+.. image:: images/pro-license-key2.png
     :width: 80%
     :alt: License keys
     :align: center
 
 
-Once you have your license key and account ID, you can get the nm-quick installer and run it. 
+Once you have your license key and tenant ID, you can get the nm-quick installer and run it. 
 
 .. code-block::
     
@@ -60,10 +60,14 @@ Once you have your license key and account ID, you can get the nm-quick installe
     chmod +x nm-quick.sh
     bash nm-quick.sh
 
-You can upgrade from an existing community server to an ee server with this script. Follow the prompts to setup an ee server and the script will make the necessary changes to your netmaker.env file and grab the ee docker-compose.override.yml file.
+Follow the prompts for a pro edition server. provide the license key and tenant id when prompted. 
+
+Upgrade to Pro from Community Edition
+======================================
+
+You can upgrade from an existing community server to a pro server with this script. Follow the prompts to setup a pro server and the script will make the necessary changes to your netmaker.env file and grab the pro docker-compose.override.yml file.
 
 If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file.
-
 
 .. code-block:: yaml
 
@@ -72,21 +76,21 @@ If you prefer to upgrade manually, go to your netmaker server and add the follow
 
 Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.3-ee`` 
 
-Also change the ``INSTALL_TYPE`` from ce to ee.
+Also change the ``INSTALL_TYPE`` from ce to pro.
 
-Then you will need to get the docker-compose ee file from here
+Then you will need to get the docker-compose pro file from here
 
 .. code-block::
 
-    wget -O docker-compose.override.yml https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.ee.yml
+    wget -O docker-compose.override.yml https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml
 
 No changes will need to be made to that file. It will use the configs listed in your netmaker.env file.
 
-After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the enterprise UI on dashboard.<YOUR_BASE_DOMAIN> 
+After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the professional UI on dashboard.<YOUR_BASE_DOMAIN>
 
 You should see a new Dashboard. The top menu bar will have relays and metrics added.
 
-.. image:: images/ee-new-dashboard.png
+.. image:: images/pro-new-dashboard.png
     :width: 80%
     :alt: new dashboard
     :align: center

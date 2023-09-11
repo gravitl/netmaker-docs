@@ -26,22 +26,22 @@ If everything is setup ok, you should be able to type ``nmctl`` and see the foll
     nmctl [command]
 
   Available Commands:
-    acl          Manage Access Control Lists (ACLs)
-    completion   Generate the autocompletion script for the specified shell
-    context      Manage various netmaker server configurations
-    dns          Manage DNS entries associated with a network
-    ext_client   Manage External Clients
-    help         Help about any command
-    host         Manage hosts
-    keys         Manage access keys associated with a network
-    logs         Retrieve server logs
-    metrics      Fetch metrics of nodes/networks
-    network      Manage Netmaker Networks
-    network_user Manage Network Users
-    node         Manage nodes associated with a network
-    server       Get netmaker server information
-    user         Manage users and permissions
-    usergroup    Manage User Groups
+    acl             Manage Access Control Lists (ACLs)
+    completion      Generate the autocompletion script for the specified shell
+    context         Manage various netmaker server configurations
+    dns             Manage DNS entries associated with a network
+    enrollment_key  Manage Enrollment Keys
+    ext_client      Manage External Clients
+    help            Help about any command
+    host            Manage hosts
+    logs            Retrieve server logs
+    metrics         Fetch metrics of nodes/networks
+    network         Manage Netmaker Networks
+    network_user    Manage Network Users
+    node            Manage nodes associated with a network
+    server          Get netmaker server information
+    user            Manage users and permissions
+    usergroup       Manage User Groups
 
   Flags:
     -h, --help   help for nmctl

@@ -9,9 +9,9 @@ Important Notes
 
 2. Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-3. This guide is just a manual version of the steps perfomed by that script, and is therefore more prone to error.
+3. This guide is just a manual version of the steps performed by that script, and is therefore more prone to error.
 
-4. You must decide if you are installing the EE version of Netmaker or the Community version. We reccommend EE because of its substantial free limits, but it does require `an account <https://app.netmaker.io>`_.
+4. You must decide if you are installing the Pro version of Netmaker or the Community version. We recommend Pro because of its substantial free limits, but it does require `an account <https://app.netmaker.io>`_.
 
 5. If deploying to DigitalOcean, you should use the `DigitalOcean 1-Click <https://marketplace.digitalocean.com/apps/netmaker>`_, which uses the interactive script.
 
@@ -58,7 +58,7 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 
 - turnapi.domain
 
-If deploying EE, you will also need records for the following:IsStatic
+If deploying Pro, you will also need records for the following:IsStatic
 
 - grafana.domain
 
@@ -88,7 +88,7 @@ Make sure the following ports are open both on the VM and in the cloud security 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
 - **3479, 8089 (TURN, TURN api):** Port 3479 is commonly used for UDP traffic related to TURN. Similar to STUN, TURN servers need to work effectively with firewalls and NAT devices. By using the reserved port 3479, TURN servers can better handle communication across various network configurations. Port 8089 is not reserved specifically for TURN but is commonly associated with TURN server deployments.
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
-- **8085 (exporter EE):** If you are building an EE server, you need this port open.
+- **8085 (exporter Pro):** If you are building a Pro server, you need this port open.
 - **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
 
 
@@ -133,7 +133,7 @@ You must retrieve the MQ configuration file for Mosquitto and the wait script.
 Prepare Docker Compose 
 ------------------------
 
-As of 0.20.0, our docker-compose and Caddyfile now contains references to a netmaker.env file. This will cut down on repetitive entries like inserting your base domain multiple times. You only insert it once in your netmaker.env file and the backend handles placing it in the right places. The EMQX and EE docker-composes are now extensions of the regular docker-compose file, so switching to EE or EMQX doesn't involve recreating an entire docker-compose file.
+As of 0.20.0, our docker-compose and Caddyfile now contains references to a netmaker.env file. This will cut down on repetitive entries like inserting your base domain multiple times. You only insert it once in your netmaker.env file and the backend handles placing it in the right places. The EMQX and Pro docker-composes are now extensions of the regular docker-compose file, so switching to Pro or EMQX doesn't involve recreating an entire docker-compose file.
 
 Get the base docker-compose and Caddyfile.
 
@@ -142,11 +142,11 @@ Get the base docker-compose and Caddyfile.
   wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.yml
   wget https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile
 
-If you plan on using an Enterprise server (EE), then you will need to grab the Caddyfile-EE file instead. There will be more EE related instructions below in "Extra Steps for EE".
+If you plan on using a Professional server (Pro), then you will need to grab the Caddyfile-pro file instead. There will be more Pro related instructions below in "Extra Steps for Pro".
 
 .. code-block::
 
-  wget https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-pro
 
 You can grab the netmaker.env file here.
 
@@ -175,19 +175,19 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   MQ_USERNAME=<EXAMPLE_USERNAME>
   # The password to set for MQ access
   MQ_PASSWORD=<EXAMPLE_PASSWORD>
-  # Specify the type of server to install. Use ee for enterprise and ce for community edition
+  # Specify the type of server to install. Use pro for professional and ce for community edition
   INSTALL_TYPE=ce
-  # The next two are for Enterprise edition. You can find that info below on "Extra steps for EE"
-  NETMAKER_TENANT_ID= (for EE version)
-  LICENSE_KEY= (for EE version)
+  # The next two are for Professional edition. You can find that info below on "Extra steps for Pro"
+  NETMAKER_TENANT_ID= (for Pro version)
+  LICENSE_KEY= (for Pro version)
   # The version for the netmaker and netmaker-ui servers. current version is v0.20.2. 
   # Some versions of docker may try to include quotation marks in this reference, so don't put them in.
   SERVER_IMAGE_TAG=v0.20.2
   UI_IMAGE_TAG=v0.20.2
   # used for HA - identifies this server vs other servers
   NODE_ID="netmaker-server-1"
-  METRICS_EXPORTER="off" (turn on for EE)
-  PROMETHEUS="off"  (turn on for EE)
+  METRICS_EXPORTER="off" (turn on for Pro)
+  PROMETHEUS="off"  (turn on for Pro)
   # Enables DNS Mode, meaning all nodes will set hosts file for private dns settings
   DNS_MODE="on"
   # Enable auto update of netclient ? ENUM:- enabled,disabled | default=enabled
@@ -247,19 +247,19 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # https://oidc.yourprovider.com - URL of oidc provider
   OIDC_ISSUER=
 
-Extra Steps for EE
+Extra Steps for Pro
 -----------------------------------------------------------------------------------------------------
 
 1. Visit `<https://app.netmaker.io>`_ to create your account on the Netmaker SaaS platform.
-2. Create a tenant of type ``self-hosted`` to obtain a license key. more details in :doc:`Netmaker Enterprise setup <./ee/ee-setup>`
+2. Create a tenant of type ``self-hosted`` to obtain a license key. more details in :doc:`Netmaker Professional setup <./pro/pro-setup>`
 3. Retrieve Tenant ID and license key from the tenant's settings tab.
 4. Place the licence key and tenant ID in the netmaker.env file.
 5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
-6. Grab the docker-compose.ee extension file from the repo and change its name to docker-compose.override.yml.
+6. Grab the docker-compose.pro extension file from the repo and change its name to docker-compose.override.yml.
 
 .. code-block::
 
-  wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.ee.yml
+  wget https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.pro.yml
 
 
 You will not need to make any changes to this file. It will reference the current netmaker.env file.

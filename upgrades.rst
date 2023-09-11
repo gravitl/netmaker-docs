@@ -50,8 +50,8 @@ General Notes
 -----------------
 
 1. The server should be upgraded before any clients.  
-2. Relays will need to be recreated after the server and all clients are upgraded. Relays are now only available on EE.
-3. If upgrading to EE, a new license key and tennet id must be obtained from https://app.netmaker.io
+2. Relays will need to be recreated after the server and all clients are upgraded. Relays are now only available on Pro.
+3. If upgrading to Pro, a new license key and tennet id must be obtained from https://app.netmaker.io
 4. As each netclient is updated, a new host, nodes, and gateways (if applicable) will be visible in the netmaker UI.
 5. Extclient config files may have to be regenerated after the upgrade.
 
@@ -72,7 +72,7 @@ Steps
       ``c:\\Users\User\Downloads\netclient-windows-amd64.exe install``
 
 5. As each netclient is updated, check that a new host, nodes, and gateways (if applicable) are visible in the Netmaker UI.
-6. If upgrading to EE, recreate any relay gateways
+6. If upgrading to Pro, recreate any relay gateways
 7. Verify extcient config files are correct. Delete and regenerate if incorrect. For each peer in config file:
 
   a. the peer's public key should be the same as the peer's public key in the netmaker UI
@@ -240,11 +240,11 @@ If you are using the Community Edition of Netmaker use this command:
 	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile"
 
 
-If you are using the Enterprise Edition of Netmaker use this command:
+If you are using the Professional Edition of Netmaker use this command:
 
 .. code-block::
 
-	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-EE"
+	wget -O /root/Caddyfile "https://raw.githubusercontent.com/gravitl/netmaker/master/docker/Caddyfile-pro"
 
 
 
