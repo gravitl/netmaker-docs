@@ -30,5 +30,5 @@ Requests take the format of:
 API Documentation
 =================
 
-Check the documentation for all available `endpoints <https://openapi.netmaker,io>`_.
+Check the documentation for all available `endpoints <https://openapi.netmaker.io>`_.
 
