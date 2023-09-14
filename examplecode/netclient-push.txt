@@ -1,0 +1,18 @@
+push netclient host configuration using:
+
+NAME:
+   netclient push - Pushes custom host configuration.
+
+USAGE:
+   netclient push [flags]
+
+OPTIONS:
+    -e, --endpoint-ip string   sets endpoint on host
+    -h, --help                 help for push
+    -m, --mtu int              sets MTU on host
+    -o, --name string          sets host name
+    -p, --port int             sets wg listen port
+    -i, --static               flag to set host as static
+
+GLOBAL OPTIONS:
+   -v, --verbosity int   set logging verbosity 0-4

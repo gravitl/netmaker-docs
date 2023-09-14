@@ -13,12 +13,17 @@ USAGE:
    netclient join [flags]
 
 OPTIONS:
-   -A, --all-networks    attempts to join/register to all available networks to user
-   -h, --help            help for join
-   -n, --net string      network to attempt to join/register to
-   -s, --server string   server for attempting SSO/Auth registration
-   -t, --token string    enrollment token for joining/registering
-   -u, --user string     user name for attempting Basic Auth join/registration
+   -A, --all-networks         attempts to join/register to all available networks to user
+   -e, --endpoint-ip string   sets endpoint on host
+   -h, --help                 help for join
+   -m, --mtu string           sets MTU on host
+   -o, --name string          sets host name
+   -n, --net string           network to attempt to join/register to
+   -p, --port int             sets wg listen port
+   -s, --server string        server for attempting SSO/Auth registration
+   -i, --static               flag to set host as static
+   -t, --token string         enrollment token for joining/registering
+   -u, --user string          user name for attempting Basic Auth join/registration
 
 GLOBAL OPTIONS:
    -v, --verbosity int   set logging verbosity 0-4
