@@ -5,7 +5,7 @@ Quick Install
 Important Notes
 ============================
 
-1. **WE RECOMMEND USING THE NM-QUICK SCRIPT INSTEAD OF THIS GUIDE. Our docker-compose files have changed sizeably and the install script now uses a different process to obtain certificates. The script can be found** `on GitHub <https://github.com/gravitl/netmaker#get-started-in-5-minutes>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh>`_ **). If you would like to install netmaker manually, You can use the instructions below.**
+1. **WE RECOMMEND USING THE NM-INSTALL TOOL INSTEAD OF THIS GUIDE. Our docker-compose files have changed sizeably and the install script now uses a different process to obtain certificates. The script can be found** `on GitHub <https://github.com/gravitl/nm-install>`_ **(raw script** `here <https://raw.githubusercontent.com/gravitl/nm-install/master/nm-install>`_ **). If you would like to install netmaker manually, You can use the instructions below.**
 
 2. Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
