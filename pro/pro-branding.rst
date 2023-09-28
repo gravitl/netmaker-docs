@@ -1,6 +1,6 @@
 ============
 UI Branding
-=============
+============
 
 Modifying the UI with whitelabeling.
 =====================================
