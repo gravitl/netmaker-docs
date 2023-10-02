@@ -56,8 +56,8 @@ to transfer super admin rights to.
    :alt: transfer super admin rights
    :align: center
 
-Using the remote access client
-==============================
+Using the Remote Access Client (RAC)
+====================================
 Once a user has been added to a client gateway, they can connect to a network using the remote access client. To do this, they will first need to log in using the credentials that were provided to them.
 
 .. image:: images/users/remote-access-client.png
@@ -81,3 +81,14 @@ The remote access client also has the following options:
    :width: 80%
    :alt: Reload clients
    :align: center
+
+Controlling RAC user sessions
+=============================
+
+On pro servers/tenants, the duration of a non-admin user's remote session can be controlled.
+This can be done by setting `RAC_AUTO_DISABLE` (to `true`) and `JWT_VALIDITY_DURATION` (to an integer in seconds) environment variables on the server. 
+
+With `RAC_AUTO_DISABLE` set to true, a non-admin user's remote sessions will be disabled after the duration specified in `JWT_VALIDITY_DURATION` has elapsed.
+The user will have to relogin to enable their remote session again.
+
+NOTE: The `JWT_VALIDITY_DURATION` environment variable also configures all the JWT token validity duration for all users, regardless of whether `RAC_AUTO_DISABLE` is set to `true` or not.
