@@ -16,8 +16,9 @@ COMMANDS:
    leave       leave a network
    list        display list of netmaker networks
    pull        get the latest host configuration
+   push        push host config to server
    register    register to a Netmaker instance
-   switch      switch [servername]
+   server      server commands [list, switch, leave]
    uninstall   uninstall netclient
    use         use a specific version of netclient
    version     Displays version information
