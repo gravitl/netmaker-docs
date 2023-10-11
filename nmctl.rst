@@ -8,11 +8,11 @@ NMCTL is a CLI tool for interacting with the Netmaker API.
 Quick Start
 ******************
 
-Start with getting the binary
+Start with getting the latest nmctl binary specific to your operating system from the link below:
 
 .. code-block::
 
-  wget -O nmctl https://github.com/gravitl/netmaker/releases/latest/download/nmctl-linux-amd64
+  https://github.com/gravitl/netmaker/releases/latest
 
 Make sure the binary is executable with ``chmod +x nmctl`` and then move it into your /usr/sbin folder.
 
