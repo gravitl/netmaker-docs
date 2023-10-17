@@ -28,6 +28,9 @@ For Linux (Debian/Ubuntu), you can also use the following command to download th
    sudo apt search remote-client  # to see available versions
    sudo apt install remote-client
 
+For Mac, You can download the mac installer from the fileserver link above and run it.
+
+For Windows, you can download the remote-access-client_86.msi installer and run it to install on your windows machine.
 
 ******************
 Quick Start
