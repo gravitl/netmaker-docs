@@ -154,6 +154,11 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           restart: always
           environment:
               - TOKEN=<networktoken>
+              - PORT=<wg interface port>
+              - ENPOINT=<endpoint ip>
+              - MTU=<mtu>
+              - HOST_NAME=<host name>
+              - IS_STATIC=<static host (true/false)>
           volumes:
               - '/etc/netclient:/etc/netclient'
           container_name: netclient
