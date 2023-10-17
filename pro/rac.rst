@@ -30,7 +30,7 @@ For Linux (Debian/Ubuntu), you can also use the following command to download th
 
 Following the above instructions, you can run RAC from your Linux desktop environment launcher or from the command line using the `remote-client` command.
 
-For Mac, You can download the mac installer from the fileserver link above and run it. Because the app needs to be run as root, when you open the application from the applications folder, it will run a script that opens the application with elevated privileges.
+For Mac, You can download the mac installer from the fileserver link above and run it. Because the app needs to be run as root, open a teminal and cd into the Applications directory. Enter the command ``sudo su``. You can also use the command ``sudo -i``. Then enter ``./NetmakerRemoteClient`` to run the program.
 
 For Windows, you can download the remote-access-client_86.msi installer and run it to install on your windows machine. The app will need to be run as administrator. Right click on the desktop icon after installation and click on ``run as administrator``. 
 
