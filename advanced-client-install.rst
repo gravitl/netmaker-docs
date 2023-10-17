@@ -136,6 +136,11 @@ CLI Reference
 .. literalinclude:: ./examplecode/netclient-join.txt
   :language: YAML
 
+``sudo netclient push --help``
+
+.. literalinclude:: ./examplecode/netclient-push.txt
+  :language: YAML
+
 
 Installation
 ======================
