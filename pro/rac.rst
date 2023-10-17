@@ -41,7 +41,7 @@ Quick Start
 To use RAC, you will need to have a Netmaker server running and have a user account on that server. You will also need to have a client gateway set up on the server that you have access to.
 
 Check :ref:`this section <pro/pro-users:adding users>` on how to create a non-admin user.
-RAC can work with both admin and non-admin users but is more suited for non-admins who want to gain access to private resources on the network.
+RAC is for non-admin users who want to gain remote access to the network, this also provides admins fine-grained control over users in the network by attaching/removing them from a client gateway.
 
 
 Using the Remote Access Client (RAC)
