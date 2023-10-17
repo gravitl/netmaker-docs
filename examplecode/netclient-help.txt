@@ -2,19 +2,29 @@ NAME:
    Netclient CLI - Netmaker's netclient agent and CLI. Used to perform interactions with Netmaker server and set local WireGuard config.
 
 USAGE:
-   netclient [global options] command [command options] [arguments...]
+   netclient [command]
 
 COMMANDS:
-   register    Register with Netmaker Server for secure GRPC communications.
-   join        Join a Netmaker network.
-   leave       Leave a Netmaker network.
-   checkin     Checks for local changes and then checks into the specified Netmaker network to ask about remote changes.
-   push        Push configuration changes to server.
-   pull        Pull latest configuration and peers from server.
-   list        Get list of networks.
-   uninstall   Uninstall the netclient system service.
-   unregister  Unregister the netclient from secure server GRPC.
-   help, h     Shows a list of commands or help for one command
+   completion  Generate the autocompletion script for the specified shell
+   connect     connect to a netmaker network
+   daemon      netclient daemon
+   disconnect  disconnet from a network
+   guiServer   guiServer [enable|disable]
+   help        Help about any command
+   install     install netclient binary and daemon
+   join        join a network
+   leave       leave a network
+   list        display list of netmaker networks
+   pull        get the latest host configuration
+   push        push host config to server
+   register    register to a Netmaker instance
+   server      server commands [list, switch, leave]
+   uninstall   uninstall netclient
+   use         use a specific version of netclient
+   version     Displays version information
 
-GLOBAL OPTIONS:
-   --help, -h  show help (default: false)
+Flags:
+   -h, --help            help for netclient
+   -v, --verbosity int   set logging verbosity 0-4
+
+Use "netclient [command] --help" for more information about a command.
