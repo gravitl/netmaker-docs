@@ -28,6 +28,8 @@ For Linux (Debian/Ubuntu), you can also use the following command to download th
    sudo apt search remote-client  # to see available versions
    sudo apt install remote-client
 
+Following the above instructions, you can run RAC from your Linux desktop environment launcher or from the command line using the `remote-client` command.
+
 For Mac, You can download the mac installer from the fileserver link above and run it.
 
 For Windows, you can download the remote-access-client_86.msi installer and run it to install on your windows machine.
@@ -38,9 +40,8 @@ Quick Start
 
 To use RAC, you will need to have a Netmaker server running and have a user account on that server. You will also need to have a client gateway set up on the server that you have access to.
 
-NOTE: RAC currently works with non-admin users
-
 Check :ref:`this section <pro/pro-users:adding users>` on how to create a non-admin user.
+RAC can work with both admin and non-admin users but is more suited for non-admins who want to gain access to private resources on the network.
 
 
 Using the Remote Access Client (RAC)
