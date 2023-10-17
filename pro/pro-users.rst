@@ -1,3 +1,5 @@
+.. _pro-users:
+
 =================================
 Users in Netmaker Professional
 =================================
@@ -55,40 +57,3 @@ to transfer super admin rights to.
    :width: 80%
    :alt: transfer super admin rights
    :align: center
-
-Using the Remote Access Client (RAC)
-====================================
-Once a user has been added to a client gateway, they can connect to a network using the remote access client. To do this, they will first need to log in using the credentials that were provided to them.
-
-.. image:: images/users/remote-access-client.png
-   :width: 80%
-   :alt: Remote access login
-   :align: center
-
-After successful login you will be shown all the networks and gateways you have given access to, so now you will be able to connect/disconnect/refresh your connection to a gateway
-
-.. image:: images/users/remote-access-client-2.png
-   :width: 80%
-   :alt: Connect and disconnect
-   :align: center
-
-The remote access client also has the following options:
-
-* Refresh connection: This disconnects the current connection to the client gateway and then reconnects to it.
-* Reload clients: This reloads the client data on the page, which can be useful if the data has changed since the page was last loaded.
-
-.. image:: images/users/remote-access-client-3.png
-   :width: 80%
-   :alt: Reload clients
-   :align: center
-
-Controlling RAC user sessions
-=============================
-
-On pro servers/tenants, the duration of a non-admin user's remote session can be controlled.
-This can be done by setting `RAC_AUTO_DISABLE` (to `true`) and `JWT_VALIDITY_DURATION` (to an integer in seconds) environment variables on the server. 
-
-With `RAC_AUTO_DISABLE` set to true, a non-admin user's remote sessions will be disabled after the duration specified in `JWT_VALIDITY_DURATION` has elapsed.
-The user will have to relogin to enable their remote session again.
-
-NOTE: The `JWT_VALIDITY_DURATION` environment variable also configures all the JWT token validity duration for all users, regardless of whether `RAC_AUTO_DISABLE` is set to `true` or not.
