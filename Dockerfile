@@ -14,13 +14,13 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/license.html\"\ />' /usr/share/nginx/html/license.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-metrics.html\"\ />' /usr/share/nginx/html/ee/ee-metrics.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/pro-metrics.html\"\ />' /usr/share/nginx/html/pro/pro-metrics.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-setup.html\"\ />' /usr/share/nginx/html/ee/ee-setup.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/pro-setup.html\"\ />' /usr/share/nginx/html/pro/pro-setup.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-users.html\"\ />' /usr/share/nginx/html/ee/ee-users.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/pro-users.html\"\ />' /usr/share/nginx/html/pro/pro-users.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/index.html\"\ />' /usr/share/nginx/html/ee/index.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/index.html\"\ />' /usr/share/nginx/html/pro/index.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/about.html\"\ />' /usr/share/nginx/html/about.html
 
@@ -58,7 +58,7 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/oauth.html\"\ />' /usr/share/nginx/html/oauth.html
 
-RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ee/ee-relay-server.html\"\ />' /usr/share/nginx/html/ee/ee-relay-server.html
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/pro-relay-server.html\"\ />' /usr/share/nginx/html/pro/pro-relay-server.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/turn-server.html\"\ />' /usr/share/nginx/html/turn-server.html
 

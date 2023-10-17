@@ -22,7 +22,7 @@ Implementing the Netmaker TURN server
 
 If you are starting out making a new netmaker server, you can just folow the installation instructions. :doc:`Quick Install<./quick-start>`
 
-If You have an existing installation and would like to add a TURN server, You will need to make some changes to your docker-compose.yml and Caddyfile. These changes work with both Community edition and Enterprise edition. There is also an option to turn the TURN server on and off, so if you decide not to use it anymore, you can just switch it off.
+If You have an existing installation and would like to add a TURN server, You will need to make some changes to your docker-compose.yml and Caddyfile. These changes work with both Community edition and Professional edition. There is also an option to turn the TURN server on and off, so if you decide not to use it anymore, you can just switch it off.
 
 You should probably backup your docker-compose file at this point. That way, if you need to start over or want to revert the changes, you can just copy the backup.
 

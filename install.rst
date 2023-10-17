@@ -22,5 +22,3 @@ Choose the install method that makes sense for you.
 :ref:`Highly Available Installation <HAInstall>`
 
 :doc:`Advanced Install Resources <./server-installation>`
-
-:ref:`Whitelabelling and custom UI Branding <UIBranding>`
