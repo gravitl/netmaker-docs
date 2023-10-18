@@ -19,6 +19,8 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
   
 - **Users:** Community netmaker has rudimentary users, but Professional gives you the ability to create access levels to control network access, and even create groups to organize users. This allows users to log into the dashboard who can only manage ext clients for themselves, or nodes.
 
+- **Remote Access Client:** Netmaker Professional comes with a remote access client that allows you to connect to your network from anywhere. This is a great way to connect to your network from a laptop or mobile device (soon).
+
 
 Setup
 --------
@@ -56,3 +58,11 @@ Branding
    :maxdepth: 2
 
    pro-branding
+
+Remote Access Client
+-----------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   rac
