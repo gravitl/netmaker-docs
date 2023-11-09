@@ -186,7 +186,7 @@ Your compose would look more like this:
               - PORT=<wg interface port>
               - ENDPOINT=<endpoint ip>
               - MTU=<mtu>
-              - HOST_NAME=<host name>
+              - HOST_NAME=nc-docker-2
               - IS_STATIC=<static host (true/false)>
               - IFACE_NAME=netmaker-2
           volumes:
@@ -245,7 +245,7 @@ Again, if you are making a docker container on an already existing baremetal net
 
 .. code-block::
 
-  docker run -d --network host --privileged -e TOKEN=<TOKEN> -e IFACE_NAME="netmaker-2" -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
+  docker run -d --network host --privileged -e TOKEN=<TOKEN> -e HOST_NAME=nc-docker-2 -e IFACE_NAME="netmaker-2" -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
 
 Make sure interface name you pass when running multiple netclient containers on same host doesn't conflict with each other.
 
