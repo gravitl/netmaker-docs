@@ -38,6 +38,8 @@ For Windows, you can download the remote-access-client_86.msi installer and run 
 Quick Start
 ******************
 
+**NOTE**: OpenGL is a requirement for Netmaker RAC to run. If you are running RAC on a virtual machine (especially with Windows as guest OS), you may need to enable 3D acceleration in your virtual machine settings.
+
 To use RAC, you will need to have a Netmaker server running and have a user account on that server. You will also need to have a client gateway set up on the server that you have access to.
 
 Check :ref:`this section <pro/pro-users:adding users>` on how to create a non-admin user.
