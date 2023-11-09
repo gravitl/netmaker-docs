@@ -162,7 +162,7 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           volumes:
               - '/etc/netclient:/etc/netclient'
           container_name: netclient
-          image: 'gravitl/netclient:v0.18.0'
+          image: 'gravitl/netclient:latest'
 
 where <networktoken> is the Access Token available from the "Viewing your Access Key Details" window in the Netmaker UI.
 
@@ -179,16 +179,22 @@ Your compose would look more like this:
   services:
       netclient:
           privileged: true
+          network_mode: host
           restart: always
           environment:
               - TOKEN=<networktoken>
-              - VERBOSITY=<0-4>
+              - PORT=<wg interface port>
+              - ENDPOINT=<endpoint ip>
+              - MTU=<mtu>
+              - HOST_NAME=<host name>
+              - IS_STATIC=<static host (true/false)>
+              - IFACE_NAME=netmaker-2
           volumes:
               - '/etc/netclient2:/etc/netclient'
           container_name: netclient2
-          image: 'gravitl/new-netclient:v0.20.5'
+          image: 'gravitl/netclient:latest'
 
-By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
+By using this method, you can run many netclients on the same host and just incrementing up the volumes (netclient3, netclient4 ..... netclientN) and make sure to set the interface name, so that it won't conflict with existing netclients running on same host.
 
 
 **IMPORTANT:**
