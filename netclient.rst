@@ -155,7 +155,7 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           environment:
               - TOKEN=<networktoken>
               - PORT=<wg interface port>
-              - ENPOINT=<endpoint ip>
+              - ENDPOINT=<endpoint ip>
               - MTU=<mtu>
               - HOST_NAME=<host name>
               - IS_STATIC=<static host (true/false)>
@@ -239,9 +239,9 @@ Again, if you are making a docker container on an already existing baremetal net
 
 .. code-block::
 
-  docker run -d --privileged -e TOKEN=<TOKEN> -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
+  docker run -d --network host --privileged -e TOKEN=<TOKEN> -e IFACE_NAME="netmaker-2" -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
 
-And again host networking will be turned off in this case and will not have the private address of the contianer and it will be segmented.
+Make sure interface name you pass when running multiple netclient containers on same host doesn't conflict with each other.
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
