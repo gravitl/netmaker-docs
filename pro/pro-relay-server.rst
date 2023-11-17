@@ -47,3 +47,21 @@ After creation, you should see your relayed host show up on a list of relayed ho
    :width: 80%
    :alt: Relay
    :align: center
+
+
+Auto Relays 
+=========================
+When incorporating a new host into a network, you have the option to set it up as a relayed node. 
+To accomplish this, the initial step involves generating an enrollment key and specifying both the network and the relay to which the host will be added.
+
+.. image:: images/pro-relay-enrollment-key.png
+   :width: 80%
+   :alt: Relay enrollment key
+   :align: center
+
+When integrating a new host into a network, choose the recently generated enrollment key and proceed with the remaining setup steps.
+After completing this process, you should observe your new host being successfully relayed.
+
+.. image:: images/pro-relay-host-setup.png
+   :width: 80%
+   :alt: 
