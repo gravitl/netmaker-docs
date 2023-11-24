@@ -54,8 +54,8 @@ Debian Distros (debian/ubuntu/mint/pop-os)
 
 .. code-block::
 
-  curl -sL 'https://apt.netmaker.org/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/netclient.asc
-  curl -sL 'https://apt.netmaker.org/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/netclient.list
+  curl -sL 'https://apt.netmaker.org/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/netmaker-keyring.gpg
+  echo "deb [signed-by=/usr/share/keyrings/netmaker-keyring.gpg] https://apt.netmaker.org stable main" | sudo tee /etc/apt/sources.list.d/netclient.list
   sudo apt update
   sudo apt install netclient
 
