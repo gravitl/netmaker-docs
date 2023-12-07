@@ -31,7 +31,7 @@ If everything is setup ok, you should be able to type ``nmctl`` and see the foll
     context         Manage various netmaker server configurations
     dns             Manage DNS entries associated with a network
     enrollment_key  Manage Enrollment Keys
-    ext_client      Manage External Clients
+    ext_client      Manage Remote Access Clients
     help            Help about any command
     host            Manage hosts
     logs            Retrieve server logs
@@ -142,17 +142,17 @@ Fetching the node list once again we can see that our node has been turned into 
   +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
 
 
-External Clients
-==================
+Remote Access Clients
+=====================
 
-Adding an :doc:`external client <./external-clients>` to the network is just as easy. Requires the `network name` and `node id` as input parameters.
+Adding a :doc:`Remote Access Client <./external-clients>` to the network is just as easy. Requires the `network name` and `node id` as input parameters.
 
 .. code-block::
 
   nmctl ext_client create test_net 938d7861-55fc-40a9-970d-6d70acfc3a80
   Success
 
-List all available external clients.
+List all available Remote Access Clients.
 
 .. code-block::
 
@@ -163,7 +163,7 @@ List all available external clients.
   | limp-chicken |test_net | 10.11.13.2   |              | true    | 2022-11-23 18:28:57 +0530 IST |
   +--------------+---------+--------------+--------------+---------+-------------------------------+
 
-The wireguard config of an external client can also be fetched with the `network name` and `external client id`.
+The wireguard config of an Remote Access Client can also be fetched with the `network name` and `client id`.
 
 .. code-block::
 

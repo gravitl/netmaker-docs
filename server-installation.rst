@@ -157,7 +157,7 @@ MANAGE_IPTABLES:
 PORT_FORWARD_SERVICES: 
     **Default:** ""
 
-    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
+    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an Remote Access Gateway (ingress), this will break SSH on Remote Access Clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
 
 VERBOSITY:
     **Default:** 0

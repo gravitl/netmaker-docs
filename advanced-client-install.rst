@@ -82,7 +82,7 @@ i. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linu
 Modes and System Compatibility
 ==================================
 
-**Note: If you would like to connect non-Linux/Unix machines to your network such as phones and Windows desktops, please see the documentation on External Clients**
+**Note: If you would like to connect non-Linux/Unix machines to your network such as phones and Windows desktops, please see the documentation on Remote Access Clients(previously External Clients)**
 
 The netclient can be run in a few "modes". System compatibility depends on which modes you intend to use. These modes can be mixed and matched across a network, meaning all machines do not have to run with the same "mode."
 
