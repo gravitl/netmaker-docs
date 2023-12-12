@@ -85,6 +85,17 @@ OpenWRT Distros (mips/mipsle)
 
 refer to Advanced Client Installation :ref:`advanced-client-install:Notes on OpenWRT` 
 
+OpenSUSE (tumbleweed/leap)
+---------------------------------------------------------------------
+
+.. code-block:: shell
+
+  sudo rpm --import https://rpm.netmaker.org/gpg.key
+  curl -sL 'https://rpm.netmaker.org/netclient-repo' | sudo tee /etc/zypp/repos.d/netclient.repo
+  sudo zypper refresh
+  sudo zypper install netclient
+
+
 Windows
 ===============
 
