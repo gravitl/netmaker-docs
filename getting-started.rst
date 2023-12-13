@@ -164,7 +164,6 @@ In the edit screen, you can make changes to the logging verbosity, listening por
 You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 
 .. image:: images/node-details.jpg
-   :width: 80%
    :alt: Node Success
    :align: center
 
