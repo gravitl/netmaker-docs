@@ -254,10 +254,6 @@ The following is a brief description of each:
 - `docker-compose.pro.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml>`_ -= This is the compose file needed for Netmaker Professional. You will need a licence and user id from `Netmaker's licence dashboard <https://account.netmaker.io/>`_ .
 
 
-No DNS - CoreDNS Disabled
-----------------------------------------------
-
-CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your netmaker.env for netmaker, set DNS_MODE="off"
 
 .. _Emqx:
 
