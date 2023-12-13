@@ -155,14 +155,14 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           environment:
               - TOKEN=<networktoken>
               - PORT=<wg interface port>
-              - ENPOINT=<endpoint ip>
+              - ENDPOINT=<endpoint ip>
               - MTU=<mtu>
               - HOST_NAME=<host name>
               - IS_STATIC=<static host (true/false)>
           volumes:
               - '/etc/netclient:/etc/netclient'
           container_name: netclient
-          image: 'gravitl/netclient:v0.18.0'
+          image: 'gravitl/netclient:latest'
 
 where <networktoken> is the Access Token available from the "Viewing your Access Key Details" window in the Netmaker UI.
 
@@ -179,16 +179,22 @@ Your compose would look more like this:
   services:
       netclient:
           privileged: true
+          network_mode: host
           restart: always
           environment:
               - TOKEN=<networktoken>
-              - VERBOSITY=<0-4>
+              - PORT=<wg interface port>
+              - ENDPOINT=<endpoint ip>
+              - MTU=<mtu>
+              - HOST_NAME=nc-docker-2
+              - IS_STATIC=<static host (true/false)>
+              - IFACE_NAME=netmaker-2
           volumes:
               - '/etc/netclient2:/etc/netclient'
           container_name: netclient2
-          image: 'gravitl/new-netclient:v0.20.5'
+          image: 'gravitl/netclient:latest'
 
-By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
+By using this method, you can run many netclients on the same host and just incrementing up the volumes (netclient3, netclient4 ..... netclientN) and make sure to set the interface name, so that it won't conflict with existing netclients running on same host.
 
 
 **IMPORTANT:**
@@ -239,9 +245,9 @@ Again, if you are making a docker container on an already existing baremetal net
 
 .. code-block::
 
-  docker run -d --privileged -e TOKEN=<TOKEN> -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
+  docker run -d --network host --privileged -e TOKEN=<TOKEN> -e HOST_NAME=nc-docker-2 -e IFACE_NAME="netmaker-2" -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
 
-And again host networking will be turned off in this case and will not have the private address of the contianer and it will be segmented.
+Make sure interface name you pass when running multiple netclient containers on same host doesn't conflict with each other.
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
