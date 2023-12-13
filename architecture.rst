@@ -121,14 +121,16 @@ Netmaker can be used in its entirety without the UI, but the UI makes things a l
 CoreDNS
 --------
 
-As of 0.12.0, CoreDNS is not an active part of the Netmaker system. Nodes DO NOT receive their DNS updates using a nameserver. Instead, DNS entries are added to the local "hosts" file directly. The CoreDNS component can be safely removed from the setup and DNS will continue to function.
-
-Previously, CoreDNS was used as a nameserver and the netclient would set the nameserver per peer. However, this only worked on a subset of Linux systems, because it required resolvectl. The new method (using the hosts file) works across OSs.
-
-However, we still maintain CoreDNS in the default deployment for two reasons:  
-  1. You may wish to add a nameserver to "Ext Clients". CoreDNS can still be used for this.  
-  2. You may wish to integrate the Netmaker nameserver with your existing DNS setup.  
-
+As of 0.22.0, CoreDNS is an active part of the Netmaker system. We deprecated setting entries on the hosts file which was not a ideal implementation.
+Netmaker server actively sets the dns entries on the CoreDNS server.
+After you install the netmaker server components, you can see the corendns container running as well.
+User need make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
+   1. disable the systemd-resolved
+      sudo systemctl disable systemd-resolved.service
+      sudo systemctl stop systemd-resolved
+   2. Uncomment the `network_mode: host` on the coredns container spec in /root/docker-compose.yml`
+   3. And make sure to set the nameserver (vi /etc/resolv.conf) on the machine where netmaker server is running to public ip of the machine.  
+And Now you can point any machine in the network to use this dns server and you can reach the other peers in the network by their dns names.
 
 Caddy
 -------
