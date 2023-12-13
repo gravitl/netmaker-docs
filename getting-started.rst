@@ -113,7 +113,6 @@ Deploy Nodes
 You should get output similar to the below. The netclient retrieves local settings, submits them to the server for processing, and retrieves updated settings. Then it sets the local network configuration. For more information about this process, see the :doc:`client installation <./netclient>` documentation. If this process failed and you do not see your node in the console (see below), then reference the :doc:`troubleshooting <./troubleshoot>` documentation.
 
 .. image:: images/nc-install-output.jpg
-   :width: 80%
    :alt: Output from Netclient Install
    :align: center
 
@@ -124,7 +123,6 @@ Once installed on all nodes, you can test the connection by pinging the private 
 
 
 .. image:: images/ping-node.jpg
-   :width: 80%
    :alt: Node Success
    :align: center
 
@@ -155,7 +153,6 @@ In here you can see the host's name, the endpoint of the server running netclien
 This will give you more information like the firewall in use, MTUs, and listening port. You can also see networks associated with that host and options to edit or delete the host. If you are going to delete a Host, you need to delete the associated node first.
 
 .. image:: images/hostedit.jpg
-   :width: 80%
    :alt: Edit screen of a host
    :align: center
 
@@ -164,6 +161,7 @@ In the edit screen, you can make changes to the logging verbosity, listening por
 You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 
 .. image:: images/node-details.jpg
+   :width: 80%
    :alt: Node Success
    :align: center
 

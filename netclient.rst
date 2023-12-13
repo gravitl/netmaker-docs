@@ -14,7 +14,6 @@ The UI has been updated for Mac and Windows,
 And the CLI has been updated.
 
 .. image:: images/netclientcli.jpg
-  :width: 80%
   :alt: netclient CLI
   :align: center
 

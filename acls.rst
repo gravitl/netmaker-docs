@@ -46,7 +46,6 @@ When you create a network, you set a "default ACL" of either "Allow" or "Deny." 
 As of 0.16.0, there is another option, the default node-level ACL.
 
 .. image:: images/acls-4.jpg
-   :width: 80%
    :alt: ACLs
    :align: center
 
