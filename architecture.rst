@@ -1,6 +1,5 @@
-===============
 Architecture
-===============
+=============
 
 .. image:: images/nm-diagram-3.png
    :width: 100%

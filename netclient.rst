@@ -1,6 +1,6 @@
-================================
-Netclient Setup
-================================
+==========
+Netclient 
+==========
 
 As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
 

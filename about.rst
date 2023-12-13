@@ -2,11 +2,11 @@
 About
 ==========
 
+
 .. image:: images/netmaker-simple.png
    :width: 60%
    :alt: Netmaker Architecture Diagram
    :align: center
-
 
 What is Netmaker?
 ==================
@@ -58,3 +58,13 @@ This list is not all-encompassing but provides a sample of how many users use Ne
  3. Provide remote access to resources like an AWS VPC, data center, or K8S cluster  
  4. Create distributed, cross-cloud Kubernetes clusters or database clusters
  5. Manage a secure mesh of IoT devices 
+
+
+Architecture
+==================
+
+.. toctree::
+   :maxdepth: 1
+   
+   architecture
+
