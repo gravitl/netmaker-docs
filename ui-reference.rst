@@ -1,7 +1,3 @@
-=================
-UI Reference
-=================
-
 This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.
 
 

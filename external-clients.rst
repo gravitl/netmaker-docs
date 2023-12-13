@@ -1,3 +1,5 @@
+.. _remote-access:
+
 =====================================
 Remote Access Gateways and Clients
 =====================================
@@ -10,7 +12,7 @@ Introduction
    :alt: Gateway
    :align: center
 
-Netmaker allows for "Remote Access Clients (RAC)" to reach into a network and access services via a Remote Access Gateway (ingress). So what is a "Remote Access Clients"? A remote access clients is any machine which cannot or should not be meshed, but can be connected to a Netmaker network. They are more or less VPN clients of a remote access gateway. This can include:
+Netmaker allows for **Remote Access Clients (RAC)** to reach into a network and access services via a Remote Access Gateway (ingress). So what is a "Remote Access Clients"? A remote access clients is any machine which cannot or should not be meshed, but can be connected to a Netmaker network. They are more or less VPN clients of a remote access gateway. This can include:
         - Phones
         - Laptops
         - Desktops
