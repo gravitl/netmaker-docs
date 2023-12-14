@@ -128,7 +128,7 @@ User need make some changes manually to activate the corendns server, follow the
    1. disable the systemd-resolved
       sudo systemctl disable systemd-resolved.service
       sudo systemctl stop systemd-resolved
-   2. Uncomment the `network_mode: host` on the coredns container spec in /root/docker-compose.yml`
+   2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
    3. And make sure to set the nameserver  on the machine where netmaker server is running to public ip of the machine.  
 And Now you can point any machine in the network to use this dns server and you can reach the other peers in the network by their dns names.
 Here are some help Guides on how to set add custom DNS server 
