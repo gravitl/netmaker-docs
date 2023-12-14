@@ -9,12 +9,12 @@ Assumptions
 ******************
 
 1. using bash shell
-2. netclient, nmctl and jq have been installed
-3. netmaker server has been set up at example.com without UI  (netmaker-ui section of docker-compose.yml has been deleted)
+2. nmctl and jq have been installed
+3. netmaker server has been set up at example.com. This can be a SaaS (managed) tenant as well.
 
-***********************
-Setup superadmin user 
-***********************
+*********************
+Setup superadmin user
+*********************
 
 Set base domain
 ================
@@ -22,8 +22,10 @@ Set base domain
 
         export NN_DOMAIN=example.com
 
+
 Create SuperAdmin User
-=======================
+======================
+
 .. code-block::
 
                 curl --location 'https://api.$NM_DOMAIN/api/users/adm/createsuperadmin' \
@@ -52,10 +54,10 @@ Create Normal User
             nmctl user create --name <user> --password <user-password>
 
 *************************
-Normal Operations by user 
+Normal Operations by user
 *************************
 
-*assume that users have been created by superAdmin*
+*assume that users have been created by superadmin*
 
 ***********************
 Set username/password
@@ -66,13 +68,14 @@ Set username/password
         export PASSWORD=<user-password>
 
 
-
 ******************
 Set User Context
 ******************
 .. code-block::
 
             nmctl context set commandline --endpoint https://api.$NM_DOMAIN --username $USER --password $PASSWORD
+            nmctl context use commandline
+
 
 ******************
 Create Network
