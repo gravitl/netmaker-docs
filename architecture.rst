@@ -124,17 +124,27 @@ CoreDNS
 As of 0.22.0, CoreDNS is an active part of the Netmaker system. We deprecated setting entries on the hosts file which was not a ideal implementation.
 Netmaker server actively sets the dns entries on the CoreDNS server.
 After you install the netmaker server components, you can see the corendns container running as well.
-User need make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
-   1. disable the systemd-resolved
-      sudo systemctl disable systemd-resolved.service
-      sudo systemctl stop systemd-resolved
-   2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
-   3. And make sure to set the nameserver on the machine where netmaker server is running to public ip of the machine, which basically points to the coredns server.  
+User need to make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
+1. disable the systemd-resolved (Reason: to avoid port conflict with coredns server )
+.. code-block::
+
+   sudo systemctl disable systemd-resolved.service
+   sudo systemctl stop systemd-resolved
+
+2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
+
+3. `**IMPORTANT:**` Since you have disabled systemd-resolved service on server, make sure to set the nameserver to public ip of the machine, which basically points to the coredns server.
+
 And Now you can point any machine in the network to use this dns server and you can reach the other peers in the network by their dns names.
-Here are some help Guides on how to add custom DNS server 
-   1. Linux - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-linux.html
-   2. Mac - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-mac.html
-   3. Windows - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-win.html
+
+Here are some help Guides on how to add custom DNS server:
+
+1. Linux - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-linux.html
+
+2. Mac - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-mac.html
+
+3. Windows - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-win.html
+
 Caddy
 -------
 
