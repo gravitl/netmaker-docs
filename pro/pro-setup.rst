@@ -78,8 +78,8 @@ Make sure that it should look something like this:
 
 .. code-block::
 
-    LICENSE_KEY=mylicensekeymylicensekeymylicensekey
-    NETMAKER_TENANT_ID=myguidte-nant-idyg-uidt-enantidyguid
+    LICENSE_KEY=mylicensekeymylicensekeymylicensekeymylicensekeymylicensekey
+    NETMAKER_TENANT_ID=myguidte-nant-idmy-guid-tenantidmygu
 
 Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.3-ee`` 
 
