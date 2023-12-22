@@ -93,13 +93,13 @@ Then you will need to get the docker-compose pro file from here
 
 No changes will need to be made to that file. It will use the configs listed in your netmaker.env file.
 
-After that run the following command and you should see the professional UI on dashboard.<YOUR_BASE_DOMAIN>: 
+After that run the following command: 
 
 .. code-block::
 
     docker kill netmaker netmaker-ui && docker-compose up -d 
 
-You should see a new Dashboard. The top menu bar will have relays and metrics added.
+When you browse to your self-hosted Netmaker via dashboard.<YOUR_BASE_DOMAIN>, you should see the professional UI and a new Dashboard. The top menu bar will have relays and metrics added.
 
 .. image:: images/pro-new-dashboard.png
     :width: 80%
