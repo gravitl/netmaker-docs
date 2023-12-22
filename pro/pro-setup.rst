@@ -67,12 +67,19 @@ Upgrade to Pro from Community Edition
 
 You can upgrade from an existing community server to a pro server with this script. Follow the prompts to setup a pro server and the script will make the necessary changes to your netmaker.env file and grab the pro docker-compose.override.yml file.
 
-If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file.
+If you prefer to upgrade manually, go to your netmaker server and add the following to your netmaker.env file:
 
-.. code-block:: yaml
+.. code-block::
 
-    LICENSE_KEY: “<license key>”
-    NETMAKER_TENANT_ID: "<tenant id>"
+    LICENSE_KEY=“<license key>”
+    NETMAKER_TENANT_ID="<tenant id>"
+
+Make sure that it should look something like this:
+
+.. code-block::
+
+    LICENSE_KEY=mylicensekeymylicensekeymylicensekey
+    NETMAKER_TENANT_ID=myguidte-nant-idyg-uidt-enantidyguid
 
 Also change ``SERVER_IMAGE_TAG`` in netmaker.env to ``<version>-ee``. For example: ``SERVER_IMAGE_TAG=v0.20.3-ee`` 
 
@@ -82,11 +89,15 @@ Then you will need to get the docker-compose pro file from here
 
 .. code-block::
 
-    wget -O docker-compose.override.yml https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml
+    wget -O docker-compose.override.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.pro.yml
 
 No changes will need to be made to that file. It will use the configs listed in your netmaker.env file.
 
-After that ``docker kill netmaker netmaker-ui && docker-compose up -d`` and you should see the professional UI on dashboard.<YOUR_BASE_DOMAIN>
+After that run the following command and you should see the professional UI on dashboard.<YOUR_BASE_DOMAIN>: 
+
+.. code-block::
+
+    docker kill netmaker netmaker-ui && docker-compose up -d 
 
 You should see a new Dashboard. The top menu bar will have relays and metrics added.
 
