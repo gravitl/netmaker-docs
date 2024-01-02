@@ -1,0 +1,8 @@
+name: create docker image
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "new version number"
+        required: true

@@ -1,0 +1,16 @@
+# copied from https://rtds-action.readthedocs.io/en/latest/ 
+# need to get webhook token from readthedocs.
+name: Docs
+on: workflow_dispatch
+
+jobs:
+  notebooks:
+    name: "Build the docs for readthedocs.org"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger RTDs build
+        uses: dfm/rtds-action@v1
+        with:
+          webhook_url: ${{ secrets.RTDS_WEBHOOK_URL }}
+          webhook_token: ${{ secrets.RTDS_WEBHOOK_TOKEN }}
+          commit_ref: ${{ github.ref }}
