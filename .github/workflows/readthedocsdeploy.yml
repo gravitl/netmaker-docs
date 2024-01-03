@@ -5,7 +5,7 @@ name: Docs
 on: workflow_dispatch
 
 jobs:
-  notebooks:
+  deploy_readthedocs:
     name: "Build the docs for readthedocs.org"
     runs-on: ubuntu-latest
     steps:
