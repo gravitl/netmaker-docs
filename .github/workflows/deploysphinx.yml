@@ -9,19 +9,28 @@ on:
         required: true
 
 jobs:
-
-  build-docs:
-    runs-on: ubuntu-latest
-    
-
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup git
+        run: |
+          git config --global user.name "Gravitl"
+          git config --global user.email "info@netmaker.io"
       - name: Checkout
         uses: actions/checkout@v3
         with:
           repository: gravitl/netmaker-docs
           ref: master
+      - name: Build Docs
+        env:
+          TOKEN: ${{ secrets.repo_token }}
+        run: |
+          curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/gravitl/netmaker-devops/master/netmaker-docs/Dockerfile
+          curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/gravitl/netmaker-devops/master/netmaker-docs/mod-html.sh
+          mv Dockerfile netmaker-docs
+          mv mod-html.sh netmaker-docs
+          cd netmaker-docs
+          make html
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v2
       - name: Setup Docker Buildx
@@ -41,3 +50,6 @@ jobs:
           tags: |
             gravitl/netmaker-docs:${{ inputs.version }}
             gravitl/netmaker-docs:latest
+      - name: Update Server
+        run: |
+          ssh root@143.198.165.134 "bash updateimage.sh ${{ inputs.version }}"
