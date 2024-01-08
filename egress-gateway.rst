@@ -1,6 +1,8 @@
-=====================================
-Egress Gateway
-=====================================
+.. _egress:
+
+=======
+egress
+=======
 
 Introduction
 ===============
@@ -126,4 +128,5 @@ Advanced Use Cases
    https://www.kernelconfig.io/config_nf_nat_masquerade_ipv6?q=&kernelversion=5.15.116&arch=x86
 
    https://www.reddit.com/r/PFSENSE/comments/vb4r3s/ip6_masquerading
+
 

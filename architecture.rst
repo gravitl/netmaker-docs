@@ -1,6 +1,5 @@
-===============
 Architecture
-===============
+=============
 
 .. image:: images/nm-diagram-3.png
    :width: 100%
@@ -122,14 +121,33 @@ Netmaker can be used in its entirety without the UI, but the UI makes things a l
 CoreDNS
 --------
 
-As of 0.12.0, CoreDNS is not an active part of the Netmaker system. Nodes DO NOT receive their DNS updates using a nameserver. Instead, DNS entries are added to the local "hosts" file directly. The CoreDNS component can be safely removed from the setup and DNS will continue to function.
+As of 0.22.0, CoreDNS is an active part of the Netmaker system. We deprecated setting entries on the hosts file which was not an ideal implementation.
+Netmaker server actively sets the dns entries on the CoreDNS server.
+After you install the netmaker server components, you can see the corendns container running as well.
+You need to make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
+1. Make sure that UDP Port 53 and TCP Port 53 are allowed to pass in the network where your netmaker server lies
 
-Previously, CoreDNS was used as a nameserver and the netclient would set the nameserver per peer. However, this only worked on a subset of Linux systems, because it required resolvectl. The new method (using the hosts file) works across OSs.
+2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
 
-However, we still maintain CoreDNS in the default deployment for two reasons:  
-  1. You may wish to add a nameserver to "Ext Clients". CoreDNS can still be used for this.  
-  2. You may wish to integrate the Netmaker nameserver with your existing DNS setup.  
+3. disable the systemd-resolved (Reason: to avoid port conflict with coredns server )
+.. code-block::
 
+   sudo systemctl disable systemd-resolved.service
+   sudo systemctl stop systemd-resolved
+
+4. `**IMPORTANT:**` Since you have disabled systemd-resolved service on server, make sure to set the nameserver to the public ip of the machine, which basically points to the coredns server.
+
+And now you can point any machine in the network to use this dns server and you can reach the other peers in the network by their dns names. For external clients running linux, install 'resolvconf' before setting the Wireguard configurations.
+
+Refer to your operating system documentation for information about how to configure custom DNS network settings. Here are some general help guides on how to add custom DNS server:
+
+1. Linux - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-linux.html. Configuration depends on what distribution of Linux you use.
+
+2. Mac - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-mac.html
+
+3. Windows - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-win.html
+
+If your machine is virtually hosted in a cloud, you might want to refer to your VM provider's documention on how to permanently set the custom DNS resolver.
 
 Caddy
 -------
