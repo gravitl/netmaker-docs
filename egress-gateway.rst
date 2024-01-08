@@ -37,7 +37,7 @@ Once you have determined the subnet, and deployed your netclient, you can go to 
    :alt: Gateway
    :align: center
 
-At this point you will choose your selected host to use as an egress. You can choose if you would like to use NAT or not with the switch. You also have a choice of using this host as an internet gateway. more on that in a bit. You can put the selected CIDR for your egress range(s) in the field. click the add range button to add more egress ranges for the host. The interface is automatically chosen and will not be shown in this window. With everything filled out, click the create button.
+At this point you will choose your selected host to use as an egress. You can choose if you would like to use NAT or not with the switch. You can put the selected CIDR for your egress range(s) in the field. click the add range button to add more egress ranges for the host. The interface is automatically chosen and will not be shown in this window. With everything filled out, click the create button.
 
 .. image:: images/ui-6.png
    :width: 80%
@@ -63,28 +63,6 @@ A common scenario would be to combine this with an "Ingress Gateway" to create a
 In some scenarios, a single node will act as both ingress and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.
 
 .. image:: images/egress3.png
-   :width: 50%
-   :alt: Gateway
-   :align: center
-
-2)  / NAT Gateway
------------------------
-
-Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country, using a VPN server based in that country.
-
-These are not typical use cases for Netmaker, but can be easily enabled.
-
-Navigate to the egress setup mentioned above. Instead of inputting a range, just click the internet gateway switch. the range of ``0.0.0.0/0`` will be automatically put in for you. (The IPv6 version ``::/0`` is still under construction) Click create.
-
-.. image:: images/internet-gateway.png
-   :width: 80%
-   :alt: Internet Gateway
-   :align: center
-
-After that, your public traffic will be routed through your egressing client.
-
-
-.. image:: images/egress5.png
    :width: 50%
    :alt: Gateway
    :align: center

@@ -21,6 +21,7 @@ apt-get install make
 apt-get install python3-sphinx
 apt-get install python3-pip
 pip install git+https://github.com/bashtage/sphinx-material.git
+pip install markupsafe
 
 ```
 1. Clone the repo  

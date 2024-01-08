@@ -11,12 +11,12 @@ Allows clients (nodes and ext clients) to reach external networks.
 :ref:`egress`
 
 
-Ingress Gateway/External Clients
+Remoter Access Gateways & Clients
 =================================
 
-An ingress gateway enables external clients to connect to the network
+A remote access gateway enables "external" clients to connect to the network. External clients refer to clients that are not part of the mesh network, but need to connect to it. This could be a laptop, mobile device, or even a server that is not part of the network.
 
-:ref:`ingress`
+:ref:`remote-access`
 
 
 

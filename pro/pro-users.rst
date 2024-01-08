@@ -4,7 +4,7 @@
 Users in Netmaker Professional
 =================================
 Netmaker Professional offers advanced user management features. The super admin can create users with either a user or admin role. Only Admins can access the dashboard, the normal users can use remote access client to join the network through a gateway.
-Admins can add users and assign them to client gateways, which includes managing the user's access to different client gateways.
+Admins can add users and assign them to remote access gateways, which includes managing the user's access to different remote access gateways.
 
 Here is a breakdown of the different user types and their permissions:
 
@@ -28,10 +28,10 @@ To add a user, go to the Users section and click the Add User button. Fill in th
 
 The credentials will need to be shared with the added user.
 
-Attaching or removing user from a client gateway
-================================================
-To attach users to a client gateway or remove users from a gateway, you will need to have the client gateway set up. 
-Once the client gateway is set up, you will see an option to remove users from the dropdown menu.
+Attaching or removing user from a remote access gateway
+========================================================
+To attach users to a remote access gateway or remove users from a gateway, you will need to have the gateway set up. 
+Once the remote access gateway is set up, you will see an option to attach or remove users from the gateway's dropdown menu on the table row.
 
 .. image:: images/users/gateway-dropdown.png
    :width: 80%

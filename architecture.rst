@@ -37,7 +37,7 @@ A full `mesh network <https://www.bbc.co.uk/bitesize/guides/zr3yb82/revision/2>`
 
 This is in contrast to a hub-and-spoke network, where each machine must first pass its traffic through a relay server before it can reach other machines.
 
-In certain situations, you may either want or need a *partial mesh* network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh because the servers (nodes A-D) are meshed, but then external clients come in via a gateway and are not meshed.
+In certain situations, you may either want or need a *partial mesh* network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh because the servers (nodes A-D) are meshed, but then Remote Access Clients come in via a gateway and are not meshed.
 
 Mesh networks are generally faster than other topologies but are also more complicated to set up. WireGuard on its own gives you the means to create encrypted tunnels between devices, but it does not provide a method for setting up a full network. This is where Netmaker comes in.
 
@@ -159,18 +159,18 @@ Caddy simplifies management because the configuration file is very short, severa
 Traefik was previously the default and is still a functioning option, but We are moving guidance towards Caddy by default. If you are maintaining an installation that relies on Traefik, you can continue to use it with Netmaker.
 
 
-External Client
-----------------
+Remote Access Clients
+---------------------
 
-The external client is simply a manually configured WireGuard connection to your network, which Netmaker helps to manage.
+The Remote Access Clients (client external to the mesh network) is simply a configured WireGuard connection to your network, which Netmaker helps to manage.
 
 Most machines can run WireGuard. Setting up a WireGuard connection to a single endpoint is fairly simple. It is setting up mesh networks and other topologies like site-to-site which becomes complicated. 
 
-Mac, Windows, and Linux are handled natively by the Netclient, though you can still add them as ext clients if you wish. Primarily, iPhone and Android are the main systems unsupported by the Netclient which MUST be handled via external client.
+Mac, Windows, and Linux are handled natively by the Netclient, though you can still add them as ext clients if you wish. Primarily, iPhone and Android are the main systems unsupported by the Netclient which MUST be handled via Remote Access Client.
 
-External clients hook into a Netmaker network via an "Ingress Gateway," which is configured for a given node and allows traffic to flow into the network. External clients are also reachable via the gateway. While this is a "concentrator" and not peer-to-peer, this is often desirable.
+Remote Access Clients hook into a Netmaker network via an "Remote Access Gateway (ingress)," which is configured for a given node and allows traffic to flow into the network. Remote Access Clients are also reachable via the gateway. While this is a "concentrator" and not peer-to-peer, this is often desirable.
 
-Many users use external clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software is required. It can also be quite helpful to have a "choke point" for traffic (the gateway) rather than direct p2p connections to every machine.
+Many users use Remote Access Clients clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software is required. It can also be quite helpful to have a "choke point" for traffic (the gateway) rather than direct p2p connections to every machine.
 
 Technical Process
 ====================

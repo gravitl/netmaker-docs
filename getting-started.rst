@@ -38,7 +38,7 @@ If you are running a small (less than 254 machines) network, and are unsure of w
 
 - 10.11.12.0/24
 - 10.20.30.0/24
-- 100.99.98.0/24
+- 10.99.98.0/24
 
 Network Settings Description
 -------------------------------
