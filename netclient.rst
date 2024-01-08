@@ -13,8 +13,7 @@ The UI has been updated for Mac and Windows,
 
 And the CLI has been updated.
 
-.. image:: images/netclientcli.png
-  :width: 80%
+.. image:: images/netclientcli.jpg
   :alt: netclient CLI
   :align: center
 
@@ -222,7 +221,7 @@ Joining a Network
 
 The join command provides the following flags with short descriptions on what each one does.
 
-.. image:: images/netclientjoincli.png
+.. image:: images/netclientjoincli.jpg
   :width: 80%
   :alt: netclient CLI
   :align: center
@@ -264,14 +263,14 @@ These commands will be available to copy and paste in the access keys section of
 
 To join on the GUI with Windows or Mac, just click the ADD NEW button and you will be given a choice of token or Username/Password.
 
-.. image:: images/netclientjoinGUI.png
+.. image:: images/netclientjoinGUI.jpg
   :width: 80%
   :alt: netclient join through GUI
   :align: center
 
 Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
 
-.. image:: images/netclienttokenGUI.png
+.. image:: images/netclienttokenGUI.jpg
   :width: 80%
   :alt: netclient token screen
   :align: center
@@ -294,14 +293,14 @@ The Server name will be in the <netmaker api domain> and the network will be in 
 
 If the join was successful, you should see the network on the GUI.
 
-.. image:: images/netclientconnectedGUI.png
+.. image:: images/netclientconnectedGUI.jpg
   :width: 80%
   :alt: netclient GUI showing a connected network
   :align: center
 
 You should be able to click on that network and see the details page on that network.
 
-.. image:: images/netclientdetailsGUI.png
+.. image:: images/netclientdetailsGUI.jpg
   :width: 80%
   :alt: netclient GUI network details
   :align: center
@@ -326,7 +325,7 @@ You can also disconnect and reconnect from the UI. Click on the node you want to
 
 On the bottom, you should see a switch labeled connected like this one. toggle the switch and hit submit. That client will connect or disconnect accordingly.
 
-.. image:: images/disconnect.png
+.. image:: images/disconnect.jpg
   :width: 80%
   :alt: connect/disconnect button
   :align: center
