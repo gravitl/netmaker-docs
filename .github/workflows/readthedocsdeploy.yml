@@ -6,7 +6,7 @@ on: workflow_dispatch
 
 jobs:
   deploy_readthedocs:
-    name: "Build the docs for readthedocs.org"
+    name: "Deploy Readthedocs"
     runs-on: ubuntu-latest
     steps:
       - name: Trigger RTDs build
