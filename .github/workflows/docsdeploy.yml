@@ -13,6 +13,7 @@ on:
 jobs:
 
   release:
+    steps:
     - name: Setup git
       run: |
         git config --global user.name "Gravitl"
