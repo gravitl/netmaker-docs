@@ -13,15 +13,16 @@ on:
 jobs:
 
   release:
-    steps:
-    - name: Setup git
-      run: |
-        git config --global user.name "Gravitl"
-        git config --global user.email "info@netmaker.io"
-    - name: Run Deploy
-    uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
-    env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      version: ${{ inputs.version }}
-    secrets: inherit
+    runs-on: ubuntu-latest
+      steps:
+      - name: Setup git
+        run: |
+          git config --global user.name "Gravitl"
+          git config --global user.email "info@netmaker.io"
+      - name: Run Deploy
+        uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
+        env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version: ${{ inputs.version }}
+        secrets: inherit
