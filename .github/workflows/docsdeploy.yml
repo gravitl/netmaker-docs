@@ -14,9 +14,9 @@ jobs:
 
   release:
     - name: Setup git
-        run: |
-          git config --global user.name "Gravitl"
-          git config --global user.email "info@netmaker.io"
+      run: |
+        git config --global user.name "Gravitl"
+        git config --global user.email "info@netmaker.io"
     - name: Run Deploy
     uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
     env:
