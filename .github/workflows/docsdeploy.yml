@@ -14,6 +14,8 @@ jobs:
 
   release:
     uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
+    env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       version: ${{ inputs.version }}
     secrets: inherit
