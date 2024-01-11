@@ -12,12 +12,6 @@ on:
 
 jobs:
 
-  setup_git:
-    steps:
-      run: |
-        git config --global user.name "Gravitl"
-        git config --global user.email "info@netmaker.io"
-
   release:
     uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
     env:
