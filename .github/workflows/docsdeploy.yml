@@ -13,10 +13,7 @@ on:
 jobs:
 
   release:
-    uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
-    env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: gravitl/devops/.github/workflows/deploydocs.yml@master
     with:
       version: ${{ inputs.version }}
-      repo_token: ${{ secrets.GITHUB_TOKEN }}
     secrets: inherit
