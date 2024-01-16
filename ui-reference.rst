@@ -1,7 +1,3 @@
-=================
-UI Reference
-=================
-
 This page contains annotated screenshots of most UI components, detailing the configuration options of each field across Nodes, Networks, DNS, Ext Clients, Users, and more.
 
 
@@ -138,14 +134,12 @@ Node List
    :alt: nodes list
    :align: center
 
-(1) **Search Nodes:** Look up a node by name.
-(2) **Node Name:** Name of node. By default set to hostname of machine.
-(3) **IP Addresses:** Private IPs of node within network.
-(4) **Network:** Network the node is in.
-(5) **Egress:** Indicates if node is an egress gateway. Click to convert into egress gateway. Egress gateways route traffic from the network into a specific subnet or subnets. Egress gateways should be servers in a static location with a reliable IP.
-(6) **Ingress:** Indicates if the node is an ingress. Click to convert into ingress gateway. Ingress gateways route traffic into the network over the WireGuard interface using "ext clients," which are static WireGuard config files. Ingress gateways should be servers in a static location with a reliable IP.
-(7) **Status:** Indicates how recently the node checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** indicate the health of the node's virtual network connections.
-(8) **Delete:** Delete the node.
+(1) **Search Hosts:** Look up a host by name.
+(2) **Host Name:** Name of host. By default set to hostname of machine.
+(3) **Private Addresses:** Private IPs of host within network.
+(4) **Public Address:** Public IP of host.
+(5) **Status:** Indicates how recently the host checked into the server. Displays "Warning" after 5 minutes and "Error" after 30 minutes without a check in. Does **not** explicitly indicate the health of the node's virtual network connections; however a healthy host will check-in regularly.
+(6) **Actions:** Dropdown list of actions that can be performed on a host, including disconnecting and deleting the host.
 
 A node pending deletion will be grayed out.
 
@@ -185,43 +179,40 @@ Edit Node / Node Details
 (3) **Metrics** View the node's metrics
 (4) **Host** View the node's associated host
 (5) **Delete** Delete the node
-
 (6) **Endpoint:** The (typically public) IP of the machine, which peers will use to reach it, in combination with the port. If changing this value, make sure Roaming is turned off, since otherwise, the node will check to see if there is a change in the public IP regularly and update it.
-(7) **Dynamic Endpoint:** The endpoint may be changed automatically. Switching this off (indicating static endpoint) means the endpoint will stay the same until you change it. This can be good to set if the machine is a server sitting in a location that is not expected to change. It is also good to have this switched off for Ingress, Egress, and Relay Servers, since they should be in a reliable location.
+(7) **Dynamic Endpoint:** The endpoint may be changed automatically. Switching this off (indicating static endpoint) means the endpoint will stay the same until you change it. This can be good to set if the machine is a server sitting in a location that is not expected to change. It is also good to have this switched off for Remote Access gateway, Egress, and Relay Servers, since they should be in a reliable location.
 (8) **Listen Port:** The port used by the node locally. **This value is ignored if UDP Hole Punching is on,** because port is set dynamically every time interface is created. If UDP Hole Punching is off, the port can be set to any reasonable (and available) value you'd like for the local machine.
 (9) **IP Address:** The primary private IP address of the node. Assigned automatically by Netmaker but can be changed to whatever you want within the Network CIDR.
 (10) **IPv6 Address:** (Only if running dual stack) the primary private IPv6 address of the node. Assigned automatically by Netmaker but can be changed to whatever you want within the Network CIDR.
 (11) **Local Address:** The "locally reachable" address of the node. Other nodes will take note of this to see if this node is on the same network. If so, they will use this address instead of the public "Endpoint." If running a few nodes inside of a VPC, home network, or similar, make sure the local address is populated correctly for faster and more secure inter-node communication.
 (12) **Node Name:** The name of the node within the network. Hostname by default but can be anything (within the character limits).
 (13) **Public Key:** (Uneditable) The public key of the node, distributed to other peers in the network.
-(14) **PostUp:** Uneditable by default to disable RCE. Commands to run after the interface is created. If an ingress or egress gateway are created, this field will populate automatically with appropriate iptables commands. 
-(15) **PostDown:** Uneditable by default to disable RCE. Commands to run after the interface is brought down. If an ingress or egress gateway are created, this field will populate automatically with appropriate iptables commands.
-(16) **Persistent Keepalive:** How often packets are sent to keep connections open with other peers.
-(17) **Last Modified:** Timestamp of the last time the node config was changed.
-(18) **Node Expiration Datetime:** If a node should become invalid after a length of time, you can set it in this field, after which time, it will lose access to the network and will not populate to other nodes. Useful for scenarios where temporary access is granted to 3rd parties.
-(19) **Last Checkin:** Unix timestamp of the last time the node checked in with the server. Used to determine generic health of node.
-(20) **MAC Address:** The hardware Media Access Control (MAC) address of the machine. Used to be used as the unique ID, but is being depreciated.
-(21) **Egress Gateway Ranges:** If Egress is enabled, the gateway ranges that this machine routes to.
-(22) **Local Range:** If IsLocal has been enabled on the network, this is the local range in which the node will look for a private address from it's local interfaces, to use as an endpoint.
-(23) **Node Operating System:** The OS of the machine.
-(24) **MTU:** The MTU that the node will use on the interface. If "wg show" displays a valid handshake but pings are not working, many times the issue is MTU. Making this value lower can solve this issue. Some typical values are 1024, 1280, and 1420.
-(25) **Network:** The network this node belongs to.
-(26) **Node ACL Rule** The current ACL rule for this node in the network
-(27) **Is DNS On:** DNS is solely handled by resolvectl at the moment, which is on many Linux distributions. For anything else, this value should remain off. If you wish to configure DNS for non-compatible systems, you must do so manually.
-(28) **Is Local:** If on, will only communicate over the local address (Assumes IsLocal tuned to 'yes' on the network level.)
-(29) **Connected** Indicates whether the node has is connected to the network
+(14) **Persistent Keepalive:** How often packets are sent to keep connections open with other peers.
+(15) **Last Modified:** Timestamp of the last time the node config was changed.
+(16) **Node Expiration Datetime:** If a node should become invalid after a length of time, you can set it in this field, after which time, it will lose access to the network and will not populate to other nodes. Useful for scenarios where temporary access is granted to 3rd parties.
+(17) **Last Checkin:** Unix timestamp of the last time the node checked in with the server. Used to determine generic health of node.
+(18) **MAC Address:** The hardware Media Access Control (MAC) address of the machine. Used to be used as the unique ID, but is being depreciated.
+(19) **Egress Gateway Ranges:** If Egress is enabled, the gateway ranges that this machine routes to.
+(20) **Local Range:** If IsLocal has been enabled on the network, this is the local range in which the node will look for a private address from it's local interfaces, to use as an endpoint.
+(21) **Node Operating System:** The OS of the machine.
+(22) **MTU:** The MTU that the node will use on the interface. If "wg show" displays a valid handshake but pings are not working, many times the issue is MTU. Making this value lower can solve this issue. Some typical values are 1024, 1280, and 1420.
+(23) **Network:** The network this node belongs to.
+(24) **Node ACL Rule** The current ACL rule for this node in the network
+(25) **Is DNS On:** DNS is solely handled by resolvectl at the moment, which is on many Linux distributions. For anything else, this value should remain off. If you wish to configure DNS for non-compatible systems, you must do so manually.
+(26) **Is Local:** If on, will only communicate over the local address (Assumes IsLocal tuned to 'yes' on the network level.)
+(27) **Connected** Indicates whether the node has is connected to the network
 
 
-Ext Clients
-================
+Remote Access
+=============
 
 .. image:: images/ui-8.jpg
    :width: 80%
    :alt: dashboard
    :align: center
 
-(1) **Gateway Name / IP Address:** Information about which Node is the Ingress Gateway.
-(2) **Add External Client:** Button to generate a new ext client.
+(1) **Gateway Name / IP Address:** Information about which Node is the Remote Access Gateway.
+(2) **Add Client Config:** Button to generate a new Remote Access Client configuration file.
 (3) **Client ID:** The randomly-generated name of the client. Click on the ID to change the name to something sensible. 
 (4) **IP Address:** The private ip address of the ext client.
 (5) **QR Code:** If joining form iOS or Android, open the WireGuard app and scan the QR code to join the network.

@@ -1,6 +1,8 @@
-=====================================
-Access Control Lists
-=====================================
+.. _acls:
+
+======
+ACLs
+======
 
 Introduction
 ===============
@@ -32,7 +34,7 @@ Node ACL Screen
 
 Alternatively, you can reach the individual node ACLs by clicking on a Node in either the Node List or the Graph view. This will give you the ACLs for just this individual node, making it easier to enable/disable peers at an individual level.
 
-.. image:: images/acls-2.png
+.. image:: images/acls-2.jpg
    :width: 80%
    :alt: ACLs
    :align: center
@@ -45,8 +47,7 @@ When you create a network, you set a "default ACL" of either "Allow" or "Deny." 
 
 As of 0.16.0, there is another option, the default node-level ACL.
 
-.. image:: images/acls-4.png
-   :width: 80%
+.. image:: images/acls-4.jpg
    :alt: ACLs
    :align: center
 

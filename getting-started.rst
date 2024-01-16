@@ -4,6 +4,16 @@ Getting Started
 
 Once you have Netmaker installed via the :doc:`Quick Install <./quick-start>` guide, you can use this Getting Started guide to help create and manage your first network.
 
+.. toctree::
+   :maxdepth: 1
+
+   install
+   quick-start
+   netclient
+   advanced-client-install
+   server-installation
+   oauth
+
 Setup
 =================
 
@@ -15,7 +25,7 @@ Create a Network
 =================
 
 
-.. image:: images/create-net.png
+.. image:: images/create-net.jpg
    :width: 80%
    :alt: Create Network Screen
    :align: center
@@ -28,7 +38,7 @@ If you are running a small (less than 254 machines) network, and are unsure of w
 
 - 10.11.12.0/24
 - 10.20.30.0/24
-- 100.99.98.0/24
+- 10.99.98.0/24
 
 Network Settings Description
 -------------------------------
@@ -43,7 +53,7 @@ The Network creation form has a few fields which may seem unfamiliar. Here is a 
 
 Once your network is created, you should see the network (wg-net here but it will be the name you chose when creating the network):
 
-.. image:: images/network-created.png
+.. image:: images/network-created.jpg
    :width: 80%
    :alt: Node Screen
    :align: center
@@ -53,7 +63,7 @@ When you click on the NetId and then the Nodes button (or go direct via the left
 
 As of v0.18.0, netclient has been moved out of the netmaker repo and into its own repo. This means that the netmaker server will no longer create its own default node. To recreate that default node, Netclient will also have to be installed on the netmaker server and joined to the network. You can then set that node as a default node in the Hosts tab. This will make every new network have that node automatically on creation. More on hosts are mentioned in the manage Nodes/Hosts section of this page.
 
-.. image:: images/netmaker-node.png
+.. image:: images/netmaker-node.jpg
    :width: 80%
    :alt: Node Screen
    :align: center
@@ -66,28 +76,28 @@ Adding nodes to the network typically requires a key. If You are on version 0.18
 
 Navigate to the enrollment keys tab on the side menu. You should see a create button in the top right corner. After clicking that, you should be brought to a window like this.
 
-.. image:: images/enrollmentkeycreate.png
+.. image:: images/enrollmentkeycreate.jpg
    :width: 80%
    :alt: Enrollment Key Screen
    :align: center
 
 This will give you a few different options on how you want to set up your enrollment key. you can set it up with unlimited uses, limited uses, or timebound uses. You can also setup one or multiple networks to join, or you can set it to no networks and then join a network through the UI in the hosts tab. Click on newly registered host and go to the networks tab. Then click on show all networks. You can also create any tags you would like for that key
 
-.. image:: images/networkjoinui.png
+.. image:: images/networkjoinui.jpg
    :width: 80%
    :alt: Join network through UI
    :align: center
 
 If an enrollment key runs out of uses, or is expired, the key will show as invalid like in the image below.
 
-.. image:: images/enrollmentkeyinvalid.png
+.. image:: images/enrollmentkeyinvalid.jpg
    :width: 80%
    :alt: Enrollment Key Screen with invalid keys
    :align: center
 
 After your enrollment key is created, you can click on that key to get the registration token.
 
-.. image:: images/enrollmentkeytoken.png
+.. image:: images/enrollmentkeytoken.jpg
    :width: 80%
    :alt: Enrollment Key token window
    :align: center
@@ -112,8 +122,7 @@ Deploy Nodes
 
 You should get output similar to the below. The netclient retrieves local settings, submits them to the server for processing, and retrieves updated settings. Then it sets the local network configuration. For more information about this process, see the :doc:`client installation <./netclient>` documentation. If this process failed and you do not see your node in the console (see below), then reference the :doc:`troubleshooting <./troubleshoot>` documentation.
 
-.. image:: images/nc-install-output.png
-   :width: 80%
+.. image:: images/nc-install-output.jpg
    :alt: Output from Netclient Install
    :align: center
 
@@ -123,8 +132,7 @@ Repeat the above steps for every machine you would like to add to your network. 
 Once installed on all nodes, you can test the connection by pinging the private address of any node from any other node.
 
 
-.. image:: images/ping-node.png
-   :width: 80%
+.. image:: images/ping-node.jpg
    :alt: Node Success
    :align: center
 
@@ -133,29 +141,28 @@ Manage Nodes/Hosts
 
 Your machines should now be visible in the control panel. 
 
-.. image:: images/nodes.png
+.. image:: images/nodes.jpg
    :width: 80%
    :alt: Node Success
    :align: center
 
 As of v0.18.0 each node has an associated host. The host is a structure that encapsulates the node and gives it the information it needs like the name and network. The host will have features like creating a proxy, setting the hosted node as a default node, joining the hosted node to new networks without the need for another access key, setting verbosity, and changing listening ports and default interfaces. Server relays will also be handled by the host. The Hosts can be found in the Hosts tab on the UI. You should be taken to a screen like this.
 
-.. image:: images/netmakerhostpage.png
+.. image:: images/netmakerhostpage.jpg
    :width: 80%
    :alt: Host page
    :align: center
 
 In here you can see the host's name, the endpoint of the server running netclient, the public key for that host, the version number, and a switch to set that host's node as the default node. When this is switched on, that node will serve as the default node when a network is created (similar to netmaker-1 in versions before v0.18.0). Clicking on a host will bring you to the host's details.
 
-.. image:: images/hostdetails.png
+.. image:: images/hostdetails.jpg
    :width: 80%
    :alt: details screen of the host
    :align: center
 
 This will give you more information like the firewall in use, MTUs, and listening port. You can also see networks associated with that host and options to edit or delete the host. If you are going to delete a Host, you need to delete the associated node first.
 
-.. image:: images/hostedit.png
-   :width: 80%
+.. image:: images/hostedit.jpg
    :alt: Edit screen of a host
    :align: center
 
@@ -163,7 +170,7 @@ In the edit screen, you can make changes to the logging verbosity, listening por
 
 You can view/modify/delete any node by selecting it in the NODES tab. For instance, you can change the name to something more sensible like "workstation" or "api server". You can also modify network settings here, such as keys or the WireGuard port. These settings will be picked up by the node on its next check-in. For more information, see Advanced Configuration in the :doc:`Using Netmaker <./usage>` docs.
 
-.. image:: images/node-details.png
+.. image:: images/node-details.jpg
    :width: 80%
    :alt: Node Success
    :align: center

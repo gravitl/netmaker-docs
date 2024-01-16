@@ -1,6 +1,6 @@
-================================
-Netclient Setup
-================================
+==========
+Netclient 
+==========
 
 As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
 
@@ -13,8 +13,7 @@ The UI has been updated for Mac and Windows,
 
 And the CLI has been updated.
 
-.. image:: images/netclientcli.png
-  :width: 80%
+.. image:: images/netclientcli.jpg
   :alt: netclient CLI
   :align: center
 
@@ -29,7 +28,7 @@ The Netclient is supported on the following operating systems:
 * macOS
 * FreeBSD
 
-For unsupported devices, please use the external client, which is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
+For unsupported devices, please use the Remote Access Client config, which is just a static, vanilla, WireGuard configuration file, which can be added to any device that supports WireGuard.
 
 ******************
 Installation
@@ -84,6 +83,17 @@ OpenWRT Distros (mips/mipsle)
 .. code-block::
 
 refer to Advanced Client Installation :ref:`advanced-client-install:Notes on OpenWRT` 
+
+OpenSUSE (tumbleweed/leap)
+---------------------------------------------------------------------
+
+.. code-block:: shell
+
+  sudo rpm --import https://rpm.netmaker.org/gpg.key
+  curl -sL 'https://rpm.netmaker.org/netclient-repo' | sudo tee /etc/zypp/repos.d/netclient.repo
+  sudo zypper refresh
+  sudo zypper install netclient
+
 
 Windows
 ===============
@@ -155,14 +165,14 @@ If you prefer (e.g., when specifying a lot of environment variables), you can us
           environment:
               - TOKEN=<networktoken>
               - PORT=<wg interface port>
-              - ENPOINT=<endpoint ip>
+              - ENDPOINT=<endpoint ip>
               - MTU=<mtu>
               - HOST_NAME=<host name>
               - IS_STATIC=<static host (true/false)>
           volumes:
               - '/etc/netclient:/etc/netclient'
           container_name: netclient
-          image: 'gravitl/netclient:v0.18.0'
+          image: 'gravitl/netclient:latest'
 
 where <networktoken> is the Access Token available from the "Viewing your Access Key Details" window in the Netmaker UI.
 
@@ -179,16 +189,22 @@ Your compose would look more like this:
   services:
       netclient:
           privileged: true
+          network_mode: host
           restart: always
           environment:
               - TOKEN=<networktoken>
-              - VERBOSITY=<0-4>
+              - PORT=<wg interface port>
+              - ENDPOINT=<endpoint ip>
+              - MTU=<mtu>
+              - HOST_NAME=nc-docker-2
+              - IS_STATIC=<static host (true/false)>
+              - IFACE_NAME=netmaker-2
           volumes:
               - '/etc/netclient2:/etc/netclient'
           container_name: netclient2
-          image: 'gravitl/new-netclient:v0.20.5'
+          image: 'gravitl/netclient:latest'
 
-By using this method, you can run many netclients on the same host and just incrementing up (netclient3, netclient4 ..... netclientN).
+By using this method, you can run many netclients on the same host and just incrementing up the volumes (netclient3, netclient4 ..... netclientN) and make sure to set the interface name, so that it won't conflict with existing netclients running on same host.
 
 
 **IMPORTANT:**
@@ -205,7 +221,7 @@ Joining a Network
 
 The join command provides the following flags with short descriptions on what each one does.
 
-.. image:: images/netclientjoincli.png
+.. image:: images/netclientjoincli.jpg
   :width: 80%
   :alt: netclient CLI
   :align: center
@@ -239,22 +255,22 @@ Again, if you are making a docker container on an already existing baremetal net
 
 .. code-block::
 
-  docker run -d --privileged -e TOKEN=<TOKEN> -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
+  docker run -d --network host --privileged -e TOKEN=<TOKEN> -e HOST_NAME=nc-docker-2 -e IFACE_NAME="netmaker-2" -v /etc/netclient2:/etc/netclient --name netclient2 gravitl/new-netclient:<CURRENT_VERSION>
 
-And again host networking will be turned off in this case and will not have the private address of the contianer and it will be segmented.
+Make sure interface name you pass when running multiple netclient containers on same host doesn't conflict with each other.
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
 To join on the GUI with Windows or Mac, just click the ADD NEW button and you will be given a choice of token or Username/Password.
 
-.. image:: images/netclientjoinGUI.png
+.. image:: images/netclientjoinGUI.jpg
   :width: 80%
   :alt: netclient join through GUI
   :align: center
 
 Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
 
-.. image:: images/netclienttokenGUI.png
+.. image:: images/netclienttokenGUI.jpg
   :width: 80%
   :alt: netclient token screen
   :align: center
@@ -277,14 +293,14 @@ The Server name will be in the <netmaker api domain> and the network will be in 
 
 If the join was successful, you should see the network on the GUI.
 
-.. image:: images/netclientconnectedGUI.png
+.. image:: images/netclientconnectedGUI.jpg
   :width: 80%
   :alt: netclient GUI showing a connected network
   :align: center
 
 You should be able to click on that network and see the details page on that network.
 
-.. image:: images/netclientdetailsGUI.png
+.. image:: images/netclientdetailsGUI.jpg
   :width: 80%
   :alt: netclient GUI network details
   :align: center
@@ -309,7 +325,7 @@ You can also disconnect and reconnect from the UI. Click on the node you want to
 
 On the bottom, you should see a switch labeled connected like this one. toggle the switch and hit submit. That client will connect or disconnect accordingly.
 
-.. image:: images/disconnect.png
+.. image:: images/disconnect.jpg
   :width: 80%
   :alt: connect/disconnect button
   :align: center

@@ -157,7 +157,7 @@ MANAGE_IPTABLES:
 PORT_FORWARD_SERVICES: 
     **Default:** ""
 
-    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an ingress gateway, this will break SSH on external clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
+    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an Remote Access Gateway (ingress), this will break SSH on Remote Access Clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
 
 VERBOSITY:
     **Default:** 0
@@ -251,13 +251,9 @@ The following is a brief description of each:
 
 - `docker-compose.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml>`_ -= This maintains the most recommended setup at the moment, using the caddy proxy.
 
-- `docker-compose.pro.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml>`_ -= This is the compose file needed for Netmaker Professional. You will need a licence and user id from `Netmaker's licence dashboard <https://account.netmaker.io/>`_ .
+- `docker-compose.pro.yml <https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.pro.yml>`_ -= This is the compose file needed for Netmaker Professional. You will need a licence and tenant id from `Netmaker's licence dashboard <https://account.netmaker.io/>`_ .
 
 
-No DNS - CoreDNS Disabled
-----------------------------------------------
-
-CoreDNS is no longer required for most installs. You can simply remove the CoreDNS section from your docker-compose. DNS will still function because it is added directly to nodes' hosts files (ex: /etc/hosts). If you would like to disable DNS propagation entirely, in your netmaker.env for netmaker, set DNS_MODE="off"
 
 .. _Emqx:
 

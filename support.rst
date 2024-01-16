@@ -1,7 +1,4 @@
-=========
-Support
-=========
-
+======
 FAQ
 ======
 
@@ -27,17 +24,7 @@ Please see the :doc:`Egress Gateway <./egress-gateway>` documentation.
 Do you offer any business or professional support?
 ---------------------------------------------------
 
-Yes, please contact info@gravitl.com or visit https://gravitl.com/plans.
-
-
-Why the SSPL License?
-----------------------
-
-As of now, we think the SSPL is the best way to ensure the long-term viability of the project, but we are regularly evaluating this to see if an OSI-approved license makes more sense.
-
-We believe the SSPL lets most people run the project the way they want, for both private use and business use, while giving us a path to maintain viability. We are working to make sure the guidelines clear, and do not want the license to impact the community's ability to use and modify the project.
-
-If you believe the SSPL will negatively impact your ability to use the project, please do not hesitate to reach out.
+Yes, please contact help@netmaker.io or visit https://gravitl.com/plans.
 
 Telemetry
 ==============
@@ -51,7 +38,7 @@ The following is the full list of telemetry data we collect. Besides "Server Ver
 - Randomized server ID
 - Count of nodes
 - Count of "non-server" nodes
-- Count of external clients
+- Count of Remote Access Clients
 - Count of networks
 - Count of users
 - Count of linux nodes

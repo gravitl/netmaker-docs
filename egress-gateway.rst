@@ -1,6 +1,8 @@
-=====================================
-Egress Gateway
-=====================================
+.. _egress:
+
+=======
+egress
+=======
 
 Introduction
 ===============
@@ -35,7 +37,7 @@ Once you have determined the subnet, and deployed your netclient, you can go to 
    :alt: Gateway
    :align: center
 
-At this point you will choose your selected host to use as an egress. You can choose if you would like to use NAT or not with the switch. You also have a choice of using this host as an internet gateway. more on that in a bit. You can put the selected CIDR for your egress range(s) in the field. click the add range button to add more egress ranges for the host. The interface is automatically chosen and will not be shown in this window. With everything filled out, click the create button.
+At this point you will choose your selected host to use as an egress. You can choose if you would like to use NAT or not with the switch. You can put the selected CIDR for your egress range(s) in the field. click the add range button to add more egress ranges for the host. The interface is automatically chosen and will not be shown in this window. With everything filled out, click the create button.
 
 .. image:: images/ui-6.png
    :width: 80%
@@ -65,28 +67,6 @@ In some scenarios, a single node will act as both ingress and egress! For instan
    :alt: Gateway
    :align: center
 
-2)  / NAT Gateway
------------------------
-
-Most people think of a VPN as a remote server that keeps your internet traffic secure while you browse the web, or as a tool for accessing internet services in another country, using a VPN server based in that country.
-
-These are not typical use cases for Netmaker, but can be easily enabled.
-
-Navigate to the egress setup mentioned above. Instead of inputting a range, just click the internet gateway switch. the range of ``0.0.0.0/0`` will be automatically put in for you. (The IPv6 version ``::/0`` is still under construction) Click create.
-
-.. image:: images/internet-gateway.png
-   :width: 80%
-   :alt: Internet Gateway
-   :align: center
-
-After that, your public traffic will be routed through your egressing client.
-
-
-.. image:: images/egress5.png
-   :width: 50%
-   :alt: Gateway
-   :align: center
-
 Advanced Use Cases
 ======================
 
@@ -112,3 +92,19 @@ Advanced Use Cases
    iptables -t nat -I POSTROUTING -s networkRangeB -d egressGwRangeB -j MASQUERADE
 
    iptables -t nat -I POSTROUTING -s egressGwRangeB -d networkRangeB  -j MASQUERADE 
+
+2) IPv6 NAT Masquerading for Egress Gateways
+
+   Currently IPv6 Egress Gateways are not working because the default kernel builds for most common linux distributions do not support ipv6 masquerading. Custom linux kernel needs to be built with flag for enabling ipv6 masquerading to get ipv6 egress gateways working.
+
+   Some online resources about the topic:
+
+.. code-block::
+
+   https://superuser.com/questions/1751062/ipv6-masquerading-on-linux
+
+   https://www.kernelconfig.io/config_nf_nat_masquerade_ipv6?q=&kernelversion=5.15.116&arch=x86
+
+   https://www.reddit.com/r/PFSENSE/comments/vb4r3s/ip6_masquerading
+
+

@@ -1,6 +1,5 @@
-===============
 Architecture
-===============
+=============
 
 .. image:: images/nm-diagram-3.png
    :width: 100%
@@ -38,7 +37,7 @@ A full `mesh network <https://www.bbc.co.uk/bitesize/guides/zr3yb82/revision/2>`
 
 This is in contrast to a hub-and-spoke network, where each machine must first pass its traffic through a relay server before it can reach other machines.
 
-In certain situations, you may either want or need a *partial mesh* network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh because the servers (nodes A-D) are meshed, but then external clients come in via a gateway and are not meshed.
+In certain situations, you may either want or need a *partial mesh* network, where only some devices can reach each other directly, and other devices must route their traffic through a relay/gateway. Netmaker can use this model in some use cases where it makes sense. In the diagram at the top of this page, the setup is a partial mesh because the servers (nodes A-D) are meshed, but then Remote Access Clients come in via a gateway and are not meshed.
 
 Mesh networks are generally faster than other topologies but are also more complicated to set up. WireGuard on its own gives you the means to create encrypted tunnels between devices, but it does not provide a method for setting up a full network. This is where Netmaker comes in.
 
@@ -122,14 +121,33 @@ Netmaker can be used in its entirety without the UI, but the UI makes things a l
 CoreDNS
 --------
 
-As of 0.12.0, CoreDNS is not an active part of the Netmaker system. Nodes DO NOT receive their DNS updates using a nameserver. Instead, DNS entries are added to the local "hosts" file directly. The CoreDNS component can be safely removed from the setup and DNS will continue to function.
+As of 0.22.0, CoreDNS is an active part of the Netmaker system. We deprecated setting entries on the hosts file which was not an ideal implementation.
+Netmaker server actively sets the dns entries on the CoreDNS server.
+After you install the netmaker server components, you can see the corendns container running as well.
+You need to make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
+1. Make sure that UDP Port 53 and TCP Port 53 are allowed to pass in the network where your netmaker server lies
 
-Previously, CoreDNS was used as a nameserver and the netclient would set the nameserver per peer. However, this only worked on a subset of Linux systems, because it required resolvectl. The new method (using the hosts file) works across OSs.
+2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
 
-However, we still maintain CoreDNS in the default deployment for two reasons:  
-  1. You may wish to add a nameserver to "Ext Clients". CoreDNS can still be used for this.  
-  2. You may wish to integrate the Netmaker nameserver with your existing DNS setup.  
+3. disable the systemd-resolved (Reason: to avoid port conflict with coredns server )
+.. code-block::
 
+   sudo systemctl disable systemd-resolved.service
+   sudo systemctl stop systemd-resolved
+
+4. `**IMPORTANT:**` Since you have disabled systemd-resolved service on server, make sure to set the nameserver to the public ip of the machine, which basically points to the coredns server.
+
+And now you can point any machine in the network to use this dns server and you can reach the other peers in the network by their dns names. For external clients running linux, install 'resolvconf' before setting the Wireguard configurations.
+
+Refer to your operating system documentation for information about how to configure custom DNS network settings. Here are some general help guides on how to add custom DNS server:
+
+1. Linux - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-linux.html. Configuration depends on what distribution of Linux you use.
+
+2. Mac - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-mac.html
+
+3. Windows - https://devilbox.readthedocs.io/en/latest/howto/dns/add-custom-dns-server-on-win.html
+
+If your machine is virtually hosted in a cloud, you might want to refer to your VM provider's documention on how to permanently set the custom DNS resolver.
 
 Caddy
 -------
@@ -141,18 +159,18 @@ Caddy simplifies management because the configuration file is very short, severa
 Traefik was previously the default and is still a functioning option, but We are moving guidance towards Caddy by default. If you are maintaining an installation that relies on Traefik, you can continue to use it with Netmaker.
 
 
-External Client
-----------------
+Remote Access Clients
+---------------------
 
-The external client is simply a manually configured WireGuard connection to your network, which Netmaker helps to manage.
+The Remote Access Clients (client external to the mesh network) is simply a configured WireGuard connection to your network, which Netmaker helps to manage.
 
 Most machines can run WireGuard. Setting up a WireGuard connection to a single endpoint is fairly simple. It is setting up mesh networks and other topologies like site-to-site which becomes complicated. 
 
-Mac, Windows, and Linux are handled natively by the Netclient, though you can still add them as ext clients if you wish. Primarily, iPhone and Android are the main systems unsupported by the Netclient which MUST be handled via external client.
+Mac, Windows, and Linux are handled natively by the Netclient, though you can still add them as ext clients if you wish. Primarily, iPhone and Android are the main systems unsupported by the Netclient which MUST be handled via Remote Access Client.
 
-External clients hook into a Netmaker network via an "Ingress Gateway," which is configured for a given node and allows traffic to flow into the network. External clients are also reachable via the gateway. While this is a "concentrator" and not peer-to-peer, this is often desirable.
+Remote Access Clients hook into a Netmaker network via an "Remote Access Gateway (ingress)," which is configured for a given node and allows traffic to flow into the network. Remote Access Clients are also reachable via the gateway. While this is a "concentrator" and not peer-to-peer, this is often desirable.
 
-Many users use external clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software is required. It can also be quite helpful to have a "choke point" for traffic (the gateway) rather than direct p2p connections to every machine.
+Many users use Remote Access Clients clients as a convenient way to manage remote access for their users. Why? It works with vanilla WireGuard for one. You simply download the config and load it into WireGuard on the client device. No additional software is required. It can also be quite helpful to have a "choke point" for traffic (the gateway) rather than direct p2p connections to every machine.
 
 Technical Process
 ====================
