@@ -276,7 +276,6 @@ In your Caddyfile, the only change you need to make is in the mq block.
     
     # MQ
     wss://broker.{$NM_DOMAIN} {
-        tls /root/certs/fullchain.pem /root/certs/privkey.pem
         reverse_proxy ws://mq:8083
     }
 
