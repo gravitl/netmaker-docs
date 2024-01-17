@@ -127,7 +127,7 @@ After you install the netmaker server components, you can see the corendns conta
 You need to make some changes manually to activate the corendns server, follow these steps on the netmaker server :-
 1. Make sure that UDP Port 53 and TCP Port 53 are allowed to pass in the network where your netmaker server lies
 
-2. Uncomment the `network_mode: host` on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
+2. Make sure the `network_mode: host` is set on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
 
 3. disable the systemd-resolved (Reason: to avoid port conflict with coredns server )
 .. code-block::
