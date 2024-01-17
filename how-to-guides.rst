@@ -38,15 +38,6 @@ By default, Netmaker creates a "full mesh," meaning every node in your network c
 
    acls
 
-TURN
-======
-A TURN (Traversal Using Relays around NAT) server is a type of server used in peer-to-peer communication protocols to facilitate communication between devices that are located behind a network address translator (NAT).
-
-.. toctree::
-   :maxdepth: 2
-
-   turn-server
-
 Netmaker Professional
 ======================
 
