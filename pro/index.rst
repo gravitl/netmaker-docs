@@ -61,3 +61,11 @@ Remote Access Client
    :maxdepth: 2
 
    rac
+
+FailOvers
+-----------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   pro-failovers
