@@ -28,13 +28,6 @@ ACLs control communications between nodes on a network
 :ref:`acls`
 
 
-TURN
-======
-TURN (Traversal Using Relays around NAT) facilitates communication between devices that are located behind a network address translator (NAT).
-
-:ref:`turn`
-
-
 Netmaker Professional
 ======================
 
