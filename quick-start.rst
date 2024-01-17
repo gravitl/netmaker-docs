@@ -64,10 +64,6 @@ Create a wildcard A record pointing to the public IP of your VM. As an example, 
 
 - broker.domain
 
-- turn.domain
-
-- turnapi.domain
-
 If deploying Pro, you will also need records for the following:IsStatic
 
 - grafana.domain
@@ -96,7 +92,6 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
-- **3479, 8089 (TURN, TURN api):** Port 3479 is commonly used for UDP traffic related to TURN. Similar to STUN, TURN servers need to work effectively with firewalls and NAT devices. By using the reserved port 3479, TURN servers can better handle communication across various network configurations. Port 8089 is not reserved specifically for TURN but is commonly associated with TURN server deployments.
 - **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
 - **8085 (exporter Pro):** If you are building a Pro server, you need this port open.
 - **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
@@ -165,7 +160,7 @@ You can grab the netmaker.env file here.
   wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/netmaker.default.env
   cp netmaker.default.env netmaker.env
 
-You can then use a text editor like vim or nano to go in there and fill out the fields. There is an example below to reference. You can get your ip with the command ``ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'``. You can also generate random strings for the master key and TURN and MQ passwords with the command ``tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''`` or you can enter them manually if desired. For the base domain again, we advise you use your own domain, because nip.io can hit rate limiting easily from the high volume when obtaining certificates. If you do want to use nip.io, just enter ``nm.<YOUR_IP_WITH_DASHES_INSTEAD_OF_DOTS>.nip.io``.
+You can then use a text editor like vim or nano to go in there and fill out the fields. There is an example below to reference. You can get your ip with the command ``ip route get 1 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p'``. You can also generate random strings for the master key and MQ passwords with the command ``tr -dc A-Za-z0-9 </dev/urandom | head -c 30 ; echo ''`` or you can enter them manually if desired. For the base domain again, we advise you use your own domain, because nip.io can hit rate limiting easily from the high volume when obtaining certificates. If you do want to use nip.io, just enter ``nm.<YOUR_IP_WITH_DASHES_INSTEAD_OF_DOTS>.nip.io``.
 
 .. code-block:: cfg
 
@@ -177,10 +172,6 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   SERVER_HOST=<YOUR_IP_ADDRESS>
   # The admin master key for accessing the API. Change this in any production installation.
   MASTER_KEY=<RANDOM_STRING>
-  # The username to set for turn api access
-  TURN_USERNAME=<EXAMPLE_USERNAME>
-  # The password to set for turn api access
-  TURN_PASSWORD=<EXAMPLE_PASSWORD>
   # The username to set for MQ access
   MQ_USERNAME=<EXAMPLE_USERNAME>
   # The password to set for MQ access
@@ -225,12 +216,7 @@ You can then use a text editor like vim or nano to go in there and fill out the 
   # If AUTO, stick with the existing logic for NAT detection
   # This setting is no longer available from v0.20.5
   DEFAULT_PROXY_MODE="off"
-  # Port to access turn server
-  TURN_PORT="3479"
-  # Config for using turn, accepts either true/false
-  USE_TURN="true"
   DEBUG_MODE="off"
-  TURN_API_PORT="8089"
   # Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST).
   # Change to "off" to turn off.
   REST_BACKEND="on"

@@ -192,7 +192,7 @@ There are also some environment variables that have been changed, or removed. Yo
 .. literalinclude:: ./examplecode/netmaker.default.env
   :language: YAML   
 
-Our Caddy file has gone through some minor changes as well. There needs to be a block for the TURN server. The file should look like this.
+Your Caddyfile should look like this.
 
 .. code-block:: cfg
 
@@ -225,16 +225,6 @@ Our Caddy file has gone through some minor changes as well. There needs to be a 
     # API
     https://api.NETMAKER_BASE_DOMAIN {
             reverse_proxy http://netmaker:8081
-    }
-    
-    # TURN
-    https://turn.NETMAKER_BASE_DOMAIN {
-        reverse_proxy host.docker.internal:3479
-    }
-
-    #TURN API
-    https://turnapi.NETMAKER_BASE_DOMAIN {
-            reverse_proxy http://host.docker.internal:8089
     }
 
     # MQ
@@ -358,17 +348,11 @@ Server Setup (using sqlite)
       masterkey: "<SECRET_KEY>"
       mqpassword: "<YOUR_PASSWORD>"
       mqusername: "<YOUR_USERNAME>"
-      turn_username: "<YOUR_USERNAME>"
-      turn_password: "<YOUR_PASSWORD>"
-      turn_server: "turn.<YOUR_BASE_DOMAIN>"
-      turn_api_server: "https://turnapi.<YOUR_BASE_DOMAIN>"
-      turn_port: "3479"
-      use_turn: "true"
       serverbrokerendpoint: "ws://mq:1883"
 
 
 
-4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq and turn.
+4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq.
 5. create your netmaker.service file /etc/systemd/system/netmaker.service
 
 .. code-block:: cfg
