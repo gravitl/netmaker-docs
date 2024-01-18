@@ -4,16 +4,12 @@
 name: Docs_deploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "new version number"
-        required: true
+  push:
+    branches:
+      - master
 
 jobs:
 
   release:
-    uses: gravitl/netmaker-devops/.github/workflows/deploydocs.yml@master
-    with:
-      version: ${{ inputs.version }}
+    uses: gravitl/devops/.github/workflows/deploydocs.yml@master
     secrets: inherit
