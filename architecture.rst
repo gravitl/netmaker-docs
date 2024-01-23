@@ -139,9 +139,9 @@ You need to make some changes manually to activate the corendns server, follow t
 3. Make sure the `network_mode: host` is set on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
 
 
-And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names. For now, set it as the main DNS resolver (set as the first one in the list of your machine's nameservers).
+And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names.
 
-For external clients running linux, install 'resolvconf' before setting the Wireguard configurations.
+For external clients running linux, make sure 'resolvconf' is installed, before setting the Wireguard configurations.
 
 Refer to your operating system documentation for information about how to configure custom DNS network settings. Here are some general help guides on how to add custom DNS server:
 
