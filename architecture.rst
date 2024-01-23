@@ -141,7 +141,7 @@ You need to make some changes manually to activate the corendns server, follow t
 
 And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names.
 
-For external clients running linux, make sure 'resolvconf' is installed, before setting the Wireguard configurations.
+For external clients running linux, make sure 'resolvconf' is installed before setting the Wireguard configurations.
 
 Refer to your operating system documentation for information about how to configure custom DNS network settings. Here are some general help guides on how to add custom DNS server:
 
