@@ -129,16 +129,15 @@ You need to make some changes manually to activate the corendns server, follow t
 
 1. Make sure that UDP Port 53 and TCP Port 53 are allowed to pass in the network where your netmaker server lies
 
-2. Make sure the `network_mode: host` is set on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
-
-3. disable the systemd-resolved (Reason: to avoid port conflict with coredns server)
+2. disable the systemd-resolved (Reason: to avoid port conflict with coredns server)
 
 .. code-block::
 
    sudo systemctl disable systemd-resolved.service
    sudo systemctl stop systemd-resolved
 
-4. `**IMPORTANT:**` Since you have disabled systemd-resolved service on server, make sure to set the nameserver to the public ip of the machine, which basically points to the coredns server.
+3. Make sure the `network_mode: host` is set on the coredns container spec in `/root/docker-compose.yml` and run `docker-compose up -d`
+
 
 And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names. For now, set it as the main DNS resolver (set as the first one in the list of your machine's nameservers).
 
