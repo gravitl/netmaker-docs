@@ -140,7 +140,9 @@ You need to make some changes manually to activate the corendns server, follow t
 
 4. `**IMPORTANT:**` Since you have disabled systemd-resolved service on server, make sure to set the nameserver to the public ip of the machine, which basically points to the coredns server.
 
-And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names. For external clients running linux, install 'resolvconf' before setting the Wireguard configurations.
+And now you can point any machine in the network to use this DNS server and you can reach the other peers in the network by their domain names. For now, set it as the main DNS resolver (set as the first one in the list of your machine's nameservers).
+
+For external clients running linux, install 'resolvconf' before setting the Wireguard configurations.
 
 Refer to your operating system documentation for information about how to configure custom DNS network settings. Here are some general help guides on how to add custom DNS server:
 
