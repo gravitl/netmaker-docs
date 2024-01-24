@@ -2,23 +2,42 @@
 Install
 =========
 
-IMPORTANT: Notes on Installation
-
-- Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
-
-
 Choose the install method that makes sense for you.
 
-**For most users, we recommend the** :doc:`Quick Install<./quick-start>` **guide.**
 
-`Trial, PoC, Testing, and Experimenting <https://github.com/gravitl/netmaker/tree/master#get-started-in-5-minutes>`_
+1. **We recommend using the nm-quick script for self-hosted/On-Prem setup.**
 
-:doc:`Quick Install: for general small-to-medium use cases <./quick-start>`
+.. code-block::
 
-:ref:`Kubernetes Installation <KubeInstall>`
+  sudo wget -qO /root/nm-quick.sh https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh && sudo chmod +x /root/nm-quick.sh && sudo /root/nm-quick.sh
 
-:ref:`Non-Docker (from binary) Install <NoDocker>`
 
-:ref:`Highly Available Installation <HAInstall>`
+**IMPORTANT:** Notes on Installation
+- Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-:doc:`Advanced Install Resources <./server-installation>`
+**IMPORTANT:** From v0.22.0 the install script installs PRO version of netmaker with a 30-day free trial, for you try out full capabilities of netmaker.
+
+After trial period ends:
+
+    a. if you wish to continue using PRO :-
+
+        i. check these steps to obtain license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
+        ii. Run `/root/nm-quick.sh -u` and follow the steps
+
+    b. if you wish to downgrade to community version
+    
+        i. Run `/root/nm-quick.sh -d`
+
+2. **To get started the easiest way, visit our SaaS platform to setup a netmaker tenant with just few clicks** `<https://app.netmaker.io>`_
+
+
+3. :doc:`check out these steps for manual installation process for on-prem, although we don't recommend this path, instead use the install script mentioned above<./manual-install>`
+
+4. :ref:`Kubernetes Installation <KubeInstall>`
+
+5. :ref:`Non-Docker (from binary) Install <NoDocker>`
+
+6. :ref:`Highly Available Installation <HAInstall>`
+
+7. :doc:`Advanced Install Resources <./server-installation>`
+

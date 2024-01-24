@@ -1,5 +1,5 @@
 ===============
-Quick Install
+Manual Install
 ===============
 
 Important Notes
