@@ -261,14 +261,13 @@ Extra Steps for Pro
 You will not need to make any changes to this file. It will reference the current netmaker.env file.
 
 
-
 Then run 
 
 .. code-block::
 
   ln -fs /root/netmaker.env /root/.env
 
-7. Start Netmaker
+6. Start Netmaker
 ==================
 
 ``sudo docker-compose -f docker-compose.yml up -d --force-recreate``
