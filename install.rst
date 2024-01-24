@@ -22,7 +22,7 @@ After trial period ends:
 
     a. if you wish to continue using PRO :-
 
-        i. check these steps to obtain pro license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
+        i. check these steps to obtain pro license `<https://docs.netmaker.io/manual-install.html#extra-steps-for-pro>`_
         ii. Run `/root/nm-quick.sh -u`
 
     b. if you wish to downgrade to community version
