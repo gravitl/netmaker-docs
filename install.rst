@@ -22,14 +22,14 @@ After trial period ends:
 
     a. if you wish to continue using PRO :-
 
-        i. check these steps to obtain license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
-        ii. Run `/root/nm-quick.sh -u` and follow the steps
+        i. check these steps to obtain pro license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
+        ii. Run `/root/nm-quick.sh -u`
 
     b. if you wish to downgrade to community version
     
         i. Run `/root/nm-quick.sh -d`
 
-2. **To get started the easiest way, visit our SaaS platform to setup a netmaker tenant with just few clicks** `<https://app.netmaker.io>`_
+2. **To get started the easiest way, visit our SaaS platform to set up a netmaker server with just a few clicks** `<https://app.netmaker.io>`_
 
 
 3. :doc:`check out these steps for manual installation process for on-prem, although we don't recommend this path, instead use the install script mentioned above<./manual-install>`
