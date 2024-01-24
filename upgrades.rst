@@ -64,10 +64,9 @@ Steps
 4. Upgrade your netclients
    *do not use packages to upgrade on window/darwin, use the netclient binary to update*
 
-  a. Linux/Freebsd/Darwin: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient and run the `netclient install` command 
-  b. Windows: On each client download `the latest version <https://fileserver.netmaker.io/releases/download>`_ of netclient-windows-amd64.exe and netclient-gui-windows-amd64.exe 
+  a. Linux/Freebsd/Darwin: On each client download `the latest version <https://fileserver.netmaker.io/latest>`_ of netclient and run the `netclient install` command 
+  b. Windows: On each client download `the latest version <https://fileserver.netmaker.io/latest>`_ of netclient-windows-amd64.exe 
       open Powershell window as Administrator and run the following commands: 
-      ``cp c:\\Users\User\Downloads\netclient-gui-windows-amd64.exe c:\\Windows\System32\netclient-gui-windows-amd64.exe C:\\Program Files (x86)\gui.exe``
       ``net stop netclient``
       ``c:\\Users\User\Downloads\netclient-windows-amd64.exe install``
 
