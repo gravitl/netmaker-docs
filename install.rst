@@ -15,9 +15,10 @@ Choose the install method that makes sense for you.
 **IMPORTANT:** Notes on Installation
 - Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-**IMPORTANT:** From v0.22.0 the install script installs PRO version of netmaker with a 30-day free trial, for you try out full capabilities of netmaker.
+**IMPORTANT:** From v0.22.0 the install script will install PRO version of netmaker with a 30-day free trial, for you to try out full capabilities of netmaker.
 
 After trial period ends:
+=========================
 
     a. if you wish to continue using PRO :-
 
