@@ -2,13 +2,11 @@
 Getting Started
 =================
 
-Once you have Netmaker installed via the :doc:`Quick Install <./quick-start>` guide, you can use this Getting Started guide to help create and manage your first network.
-
 .. toctree::
    :maxdepth: 1
 
    install
-   quick-start
+   manual-install
    netclient
    advanced-client-install
    server-installation
