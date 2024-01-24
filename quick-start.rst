@@ -260,18 +260,6 @@ Extra Steps for Pro
 
 You will not need to make any changes to this file. It will reference the current netmaker.env file.
 
-6. Get Certificates
-===================
-
-Start by grabbing our nm-certs shell script, make it executable, and run it.
-
-.. code-block::
-
-  wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-certs.sh
-  chmod +x nm-certs.sh
-  bash nm-certs.sh 
-
-If the script runs successfully, you should see a message like ``SSL certificates ready``.
 
 Then run 
 
@@ -279,7 +267,7 @@ Then run
 
   ln -fs /root/netmaker.env /root/.env
 
-7. Start Netmaker
+6. Start Netmaker
 ==================
 
 ``sudo docker-compose -f docker-compose.yml up -d --force-recreate``
