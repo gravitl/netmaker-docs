@@ -6,11 +6,18 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build
+      uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "."
-    - uses: actions/upload-artifact@v4
+    - name: Generate Name:
+      id: name
+      run: |
+        echo "ARTIFACT_NAME=${{ github.event.workflow_run.name }}" >> $GITHUB_OUTPUT
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
       with:
-        name: "${{ github.event.workflow_run.name }}"
+        name: HTMLupload${{ steps.name.outputs.ARTIFACT_NAME }}
         path: ./_build/html/
