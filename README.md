@@ -7,7 +7,6 @@
 
 Where is the netmaker documentation hosted?  
 - https://docs.netmaker.org  
-- https://netmaker.readthedocs.io  
   
 We encourage contributions! Follow the below documentation to build and make changes/additions to the documentation.
 
