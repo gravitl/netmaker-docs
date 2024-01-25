@@ -13,4 +13,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: DocumentationHTML${{ github.event.workflow_run.name }}
-        path: docs/_build/html/
+        path: ./netmaker-docs/docs/_build/html/
