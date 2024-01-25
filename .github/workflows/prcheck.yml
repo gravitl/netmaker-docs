@@ -21,3 +21,8 @@ jobs:
       with:
         name: HTMLupload-${{ steps.name.outputs.ARTIFACT_NAME }}-${{ github.run_attempt }}
         path: ./_build/html/
+    - name: HTML Preview
+      id: html_preview
+      uses: pavi2410/html-preview-action@v2
+      with:
+        html_file: './_build/html/index.html'
