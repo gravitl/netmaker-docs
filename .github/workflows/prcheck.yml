@@ -12,5 +12,5 @@ jobs:
         docs-folder: "."
     - uses: actions/upload-artifact@v4
       with:
-        name: ${{ github.event.workflow_run.name }}
+        name: "${{ github.event.workflow_run.name }}"
         path: ./_build/html/
