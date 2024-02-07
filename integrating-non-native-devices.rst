@@ -189,6 +189,48 @@ G. Create a Firewall rule for WireGuard allowing traffic between it and the targ
    :alt: OPNsense add firewall rule - form
    :align: center
 
+
+3) MikroTik
+-------------------
+
+This guide will help you set up WireGuard on MikroTik 7.13.3. We will connect to a Netmaker network via a Remote Access Gateway:
+
+A. WireGuard comes pre-installed on MikroTik 7.13.3 so you don't have to do anything.
+
+B. given a sample WireGuard configuration below, you can access MikroTik's CLI and issue the corresponding commands
+
+.. image:: images/integration-mikrotik-wg-config.jpg
+   :width: 80%
+   :alt: OPNsense add firewall rule - form
+   :align: center
+
+WireGuard interface configuration:
+
+.. code-block::
+
+   /interface/wireguard
+   add name=wg-netmaker mtu=1420 private-key="iMfHqGANXMJHGMBKwuo89txiU3/9edC20TxWpFtmU2Y="
+
+Peer configuration:
+
+.. code-block::
+
+   /interface/wireguard/peers
+   add allowed-address=10.40.70.0/24 endpoint-address=188.166.235.45 endpoint-port=51821 interface=wg-netmaker public-key="GM80g/eeXgkOrk0yYtdhhU73ETHffpojG2Ewd+N4kXI=" persistent-keepalive=20 client-dns=159.159.159.159
+
+IP and routing configuration:
+
+.. code-block::
+
+   /ip/address
+   add address=10.40.70.254/32 interface=wg-netmaker
+   /ip/route
+   add dst-address=10.40.70.0/24 gateway=wg-netmaker
+
+For more information, please refer to this guide from MikroTik documentation page: https://help.mikrotik.com/docs/display/ROS/WireGuard.
+
+
+
 Disclaimer
 ---------------------
 
