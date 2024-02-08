@@ -201,7 +201,7 @@ B. given a sample WireGuard configuration below, you can access MikroTik's CLI a
 
 .. image:: images/integration-mikrotik-wg-config.jpg
    :width: 80%
-   :alt: OPNsense add firewall rule - form
+   :alt: Sample wireguard configuration for MikroTik
    :align: center
 
 WireGuard interface configuration:
@@ -228,6 +228,59 @@ IP and routing configuration:
    add dst-address=10.40.70.0/24 gateway=wg-netmaker
 
 For more information, please refer to this guide from MikroTik documentation page: https://help.mikrotik.com/docs/display/ROS/WireGuard.
+
+Routing internet traffic to a Netmaker Internet Gateway is also possible by adding the necessary firewall NAT rules. Please refer to the MikroTik documentation for more information.
+
+
+
+3) OpenWrt
+-------------------
+
+This guide will help you set up WireGuard on OpenWrt 23.05.2. We will connect to a Netmaker network via a Remote Access Gateway:
+
+A. Go to System -> Software. Click on the `Update lists...` button then search for `wireguard`. Install `wireguard-tools` and `luci-proto-wireguard` (for Web GUI). Reboot.
+
+.. image:: images/integration-openwrt-pkgmgr.jpg
+   :width: 80%
+   :alt: OpenWrt software manager
+   :align: center
+
+B. go to Network -> Interfaces, and then add a new WireGuard tunnel interface
+   
+.. image:: images/integration-openwrt-assign-if.jpg
+   :width: 80%
+   :alt: OpenWrt - create tunnel interface
+   :align: center
+
+C. click on the `Load Configuration...`, paste the WireGuard configuration and then click `Import settings`
+
+.. image:: images/integration-openwrt-wg-config.jpg
+   :width: 80%
+   :alt: OpenWrt - import WireGuard configuration
+   :align: center
+
+D. go to the `Peers` tab. Edit the generated peer, tick the `Route Allowed IPs` field. Save and apply the changes made.
+
+.. image:: images/integration-openwrt-wg-peer.jpg
+   :width: 80%
+   :alt: OpenWrt - route allowed IPs
+   :align: center
+
+E. go to Status -> WireGuard and make sure that a handshake has taken place. If successful, OpenWrt should be able to reach the Netmaker Remote Access Gateway but not the other way around
+
+.. image:: images/integration-openwrt-wg-status.jpg
+   :width: 80%
+   :alt: OpenWrt - WireGuard tunnel status
+   :align: center
+
+F. go to Network -> Firewall, and then add a zone allowing traffic between the WireGuard tunnel and the LAN. Please do add your own version of Firewall rule that is tight, specific and according to your needs
+
+.. image:: images/integration-openwrt-wg-fw.jpg
+   :width: 80%
+   :alt: OpenWrt - Firewall configuration
+   :align: center
+
+And that's about it. Routing internet traffic to a Netmaker Internet Gateway is also possible by adding the necessary firewall NAT rules. Please refer to the OpenWrt documentation for more information.
 
 
 
