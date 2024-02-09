@@ -233,7 +233,7 @@ Routing internet traffic to a Netmaker Internet Gateway is also possible by addi
 
 
 
-3) OpenWrt
+4) OpenWrt
 -------------------
 
 This guide will help you set up WireGuard on OpenWrt 23.05.2. We will connect to a Netmaker network via a Remote Access Gateway:
@@ -281,6 +281,30 @@ F. go to Network -> Firewall, and then add a zone allowing traffic between the W
    :align: center
 
 And that's about it. Routing internet traffic to a Netmaker Internet Gateway is also possible by adding the necessary firewall NAT rules. Please refer to the OpenWrt documentation for more information.
+
+
+5) Other routers
+-------------------
+
+Please refer to these links for instructions on how to configure WireGuard:
+
+   A. TP-Link - https://www.tp-link.com/fr/support/faq/3772/
+   B. Asus - https://www.asus.com/support/faq/1048281/
+   C. GL.iNet - https://docs.gl-inet.com/router/en/3/tutorials/wireguard_client/#setup-wireguard-client
+   D. Teltonika - https://wiki.teltonika-networks.com/view/WireGuard_Configuration_Example
+   E. pcWRT - https://www.pcwrt.com/2019/12/how-to-set-up-a-wireguard-vpn-client-connection-on-the-pcwrt-router/
+   F. DD-WRT - https://windscribe.com/knowledge-base/articles/wireguard-router-setup-guide-dd-wrt
+
+
+
+Internet of Things (IoT Devices)
+========================================================
+
+Please refer to these links for instructions on how to configure WireGuard:
+
+   A. IOTstack - https://sensorsiot.github.io/IOTstack/Containers/WireGuard/
+   B. Embedded Linux - https://www.toradex.com/blog/embedded-linux-vpn-application
+   C. lwIP - https://github.com/smartalock/wireguard-lwip
 
 
 
