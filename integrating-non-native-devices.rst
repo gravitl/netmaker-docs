@@ -7,19 +7,17 @@ Integrating Non-native Devices
 Introduction
 ===============
 
-Netmaker manages Wireguard configurations through the Netclient and the Remote Access Client (RAC) installed on the hosts and on the external clients repectively. Basically Netmaker makes Wireguard configurations, which are inherently static, dynamic. As you setup and change your network, Netmaker propagates these changes in the configuration to the affected machines installed with either Netclient or RAC.
+Netmaker manages WireGuard configurations through the Netclient and the Remote Access Client (RAC) installed on the hosts and on the external clients repectively. Basically Netmaker makes WireGuard configurations, which are inherently static, dynamic. As you setup and change your network, Netmaker propagates these changes in the configuration to the affected machines installed with either Netclient or RAC.
 
-However in some cases, it might not be ideal or even possible to install Netclient or RAC on your machine/device. In these cases Netmaker will rely upon your intervention to manually set up and/or change Wireguard configurations on these machines/devices whenever necessary.  
+However in some cases, it might not be ideal or even possible to install Netclient or RAC on some of your machines/devices. In these cases, Netmaker will rely upon your intervention to install WireGuard on these machines/devices and then to manually set up or change their WireGuard configurations whenever necessary. Basically, you just need to get the current WireGuard configuration (or VPN config files) from your Netmaker Remote Access Gateway and then stick it to your device in order for it to connect to your Netmaker network.
 
 
-Generating a Wireguard Configuration File on Remote Access Gateway
+Generating a WireGuard Configuration File on Remote Access Gateway
 =====================================================================
 
-Using only Wireguard, you can connect to a Netmaker network via a Remote Access gateway.
+Netmaker allows you to generate and manage your VPN configuration files. For instructions on how to make a node a Remote Access Gateway and on how to create/generate VPN configuration files, please refer to the "Ingress Gateway/External Clients" section under the "How-to-Guides".
 
-For instructions on how to create a node as a Remote Access Gateway and on how to create/generate and get VPN configuration files, please refer to the "Ingress Gateway/External Clients" section under the "How-to-Guides".
-
-You can also get the Wireguard VPN configuration by following these steps:
+You can also get the WireGuard VPN configuration by following these steps:
 
 1. Navigate to your network's Remote Access tab. You should see the Gateways table to the left-hand side and then the VPN Config Files table to the right-hand side of the page
 
@@ -48,7 +46,7 @@ Once you have the configuration information or the configuration file, you can n
 Routers and Firewall Appliances (Virtual or Bare metal)
 ========================================================
 
-While Netclient can be installed in some routers and firewall appliances and then configure them as egress gateways, it is generally ideal to use these devices' built-in VPN feature for seamless integration. Since most modern VPN routers and firewalls today support Wireguard, they can connect to a Netmaker network as an external client and then responsibly expose the resources behind them by inputting their IP address ranges in the 'Additional Addresses' field.
+While Netclient can be installed on some routers and firewall appliances after which you can then configure as egress gateways, it is generally ideal to use these devices' built-in VPN feature for seamless integration. Since most modern VPN routers and firewalls today support WireGuard, they can connect to a Netmaker network as an external client, after which you can then responsibly expose the resources behind them by inputting specific IP address ranges in the 'Additional Addresses' field.
 
 .. image:: images/integration-config-additional-addresses.jpg
    :width: 80%
@@ -56,14 +54,14 @@ While Netclient can be installed in some routers and firewall appliances and the
    :align: center
 
 
-The general guidelines for integrating routers and firewall appliances to Netmaker are the following:
+The general guidelines for integrating routers and firewall appliances (FWA) to Netmaker are the following:
 
    - Before doing any further configuration, take note of your current firmware version and back up the current configuration settings
    - Upgrade your firmware if necessary
-   - Install Wireguard via your router's or FWA's Package Manager. Usually this can be done from its web interface (GUI) instead of from its shell (CLI)
+   - Install WireGuard via your router's or FWA's Package Manager. Usually this can be done from its web interface (GUI) instead of from its shell (CLI)
    - Input the VPN configuration information from Netmaker; or upload the configuration file if your device supports it
-   - If necessary, create a routing entry for the Wireguard interface
-   - Create tight and specific firewall rules for traffic going in and out between the VPN interface and your LAN [or depending on your use case your specific device, interface/port, VLAN, DMZ, WAN, etc.]
+   - If necessary, create a routing entry for the WireGuard tunnel interface
+   - Create tight and specific firewall rules for traffic going in and out between the VPN interface and your LAN [or depending on your use case, your specific device, interface/port, VLAN, DMZ, WAN, etc.]
 
 
 1) pfSense
@@ -71,28 +69,28 @@ The general guidelines for integrating routers and firewall appliances to Netmak
 
 This guide will help you set up WireGuard on pfSense 2.7.2. We will connect to a Netmaker network via a Remote Access Gateway
 
-A. install Wireguard using the Package Manager in System -> Package Manager -> Available Packages
+A. install WireGuard using the Package Manager in System -> Package Manager -> Available Packages
 
 .. image:: images/integration-pfsense-pkgmgr.jpg
    :width: 80%
    :alt: pfSense Package Manager
    :align: center
 
-B. go to VPN -> WireGuard -> Tunnels, and then create a new WireGuard tunnel using the information provided by Netmaker. Click on the Generate button under the Interface Keys fields then paste the Private Key from the configuration file generated by Netmaker. Take note of the tunnel interface name
+B. go to VPN -> WireGuard -> Tunnels, and then create a new WireGuard tunnel using the configuration information provided by Netmaker. Click on the Generate button under the Interface Keys fields before pasting the Private Key (from the configuration file generated by Netmaker). Save or submit the form and then take note of the tunnel interface name
    
 .. image:: images/integration-pfsense-tunnel-interface.jpg
    :width: 80%
    :alt: pfSense Tunnel Configuration
    :align: center
 
-C. go to VPN -> WireGuard -> Peers, and then create a WireGuard peer using the information provided by Netmaker
+C. go to VPN -> WireGuard -> Peers, and then create a peer. Input the necessary configuration infomation similar to what is shown in the image below
 
 .. image:: images/integration-pfsense-peer.jpg
    :width: 80%
    :alt: pfSense Peer Configuration
    :align: center
 
-D. enable WireGuard in VPN -> WireGuard -> Settings. And then click on the Apply Changes button. Make sure that the 'handshake' icon is green under the Status tab before proceeding any further 
+D. enable WireGuard in VPN -> WireGuard -> Settings, and then click on the Apply Changes button. Make sure that the 'handshake' icon is green under the Status tab before proceeding any further 
 
 .. image:: images/integration-pfsense-enable-wg.jpg
    :width: 80%
@@ -118,14 +116,14 @@ F. go to Interfaces -> [OPT1], and then tick the 'Enable interface' checkbox, in
    :alt: pfSense enable WireGuard tunnel interface
    :align: center
 
-If you're trying to connect to an Internet Gateway, then click on the 'Add a new gateway' button. Depending on your use case, you may tick the Default Gateway checkbox so that all internet traffic routes through the Netmaker Internet Gateway. Then go to System -> General Setup and, again depending on your use case, in the DNS Server Settings select the Netmaker Internet Gateway so that domain name resolution traffic will pass through it instead of the other gateways
+If you're trying to connect to a Netmaker Internet Gateway, then click on the 'Add a new gateway' button. Depending on your use case, you may tick the Default Gateway checkbox so that all internet traffic will route through the Netmaker Internet Gateway. Then go to System -> General Setup and, [again] depending on your use case, select the Netmaker Internet Gateway in the DNS Server Settings so that domain name resolution traffic will pass through it instead of the other gateways
 
 .. image:: images/integration-pfsense-if-internet-gw.jpg
    :width: 80%
    :alt: pfSense create an internet gateway
    :align: center
 
-G. If you just want to connect to an Internet Gateway, you don't need to do this step. Otherwire, create a Firewall rule for WireGuard allowing traffic between it and the target resource. For this guide we are going to allow ICMP traffic between WireGuard tunnel interface and the LAN so that we can do pings. Go to Firewall -> Rules -> [OPT1] and add a rule similar to what is shown in the screenshot below
+G. If you just need to connect to an Internet Gateway, you don't need to do this step. Otherwise create a Firewall rule for WireGuard, allowing traffic between it and the target resource. For this guide we are going to allow ICMP traffic between WireGuard tunnel interface and the LAN so that we can do pings. Go to Firewall -> Rules -> [OPT1] and add a rule similar to what is shown in the screenshot below
 
 .. image:: images/integration-pfsense-fw-init.jpg
    :width: 80%
@@ -137,6 +135,7 @@ G. If you just want to connect to an Internet Gateway, you don't need to do this
    :alt: pfSense add firewall rule - form
    :align: center
 
+After saving the firewall rule, devices in your LAN should now be able to ping machines in your Netmaker network, and vice versa. Edit the firewall rule above or create one that would suit your needs. 
 
 
 
@@ -145,9 +144,9 @@ G. If you just want to connect to an Internet Gateway, you don't need to do this
 
 This guide will help you set up WireGuard on OPNsense 24.1_1. We will connect to a Netmaker network via a Remote Access Gateway:
 
-A. WireGuard comes pre-installed on OPNsense 24.1_1. For OPNsense 23.7.12 and below install Wireguard as a plug-in in System -> Firmware -> Plugins
+A. WireGuard comes pre-installed on OPNsense 24.1_1. For OPNsense 23.7.12 and below, install WireGuard as a plug-in in System -> Firmware -> Plugins
 
-B. go to VPN -> WireGuard -> Settings -> Instances, and then create a new WireGuard tunnel instance using the information provided by Netmaker. Click on the Generate [gear] icon in the Public Key field then paste the Private Key from the configuration file generated by Netmaker. Take note of the tunnel interface name
+B. go to VPN -> WireGuard -> Settings -> Instances, and then create a new WireGuard tunnel instance using the configuration information provided by Netmaker. Click on the Generate [gear] icon in the Public Key field before pasting the Private Key (from the configuration file generated by Netmaker). Save and then take note of the tunnel interface name
    
 .. image:: images/integration-opnsense-tunnel-interface.jpg
    :width: 80%
@@ -190,6 +189,10 @@ G. Create a Firewall rule for WireGuard allowing traffic between it and the targ
    :align: center
 
 
+After saving the firewall rule, devices in your LAN should now be able to ping machines in your Netmaker network, and vice versa. Edit the firewall rule above or create one that would suit your needs. 
+
+
+
 3) MikroTik
 -------------------
 
@@ -201,21 +204,21 @@ B. given a sample WireGuard configuration below, you can access MikroTik's CLI a
 
 .. image:: images/integration-mikrotik-wg-config.jpg
    :width: 80%
-   :alt: Sample wireguard configuration for MikroTik
+   :alt: Sample WireGuard configuration for MikroTik
    :align: center
 
 WireGuard interface configuration:
 
 .. code-block::
 
-   /interface/wireguard
+   /interface/WireGuard
    add name=wg-netmaker mtu=1420 private-key="iMfHqGANXMJHGMBKwuo89txiU3/9edC20TxWpFtmU2Y="
 
 Peer configuration:
 
 .. code-block::
 
-   /interface/wireguard/peers
+   /interface/WireGuard/peers
    add allowed-address=10.40.70.0/24 endpoint-address=188.166.235.45 endpoint-port=51821 interface=wg-netmaker public-key="GM80g/eeXgkOrk0yYtdhhU73ETHffpojG2Ewd+N4kXI=" persistent-keepalive=20 client-dns=159.159.159.159
 
 IP and routing configuration:
@@ -227,7 +230,9 @@ IP and routing configuration:
    /ip/route
    add dst-address=10.40.70.0/24 gateway=wg-netmaker
 
-For more information, please refer to this guide from MikroTik documentation page: https://help.mikrotik.com/docs/display/ROS/WireGuard.
+And that's it. Devices in your LAN should now be able to reach machines in your Netmaker network, and vice versa. 
+
+For more information, please refer to this guide from MikroTik's documentation page: https://help.mikrotik.com/docs/display/ROS/WireGuard.
 
 Routing internet traffic to a Netmaker Internet Gateway is also possible by adding the necessary firewall NAT rules. Please refer to the MikroTik documentation for more information.
 
@@ -238,7 +243,7 @@ Routing internet traffic to a Netmaker Internet Gateway is also possible by addi
 
 This guide will help you set up WireGuard on OpenWrt 23.05.2. We will connect to a Netmaker network via a Remote Access Gateway:
 
-A. Go to System -> Software. Click on the `Update lists...` button then search for `wireguard`. Install `wireguard-tools` and `luci-proto-wireguard` (for Web GUI). Reboot.
+A. Go to System -> Software. Click on the `Update lists...` button then search for `WireGuard`. Install `WireGuard-tools` and `luci-proto-WireGuard` (for Web GUI). Reboot.
 
 .. image:: images/integration-openwrt-pkgmgr.jpg
    :width: 80%
@@ -290,10 +295,10 @@ Please refer to these links for instructions on how to configure WireGuard:
 
    A. TP-Link - https://www.tp-link.com/fr/support/faq/3772/
    B. Asus - https://www.asus.com/support/faq/1048281/
-   C. GL.iNet - https://docs.gl-inet.com/router/en/3/tutorials/wireguard_client/#setup-wireguard-client
+   C. GL.iNet - https://docs.gl-inet.com/router/en/3/tutorials/WireGuard_client/#setup-WireGuard-client
    D. Teltonika - https://wiki.teltonika-networks.com/view/WireGuard_Configuration_Example
-   E. pcWRT - https://www.pcwrt.com/2019/12/how-to-set-up-a-wireguard-vpn-client-connection-on-the-pcwrt-router/
-   F. DD-WRT - https://windscribe.com/knowledge-base/articles/wireguard-router-setup-guide-dd-wrt
+   E. pcWRT - https://www.pcwrt.com/2019/12/how-to-set-up-a-WireGuard-vpn-client-connection-on-the-pcwrt-router/
+   F. DD-WRT - https://windscribe.com/knowledge-base/articles/WireGuard-router-setup-guide-dd-wrt
 
 
 
@@ -304,12 +309,20 @@ Please refer to these links for instructions on how to configure WireGuard:
 
    A. IOTstack - https://sensorsiot.github.io/IOTstack/Containers/WireGuard/
    B. Embedded Linux - https://www.toradex.com/blog/embedded-linux-vpn-application
-   C. lwIP - https://github.com/smartalock/wireguard-lwip
+   C. lwIP IP stack - https://github.com/smartalock/WireGuard-lwip
+
+
+
+
+Other Devices
+======================================
+
+For other devices not covered above, please refer to your device's documentation for instructions on how to install and configure WireGuard.  
 
 
 
 Disclaimer
----------------------
+======================================
 
 The information provided by us on this how-to guide is for general informational purposes only. All information on this page is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the page.
 
