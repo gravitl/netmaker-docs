@@ -61,3 +61,5 @@ RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https:/
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/pro/pro-relay-server.html\"\ />' /usr/share/nginx/html/pro/pro-relay-server.html
 
 RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/ui-reference.html\"\ />' /usr/share/nginx/html/ui-reference.html
+
+RUN sed -i '/link rel=\"prev\"/a \ \ \ \ <link rel=\"canonical\"\ href=\"https://docs.netmaker.io/integrating-non-native-devices.html\"\ />' /usr/share/nginx/html/integrating-non-native-devices.html
