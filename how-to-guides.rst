@@ -56,6 +56,14 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
 
    pro/index
 
+Integrating Non-native Devices
+===============================
+
+.. toctree::
+   :maxdepth: 1
+
+   integrating-non-native-devices
+
 External Guides
 ================
 
