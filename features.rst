@@ -43,6 +43,8 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
 
 - **Relays:** All traffic routing to and from in a network for a relayed machine will go through the relay machine.
 
+- **Internet Gateways:** These work similar to traditional VPNs, and can work with netclients (hosts in the mesh network) as well as with remote devices connected to the network via client configs.
+
 .. toctree::
    :maxdepth: 1
 

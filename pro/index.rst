@@ -69,3 +69,11 @@ FailOvers
    :maxdepth: 2
 
    pro-failovers
+
+Internet Gateways
+-----------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   internet-gateways
