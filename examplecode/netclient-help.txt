@@ -9,7 +9,6 @@ COMMANDS:
    connect     connect to a netmaker network
    daemon      netclient daemon
    disconnect  disconnet from a network
-   guiServer   guiServer [enable|disable]
    help        Help about any command
    install     install netclient binary and daemon
    join        join a network

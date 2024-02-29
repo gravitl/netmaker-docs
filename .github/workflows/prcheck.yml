@@ -6,7 +6,18 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build
+      uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "."
+    - name: Generate Name
+      id: name
+      run: |
+        echo "ARTIFACT_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: HTMLupload-${{ steps.name.outputs.ARTIFACT_NAME }}-${{ github.run_attempt }}
+        path: ./_build/html/

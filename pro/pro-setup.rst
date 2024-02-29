@@ -8,38 +8,29 @@ This guide covers how to get setup with Netmaker Professional. For pricing,visit
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, You should be prompted to create an account. After you make one, you will be automatically directed to a free SAAS instance. You will need to go to account managemement. Click on the manage account button located on the side bar.
+Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the switch tenant dashboard.
 
 .. image:: images/pro-aftersignup.png
    :width: 80%
    :alt: screeen after signup on SAAS
    :align: center
 
-You will then need to navigate to click on the ``switch tenant`` button. 
 
-.. image:: images/pro-switchtenant.png
-   :width: 80%
-   :alt: Click on the switch tenant button
-   :align: center
+Click the `` create tenant `` button and a modal will pop up. If you are a new user you can follow the link to setup a self hosted instance of Netmaker for a free 14 day trial, for existing users click on the contact us link.
 
-You will then be redirected to the tennants page.
-
-.. image:: images/pro-selecttenant.png
-   :width: 80%
-   :alt: Click on the switch tenant button
-   :align: center
-
-
-Click the Create Tenant button and a modal will pop up allowing you to name your tenant. Click the switch to make the Tenant self-hosted.
-
-.. image:: images/pro-selfhostedswitch.png
+.. image:: images/pro-createtenantmodal.png
    :width: 80%
    :alt: selfhosted switch
    :align: center
 
-You will need to add payment details before you can use your tenant. click on the stripe button to go to the stripe page and enter your payment info.
+After you click on the link, you will be taken to a page to fill out a licence request form. A representative will reach out to you to get you setup with a self-hosted tenant.
 
+.. image:: images/pro-contactusform.png
+   :width: 80%
+   :alt: selfhosted switch
+   :align: center
 
+Once you have your tenant, you can click on manage account from the tenants table. Then you will need to add payment details before you can use your tenant, click on the stripe button to go to the stripe page and enter your payment info.
 
 Setup your server
 =================================
