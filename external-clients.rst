@@ -24,7 +24,7 @@ A remote access client is not "managed," meaning it does not automatically pull 
 
 By using this method, you can hook any machine that can run WireGuard into a netmaker network.
 
-It is recommended to run the netclient where compatible, but for all other cases, a machine can be configured as a Remote Access Clients. This recommendatio holds except i the situation ehre only remote acces id required.
+It is recommended to run the netclient where compatible, but for all other cases, a machine can be configured as a Remote Access Clients. This recommendation holds except in the situation where only remote access is required.
 
 Remote access gateways can be configured as internet gateways. Internet gateways work like traditional VPNs: they channel all traffic of their connected clients through them, securely hiding the client's public IP address while they browse the internet.
 Internet gateways can be configured via the `Remote Access tab`. See the below section for more information.
