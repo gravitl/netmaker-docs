@@ -4,12 +4,7 @@ Netclient
 
 As of v0.18.0 Netclient is now in its own standalone repo seperate from netmaker.
 
-The UI has been updated for Mac and Windows,
-
-.. image:: images/netclientGUI.png
-  :width: 80%
-  :alt: netclient CLI
-  :align: center
+**Netclient GUI has been deprecated as of v0.22.1.**
 
 And the CLI has been updated.
 
@@ -116,12 +111,14 @@ Brew Install
   (optional) brew audit netclient
   brew install netclient
 
-GUI Installer
----------------
+GUI Installer (for v0.22.0 and below)
+-------------------------------------
 
-Download Link for Apple silicon: https://fileserver.netmaker.org/latest/Netclient-M1.pkg
+Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-M1.pkg
 
-Download Link for Apple Intel: https://fileserver.netmaker.org/latest/Netclient-Intel.pkg
+Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-Intel.pkg
+
+Replace version number in URL with the version you want to install.
 
 
 Docker
@@ -251,49 +248,6 @@ Make sure interface name you pass when running multiple netclient containers on 
 
 These commands will be available to copy and paste in the access keys section of your netmaker UI. You can set the verbosity to a level 0-4 with the flag ``-v <number 0-4>`` in the join command if you need more info about the join.
 
-To join on the GUI with Windows or Mac, just click the ADD NEW button and you will be given a choice of token or Username/Password.
-
-.. image:: images/netclientjoinGUI.jpg
-  :width: 80%
-  :alt: netclient join through GUI
-  :align: center
-
-Choose token and you will be taken to a screen where you will enter the Access Token found in the access keys tab of the netmaker UI.
-
-.. image:: images/netclienttokenGUI.jpg
-  :width: 80%
-  :alt: netclient token screen
-  :align: center
-
-Choose Username/Password and you will be taken to this screen:
-
-.. image:: images/netclientauthGUI.png
-  :width: 80%
-  :alt: netclient username and password screen
-  :align: center
-
-You can fill out these fields by parsing out the Join via Basic Auth part of the Access Key Details
-
-.. image:: images/netclientjoinauthsnippet.png
-  :width: 80%
-  :alt: netclient snippet of access key details
-  :align: center
-
-The Server name will be in the <netmaker api domain> and the network will be in the <network-name> placeholder. Username and password is the same as you would use to sign into your netmaker dashboard.
-
-If the join was successful, you should see the network on the GUI.
-
-.. image:: images/netclientconnectedGUI.jpg
-  :width: 80%
-  :alt: netclient GUI showing a connected network
-  :align: center
-
-You should be able to click on that network and see the details page on that network.
-
-.. image:: images/netclientdetailsGUI.jpg
-  :width: 80%
-  :alt: netclient GUI network details
-  :align: center
 
 *********************
 Managing Netclient
@@ -302,7 +256,7 @@ Managing Netclient
 Connecting/Disconnecting from a network
 =======================================
 
-You can connect/disconnect from the network from either the netclient, or from the UI. in the last image above, you can see the connect/disconnect switch is located in the network details of the GUI.
+You can connect/disconnect from the network from either the netclient, or from the GUI.
 
 From the CLI, you can use the following:
 
