@@ -7,7 +7,7 @@ Integrating Non-native Devices
 Introduction
 ===============
 
-Netmaker manages WireGuard configurations through the Netclient and the Remote Access Client (RAC) installed on the hosts and on the external clients repectively. Basically Netmaker makes WireGuard configurations, which are inherently static, dynamic. As you setup and change your network, Netmaker propagates these changes in the configuration to the affected machines installed with either Netclient or RAC.
+Netmaker manages WireGuard configurations through the Netclient and the Remote Access Client (RAC) installed on the hosts and on the external clients respectively. Basically Netmaker makes WireGuard configurations, which are inherently static, dynamic. As you setup and change your network, Netmaker propagates these changes in the configuration to the affected machines installed with either Netclient or RAC.
 
 However in some cases, it might not be ideal or even possible to install Netclient or RAC on some of your machines/devices. In these cases, Netmaker will rely upon your intervention to install WireGuard on these machines/devices and then to manually set up or change their WireGuard configurations whenever necessary. Basically, you just need to get the current WireGuard configuration (or VPN config files) from your Netmaker Remote Access Gateway and then stick it to your device in order for it to connect to your Netmaker network.
 
