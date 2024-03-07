@@ -46,7 +46,7 @@ Once you have the configuration information or the configuration file, you can n
 Routers and Firewall Appliances (Virtual or Bare metal)
 ========================================================
 
-While Netclient can be installed on some routers and firewall appliances after which you can then configure as egress gateways, it is generally ideal to use these devices' built-in VPN feature for seamless integration. Since most modern VPN routers and firewalls today support WireGuard, they can connect to a Netmaker network as an external client, after which you can then responsibly expose the resources behind them by inputting specific IP address ranges in the 'Additional Addresses' field.
+While Netclient can be installed on some routers and firewall appliances after which you can then configure as egress gateways, it is generally ideal to use these devices' built-in VPN feature for seamless integration. Since most modern VPN routers and firewalls today support WireGuard, they can connect to a Netmaker network as an external client, after which you can then responsibly expose the resources behind them by inputting specific IP address ranges in the 'Additional Addresses' field. For more information on the Egressing External Clients, please refer to this link: https://docs.netmaker.io/egress-gateway.html#egressing-external-clients.
 
 .. image:: images/integration-config-additional-addresses.jpg
    :width: 80%

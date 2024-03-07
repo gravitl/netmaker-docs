@@ -112,12 +112,8 @@ Advanced Use Cases
 Egressing External Clients
 ============================
 
-Unmanaged external clients that are directly connected to a Remote Access Gateway can also act as egressing machines.
-The idea is the same as egress gateways. The only difference is that Netclient is necessary with egress gateways, whilst only Wireguard is needed with egressing external clients.
-This feature is provisioned for situations or scenarios where installation of Netclient is not ideal or even possible. 
-For example most VPN routers support WireGuard, but they are available only as plugins that are tailormade or closely coupled with the router's firmware or user interface. 
-While there are ways to make Netclient work for some routers, the integration could get cumbersome, obsolete, or compromising.
-Of course this feature is also applicable for simple or ad-hoc networking purposes so long as the external client supports iptables and IP forwarding.
+Unmanaged external clients that are directly connected to a Remote Access Gateway can also act as egressing machines. The idea is the same as egress gateways. The only difference is that Netclient is necessary with egress gateways, whilst only Wireguard is needed with egressing external clients. This feature is provisioned for situations or scenarios where installation of Netclient is not ideal or even possible. For example most VPN routers support WireGuard, but they are available only as plugins that are tailormade or closely coupled with the router's firmware or user interface. 
+While there are ways to make Netclient work for some routers, the integration could get cumbersome, obsolete, or compromising. Of course this feature is also applicable for simple or ad-hoc networking purposes so long as the external client supports iptables and IP forwarding.
 
 At the time of this writing, this feature only supports Linux-based external clients. But the remote machines can be anything, provided they are in the same local network as one of the egressing external client's network interface.
 
