@@ -195,7 +195,7 @@ By using this method, you can run many netclients on the same host and just incr
 
 
 **IMPORTANT:**
- For docker netclient to function correctly as either ingress/egress gateway, you need to additionally run the following commands on the host machine:
+ For docker netclient to function correctly as either remote access/egress gateway, you need to additionally run the following commands on the host machine:
 
   1. `iptables -I DOCKER-USER -i netmaker  -j ACCEPT`
   2. `iptables -I DOCKER-USER -o netmaker  -j ACCEPT`

@@ -16,10 +16,10 @@ In the Netmaker UI, that node is set as an "egress gateway." Range(s) are specif
 
    egress-gateway
 
-Ingress Gateway/External Clients
-=================================
+Remote Access Gateway/External Clients
+======================================
 
-Netmaker allows for "external clients" to reach into a network and access services via an Ingress Gateway. So what is an "external client"? An external client is any machine which cannot or should not be meshed. This can include:
+Netmaker allows for "external clients" to reach into a network and access services via an Remote Access Gateway. So what is an "external client"? An external client is any machine which cannot or should not be meshed. This can include:
         - Phones
         - Laptops
         - Desktops
