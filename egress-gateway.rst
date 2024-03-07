@@ -150,7 +150,8 @@ In some cases you might need to add POSTROUTING rules. In Ubuntu, you might do:
 
 .. code-block::
 
-   #get the name of the specific network interface of the egressing client associated with the egress ranges that you have specified 
+   #get the name of the specific network interface of the egressing client machine
+   # that is associated with the egress ranges that you have specified 
    ip a
 
    #add the necessary POSTROUTING rule, say the interface name is `eth1`
