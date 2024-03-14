@@ -181,14 +181,14 @@ F. go to Interfaces -> [OPT1], and then tick the 'Enable interface' and the 'Pre
    :alt: OPNsense enable WireGuard tunnel interface
    :align: center
 
-G. Create a route to the Netmaker network by first creating a gateway. Go to System -> Gateways -> Configuration, then click on the add icon and specify the tunnel interface [OPT1] and its IP:
+G. Create a route to the Netmaker network by first creating a gateway. Go to System -> Gateways -> Configuration, then click on the add icon and specify the tunnel interface [OPT1] and its IP
 
 .. image:: images/integration-opnsense-add-gw.jpg
    :width: 80%
    :alt: OPNsense add gateway
    :align: center
 
-H. Add the necessary routing entry. Go to System -> Routes -> Configuration, then click on the 'add' icon and specify a route to the Netmaker network via the gateway created in the previous step:
+H. Add the necessary routing entry. Go to System -> Routes -> Configuration, then click on the 'add' icon and specify a route to the Netmaker network via the gateway created in the previous step
 
 .. image:: images/integration-opnsense-add-routing-entry.jpg
    :width: 80%
