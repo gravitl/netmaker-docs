@@ -23,7 +23,6 @@ This documentation covers Netmaker's :doc:`installation <./server-installation>`
 
 
 .. toctree::
-   :maxdepth: 3
 
    about
    getting-started

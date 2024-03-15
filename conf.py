@@ -60,8 +60,8 @@ html_theme_options = {
     'color_primary': 'indigo',
     'color_accent': 'light-blue',
     'logo_icon': '&#xe869',
-    'globaltoc_depth': 2,
-    'globaltoc_collapse': True,
+    'globaltoc_depth': -1,
+    'globaltoc_collapse': False,
 }
 
 html_sidebars = {
