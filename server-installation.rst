@@ -902,7 +902,18 @@ Setup Netmaker on IPv6 only machine
 This is not a guide how to add an overlay network(with IPv6) in Netmaker, it can be found in `Setup <https://docs.netmaker.io/getting-started.html#setup>`_ page.
 This is to setup Netmaker working on an IPv6 only machine.
 
-By default, Netmaker works on IPv4. Because Docker works on IPv4 by default.
+About the install script nm-quick.sh
+------------------------------------------
+
+At the moment which the document is written, the install script `nm-quick.sh` only supports IPv4. For the installation, the IPv4 needs to be enabled temporary anyway.
+
+Add AAAA record for domain name resolution
+------------------------------------------
+
+The Netmaker client communicates with Netmaker server by domain name.   AAAA record here is to resolve the domain name to IPv6 address.
+
+
+By default, Netmaker works on IPv4. Because Docker works on IPv4 by default.  After the installation, there are several steps to enable IPv6 for Docker and Netmaker.
 
 Enable IPv6 support for Docker
 ------------------------------
