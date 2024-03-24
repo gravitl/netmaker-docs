@@ -50,6 +50,31 @@ High CPU Utilization
 
 With some versions of WireGuard on Windows, high CPU utilization has been found with the netclient. This is typically due to interaction with the WireGuard GUI component (app). If you're experiencing high CPU utilization, close the WireGuard app. WireGuard will still be running, but the CPU usage should go back down to normal.
 
+Changing network profile to private
+------------------------------------
+
+By default the netmaker network profile is added as a public network. This is the default behavior on Windows. For changing it to private, please run Powershell command,
+
+- `Set-NetConnectionProfile -InterfaceAlias 'netmaker' -NetworkCategory 'Private'`
+
+Issue after Windows sleep/hibernate
+-------------------------------------
+
+Sometimes the netclient does not work after the Windows wake up from sleep/hibernate. The root cause is not identified.  Restarting netclient service can fix the issue.
+
+Irregular netclient restart on Windows 2016 server
+----------------------------------------------------
+
+There is one issue reported on Windows 2016 server.  The netclient restarted irregularly. The root cause is not identified. But as the feedback from the client, the issue can be fixed by disabling ISATAP adapter and 6to4 feature.
+
+- `Set-Net6to4configuration -state disabled`
+- `Set-Netisatapconfiguration -state disabled`
+- `Set-NetTeredoConfiguration -type disabled`
+
+Event id 0 in Windows Event logs
+---------------------------------
+netclient service is delegated to Winsw on Windows. An issue is reported that the stop/start/restart events in Event logs show event id as 0 always. It does not impact any netclient functions.
+
 Notes on OpenWRT
 ===========================
 
