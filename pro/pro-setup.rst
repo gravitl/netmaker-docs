@@ -73,7 +73,7 @@ Then you will need to get the docker-compose pro file from here
 
 .. code-block::
 
-    wget -o /root/docker-compose.override.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.pro.yml
+    wget -O /root/docker-compose.override.yml https://raw.githubusercontent.com/gravitl/netmaker/master/compose/docker-compose.pro.yml
 
 No changes will need to be made to that file. It will use the configs listed in your netmaker.env file.
 
