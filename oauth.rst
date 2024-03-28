@@ -63,20 +63,39 @@ Once successful, users can click the key symbol on the login page to sign-in wit
    :alt: Login Oauth
    :align: center
 
+
 Configuring User Permissions
 ===============================
 
-All users logging in will have zero permissions on first sign-in. An admin must configure all user permissions.
+User management is done through the Netmaker dashboard, under the Users (or Manage Account, for SaaS) section from the left navigation bar.
+Only server admins have access to this section and can promote users to admin status. The superadmin/tenant owner can both promote and demote users to admin status.
 
-Admins must navigate to the "Users" screen to configure permissions.
+.. image:: images/user-mgmt.png
+   :width: 80%
+   :alt: Users
+   :align: center
 
-For each user, an admin must specify which networks that user has access to configure. Additionally, an Admin can elevate a user to Admin permissions.
+Normal users do not have access to the dashboard and are recommended to use our Remote Access Client to connect to the network.
+An admin must aforehand grant such users permission to certain networks by assigning them to remote access gateways however. View the "Remote Access" section for more information on this.
+
+User creation
+-------------
+
+To create a new user, click the "Add a User" button on the Users page. Fill in the user's details and click "Create User".
 
 .. image:: images/oauth3.jpg
    :alt: Edit User 2
    :align: center
 
-.. image:: images/oauth2.jpg
+Oauth Users
+-----------
+
+Users are also allowed to join a Netmaker server via OAuth. They can do this by clicking the "Login with SSO" button on the dashboard's login page.
+
+.. image:: images/user-mgmt-pending.png
    :width: 80%
-   :alt: Edit User
+   :alt: Pending Users
    :align: center
+
+From v0.23.1, new accounts would be added to a pending list and would require approval from an admin before they can access any resource. This version also allows whielisting of email domains for OAuth users.
+Server admins can do that by adding a comma-separated list of domains to the `ALLOWED_EMAIL_DOMAINS` environment variable. eg: `ALLOWED_EMAIL_DOMAINS=example.net,example.com`

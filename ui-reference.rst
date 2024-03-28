@@ -20,7 +20,7 @@ When you start Netmaker for the first time, you will be prompted to create an ad
 (1) **Username:** Enter a unique username for the admin user.
 (2) **Password:** Enter a secure password for your new user.
 (3) **Password Confirmation:** Repeat the password for verification.
-(4) **Signup with OAuth:** Button to signup with OAuth.
+(4) **Signup with OAuth:** Button to signup with OAuth. From v0.23.1, OAuth users will need further approval from a server admin to gain access.
 
 Login
 --------

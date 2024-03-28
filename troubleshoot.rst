@@ -6,7 +6,7 @@ Common Issues
 --------------
 **How can I connect my Android or IOS device to my Netmaker VPN?**
   Currently meshing one of these devices is not supported, however, it will be soon. 
-  For now, you can connect to your VPN by making one of the nodes an Ingress Gateway, then 
+  For now, you can connect to your VPN by making one of the nodes a Remote Access Gateway, then 
   create an Ext Client for each device. Finally, use the official WG app or another 
   WG configuration app to connect via QR or download the device's WireGuard configuration. 
 
@@ -30,7 +30,7 @@ Server
 -------
 
 **How do I use a private address from the Netmaker Server? How do I contact nodes using their private addresses from the server?**
-  Default nodes appear in each network with the "netmaker" name. These nodes are created by, and attached to, the server. The server is contained in docker, meaning these clients are also contained in docker. Their networking stack is also contained in docker. The "netmaker" nodes are meant to function as network utilities. They assist with UDP Hole Punching and can run Relays, Egress, and Ingress. However, they are meant to stay contained in the server. They do not touch the host networking stack.
+  Default nodes appear in each network with the "netmaker" name. These nodes are created by, and attached to, the server. The server is contained in docker, meaning these clients are also contained in docker. Their networking stack is also contained in docker. The "netmaker" nodes are meant to function as network utilities. They assist with UDP Hole Punching and can run Relays, Egresses and Remote Access Gateways. However, they are meant to stay contained in the server. They do not touch the host networking stack.
 
   If you want to give the physical server / VM a private IP in the netmaker network, you must deploy an **additional** node using the standard netclient. The only note here is that the server consumes ports 51821-51831, so you will need to give it a port outside this range, e.x. `./netclient join <token> --port 51835`. You may also need to add `--udpholepunch no`.
 

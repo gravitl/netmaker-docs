@@ -53,14 +53,14 @@ Use Cases
 1) Remote Access
 -------------------
 
-A common scenario would be to combine this with an "Ingress Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the ingress and egress gateways. The Ingress Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the Netmaker server as the Ingress, and one additional machine (in the private network you wish to reach), as the Egress.
+A common scenario would be to combine this with a "Remote Access Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the remote access and egress gateways. The Remote Access Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the Netmaker server as the Remote Access Gateway, and one additional machine (in the private network you wish to reach), as the Egress.
 
 .. image:: images/egress2.png
    :width: 80%
    :alt: Gateway
    :align: center
 
-In some scenarios, a single node will act as both ingress and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.
+In some scenarios, a single node will act as both remote access gateway and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.
 
 .. image:: images/egress3.png
    :width: 50%
