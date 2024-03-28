@@ -819,3 +819,69 @@ Replace YOUR_IP_CIDR with the whitelist IP range (can be multiple ranges).
 After changes are made for your reverse proxy, ``docker-compose down && docker-compose up -d`` and you should be all set. You can now keep your dashboard secure and your API more available without having to change netmaker-ui ports.
 
 
+Setup Netmaker on IPv6 only machine
+=====================================
+
+This is not a guide how to add an overlay network(with IPv6) in Netmaker, it can be found in `Setup <https://docs.netmaker.io/getting-started.html#setup>`_ page.
+This is to setup Netmaker working on an IPv6 only machine.
+
+About the install script nm-quick.sh
+------------------------------------------
+
+At the moment which the document is written, the install script `nm-quick.sh` only supports IPv4. For the installation, the IPv4 needs to be enabled temporary anyway.
+
+Add AAAA record for domain name resolution
+------------------------------------------
+
+The Netmaker client communicates with Netmaker server by domain name.   AAAA record here is to resolve the domain name to IPv6 address.
+
+
+By default, Netmaker works on IPv4. Because Docker works on IPv4 by default.  After the installation, there are several steps to enable IPv6 for Docker and Netmaker.
+
+Enable IPv6 support for Docker
+------------------------------
+
+1. Add/Edit the configuration file `/etc/docker/daemon.json`:
+
+.. code-block:: json
+
+	{
+	  "experimental": true,
+	  "ip6tables": true
+	}
+
+2. Restart the Docker daemon for your changes to take effect.
+
+.. code-block::
+
+	sudo systemctl restart docker
+
+3. Create a new IPv6 network, for example,
+
+.. code-block::
+
+	docker network create --ipv6 --subnet 2001:0DB8::/112 ip6net
+
+where "ip6net" is the network name, "2001:0DB8::/112" is the network range.
+
+
+Enable IPv6 support for Netmaker
+---------------------------------
+
+1. Edit `docker-compose.yml` file and add the following lines at the bottom.
+
+.. code-block:: yaml
+
+	networks:
+	  ip6net:
+	    external: true
+
+2. The same in `docker-compose.yml` file, add `networks` field for every service.
+
+.. code-block:: yaml
+
+	networks:
+	  - ip6net
+
+3. Run commands `"docker-compose down"` and `"docker-compose up -d"` to restart Netmaker server
+
