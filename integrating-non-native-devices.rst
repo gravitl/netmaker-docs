@@ -15,7 +15,7 @@ However in some cases, it might not be ideal or even possible to install Netclie
 Generating a WireGuard Configuration File on Remote Access Gateway
 =====================================================================
 
-Netmaker allows you to generate and manage your VPN configuration files. For instructions on how to make a node a Remote Access Gateway and on how to create/generate VPN configuration files, please refer to the "Ingress Gateway/External Clients" section under the "How-to-Guides".
+Netmaker allows you to generate and manage your VPN configuration files. For instructions on how to make a node a Remote Access Gateway and on how to create/generate VPN configuration files, please refer to the "Remote Access Gateway/External Clients" section under the "How-to-Guides".
 
 You can also get the WireGuard VPN configuration by following these steps:
 

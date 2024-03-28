@@ -175,28 +175,28 @@ List all nodes. This displays information about each node such as the address as
 .. code-block::
 
   nmctl node list
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
-  |     NAME     |         ADDRESSES         | VERSION | NETWORK  | EGRESS | INGRESS | RELAY |                  ID                  |
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
-  | test_node    | 10.11.13.254              | v0.17.0 | test_net | no     | no      | no    | 938d7861-55fc-40a9-970d-6d70acfc3a80 |
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
+  |     NAME     |         ADDRESSES         | VERSION | NETWORK  | EGRESS | REMOTE ACCESS GATEWAY | RELAY |                  ID                  |
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
+  | test_node    | 10.11.13.254              | v0.17.0 | test_net | no     | no                    | no    | 938d7861-55fc-40a9-970d-6d70acfc3a80 |
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
 
-Using nmctl, we can turn the node into egress, ingress or a relay. Lets turn the node into an ingress by supplying the network name and node id as parameters.
+Using nmctl, we can turn the node into egress, remote access gateway or a relay. Lets turn the node into an remote access gateway by supplying the network name and node id as parameters.
 
 .. code-block::
 
-  nmctl node create_ingress test_net 938d7861-55fc-40a9-970d-6d70acfc3a80
+  nmctl node create_remote_access_gateway test_net 938d7861-55fc-40a9-970d-6d70acfc3a80
 
-Fetching the node list once again we can see that our node has been turned into an ingress.
+Fetching the node list once again we can see that our node has been turned into a remote access gateway.
 
 .. code-block::
 
   nmctl node list
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
-  |     NAME     |         ADDRESSES         | VERSION | NETWORK  | EGRESS | INGRESS | RELAY |                  ID                  |
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
-  | test_node    | 10.11.13.254              | v0.17.0 | test_net | no     | yes     | no    | 938d7861-55fc-40a9-970d-6d70acfc3a80 |
-  +--------------+---------------------------+---------+----------+--------+---------+-------+--------------------------------------+
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
+  |     NAME     |         ADDRESSES         | VERSION | NETWORK  | EGRESS | REMOTE ACCESS GATEWAY | RELAY |                  ID                  |
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
+  | test_node    | 10.11.13.254              | v0.17.0 | test_net | no     | yes                   | no    | 938d7861-55fc-40a9-970d-6d70acfc3a80 |
+  +--------------+---------------------------+---------+----------+--------+-----------------------+-------+--------------------------------------+
 
 
 Remote Access Clients
@@ -293,17 +293,17 @@ Example:-
     nmctl node [command]
 
   Available Commands:
-    create_egress  Turn a Node into a Egress
-    create_ingress Turn a Node into a Ingress
-    create_relay   Turn a Node into a Relay
-    delete         Delete a Node
-    delete_egress  Delete Egress role from a Node
-    delete_ingress Delete Ingress role from a Node
-    delete_relay   Delete Relay role from a Node
-    get            Get a node by ID
-    list           List all nodes
-    uncordon       Get a node by ID
-    update         Update a Node
+    create_egress                Turn a Node into a Egress
+    create_remote_access_gateway Turn a Node into a Remote Access Gateway
+    create_relay                 Turn a Node into a Relay
+    delete                       Delete a Node
+    delete_egress                Delete Egress role from a Node
+    delete_remote_access_gateway Delete Remote Access Gateway role from a Node
+    delete_relay                 Delete Relay role from a Node
+    get                          Get a node by ID
+    list                         List all nodes
+    uncordon                     Get a node by ID
+    update                       Update a Node
 
   Flags:
     -h, --help     help for node

@@ -117,4 +117,4 @@ A: Make sure that the gateway is running healthily and that you have access to i
 
 **Q: Other WireGuard-based VPNs interfere with Netmaker RAC.**
 
-A: This is a known issue. If you have other WireGuard-based VPNs running on your machine, they may interfere with Netmaker RAC. You can try to disable them and see if that fixes the issue. Pro-tip: Netmaker Pro offers internet gateway functionality, so you can use it just as a traditional VPN. For more information, explore the `Remote Access gateway feature <https://www.netmaker.io/features/ingress>`_.
+A: This is a known issue. If you have other WireGuard-based VPNs running on your machine, they may interfere with Netmaker RAC. You can try to disable them and see if that fixes the issue. Pro-tip: Netmaker Pro offers internet gateway functionality, so you can use it just as a traditional VPN. For more information, explore the `Remote Access gateway feature <https://www.netmaker.io/features/remote-access-gateway>`_.
