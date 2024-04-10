@@ -10,15 +10,42 @@ RAC is mostly suited for offsite machines that need access to a Netmaker network
 Download/Installation
 ***********************
 
-You can download the latest version of RAC from the Netmaker file server:
+**For Mac**, You can download the mac installer from the fileserver link above and run it. The open the GUI to start using RAC.!
 
-.. code-block::
+**For Windows**, you can download the remoteclientbundle.exe bundle (recommended as this install wireguard and other dependencies) or remote-access-client_86.msi installer and run it to install on your windows machine. You can then open the GUI to start using RAC!
 
-  https://fileserver.netmaker.org/releases/download/<version>
 
-Search for remote client and download the appropriate version for your operating system.
+For mobile devices, you can download the app from the respective app stores.
 
-For Linux (Debian/Ubuntu), you can also use the following command to download the latest version:
+**Google Play Store:**
+
+Scan the QR code
+
+.. image:: images/netmaker-rac-android.png
+   :width: 400px
+   :alt: Netmaker RAC on Google Play Store
+   :align: left
+
+Or use the following link:
+https://play.google.com/store/apps/details?id=com.net.netmaker&pli=1&utm_source=docs
+
+
+**Apple App Store:**
+
+Scan the QR code
+
+.. image:: images/netmaker-rac-apple.png
+   :width: 400px
+   :alt: Netmaker RAC on Apple App Store
+   :align: left
+
+Or use the following link:
+https://apps.apple.com/us/app/netmaker-rac/id6479694220?itsct=apps_box_badge&amp;itscg=30200
+
+
+**For Linux (Debian/Ubuntu):**
+
+You can also use the following command to download the latest version:
 
 .. code-block:: 
 
@@ -29,7 +56,7 @@ For Linux (Debian/Ubuntu), you can also use the following command to download th
    sudo apt install remote-client
 
 
-Red Hat Distros (Fedora/RedHat/CentOSRocky)
+**Red Hat Distros (Fedora/RedHat/CentOSRocky):**
 
 .. code-block::
 
@@ -42,9 +69,14 @@ Red Hat Distros (Fedora/RedHat/CentOSRocky)
 
 Following the above instructions, you can run RAC from your Linux desktop environment launcher or from the command line using the `remote-client` command.
 
-For Mac, You can download the mac installer from the fileserver link above and run it. Because the app needs to be run as root, open a teminal and enter the command ``sudo /Applications/NetmakerRemoteClient.app/Contents/MacOS/remote-client``.
 
-For Windows, you can download the remote-access-client_86.msi installer and run it to install on your windows machine. The app will need to be run as administrator. Right click on the desktop icon after installation and click on ``run as administrator``. 
+Not finding your OS? You can download the latest version of RAC from the our file server:
+
+.. code-block::
+
+  https://fileserver.netmaker.org/releases/download/<version>
+
+Search for remote client and download the appropriate version for your operating system.
 
 
 ******************
