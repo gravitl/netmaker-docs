@@ -18,6 +18,12 @@ You can download the latest version of RAC from the Netmaker file server:
 
 Search for remote client and download the appropriate version for your operating system.
 
+For mobile devices, you can download the app from the respective app stores.
+
+Google Play Store: https://play.google.com/store/apps/details?id=com.net.netmaker&pli=1&utm_source=docs
+
+Apple App Store: https://apps.apple.com/us/app/netmaker-rac/id6479694220?itsct=apps_box_badge&amp;itscg=30200
+
 For Linux (Debian/Ubuntu), you can also use the following command to download the latest version:
 
 .. code-block:: 
