@@ -1,9 +1,8 @@
-====================
 Integrating OAuth
 ====================
 
 Introduction
-==============
+-------------
 
 As of v0.14.5, Netmaker offers integration with the following OAuth providers: 
 
@@ -15,7 +14,7 @@ As of v0.14.5, Netmaker offers integration with the following OAuth providers:
 By integrating with an OAuth provider, your Netmaker users can log in via the provider, rather than the default simple auth.
 
 Configuring your provider
-===========================
+--------------------------
 
 In order to use OAuth, configure your OAuth provider (GitHub, Google, Azure AD).
 
@@ -35,7 +34,7 @@ Instructions for Microsoft Azure AD: https://oauth2-proxy.github.io/oauth2-proxy
 Instructions for OIDC: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider/#openid-connect-provider
 
 Configuring Netmaker
-======================
+---------------------
 
 After you have configured your OAuth provider, take note of the CLIENT_ID and CLIENT_SECRET. If you are using Azure for oauth, you may also want to note down the Azure tenant ID you wish to use.
 

@@ -7,19 +7,24 @@ Superadmin Signup
 
 .. include:: ui-reference.rst
    :start-after: Signup
-   :end-before: Username
+   :end-before: 1
 
 Input your username and a super memorable but strong password then click on the `Sign up` button. Once you've signed up, you can login to your Netmaker server with the account.
 
 .. include:: ui-reference.rst
    :start-after: Login
-   :end-before: Username
+   :end-before: 1
 
 
 
 .. include:: oauth.rst
 
-test
+testing
 
-.. include:: pro/pro-users.rst
+.. include:: pro/pro-users.txt
+   :end-before: Transferring super admin rights
 
+
+testing2
+
+.. include:: pro/rac.txt

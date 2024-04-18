@@ -1,0 +1,60 @@
+
+Using the Remote Access Client (RAC)
+=====================================
+Once a user has been attached to a remote access gateway, they can connect to a network using the remote access client. To do this, they will first need to log in using the credentials that were provided to them. Social login is also supported.
+
+.. image:: images/remote-access-client.png
+   :width: 80%
+   :alt: Remote access login
+   :align: center
+
+After successful login you will be shown all the networks and gateways you have given access to, so now you will be able to connect/disconnect/refresh your connection to a gateway. Internet gateways are depicted with a globe icon.
+An internet gateway can be used to route all your traffic through the gateway, this is useful if you want to access the internet without exposing your public IP address. This behaves like a traditional VPN.
+
+.. image:: images/remote-access-client-2.png
+   :width: 80%
+   :alt: Connect and disconnect
+   :align: center
+
+The remote access client also has the following options:
+
+* Refresh connection: This basically disconnects the current connection to the remote access gateway and then reconnects to it.
+* Reload clients: This reloads the client data on the page, which can be useful if the data has changed since the page was last loaded.
+
+.. image:: images/remote-access-client-3.png
+   :width: 80%
+   :alt: Reload clients
+   :align: center
+
+* Reset: This resets all connections to remote access gateways across all Netmaker servers and networks known to the client. This can be useful if you end up with a bad wireguard or network interface configuration or are having trouble connecting to a gateway. you should only use this option if Refresh connection does not work.
+
+
+Using Netmaker like a traditional VPN
+======================================
+
+Some remote access gateways, specifically internet gateways (depicted by globe icon) can route all your traffic through the them. This can be useful if you want to access the internet without exposing your public IP address. This behaves like a traditional VPN. Internet gateways is a Pro-only feature.
+
+
+Controlling RAC user sessions
+=============================
+
+On pro servers/tenants, the duration of a non-admin user's remote session can be controlled.
+This can be done by setting `RAC_AUTO_DISABLE` (to `true`) and `JWT_VALIDITY_DURATION` (to an integer in seconds) environment variables on the server. 
+
+With `RAC_AUTO_DISABLE` set to true, a non-admin user's remote sessions will be disabled after the duration specified in `JWT_VALIDITY_DURATION` has elapsed.
+The user will have to relogin to enable their remote session again.
+
+NOTE: The `JWT_VALIDITY_DURATION` environment variable also configures all the JWT token validity duration for all users, regardless of whether `RAC_AUTO_DISABLE` is set to `true` or not.
+
+
+FAQs and Known Issues
+=====================
+
+**Q: I am getting an error when trying to connect to a gateway.**
+
+A: Make sure that the gateway is running healthily and that you have access to it. Also try to "Refresh" and see if that fixes the issue. Otherwise "Reset" all connections and try again.
+
+
+**Q: Other WireGuard-based VPNs interfere with Netmaker RAC.**
+
+A: This is a known issue. If you have other WireGuard-based VPNs running on your machine, they may interfere with Netmaker RAC. You can try to disable them and see if that fixes the issue. Pro-tip: Netmaker Pro offers internet gateway functionality, so you can use it just as a traditional VPN. For more information, explore the `Remote Access gateway feature <https://www.netmaker.io/features/remote-access-gateway>`_.
