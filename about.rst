@@ -21,7 +21,7 @@ Netmaker is a tool for creating and managing virtual overlay networks. If you ha
 Netmaker takes these machines and creates a flat network so that they can all talk to each other easily and securely. 
 If you're familiar with AWS, it's like a VPC but made up of arbitrary computers. From the machine's perspective, all these other machines are in the same neighborhood, even if they're spread all over the world.
 
-Beyond creating a flat network, Netmaker introduces Ingress and Egress, which are gateways that control the flow of traffic into and out of the network. Netmaker also has ACLs, which control exactly which machines can reach each other. The end result is you can create much more complex networks than a simple mesh.
+Beyond creating a flat network, Netmaker introduces Remote Access Gateway and Egress, which are gateways that control the flow of traffic into and out of the network. Netmaker also has ACLs, which control exactly which machines can reach each other. The end result is you can create much more complex networks than a simple mesh.
 
 .. image:: images/netmaker-advanced.png
    :width: 80%

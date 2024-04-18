@@ -53,14 +53,14 @@ Use Cases
 1) Remote Access
 -------------------
 
-A common scenario would be to combine this with an "Ingress Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the ingress and egress gateways. The Ingress Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the Netmaker server as the Ingress, and one additional machine (in the private network you wish to reach), as the Egress.
+A common scenario would be to combine this with a "Remote Access Gateway" to create a simple method for accessing a home or office network. Such a setup would typically have only two nodes: the remote access and egress gateways. The Remote Access Gateway should usually be globally accessible, which makes the Netmaker server itself a good candidate. This means you need only the Netmaker server as the Remote Access Gateway, and one additional machine (in the private network you wish to reach), as the Egress.
 
 .. image:: images/egress2.png
    :width: 80%
    :alt: Gateway
    :align: center
 
-In some scenarios, a single node will act as both ingress and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.
+In some scenarios, a single node will act as both remote access gateway and egress! For instance, you can enable acess to a VPC using your Netmaker server, deployed with a public IP. Traffic comes in over the public IP (encrypted of course) and then routes to the VPC subnet via the egress gateway.
 
 .. image:: images/egress3.png
    :width: 50%
@@ -108,3 +108,51 @@ Advanced Use Cases
    https://www.reddit.com/r/PFSENSE/comments/vb4r3s/ip6_masquerading
 
 
+
+Egressing External Clients
+============================
+
+Unmanaged external clients that are directly connected to a Remote Access Gateway can also act as egressing machines. The idea is the same as egress gateways. The only difference is that Netclient is necessary with egress gateways, whilst only Wireguard is needed with egressing external clients. This feature is provisioned for situations or scenarios where installation of Netclient is not ideal or even possible. For example most VPN routers support WireGuard, but they are available only as plugins that are tailormade or closely coupled with the router's firmware or user interface. 
+While there are ways to make Netclient work for some routers, the integration could get cumbersome, obsolete, or compromising. Of course this feature is also applicable for simple or ad-hoc networking purposes so long as the external client supports iptables and IP forwarding.
+
+At the time of this writing, this feature only supports Linux-based external clients. But the remote machines can be anything, provided they are in the same local network as one of the egressing external client's network interface.
+
+Configuring Egressing External Clients
+----------------------------------------
+
+The configuration is pretty much the same as Egress Gateways. First, make sure that iptables is installed and IP forwarding is enabled. Please refer to your distro's documentation on how to do this. For Ubuntu you might do:
+
+.. code-block::
+
+   #update
+   apt-get update
+
+   #install iptables
+   apt-get install iptables
+
+   #enable IP forwarding
+   sysctl -w net.ipv4.ip_forward=1
+
+
+You can then responsibly specify the applicable egress ranges on the external client's VPN configuration, specifically in the "Additional Addresses" field as shown in the image below. It goes without saying that you can specify single addresses such as `172.16.1.2/32`.
+
+.. image:: images/integration-config-additional-addresses.jpg
+   :width: 80%
+   :alt: Client additional IP addresses range
+   :align: center
+
+Your Netmaker server will then pick up the egress ranges and propagate it to all the other managed devices in the netmaker network. And of course you can edit them anytime when necessary. For more information on how to create or edit client VPN configurations, please refer to these links:
+
+   - https://docs.netmaker.io/external-clients.html#adding-clients-to-a-gateway
+   - https://docs.netmaker.io/integrating-non-native-devices.html#generating-a-wireguard-configuration-file-on-remote-access-gateway
+
+In some cases you might need to add POSTROUTING rules. In Ubuntu, you might do:
+
+.. code-block::
+
+   #get the name of the specific network interface of the egressing client machine
+   # that is associated with the egress ranges that you have specified 
+   ip a
+
+   #add the necessary POSTROUTING rule, say the interface name is `eth1`
+   iptables -t nat -I POSTROUTING -o eth1 -j MASQUERADE
