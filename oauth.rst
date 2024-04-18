@@ -86,6 +86,8 @@ To create a new user, click the "Add a User" button on the Users page. Fill in t
    :alt: Edit User 2
    :align: center
 
+.. include_after_this_label
+
 Oauth Users
 -----------
 
