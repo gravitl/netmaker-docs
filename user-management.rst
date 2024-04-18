@@ -31,4 +31,4 @@ Input your username and a super memorable but strong password then click on the 
 
 
 .. include:: pro/rac.rst
-   :start-after: Using the Remote Access Client (RAC)
+   :start-after: .. include_after_this_label

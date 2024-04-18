@@ -90,6 +90,7 @@ To use RAC, you will need to have a Netmaker server running and have a user acco
 Check :ref:`this section <pro/pro-users:adding users>` on how to create a non-admin user.
 RAC is best suited for non-admin users who want to gain remote access to the network, this also provides admins fine-grained control over users in the network by attaching/removing them from a remote access gateway. Admins can also use RAC to gain remote access to the network with a different machine.
 
+.. include_after_this_label
 
 Using the Remote Access Client (RAC)
 ====================================
