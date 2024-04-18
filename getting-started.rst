@@ -10,7 +10,7 @@ Getting Started
    netclient
    advanced-client-install
    server-installation
-   oauth
+   user-management
 
 Setup
 =================
