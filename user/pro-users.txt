@@ -19,7 +19,7 @@ To add a user, go to the Users section and click the Add User button. Fill in th
 * As a super admin, you can add users with the role of admin or user.
 * As an admin, you can only add users with the role of user.
 
-.. image:: _images/add-user.png
+.. image:: images/add-user.png
    :width: 80%
    :alt: Add User
    :align: center
@@ -31,14 +31,14 @@ Attaching or removing user from a remote access gateway
 To attach users to a remote access gateway or remove users from a gateway, you will need to have the gateway set up. 
 Once the remote access gateway is set up, you will see an option to attach or remove users from the gateway's dropdown menu on the table row.
 
-.. image:: _images/gateway-dropdown.png
+.. image:: images/gateway-dropdown.png
    :width: 80%
    :alt: Add Remove User dropdown
    :align: center
 
 You can click the button to either attach or remove a user
 
-.. image:: _images/attach-remove-users.png
+.. image:: images/attach-remove-users.png
    :width: 80%
    :alt: Attach Remove User Modal
    :align: center
@@ -51,7 +51,7 @@ Super admin rights can be transferred only to another admin. To do this, on the 
 You will see an option to transfer admin rights. On clicking it, a dialog box will open allowing you to select any admin 
 to transfer super admin rights to.
 
-.. image:: _images/transfer-super-admin-rights.png
+.. image:: images/transfer-super-admin-rights.png
    :width: 80%
    :alt: transfer super admin rights
    :align: center

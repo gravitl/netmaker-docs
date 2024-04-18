@@ -24,8 +24,8 @@ Input your username and a super memorable but strong password then click on the 
    :start-after: .. include_after_this_label
 
 
-.. include:: pro/pro-users.txt
+.. include:: pro/pro-users.rst
    :end-before: Transferring super admin rights
 
 
-.. include:: pro/rac.txt
+.. include:: pro/rac.rst
