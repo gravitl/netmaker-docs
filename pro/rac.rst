@@ -95,7 +95,7 @@ Using the Remote Access Client (RAC)
 ====================================
 Once a user has been attached to a remote access gateway, they can connect to a network using the remote access client. To do this, they will first need to log in using the credentials that were provided to them. Social login is also supported.
 
-.. image:: images/users/remote-access-client.png
+.. image:: /pro/images/users/remote-access-client.png
    :width: 80%
    :alt: Remote access login
    :align: center
@@ -103,7 +103,7 @@ Once a user has been attached to a remote access gateway, they can connect to a 
 After successful login you will be shown all the networks and gateways you have given access to, so now you will be able to connect/disconnect/refresh your connection to a gateway. Internet gateways are depicted with a globe icon.
 An internet gateway can be used to route all your traffic through the gateway, this is useful if you want to access the internet without exposing your public IP address. This behaves like a traditional VPN.
 
-.. image:: images/users/remote-access-client-2.png
+.. figure:: /pro/images/users/remote-access-client-2.png
    :width: 80%
    :alt: Connect and disconnect
    :align: center
@@ -113,7 +113,7 @@ The remote access client also has the following options:
 * Refresh connection: This basically disconnects the current connection to the remote access gateway and then reconnects to it.
 * Reload clients: This reloads the client data on the page, which can be useful if the data has changed since the page was last loaded.
 
-.. image:: images/users/remote-access-client-3.png
+.. image:: ./pro/images/users/remote-access-client-3.png
    :width: 80%
    :alt: Reload clients
    :align: center
