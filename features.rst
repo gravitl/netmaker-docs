@@ -5,7 +5,10 @@ Features
 User Management
 ===============
 
-:ref:`user-management'
+.. toctree::
+   :maxdepth: 1
+
+   user-management
 
 
 Egress Gateway
