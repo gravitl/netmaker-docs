@@ -3,14 +3,27 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=====================
+Netmaker Professional
+=====================
+
+.. toctree::
+   :maxdepth: 1
+
+   pro-setup
+   pro-users
+   pro-relay-server
+   pro-metrics
+   pro-branding
+   rac
+   pro-failovers
+   internet-gateways
+
 
 .. image:: ../images/netmaker.png
    :width: 100%
    :alt: Netmaker WireGuard
    :align: center
-
-Netmaker Professional
-======================
 
 Netmaker Professional is our advanced Netmaker offering for business use cases. It offers all the features of community edition plus:
 
@@ -26,72 +39,3 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
 
 - **Internet Gateways:** These work similar to traditional VPNs, and can work with netclients (hosts in the mesh network) as well as with remote devices connected to the network via client configs.
 
-
-Setup
---------
-
-How to set up Netmaker Professional
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-setup
-
-Users
----------------
-
-.. toctree::
-   :maxdepth: 2
-   
-   pro-users
-
-Relays
----------------
-
-.. toctree::
-   :maxdepth: 2
-   
-   pro-relay-server
-
-Metrics
-------------------------------------
-
-How to view network metrics in Netmaker Professional
-
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-metrics
-
-Branding
-------------
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-branding
-
-Remote Access Client
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   rac
-
-FailOvers
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-failovers
-
-Internet Gateways
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   internet-gateways

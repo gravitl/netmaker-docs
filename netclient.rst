@@ -1,3 +1,5 @@
+.. _netclient:
+
 ==========
 Netclient 
 ==========

@@ -22,8 +22,7 @@ This behaviour also happens with remote access gateways and their connected clie
 Usage
 ======
 
-Create an internet gateway
---------------------------
+**Create an internet gateway**
 
 .. image:: images/inet-gw-create.png
    :alt: internet gateway creation
@@ -41,8 +40,7 @@ Create an internet gateway
 **NOTE:** A host already connected to an internet gateway cannot be a gateway itself. ie: internet gateway chaining is not supported currently.
 
 
-Update an internet gateway
---------------------------
+**Update an internet gateway**
 
 .. image:: images/inet-gw-update.png
    :alt: internet gateway update
@@ -54,8 +52,7 @@ Update an internet gateway
 3. Update the gateway and save changes
 
 
-Delete an internet gateway
---------------------------
+**Delete an internet gateway**
 
 .. image:: images/inet-gw-delete.png
    :alt: internet gateway deletion

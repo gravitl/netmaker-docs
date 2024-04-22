@@ -2,34 +2,32 @@
 Features
 =========
 
-User Management
-===============
-
 .. toctree::
    :maxdepth: 1
 
    user-management
+   egress-gateway
+   external-clients
+   acls
+   pro/index
 
+**User Management**
 
-Egress Gateway
-===============
+:ref:`user-manage`
+
+**Egress Gateway**
 
 Allows clients (nodes and ext clients) to reach external networks.
 
 :ref:`egress`
 
-
-Remote Access Gateways & Clients
-=================================
+**Remote Access Gateways & Clients**
 
 A remote access gateway enables "external" clients to connect to the network. External clients refer to clients that are not part of the mesh network, but need to connect to it. This could be a laptop, mobile device, or even a server that is not part of the network.
 
 :ref:`remote-access`
 
-
-
-Access Control Lists
-======================
+**Access Control Lists**
 
 ACLs control communications between nodes on a network
 
