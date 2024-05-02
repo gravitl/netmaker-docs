@@ -3,77 +3,39 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=====================
+Netmaker Professional
+=====================
+
+.. toctree::
+   :maxdepth: 1
+
+   pro-setup
+   pro-users
+   pro-relay-server
+   pro-metrics
+   pro-branding
+   rac
+   pro-failovers
+   internet-gateways
+
 
 .. image:: ../images/netmaker.png
    :width: 100%
    :alt: Netmaker WireGuard
    :align: center
 
-Setup
---------
+Netmaker Professional is our advanced Netmaker offering for business use cases. It offers all the features of community edition plus:
 
-How to set up Netmaker Professional
+- **Metrics:** Nodes collect networking metrics such as latency, transfer, and connectivity status. These are displayed in the Netmaker UI, and also exported to Grafana via Prometheus.
 
-.. toctree::
-   :maxdepth: 2
+- **Users:** On community you can only create admin users, where as on PRO it gives ability to create non-admin users which you can pair with remote-access gateway to segment users on different networks.
 
-   pro-setup
+- **Remote Access Client:** Netmaker Professional comes with a remote access client that allows you to connect to your network from anywhere. This is a great way to connect to your network from a laptop or mobile device (soon).
 
-Users
----------------
+- **FailOvers:** FailOvers are made to help two peers communicate where they cannot talk directly due to their firewall restrictions, in which case their connection falls back through a failover node set by the user in the network.
 
-.. toctree::
-   :maxdepth: 2
-   
-   pro-users
+- **Relays:** All traffic routing to and from in a network for a relayed machine will go through the relay machine.
 
-Relays
----------------
+- **Internet Gateways:** These work similar to traditional VPNs, and can work with netclients (hosts in the mesh network) as well as with remote devices connected to the network via client configs.
 
-.. toctree::
-   :maxdepth: 2
-   
-   pro-relay-server
-
-Metrics
-------------------------------------
-
-How to view network metrics in Netmaker Professional
-
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-metrics
-
-Branding
-------------
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-branding
-
-Remote Access Client
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   rac
-
-FailOvers
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   pro-failovers
-
-Internet Gateways
------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   internet-gateways

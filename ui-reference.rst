@@ -10,7 +10,7 @@ Authentication
 Signup
 --------
 
-When you start Netmaker for the first time, you will be prompted to create an admin account from the UI like below
+When you start Netmaker for the first time, you will be prompted to create a superadmin account from the UI like below
 
 .. image:: images/ui-signup.png
    :width: 80%

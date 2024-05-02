@@ -26,10 +26,7 @@ Netclient
 ===========
 Netclient manages WireGuard on client devices (nodes)
 
-.. toctree::
-   :maxdepth: 2
-
-   netclient
+:ref:`netclient`
 
 NMCTL
 ======

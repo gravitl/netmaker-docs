@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Netmaker'
-copyright = '2023, Netmaker Inc.'
+copyright = '2024, Netmaker Inc.'
 author = 'Netmaker'
 
 # The full version, including alpha/beta/rc tags
@@ -57,8 +57,8 @@ html_theme_options = {
     "repo_name": "Netmaker",
     'nosidebar': True,
     "repo_type": "github",
-    'color_primary': 'indigo',
-    'color_accent': 'light-blue',
+    'color_primary': 'blue',
+    'color_accent': 'teal',
     'logo_icon': '&#xe869',
     'globaltoc_depth': 2,
     'globaltoc_collapse': True,
