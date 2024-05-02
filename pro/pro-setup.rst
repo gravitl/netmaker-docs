@@ -1,6 +1,6 @@
-=================================
-Netmaker Professional
-=================================
+===========================
+Netmaker Professional Setup
+===========================
 
 This guide covers how to get setup with Netmaker Professional. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
 
