@@ -3,21 +3,33 @@ Netmaker Remote Access Client (RAC)
 ===================================
 
 The Netmaker Remote Access Client, RAC for short is a GUI tool for easily getting access to a Netmaker network.
-RAC is mostly suited for offsite machines that need access to a Netmaker network. It supports Windows, Mac and Linux (mobile support coming soon).
+RAC is mostly suited for offsite machines that need access to a Netmaker network. It supports Windows, Mac, Linux and mobile (iOS and Android).
 
 
 ***********************
 Download/Installation
 ***********************
 
-**For Mac**, You can download the mac installer from the fileserver link above and run it. The open the GUI to start using RAC.!
+**For Mac:**
 
-**For Windows**, you can download the remoteclientbundle.exe bundle (recommended as this install wireguard and other dependencies) or remote-access-client_86.msi installer and run it to install on your windows machine. You can then open the GUI to start using RAC!
+You can download the M1 or Intel Mac installer from our fileserver link (https://fileserver.netmaker.org/releases/download/latest) run it. Then open the GUI to start using RAC!
+
+
+-----------------------------
+
+
+**For Windows:**
+
+You can download the `remoteclientbundle.exe` bundle (recommended as this install wireguard and other dependencies) or `remote-access-client_86.msi` installer and run it to install on your windows machine. You can then open the GUI to start using RAC!
+Download link: https://fileserver.netmaker.org/releases/download/latest
+
+
+-----------------------------
 
 
 For mobile devices, you can download the app from the respective app stores.
 
-**Google Play Store:**
+**Google Play Store (Android):**
 
 Scan the QR code
 
@@ -30,7 +42,7 @@ Or use the following link:
 https://play.google.com/store/apps/details?id=com.net.netmaker&pli=1&utm_source=docs
 
 
-**Apple App Store:**
+**Apple App Store (iOS):**
 
 Scan the QR code
 
@@ -43,7 +55,10 @@ Or use the following link:
 https://apps.apple.com/us/app/netmaker-rac/id6479694220?itsct=apps_box_badge&amp;itscg=30200
 
 
-**For Linux (Debian/Ubuntu):**
+-----------------------------
+
+
+**Debian/Ubuntu Linux:**
 
 You can also use the following command to download the latest version:
 
@@ -70,11 +85,11 @@ You can also use the following command to download the latest version:
 Following the above instructions, you can run RAC from your Linux desktop environment launcher or from the command line using the `remote-client` command.
 
 
+-----------------------------
+
+
 Not finding your OS? You can download the latest version of RAC from the our file server:
-
-.. code-block::
-
-  https://fileserver.netmaker.org/releases/download/<version>
+https://fileserver.netmaker.org/releases/download/latest
 
 Search for remote client and download the appropriate version for your operating system.
 
