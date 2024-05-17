@@ -10,32 +10,73 @@ Get a License
 
 Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the switch tenant dashboard.
 
-.. image:: images/pro-aftersignup.png
+.. image:: images/pro-aftersignup.jpg
    :width: 80%
    :alt: screeen after signup on SAAS
    :align: center
 
 
-Click the `` create tenant `` button and a modal will pop up. If you are a new user you can follow the link to setup a self hosted instance of Netmaker for a free 14 day trial, for existing users click on the contact us link.
+Like many cloud service providers, payment information is required in order to create resources. This can be in a form of Debit/Credit card information or a US Bank account. Click on the "Manage Billing" menu to open the Billing Information form.
 
-.. image:: images/pro-createtenantmodal.png
+.. image:: images/billing-info-form.jpg
    :width: 80%
-   :alt: selfhosted switch
+   :alt: Billing Information Form
    :align: center
 
-After you click on the link, you will be taken to a page to fill out a licence request form. A representative will reach out to you to get you setup with a self-hosted tenant.
 
-.. image:: images/pro-contactusform.png
+Click on the "Manage payment details" button in order to add your payment method. Once done, click on the "Return to Netmaker, Inc" link.
+   
+.. image:: images/payment-method-form.jpg
    :width: 80%
-   :alt: selfhosted switch
+   :alt: Payment Method Form
    :align: center
 
-Once you have your tenant, you can click on manage account from the tenants table. Then you will need to add payment details before you can use your tenant, click on the stripe button to go to the stripe page and enter your payment info.
+
+For first time users, Netmaker offers a free 14-day trial of the Professional plan, of either a SaaS tenant or an On-Prem tenant.
+
+.. image:: images/14-day-trial.jpg
+   :width: 80%
+   :alt: 14-day trial
+   :align: center
+
+
+Click on the "Create an On-Prem tenant" option and a modal will pop up. You can toggle between a Monthly or a Yearly subscription after your trial period ends. Once your done, click on the Next button.
+
+.. image:: images/pricing-and-limits.jpg
+   :width: 80%
+   :alt: Pricing and Limits
+   :align: center
+
+
+Input the name of your new tenant then click on the Next button.
+
+.. image:: images/tenant-name-form.jpg
+   :width: 80%
+   :alt: Tenant name form
+   :align: center
+
+
+Review your new tenant details then click on the Create Tenant button.
+
+.. image:: images/review-tenant-details-form.jpg
+   :width: 80%
+   :alt: Review tenant details
+   :align: center
+
+
+Once created, your new tenant should show up in the Tenants page. Click on the Manage Account button to view its details.
+
+.. image:: images/tenants-list-page.jpg
+   :width: 80%
+   :alt: Tenants page
+   :align: center
+
+
 
 Setup your server
 =================================
 
-You will need the licence key and tenant id from the settings page back at the account management page on the settings tab.
+You will need the Licence Key and Tenant ID which you will find on the Settings tab.
 
 .. image:: images/pro-license-key2.png
     :width: 80%
@@ -49,9 +90,10 @@ Once you have your license key and tenant ID, you can get the nm-quick installer
     
     wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh
     chmod +x nm-quick.sh
-    bash nm-quick.sh
+    bash nm-quick.sh -u
 
-Follow the prompts for a pro edition server. provide the license key and tenant id when prompted. 
+Follow the prompts for a pro edition server. provide the License Key and Tenant ID when prompted. 
+
 
 Upgrade to Pro from Community Edition
 ======================================
@@ -81,7 +123,7 @@ After that run the following command:
 
 .. code-block::
 
-    docker kill netmaker netmaker-ui && docker-compose up -d 
+    docker kill netmaker netmaker-ui && docker compose up -d 
 
 When you browse to your self-hosted Netmaker via dashboard.<YOUR_BASE_DOMAIN>, you should see the professional UI and a new Dashboard. The top menu bar will have relays and metrics added.
 
