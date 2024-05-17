@@ -1,8 +1,8 @@
 .. _pro-users:
 
-
+=================================
 Users in Netmaker Professional
----------------------------------
+=================================
 
 Netmaker Professional offers advanced user management features. The super admin can create users with either a user or admin role. Only Admins can access the dashboard, the normal users can use remote access client to join the network through a gateway.
 Admins can add users and assign them to remote access gateways, which includes managing the user's access to different remote access gateways.
