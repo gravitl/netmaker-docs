@@ -8,7 +8,7 @@ This guide covers how to get setup with Netmaker Professional. For pricing,visit
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the switch tenant dashboard.
+Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the tenant creation modal. For first time users, Netmaker offers a free 14-day trial of the Professional plan, of either a SaaS tenant or an On-Prem tenant.
 
 .. image:: images/pro-aftersignup.jpg
    :width: 80%
@@ -16,39 +16,8 @@ Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netma
    :align: center
 
 
-Like many cloud service providers, payment information is required in order to create resources. This can be in a form of Debit/Credit card information or a US Bank account. Click on the "Manage Billing" menu to open the Billing Information form.
 
-.. image:: images/billing-info-form.jpg
-   :width: 80%
-   :alt: Billing Information Form
-   :align: center
-
-
-Click on the "Manage payment details" button in order to add your payment method. Once done, click on the "Return to Netmaker, Inc" link.
-   
-.. image:: images/payment-method-form.jpg
-   :width: 80%
-   :alt: Payment Method Form
-   :align: center
-
-
-For first time users, Netmaker offers a free 14-day trial of the Professional plan, of either a SaaS tenant or an On-Prem tenant.
-
-.. image:: images/14-day-trial.jpg
-   :width: 80%
-   :alt: 14-day trial
-   :align: center
-
-
-Click on the "Create an On-Prem tenant" option and a modal will pop up. You can toggle between a Monthly or a Yearly subscription after your trial period ends. Once your done, click on the Next button.
-
-.. image:: images/pricing-and-limits.jpg
-   :width: 80%
-   :alt: Pricing and Limits
-   :align: center
-
-
-Input the name of your new tenant then click on the Next button.
+Click on the "Create an On-Prem tenant" option. Input the name of your new tenant then click on the Next button.  
 
 .. image:: images/tenant-name-form.jpg
    :width: 80%
@@ -56,7 +25,23 @@ Input the name of your new tenant then click on the Next button.
    :align: center
 
 
-Review your new tenant details then click on the Create Tenant button.
+You can toggle between a Monthly or a Yearly subscription plan for when your trial period ends. Click on the "Tier breakdown" button to view the details of the plan. Once your done, click on the "Add Payment Details in Stripe" button.
+
+.. image:: images/pricing-and-limits.jpg
+   :width: 80%
+   :alt: Pricing and Limits
+   :align: center
+
+
+Like many cloud service providers, payment information is required in order to create resources even during trial period. This can be in a form of Debit/Credit card information or a US Bank account. Fillout the form and then click on the "Add" button.
+
+.. image:: images/payment-method-form.jpg
+   :width: 80%
+   :alt: Payment Method Form
+   :align: center
+
+
+You should automatically be redirected back to the tenant creation modal. Review your new tenant details then click on the Create Tenant button.
 
 .. image:: images/review-tenant-details-form.jpg
    :width: 80%
@@ -76,9 +61,9 @@ Once created, your new tenant should show up in the Tenants page. Click on the M
 Setup your server
 =================================
 
-You will need the Licence Key and Tenant ID which you will find on the Settings tab.
+You will need the Licence Key and Tenant ID which you can find on the Settings tab.
 
-.. image:: images/pro-license-key2.png
+.. image:: images/pro-license-key2.jpg
     :width: 80%
     :alt: License keys
     :align: center
