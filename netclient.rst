@@ -96,10 +96,10 @@ Windows
 ===============
 
 
-MSI Installer
---------------
+Bundled Installer
+-----------------
 
-Download Link: https://fileserver.netmaker.org/latest/netclient_x86.msi 
+Download Link: https://fileserver.netmaker.org/latest/netclientbundle.exe
 
 Mac
 ============
