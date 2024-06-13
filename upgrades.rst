@@ -24,7 +24,7 @@ As of v0.20.5, the Netclient should automatically upgrade itself when it detects
 
 **For Linux and Freebsd:** Download the netclient for your target version, OS, and arch, from  `the fileserver <https://fileserver.netmaker.io/releases/download>`_. Then run "./netclient install" from the downloaded executable in your terminal.  
 
-**For Mac and Windows:** Download and run the installer (.MSI for Windows, .PKG for Mac) for your target version, OS, and arch, from `the fileserver <https://fileserver.netmaker.io/releases/download>`_. Then, run the installer.  
+**For Mac and Windows:** Download and run the installer (.EXE for Windows, .PKG for Mac) for your target version, OS, and arch, from `the fileserver <https://fileserver.netmaker.io/releases/download>`_. Then, run the installer.  
 
 Server Upgrades (v0.20.0+)
 ========================================

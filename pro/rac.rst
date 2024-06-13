@@ -12,7 +12,7 @@ Download/Installation
 
 **For Mac:**
 
-You can download the M1 or Intel Mac installer from our fileserver link (https://fileserver.netmaker.org/releases/download/latest) run it. Then open the GUI to start using RAC!
+You can download the M1 or Intel Mac installer from our fileserver link (https://fileserver.netmaker.io/releases/download/latest) run it. Then open the GUI to start using RAC!
 
 
 -----------------------------
@@ -20,8 +20,8 @@ You can download the M1 or Intel Mac installer from our fileserver link (https:/
 
 **For Windows:**
 
-You can download the `remoteclientbundle.exe` bundle (recommended as this install wireguard and other dependencies) or `remote-access-client_86.msi` installer and run it to install on your windows machine. You can then open the GUI to start using RAC!
-Download link: https://fileserver.netmaker.org/releases/download/latest
+You can download the `remoteclientbundle.exe` bundle (recommended as this install wireguard and other dependencies) or `remote-access-client_86.msi` installer (MSI doesnt install any dependencies) and run it to install on your windows machine. You can then open the GUI to start using RAC!
+Download link: https://fileserver.netmaker.io/latest/remoteclientbundle.exe 
 
 
 -----------------------------
@@ -89,7 +89,7 @@ Following the above instructions, you can run RAC from your Linux desktop enviro
 
 
 Not finding your OS? You can download the latest version of RAC from the our file server:
-https://fileserver.netmaker.org/releases/download/latest
+https://fileserver.netmaker.io/releases/download/latest
 
 Search for remote client and download the appropriate version for your operating system.
 
