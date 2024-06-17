@@ -116,9 +116,9 @@ Brew Install
 GUI Installer (for v0.22.0 and below)
 -------------------------------------
 
-Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-M1.pkg
+Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/latest/Netclient-M1.pkg
 
-Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-Intel.pkg
+Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/latest/Netclient-Intel.pkg
 
 Replace version number in URL with the version you want to install.
 

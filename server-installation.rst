@@ -33,6 +33,11 @@ In most situations, if you wish to modify a server setting, set it in the netmak
 Variable Description
 ----------------------
 
+NM_EMAIL
+    **Default** ""
+
+    **Description** Email used for SSL certificates
+
 SERVER_NAME
     **Default:** ""
 
@@ -164,13 +169,6 @@ VERBOSITY:
 
     **Description:** Specify the level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.
 
-
-Config File Reference
------------------------
-A config file may be placed under config/environments/<env-name>.yml. To read this file at runtime, provide the environment variable NETMAKER_ENV at runtime. For instance, dev.yml paired with ENV=dev. Netmaker will load the specified Config file. This allows you to store and manage configurations for different environments. Below is a reference Config File you may use.
-
-.. literalinclude:: ./examplecode/dev.yaml
-  :language: YAML
 
 Compose File - Annotated
 --------------------------------------
@@ -334,7 +332,7 @@ If using rqlite or postgres, you must change the DATABASE environment/config var
 Server Setup (using sqlite)
 ---------------------------
 
-1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/download/$VERSION/netmaker``
+1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/latest/download/netmaker-linux-amd64``
 2. Move the binary to /usr/sbin and make it executable.
 3. create a config file. /etc/netmaker/netmaker.yml
 
@@ -380,7 +378,7 @@ UI Setup
 The following uses Caddy as a file server/proxy.
 
 1. Download and Unzip UI asset files from https://github.com/gravitl/netmaker-ui/releases and put them in /var/www/netmaker
-    ``sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/download/latest/netmaker-ui.zip``
+    ``sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/latest/download/netmaker-ui.zip``
     ``sudo unzip /tmp/netmaker-ui.zip -d /var/www/netmaker``
 
 2. Create config.js in /var/www/netmaker
