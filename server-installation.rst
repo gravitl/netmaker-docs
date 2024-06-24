@@ -92,12 +92,6 @@ UI_IMAGE_TAG
 
     **Description** The tag used for the netmaker ui docker image. You can set it to "latest" to get the most up to date version. To stay on a certain version set the tag to the version you would like. ex: v0.24.2.
 
-NODE_ID
-
-    **Default** netmaker-server-1
-
-    **Description** used for HA - identifies this server vs other servers
-
 METRICS_EXPORTER
 
     **Default** off
