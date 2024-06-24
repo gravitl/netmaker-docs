@@ -107,14 +107,13 @@ Brew Install
   (optional) brew audit netclient
   brew install netclient
 
-GUI Installer (for v0.22.0 and below)
+Installer
 -------------------------------------
 
 Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/latest/Netclient-M1.pkg
 
 Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/latest/Netclient-Intel.pkg
 
-Replace version number in URL with the version you want to install.
 
 
 Docker
