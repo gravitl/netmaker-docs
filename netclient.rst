@@ -93,7 +93,7 @@ Windows
 Bundled Installer
 -----------------
 
-Download Link: https://fileserver.netmaker.org/latest/netclientbundle.exe
+Download Link: https://fileserver.netmaker.org/releases/download/latest/netclientbundle.exe
 
 Mac
 ============
