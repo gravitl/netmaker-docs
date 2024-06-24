@@ -74,12 +74,6 @@ Arch Distros (arch/manjaro/endeavouros)
 
   yay -S netclient
 
-OpenWRT Distros (mips/mipsle)
-------------------------------------------------
-
-.. code-block::
-
-refer to Advanced Client Installation :ref:`advanced-client-install:Notes on OpenWRT` 
 
 OpenSUSE (tumbleweed/leap)
 ---------------------------------------------------------------------
