@@ -55,6 +55,11 @@ Quick Install
 
 **IMPORTANT:** From v0.22.0 the install script will install PRO version of netmaker with a 30-day free trial, for you to try out full capabilities of netmaker.
 
+Integrating OAuth
+====================
+
+Users are also allowed to join a Netmaker server via OAuth. They can do this by clicking the "Login with SSO" button on the dashboard's login page. Check out the :doc:`integrating oauth docs <./oauth>`.
+
 After trial period ends:
 =========================
 
@@ -66,6 +71,7 @@ After trial period ends:
     b. if you wish to downgrade to community version
     
         i. Run `/root/nm-quick.sh -d`
+
 
 1. **To get started the easiest way, visit our SaaS platform to set up a netmaker server with just a few clicks** `<https://app.netmaker.io>`_
 
