@@ -37,7 +37,7 @@ Your server will host several services (netmaker server, UI, etc.) each of which
 - Use a publicly owned domain (e.x. example.com, mysite.biz)
 - Designate a subdomain (e.g. netmaker.example.com) for netmaker's services (e.g. dashboard.netmaker.example.com) 
 - Make sure you have permission and access to modify DNS records for your domain (e.x: Route53)
-- **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on subdomains you must be aware of, which can cause issues once Netmaker is deployed. Cloudflare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
+- **Note on Cloudflare:** Many of our users use Cloudflare for DNS. Cloudflare has limitations on total dns records which you must be aware of, which can cause issues deplyoing multiple subdomains for netmaker. Cloudflare will also proxy connections, which MQ does not like. This can be disabled in the Cloudflare DNS dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
 
 
 Quick Install
