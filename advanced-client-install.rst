@@ -218,16 +218,12 @@ For example, in UFW you may do:
   #set firewall to log only the blocked traffic
   ufw logging low
 
-.. code-block::
-
   #clear out the current logs
   cat /dev/null | sudo tee /var/log/ufw.log
-​
-.. code-block::
+
 ​  #reload ufw
   ufw reload
 
-.. code-block::
   #filter the logs
   cat /var/log/ufw.log | grep -e <netmaker server IP> -e <other nodes' IPs> 
 
