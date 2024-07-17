@@ -21,7 +21,7 @@ You can download the M1 or Intel Mac installer from our fileserver link (https:/
 **For Windows:**
 
 You can download the `remoteclientbundle.exe` bundle (recommended as this install wireguard and other dependencies) or `remote-access-client_86.msi` installer (MSI doesnt install any dependencies) and run it to install on your windows machine. You can then open the GUI to start using RAC!
-Download link: https://fileserver.netmaker.io/latest/remoteclientbundle.exe 
+Download link: https://fileserver.netmaker.io/releases/download/latest/remoteclientbundle.exe 
 
 
 -----------------------------
