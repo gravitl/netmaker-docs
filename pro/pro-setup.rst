@@ -2,21 +2,41 @@
 Netmaker Professional Setup
 ===========================
 
-This guide covers how to get setup with Netmaker Professional. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
+This guide covers how to get setup with Netmaker Professional. For pricing, visit `our pricing page <https://www.netmaker.io/pricing>`_
 
 
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the tenant creation modal. For first time users, Netmaker offers a free 14-day trial of the Professional plan, of either a SaaS tenant or an On-Prem tenant.
+Signup here `<https://account.netmaker.io/signup>`_ to get a license for your self-hosted Netmaker. 
+Never miss to input your Firstname and Lastname.
+
+.. image:: images/profile-form-after-signup---regular-email.jpg
+   :width: 80%
+   :alt: Profile form after signup on SAAS with regular email
+   :align: center
+
+.. image:: images/profile-form-after-signup---sso.jpg
+   :width: 80%
+   :alt: Profile form after signup on SAAS with SSO
+   :align: center
+
+When you login to the site for the first time, normally you will be automatically directed to the tenant creation modal as shown in the first image below. 
+But if, for some reason, you happen to have missed inputting your Firstname and Lastname after signing up, the Profile page will show up instead. 
+Click on the `>` icon to expand the Profile form where you can input your profile info because this is required when creating tenants.
 
 .. image:: images/pro-aftersignup.jpg
    :width: 80%
-   :alt: screeen after signup on SAAS
+   :alt: screeen after first login on SAAS
    :align: center
 
 
+.. image:: images/missed-profile-info.jpg
+   :width: 80%
+   :alt: screeen after first login on SAAS - missed profile info
+   :align: center
 
+For first time users, Netmaker offers a free 14-day trial of the Professional plan, of either a SaaS tenant or an On-Prem tenant.
 Click on the "Create an On-Prem tenant" option. Input the name of your new tenant then click on the Next button.  
 
 .. image:: images/tenant-name-form.jpg
@@ -25,7 +45,8 @@ Click on the "Create an On-Prem tenant" option. Input the name of your new tenan
    :align: center
 
 
-You can toggle between a Monthly or a Yearly subscription plan for when your trial period ends. Click on the "Tier breakdown" button to view the details of the plan. Once your done, click on the "Add Payment Details in Stripe" button.
+You can toggle between a Monthly or a Yearly subscription plan for when your trial period ends. 
+Click on the "Tier breakdown" button to view the details of the plan. Once you're done, click on the "Add Payment Details in Stripe" button.
 
 .. image:: images/pricing-and-limits.jpg
    :width: 80%
@@ -61,7 +82,7 @@ Once created, your new tenant should show up in the Tenants page. Click on the M
 Setup your server
 =================================
 
-You will need the Licence Key and Tenant ID which you can find on the Settings tab.
+You will need the Licence Key and the Tenant ID which are found on the Settings tab.
 
 .. image:: images/pro-license-key2.jpg
     :width: 80%
@@ -112,7 +133,7 @@ After that run the following command:
 
 When you browse to your self-hosted Netmaker via dashboard.<YOUR_BASE_DOMAIN>, you should see the professional UI and a new Dashboard. The top menu bar will have relays and metrics added.
 
-.. image:: images/pro-new-dashboard.png
+.. image:: images/pro-new-dashboard.jpg
     :width: 80%
     :alt: new dashboard
     :align: center
