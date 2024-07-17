@@ -188,6 +188,51 @@ An admin creates an enrollment key in the "Enrollment Keys" section of the UI. U
 For first time installations, you can run the Install Command. For additional networks, simply run ``netclient join -t <enrollment key>``.
 
 
+Firewall Settings
+======================
+
+On Windows machines, it is possible to allow programs or applications through the firewall. Thus you might want to allow Netclient and, depending on your setup, WireGuard.
+
+On Linux, these necessary ports are needed to be opened:
+
+  - UDP and TCP ports 51821-51830
+  - TCP ports 80 and 443
+  - UDP and TCP port 53 for DNS
+
+In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
+
+  - UDP ports 19302 & 3478 for STUN
+  - TCP port 3479 for TURN
+  - TCP ports 1883 & 8883 for MQTT
+  - TCP ports 8083 & 8084 for EMQX Websocket
+  - TCP port 8081 for the NM API
+
+If the public port is not in the range of 51821-51830, set a static one and allow that port 
+
+For advanced use cases, you might need to view your device's firewall logs, or in case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
+
+For example, in UFW you may do:
+
+.. code-block::
+
+  #set firewall to log only the blocked traffic
+  ufw logging low
+
+.. code-block::
+
+  #clear out the current logs
+  cat /dev/null | sudo tee /var/log/ufw.log
+​
+.. code-block::
+​  #reload ufw
+  ufw reload
+
+.. code-block::
+  #filter the logs
+  cat /var/log/ufw.log | grep -e <netmaker server IP> -e <other nodes' IPs> 
+
+
+
 Managing Netclient
 =====================
 
