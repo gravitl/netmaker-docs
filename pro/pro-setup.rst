@@ -15,18 +15,21 @@ Signup here `<https://account.netmaker.io/signup>`_ to get a license for your se
    :alt: Profile form after signup on SAAS with regular email
    :align: center
 
+|
+
 .. image:: images/profile-form-after-signup---sso.jpg
    :width: 80%
    :alt: Profile form after signup on SAAS with SSO
    :align: center
 
-When you login to the site for the first time, normally you will be automatically directed to the tenant creation modal as shown in the first image below. But if, for some reason, you happen to have missed inputting your Firstname and Lastname after signing up, the Profile page will show up instead. Click on the `>` icon to expand the Profile form where you can input your profile info because this is required when creating tenants.
+When you login to the site for the first time, normally you will be automatically directed to the tenant creation modal as shown in the first image below. But if, for some reason, you happen to have missed inputting your Firstname and Lastname after signing up, the Profile page will show up instead. Click on the [>] icon to expand the Profile form where you can input your profile info. This is required when creating tenants.
 
 .. image:: images/pro-aftersignup.jpg
    :width: 80%
    :alt: screeen after first login on SAAS
    :align: center
 
+|
 
 .. image:: images/missed-profile-info.jpg
    :width: 80%
