@@ -476,22 +476,35 @@ Requirements
 ---------------
 
 To run HA Netmaker on Kubernetes, your cluster must have the following:
-* RWO and RWX Storage Classes
-* An Ingress Controller and valid TLS certificates
-  * This chart can currently generate ingress for:
-    * Nginx Ingress + LetsEncrypt/Cert-Manager
-  * To generate automatically, make sure one of the two is configured for your cluster
-* Ability to set up DNS for Secure Web Sockets
-  * Nginx Ingress supports Secure Web Sockets (WSS) by default. If you are not using Nginx Ingress, you must route external traffic from broker.domain to the MQTT service, and provide valid TLS certificates.
-  * One option is to set up a Load Balancer which routes broker.domain:443 to the MQTT service on port 8883.
-  * We do not provide guidance beyond this, and recommend using an Ingress Controller that supports websockets.
+
+- RWO and RWX Storage Classes
+- An Ingress Controller and valid TLS certificates
+
+  This chart can currently generate ingress for:
+  - Nginx Ingress + LetsEncrypt/Cert-Manager
+
+  To generate automatically, make sure one of the two is configured for your cluster
+
+- Ability to set up ingress route for Secure Web Sockets
+
+  Nginx Ingress supports Secure Web Sockets (WSS) by default. If you are not using Nginx Ingress, you must route external traffic from broker.domain to the MQTT service, and provide valid TLS certificates.
+
+  One option is to set up a Load Balancer which routes broker.domain:443 to the MQTT service on port 8883.
+
+  We do not provide guidance beyond this, and recommend using an Ingress Controller that supports websockets.
 
 Furthermore, the chart will by default install and use a postgresql cluster as its datastore:
-+--------------------------------------+----------------+---------+
-| Repository                           | Name           | Version |
-+======================================+================+=========+
-| https://charts.bitnami.com/bitnami   | postgresql-ha  | 7.11.0  |
-+--------------------------------------+----------------+---------+
+
+.. list-table::
+   :header-rows: 1
+
+   * - Repository
+     - Name
+     - Version
+   * - https://charts.bitnami.com/bitnami
+     - postgresql-ha
+     - 7.11.0
+
 
 Example Installations:
 ------------------------
