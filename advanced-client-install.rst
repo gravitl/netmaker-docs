@@ -195,17 +195,17 @@ On Windows machines, it is possible to allow programs or applications through th
 
 On Linux, these necessary ports are needed to be opened:
 
-  - UDP and TCP ports 51821-51830
-  - TCP ports 80 and 443
-  - UDP and TCP port 53 for DNS
+- UDP and TCP ports 51821-51830
+- TCP ports 80 and 443
+- UDP and TCP port 53 for DNS
 
 In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
 
-  - UDP ports 19302 & 3478 for STUN
-  - TCP port 3479 for TURN
-  - TCP ports 1883 & 8883 for MQTT
-  - TCP ports 8083 & 8084 for EMQX Websocket
-  - TCP port 8081 for the NM API
+- UDP ports 19302 & 3478 for STUN
+- TCP port 3479 for TURN
+- TCP ports 1883 & 8883 for MQTT
+- TCP ports 8083 & 8084 for EMQX Websocket
+- TCP port 8081 for the NM API
 
 If the public port is not in the range of 51821-51830, set a static one and allow that port 
 
