@@ -221,7 +221,7 @@ For example, in UFW you may do:
   #clear out the current logs
   cat /dev/null | sudo tee /var/log/ufw.log
 
-​  #reload ufw
+  #reload ufw
   ufw reload
 
   #filter the logs
