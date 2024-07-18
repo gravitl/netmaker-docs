@@ -75,35 +75,6 @@ Event id 0 in Windows Event logs
 ---------------------------------
 netclient service is delegated to Winsw on Windows. An issue is reported that the stop/start/restart events in Event logs show event id as 0 always. It does not impact any netclient functions.
 
-Notes on OpenWRT
-===========================
-
-Deploying on OpenWRT depends a lot on the version of OpenWRT and the hardware being used.
-
-1. Ensure you download the appropriate binary for your architecture.  replace ${VERSION} with the version you want to download
-
-a. https://github.com/gravitl/netclient/releases/download/${VERSION}/netclient-linux-amd64
-b. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-arm64
-c. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv5
-d. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv6
-e. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-armv7
-f. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mips-hardfloat
-g. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mips-softfloat
-h. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mipsle-hardfloat
-i. https://github.com/gravitl/netclient/releases/download/v0.20.5/netclient-linux-mipsle-softfloat
-
-2. run netclient install  (note: all netclient commands must be run as root) will install the netclient binary to /usr/bin/netclient and service file to /etc/init.d/netclient
-
-3. to start/stop the netclient daemon run 
-
-.. code-block::
-
-   /sbin/rc-service netclient start/stop
-
-4. run other netclient commands (join, list, connect, disconnect, pull etc ) as required
-
-
-
 Modes and System Compatibility
 ==================================
 
@@ -220,16 +191,6 @@ If the daemon is not running correctly, try restarting the daemon, or pulling ch
   ``systemctl restart netclient``
 
   ``sudo netclient pull``
-
-
-Making Updates
-----------------
-
-``vim /etc/netclient/config/netconfig-<network>``
-
-Change any of the variables in this file, and changes will be pushed to the server and processed locally on the next checkin.
-
-For instance, change the private address, endpoint, or name. See above example config file for details
 
 
 Adding/Removing Networks

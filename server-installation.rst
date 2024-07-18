@@ -49,10 +49,10 @@ SERVER_HOST
     **Description:** The public IP of the server where the machine is running.
 
 MASTER_KEY  
-    **Default:** "secretkey" 
+    **Default:** "secretkey"
 
     **Description:** The admin master key for accessing the API. Change this in any production installation.
- 
+
 MQ_USERNAME
     **Default** ""
 
@@ -159,6 +159,7 @@ VERBOSITY
     **Description** Logging verbosity level - 1, 2, 3, or 4
 
 REST_BACKEND
+
 
     **Default** on
 

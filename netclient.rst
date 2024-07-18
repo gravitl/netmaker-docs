@@ -74,12 +74,6 @@ Arch Distros (arch/manjaro/endeavouros)
 
   yay -S netclient
 
-OpenWRT Distros (mips/mipsle)
-------------------------------------------------
-
-.. code-block::
-
-refer to Advanced Client Installation :ref:`advanced-client-install:Notes on OpenWRT` 
 
 OpenSUSE (tumbleweed/leap)
 ---------------------------------------------------------------------
@@ -99,7 +93,7 @@ Windows
 Bundled Installer
 -----------------
 
-Download Link: https://fileserver.netmaker.org/latest/netclientbundle.exe
+Download Link: https://fileserver.netmaker.org/releases/download/latest/netclientbundle.exe
 
 Mac
 ============
@@ -113,14 +107,13 @@ Brew Install
   (optional) brew audit netclient
   brew install netclient
 
-GUI Installer (for v0.22.0 and below)
+Installer
 -------------------------------------
 
-Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-M1.pkg
+Download Link for Apple silicon: https://fileserver.netmaker.org/releases/download/latest/Netclient-M1.pkg
 
-Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/v0.22.0/Netclient-Intel.pkg
+Download Link for Apple Intel: https://fileserver.netmaker.org/releases/download/latest/Netclient-Intel.pkg
 
-Replace version number in URL with the version you want to install.
 
 
 Docker
