@@ -33,144 +33,214 @@ In most situations, if you wish to modify a server setting, set it in the netmak
 Variable Description
 ----------------------
 
-SERVER_NAME
+NM_EMAIL
+    **Default** ""
+
+    **Description** Email used for SSL certificates
+
+NM_DOMAIN
     **Default:** ""
 
-    **Description:**  MUST SET THIS VALUE. This is the public, resolvable DNS name of the MQ Broker. For instance: broker.netmaker.example.com.
+    **Description:**  Public IP of machine
 
 SERVER_HOST
     **Default:** (Server detects the public IP address of machine)
 
-    **Description:** The public IP of the server where the machine is running. 
+    **Description:** The public IP of the server where the machine is running.
 
-SERVER_API_CONN_STRING
-    **Default:** ""
-
-    **Description:**  MUST SET THIS VALUE. This is the public, resolvable address of the API, including the port. For instance: api.netmaker.example.com:443.
-
-COREDNS_ADDR
-    **Default:** ""
-
-    **Description:** The public IP of the CoreDNS server. Will typically be the same as the server where Netmaker is running (same as SERVER_HOST).
-
-
-SERVER_HTTP_HOST
-    **Default:** Equals SERVER_HOST if set, "127.0.0.1" if SERVER_HOST is unset.
-    
-    **Description:** Should be the same as SERVER_API_CONN_STRING minus the port.
-
-API_PORT:
-    **Default:** 8081 
-
-    **Description:** Should be the same as the port on SERVER_API_CONN_STRING in most cases. Sets the port for the API on the server.
-
-MASTER_KEY:  
+MASTER_KEY  
     **Default:** "secretkey" 
 
     **Description:** The admin master key for accessing the API. Change this in any production installation.
+ 
+MQ_USERNAME
+    **Default** ""
 
-CORS_ALLOWED_ORIGIN:  
-    **Default:** "*"
+    **Description** The username to set for MQ access
 
-    **Description:** The "allowed origin" for API requests. Change to restrict where API requests can come from.
+MQ_PASSWORD
+    **Default** ""
 
-REST_BACKEND:  
-    **Default:** "on" 
+    **Description** The password to set for MQ access
 
-    **Description:** Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST). Change to "off" to turn off.
+INSTALL_TYPE
+    **Default** ce 
 
-DNS_MODE:  
-    **Default:** "off"
+    **Description** The installation type to run on the server. "ce" will run community edition. "pro" will run professional edition if you have an on-prem tenant.
 
-    **Description:** Enables DNS Mode, meaning config files will be generated for CoreDNS.
+LICENSE_KEY
 
-DATABASE:  
-    **Default:** "sqlite"
+    **Default** ""
 
-    **Description:** Specify db type to connect with. Currently, options include "sqlite", "rqlite", and "postgres".
+    **Description** The license key from your on-prem tenent needed to validate your professional installation.
 
-SQL_CONN:
-    **Default:** "http://"
+NETMAKER_TENANT_ID
 
-    **Description:** Specify the necessary string to connect with your local or remote sql database.
+    **Default** ""
 
-SQL_HOST:
-    **Default:** "localhost"
+    **Description** The ID of your on-prem tenant used to validate your professional installation.
 
-    **Description:** Host where postgres is running.
+SERVER_IMAGE_TAG
 
-SQL_PORT:
-    **Default:** "5432"
+    **Default**
 
-    **Description:** port postgres is running.
+    **Description** The tag used for the server docker image. You can set it to "latest" to get the most up to date version. To stay on a certain version set the tag to the version you would like. ex: v0.24.2. if using a pro image, add "-ee" after the version. ex: v0.24.2-ee.
 
-SQL_DB:
-    **Default:** "netmaker"
+UI_IMAGE_TAG
 
-    **Description:** DB to use in postgres.
+    **Default** ""
 
-SQL_USER:
-    **Default:** "postgres"
+    **Description** The tag used for the netmaker ui docker image. You can set it to "latest" to get the most up to date version. To stay on a certain version set the tag to the version you would like. ex: v0.24.2.
 
-    **Description:** User for postgres.
+METRICS_EXPORTER
 
-SQL_PASS:
-    **Default:** "nopass"
+    **Default** off
 
-    **Description:** Password for postgres.
+    **Description** This is a pro feature that exports metrics to the netmaker server.
 
-RCE:  
-    **Default:** "off"
+PROMETHEUS
 
-    **Description:** The server enables you to set PostUp and PostDown commands for nodes, which is standard for WireGuard with wg-quick, but is also **Remote Code Execution**, which is a critical vulnerability if the server is exploited. Because of this, it's turned off by default, but if turned on, PostUp and PostDown become editable.
+    **Default** off
+
+    **Description** This is a pro feature. Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud. It is used in out metrics collection
+
+DNS_MODE
+
+    **Default** on
+
+    **Description** Enables DNS Mode, meaning all nodes will set hosts file for private dns settings
+
+NETCLIENT_AUTO_UPDATE
+
+    **Default** enabled
+
+    **Description** Enable/Disable auto update of netclient
+
+API_PORT
+
+    **Default** 8081
+
+    **Description** The HTTP API port for Netmaker. Used for API calls / communication from front end. If changed, need to change port of BACKEND_URL for netmaker-ui.
+
+EXPORTER_API_PORT
+
+    **Default** 8085
+
+    **Description** the API port to set for the metrics exporter.
+
+CORS_ALLOWED_ORIGIN
+
+    **Default** "*"
+
+    **Description** The "allowed origin" for API requests. Change to restrict where API requests can come from with comma-separated URLs. ex:- https://dashboard.netmaker.domain1.com,https://dashboard.netmaker.domain2.com
 
 DISPLAY_KEYS
-    **Default:** "on"
 
-    **Description:** If "on", will allow you to always show the key values of "access keys". This could be considered a vulnerability, so if turned "off", will only display key values once, and it is up to the users to store the key values locally.
+    **Default** on
 
-NODE_ID
-    **Default:** <system mac addres>
+    **Description** Show keys permanently in UI (until deleted) as opposed to 1-time display.
 
-    **Description:** This setting is used for HA configurations of the server, to identify between different servers. Nodes are given ID's like netmaker-1, netmaker-2, and netmaker-3. If the server is not HA, there is no reason to set this field.
+DATABASE
+
+    **Default** sqlite
+
+    **Description** Database to use - sqlite, postgres, or rqlite
+
+SERVER_BROKER_ENDPOINT
+
+    **Default** ws://mq:1883 
+
+    **Description** The address of the mq server. If running from docker compose it will be "mq". Otherwise, need to input address. If using "host networking", it will find and detect the IP of the mq container. For EMQX websockets use `SERVER_BROKER_ENDPOINT=ws://mq:8083/mqtt`
+
+VERBOSITY
+
+    **Default** 1
+
+    **Description** Logging verbosity level - 1, 2, 3, or 4
+
+REST_BACKEND
+
+    **Default** on
+
+    **Description** Enables the REST backend (API running on API_PORT at SERVER_HTTP_HOST).
+
+DISABLE_REMOTE_IP_CHECK
+
+    **Default** off
+    
+    **Description** If turned "on", Server will not set Host based on remote IP check. This is already overridden if SERVER_HOST is set.
 
 TELEMETRY
-    **Default:** "on"
 
-    **Description:** If "on", the server will send anonymous telemetry data once daily, which is used to improve the product. Data sent includes counts (integer values) for the number of nodes, types of nodes, users, and networks. It also sends the version of the server.
+    **Default** on
 
-MQ_HOST 
-    **Default:** (public IP of server)
+    **Description** Whether or not to send telemetry data to help improve Netmaker. Switch to "off" to opt out of sending telemetry.
 
-    **Description:** The address of the mq server. If running from docker compose it will be "mq". If using "host networking", it will find and detect the IP of the mq container. Otherwise, need to input address. If not set, it will use the public IP of the server. The port 1883 will be appended automatically. This is the expected reachable port for MQ and cannot be changed at this time.
+ALLOWED_EMAIL_DOMAINS
 
-HOST_NETWORK: 
-    **Default:** "off"
+    **Default** "*"
 
-    **Description:** Whether or not host networking is turned on. Only turn on if configured for host networking (see docker-compose.hostnetwork.yml). Will set host-level settings like iptables and forwarding for MQ.
+    **Description** only mentioned domains will be allowded to signup using oauth, by default all domains are allowed
 
-MANAGE_IPTABLES: 
-    **Default:** "on"
+AUTH_PROVIDER
 
-    **Description:** # Allows netmaker to manage iptables locally to set forwarding rules. Largely for DNS or SSH forwarding (see below). It will also set a default "allow forwarding" policy on the host. It's better to leave this on unless you know what you're doing.
+    **Default** ""
 
-PORT_FORWARD_SERVICES: 
-    **Default:** ""
+    **Description** You can use azure-ad, github, google, oidc
 
-    **Description:** Comma-separated list of services for which to configure port forwarding on the machine. Options include "mq,dns,ssh". MQ IS DEPRECIATED, DO NOT SET THIS.'ssh' forwards port 22 over WireGuard, enabling ssh to server over WireGuard. However, if you set the Netmaker server as an Remote Access Gateway (ingress), this will break SSH on Remote Access Clients, so be careful. DNS enables private DNS over WireGuard. If you would like to use private DNS with ext clients, turn this on.
+CLIENT_ID
 
-VERBOSITY:
-    **Default:** 0
+    **Default** ""
 
-    **Description:** Specify the level of logging you would like on the server. Goes up to 3 for debugging. If you run into issues, up the verbosity.
+    **Description** The client id of your oauth provider.
 
+CLIENT_SECRET
 
-Config File Reference
------------------------
-A config file may be placed under config/environments/<env-name>.yml. To read this file at runtime, provide the environment variable NETMAKER_ENV at runtime. For instance, dev.yml paired with ENV=dev. Netmaker will load the specified Config file. This allows you to store and manage configurations for different environments. Below is a reference Config File you may use.
+    **Default** ""
 
-.. literalinclude:: ./examplecode/dev.yaml
-  :language: YAML
+    **Description** The client secret of your oauth provider.
+
+FRONTEND_URL
+
+    **Default** ""
+
+    **Description** https://dashboard.<netmaker base domain>
+
+AZURE_TENANT
+
+    **Default** ""
+
+    **Description** only for azure, you may optionally specify the tenant for the OAuth
+
+OIDC_ISSUER
+
+    **Default** ""
+
+    **Description** https://oidc.yourprovider.com - URL of oidc provider
+
+JWT_VALIDITY_DURATION
+
+    **Default** 43200
+
+    **Description** Duration of JWT token validity in seconds
+
+RAC_AUTO_DISABLE
+
+    **Default** false
+
+    **Description** Auto disable a user's connected clients based on JWT token expiration
+
+CACHING_ENABLED
+
+    **Default** true
+
+    **Description** if turned on data will be cached on to improve performance significantly (IMPORTANT: If HA set to `false` )
+
+ENDPOINT_DETECTION
+
+    **Default** true
+
+    **Description** if turned on netclient checks if peers are reachable over private/LAN address, and choose that as peer endpoint
 
 Compose File - Annotated
 --------------------------------------
