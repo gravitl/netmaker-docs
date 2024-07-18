@@ -61,3 +61,9 @@ to transfer super admin rights to.
    :width: 80%
    :alt: transfer super admin rights
    :align: center
+
+
+Integrating OAuth
+====================
+
+Users are also allowed to join a Netmaker server via OAuth. They can do this by clicking the "Login with SSO" button on the dashboard's login page. Check out the :doc:`integrating oauth docs <../oauth>`.
