@@ -21,7 +21,7 @@ Input your username and a super memorable but strong password then click on the 
 
 
 .. include:: oauth.rst
-   :end-before: users-in-netmaker-professional
+   :end-before: Integrating OAuth
 
 
 .. include:: pro/pro-users.rst
