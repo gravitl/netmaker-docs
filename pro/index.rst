@@ -12,7 +12,7 @@ Netmaker Professional
 
    pro-setup
    pro-users
-   oauth
+   ../oauth
    pro-relay-server
    pro-metrics
    pro-branding
