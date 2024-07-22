@@ -27,7 +27,7 @@ Server
 
 All components of Netmaker can be run on a single server (Virtual Machine or Bare Metal). Here some recommendations for setting up the server:
 
-- We **highly recommend** that Netmaker be deployed in a dedicated networking environment. It should not share a local network with the clients which it will be managing. This can cause routing issues.
+- We **highly recommend** that Netmaker be deployed in a dedicated networking environment.
 - The machine should have a public, static IP address 
 - The machine should have at least 1GB RAM and 1 CPU (2GB RAM preferred for production installs)
 - 2GB+ of storage 
