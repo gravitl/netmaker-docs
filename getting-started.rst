@@ -10,7 +10,6 @@ Getting Started
    netclient
    advanced-client-install
    server-installation
-   oauth
 
 Setup
 =================
@@ -189,4 +188,3 @@ Uninstalling Netmaker
 ===========================
 
 To uninstall Netmaker from the server, simply run ``docker-compose down`` or ``docker-compose down --volumes`` to remove the docker volumes for a future installation.
-
