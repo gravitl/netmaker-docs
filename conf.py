@@ -22,7 +22,7 @@ copyright = '2024, Netmaker Inc.'
 author = 'Netmaker'
 
 # The full version, including alpha/beta/rc tags
-release = '0.24.2'
+release = '0.24.3'
 
 
 # -- General configuration ---------------------------------------------------
@@ -52,7 +52,7 @@ html_theme = 'renku'
 html_show_sourcelink = False
 
 html_theme_options = {
-    'description': 'Netmaker Docs Description' 
+    'description': 'Netmaker Docs Description',
     'nav_title': 'Netmaker Docs',
     'repo_url': 'https://github.com/gravitl/netmaker/',
     "repo_name": "Netmaker",
