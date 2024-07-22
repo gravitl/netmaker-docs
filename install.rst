@@ -112,6 +112,7 @@ For advanced use cases, you might need to view your device's firewall logs, or i
 For example, in UFW you may do:
 
 .. code-block::
+  
   #set firewall to log only the blocked traffic
   ufw logging low
 
