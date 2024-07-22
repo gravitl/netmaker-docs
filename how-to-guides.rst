@@ -6,6 +6,7 @@ How-to-Guides
    :maxdepth: 1
 
    integrating-non-native-devices
+   site2site-mesh-vpn
    usage
 
 **Egress Gateway**
