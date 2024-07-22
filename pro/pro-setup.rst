@@ -26,14 +26,14 @@ When you login to the site for the first time, normally you will be automaticall
 
 .. image:: images/pro-aftersignup.jpg
    :width: 80%
-   :alt: screeen after first login on SAAS
+   :alt: screen after first login on SAAS
    :align: center
 
 |
 
 .. image:: images/missed-profile-info.jpg
    :width: 80%
-   :alt: screeen after first login on SAAS - missed profile info
+   :alt: screen after first login on SAAS - missed profile info
    :align: center
 
 For first time users Netmaker offers a free 14-day trial of the Professional plan of either a SaaS tenant or an On-Prem tenant. Click on the "Create an On-Prem tenant" option. Input the name of your new tenant then click on the Next button.  
