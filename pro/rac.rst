@@ -155,6 +155,42 @@ The user will have to relogin to enable their remote session again.
 NOTE: The `JWT_VALIDITY_DURATION` environment variable also configures all the JWT token validity duration for all users, regardless of whether `RAC_AUTO_DISABLE` is set to `true` or not.
 
 
+(Re)Starting the service/daemon process
+=======================================
+
+On very few occasion, the RAC daemon may not be running and will need to be restarted manually. There are two ways to resolve this:
+
+1. Restart the computer. The daemon starts automatically on boot so restarting the computer will start the daemon on next startup.
+2. Manual restart. The exact procedure depends on your operating system.
+
+Manual daemon restart on Windows
+--------------------------------
+
+1. Open Task Manager.
+2. Go to the "Services" tab.
+3. Look for the "remote-client" service.
+4. Right-click on the service and select "Restart" or "Start".
+
+Manual daemon restart on Linux
+------------------------------
+
+On Linux, RAC daemon relies on systemd to manage the service. You can restart the service using the following command:
+
+.. code-block::
+
+   sudo systemctl restart remote-client
+
+Manual daemon restart on Mac
+----------------------------
+
+On Mac, RAC daemon relies on launchd to manage the service. You can restart the service using the following command:
+
+.. code-block::
+
+   sudo launchctl stop com.netmaker.remote-client
+   sudo launchctl start com.netmaker.remote-client
+
+
 FAQs and Known Issues
 =====================
 
