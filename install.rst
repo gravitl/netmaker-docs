@@ -40,6 +40,91 @@ Your server will host several services (netmaker server, UI, etc.) each of which
 - **Note on Cloudflare:** Many of our users use Cloudflare. Cloudflare will proxy connections, which MQ does not like. This can be disabled in the Cloudflare DNS dashboard. If setting up your Netmaker server using Cloudflare for DNS, be aware that the configuration of Cloudflare proxy may cause problems with Netmaker which must be resolved, and at this point, Netmaker is not providing guidance on this setup.
 
 
+
+Firewall Rules for Netmaker Server
+-------------------------------------
+
+Make sure firewall settings are set for Netmaker both on the VM and with your cloud security groups (AWS, GCP, etc) or with your router/FWA. 
+
+Make sure the following ports are open both on the VM and in the cloud security groups:
+
+- **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
+- **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
+- **8085 (exporter Pro):** If you are building a Pro server, you need this port open.
+- **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
+- **53 (tcp and udp):** if you set the CoreDNS container, that comes with the Netmaker installion, to 'host' your domain name resolution needs
+
+
+.. code-block::
+
+  sudo ufw allow proto tcp from any to any port 443 
+  sudo ufw allow proto tcp from any to any port 80 
+  sudo ufw allow proto tcp from any to any port 3479
+  sudo ufw allow proto tcp from any to any port 8089 
+  sudo ufw allow 51821:51830/udp
+
+  #optional: only when hosting DNS on the Netmaker server
+  sudo ufw allow 53
+  
+
+It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
+
+.. code-block::
+
+  iptables --policy FORWARD ACCEPT
+
+
+**Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
+  - allow 443/tcp from all
+  - allow 80/tcp from all
+  - allow 3479/tcp from all
+  - allow 8089/tcp from all
+  - allow 51821-51830/udp from all
+  - allow 53 from all (optional)
+
+
+Firewall Rules for Machines Running Netclient
+-------------------------------------------------
+
+As we already know, Netclient manages WireGuard on client devices (nodes). As its name suggests, Netclient is a client in a mesh topology, thus it needs to communicate with the server and with the other clients as well. Netclient will detect local changes and send them to the server when necessary. A change in IP address or port will lead to a network update to keep everything in sync.
+It goes without saying that in almost all cases it is imperative that firewall must be up and running on any device that is connected to a network, especially the internet. Firewalls are inherently restrictive for good reasons. And by default, it doesn't allow any traffic that Netclient would use to function properly.
+
+On Windows machines, it is possible to allow programs or applications through the firewall. Thus you might want to allow Netclient and, depending on your setup, WireGuard.
+
+On Linux, these necessary ports are needed to be opened:
+
+- UDP and TCP ports 51821-51830
+- TCP ports 80 and 443
+- UDP and TCP port 53 for DNS (optional)
+
+In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
+
+- UDP ports 19302 & 3478 for STUN
+- TCP port 3479 for TURN
+- TCP ports 1883 & 8883 for MQTT
+- TCP ports 8083 & 8084 for EMQX Websocket
+- TCP port 8081 for the NM API
+
+If the public port is not in the range of 51821-51830, set a static one and allow that port 
+
+For advanced use cases, you might need to view your device's firewall logs, or in case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
+
+For example, in UFW you may do:
+
+.. code-block::
+  #set firewall to log only the blocked traffic
+  ufw logging low
+
+  #clear out the current logs
+  cat /dev/null | sudo tee /var/log/ufw.log
+
+  #reload ufw
+  ufw reload
+  
+  #filter the logs
+  cat /var/log/ufw.log | grep -e <netmaker server IP> -e <other nodes' IPs> 
+
+
 Quick Install
 ==================
 

@@ -114,6 +114,9 @@ To obtain the netclient, go to the GitHub releases: https://github.com/gravitl/n
 
 **For Private DNS management:** Resolvectl (systemd-resolved)
 
+Please refer to the `Firewall Rules for Machines Running Netclient <https://docs.netmaker.io/install.html#firewall-rules-for-machines-running-netclient>`_ for more information.
+
+
 Configuration
 ===============
 
