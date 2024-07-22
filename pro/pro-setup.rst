@@ -2,42 +2,87 @@
 Netmaker Professional Setup
 ===========================
 
-This guide covers how to get setup with Netmaker Professional. For pricing,visit `our pricing page <https://www.netmaker.io/pricing>`_
+This guide covers how to get setup with Netmaker Professional. For pricing, visit `our pricing page <https://www.netmaker.io/pricing>`_
 
 
 Get a License
 =================================
 
-Visit `<https://app.netmaker.io>`_ to set up a self-hosted instance on the Netmaker SAAS platform. When you first visit the site, you should be prompted to create an account. After you make one, you will be automatically directed to the switch tenant dashboard.
+Signup here `<https://account.netmaker.io/signup>`_ to get a license for your self-hosted Netmaker. Never miss to input your Firstname and Lastname.
 
-.. image:: images/pro-aftersignup.png
+.. image:: images/profile-form-after-signup---regular-email.jpg
    :width: 80%
-   :alt: screeen after signup on SAAS
+   :alt: Profile form after signup on SAAS with regular email
+   :align: center
+
+|
+
+.. image:: images/profile-form-after-signup---sso.jpg
+   :width: 80%
+   :alt: Profile form after signup on SAAS with SSO
+   :align: center
+
+When you login to the site for the first time, normally you will be automatically directed to the tenant creation modal as shown in the first image below. But if, for some reason, you happen to have missed inputting your Firstname and Lastname after signing up, the Profile page will show up instead. Click on the [>] icon to expand the Profile form where you can input your profile info. This is required when creating tenants.
+
+.. image:: images/pro-aftersignup.jpg
+   :width: 80%
+   :alt: screen after first login on SAAS
+   :align: center
+
+|
+
+.. image:: images/missed-profile-info.jpg
+   :width: 80%
+   :alt: screen after first login on SAAS - missed profile info
+   :align: center
+
+For first time users Netmaker offers a free 14-day trial of the Professional plan of either a SaaS tenant or an On-Prem tenant. Click on the "Create an On-Prem tenant" option. Input the name of your new tenant then click on the Next button.  
+
+.. image:: images/tenant-name-form.jpg
+   :width: 80%
+   :alt: Tenant name form
    :align: center
 
 
-Click the `` create tenant `` button and a modal will pop up. If you are a new user you can follow the link to setup a self hosted instance of Netmaker for a free 14 day trial, for existing users click on the contact us link.
+You can toggle between a Monthly or a Yearly subscription plan for when your trial period ends. Click on the "Tier breakdown" button to view the details of the plan. Once you're done, click on the "Add Payment Details in Stripe" button.
 
-.. image:: images/pro-createtenantmodal.png
+.. image:: images/pricing-and-limits.jpg
    :width: 80%
-   :alt: selfhosted switch
+   :alt: Pricing and Limits
    :align: center
 
-After you click on the link, you will be taken to a page to fill out a licence request form. A representative will reach out to you to get you setup with a self-hosted tenant.
 
-.. image:: images/pro-contactusform.png
+Like many cloud service providers, payment information is required in order to create resources even during trial period. This can be in a form of Debit/Credit card information or a US Bank account. Fillout the form and then click on the "Add" button.
+
+.. image:: images/payment-method-form.jpg
    :width: 80%
-   :alt: selfhosted switch
+   :alt: Payment Method Form
    :align: center
 
-Once you have your tenant, you can click on manage account from the tenants table. Then you will need to add payment details before you can use your tenant, click on the stripe button to go to the stripe page and enter your payment info.
+
+You should automatically be redirected back to the tenant creation modal. Review your new tenant details then click on the Create Tenant button.
+
+.. image:: images/review-tenant-details-form.jpg
+   :width: 80%
+   :alt: Review tenant details
+   :align: center
+
+
+Once created, your new tenant should show up in the Tenants page. Click on the Manage Account button to view its details.
+
+.. image:: images/tenants-list-page.jpg
+   :width: 80%
+   :alt: Tenants page
+   :align: center
+
+
 
 Setup your server
 =================================
 
-You will need the licence key and tenant id from the settings page back at the account management page on the settings tab.
+You will need the Licence Key and the Tenant ID which are found on the Settings tab.
 
-.. image:: images/pro-license-key2.png
+.. image:: images/pro-license-key2.jpg
     :width: 80%
     :alt: License keys
     :align: center
@@ -49,9 +94,10 @@ Once you have your license key and tenant ID, you can get the nm-quick installer
     
     wget https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick.sh
     chmod +x nm-quick.sh
-    bash nm-quick.sh
+    bash nm-quick.sh -u
 
-Follow the prompts for a pro edition server. provide the license key and tenant id when prompted. 
+Follow the prompts for a pro edition server. provide the License Key and Tenant ID when prompted. 
+
 
 Upgrade to Pro from Community Edition
 ======================================
@@ -81,11 +127,11 @@ After that run the following command:
 
 .. code-block::
 
-    docker kill netmaker netmaker-ui && docker-compose up -d 
+    docker kill netmaker netmaker-ui && docker compose up -d 
 
 When you browse to your self-hosted Netmaker via dashboard.<YOUR_BASE_DOMAIN>, you should see the professional UI and a new Dashboard. The top menu bar will have relays and metrics added.
 
-.. image:: images/pro-new-dashboard.png
+.. image:: images/pro-new-dashboard.jpg
     :width: 80%
     :alt: new dashboard
     :align: center
