@@ -12,14 +12,14 @@ We encourage contributions! Follow the below documentation to build and make cha
 
 # How to build the Netmaker documentation  
 
-0. Install dependencies: make, python3, pip, sphinx, sphinx-material theme 
+0. Install dependencies: make, python3, pip, sphinx, renku-sphinx-theme 
 ```
 (debian instructions, varies by OS)
 
 apt-get install make  
 apt-get install python3-sphinx
 apt-get install python3-pip
-pip install git+https://github.com/bashtage/sphinx-material.git
+pip install renku-sphinx-theme
 pip install markupsafe
 
 ```

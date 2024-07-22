@@ -1,7 +1,7 @@
 FROM sphinxdoc/sphinx:latest as builder
 WORKDIR /netmaker-docs
 COPY . /netmaker-docs/
-RUN pip install sphinx_material
+RUN pip install renku-sphinx-theme
 
 RUN ["make","html"]
 RUN ["/bin/ls"]

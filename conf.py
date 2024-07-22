@@ -47,11 +47,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
+html_theme = 'renku'
 
 html_show_sourcelink = False
 
 html_theme_options = {
+    'description': 'Netmaker Docs Description' 
     'nav_title': 'Netmaker Docs',
     'repo_url': 'https://github.com/gravitl/netmaker/',
     "repo_name": "Netmaker",
