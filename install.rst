@@ -49,7 +49,7 @@ Make sure firewall settings are set for Netmaker both on the VM and with your cl
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
-- **51821-518XX (udp):** for WireGuard - Netmaker needs one port per network, starting with 51821, so open up a range depending on the number of networks you plan on having. For instance, 51821-51830.  
+- **51821 (udp and tcp):** for WireGuard - Install script automatically setups a netclient on the server machine with default port as 51821.  
 - **8085 (exporter Pro):** If you are building a Pro server, you need this port open.
 - **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
 - **53 (tcp and udp):** if you set the CoreDNS container, that comes with the Netmaker installion, to 'host' your domain name resolution needs
@@ -58,10 +58,9 @@ Make sure the following ports are open both on the VM and in the cloud security 
 .. code-block::
 
   sudo ufw allow proto tcp from any to any port 443 
-  sudo ufw allow proto tcp from any to any port 80 
-  sudo ufw allow proto tcp from any to any port 3479
-  sudo ufw allow proto tcp from any to any port 8089 
-  sudo ufw allow 51821:51830/udp
+  sudo ufw allow proto tcp from any to any port 80
+  sudo ufw allow 51821/udp (based on your netclient listen port)
+  sudo ufw allow 51821/tcp (based on your netclient listen port)
 
   #optional: only when hosting DNS on the Netmaker server
   sudo ufw allow 53
@@ -77,9 +76,8 @@ It is also important to make sure the server does not block forwarding traffic (
 **Again, based on your cloud provider, you may additionally need to set inbound security rules for your server (for instance, on AWS). This will be dependent on your cloud provider. Be sure to check before moving on:**
   - allow 443/tcp from all
   - allow 80/tcp from all
-  - allow 3479/tcp from all
-  - allow 8089/tcp from all
   - allow 51821-51830/udp from all
+  - allow 51821-51830/tcp from all
   - allow 53 from all (optional)
 
 
@@ -87,33 +85,31 @@ Firewall Rules for Machines Running Netclient
 -------------------------------------------------
 
 As we already know, Netclient manages WireGuard on client devices (nodes). As its name suggests, Netclient is a client in a mesh topology, thus it needs to communicate with the server and with the other clients as well. Netclient will detect local changes and send them to the server when necessary. A change in IP address or port will lead to a network update to keep everything in sync.
-It goes without saying that in almost all cases it is imperative that firewall must be up and running on any device that is connected to a network, especially the internet. Firewalls are inherently restrictive for good reasons. And by default, it doesn't allow any traffic that Netclient would use to function properly.
+It goes without saying that in almost all cases a firewall must be up and running on any device that is connected to a network, especially the Internet. Firewalls are inherently restrictive for good reasons. And by default, it might not allow traffic that Netclient would use to function properly.
 
 On Windows machines, it is possible to allow programs or applications through the firewall. Thus you might want to allow Netclient and, depending on your setup, WireGuard.
 
 On Linux, these necessary ports are needed to be opened:
 
-- UDP and TCP ports 51821-51830
+- UDP and TCP ports 51821-51830 (based on your client's listen port running on the machine)
 - TCP ports 80 and 443
 - UDP and TCP port 53 for DNS (optional)
 
 In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
 
 - UDP ports 19302 & 3478 for STUN
-- TCP port 3479 for TURN
 - TCP ports 1883 & 8883 for MQTT
 - TCP ports 8083 & 8084 for EMQX Websocket
 - TCP port 8081 for the NM API
+ 
 
-If the public port is not in the range of 51821-51830, set a static one and allow that port 
-
-For advanced use cases, you might need to view your device's firewall logs, or in case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
+For advanced use cases, you might need to view your device's firewall logs, or in the case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
 
 For example, in UFW you may do:
 
 .. code-block::
   
-  #set firewall to log only the blocked traffic
+  #set the firewall to log only the blocked traffic
   ufw logging low
 
   #clear out the current logs
@@ -137,31 +133,31 @@ Quick Install
 
 
 **IMPORTANT:** Notes on Installation
-- Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your own domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
+- Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-**IMPORTANT:** From v0.22.0 the install script will install PRO version of netmaker with a 30-day free trial, for you to try out full capabilities of netmaker.
+**IMPORTANT:** From v0.22.0 the install script will install the PRO version of netmaker with a 30-day free trial, for you to try out the full capabilities of netmaker.
 
 Integrating OAuth
 ====================
 
-Users are also allowed to join a Netmaker server via OAuth. They can do this by clicking the "Login with SSO" button on the dashboard's login page. Check out the :doc:`integrating oauth docs <./oauth>`.
+Users are also allowed to join a Netmaker server via OAuth. They can do this by clicking the "Login with SSO" button on the dashboard's login page. Check out the:doc:`integrating oauth docs <./oauth>`.
 
-After trial period ends:
+After the trial period ends:
 =========================
 
-    a. if you wish to continue using PRO :-
+    a. if you wish to continue using PRO:-
 
-        i. check these steps to obtain pro license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
+        i. Check these steps to obtain a pro license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
         ii. Run `/root/nm-quick.sh -u`
 
-    b. if you wish to downgrade to community version
+    b. if you wish to downgrade to the community version
     
         i. Run `/root/nm-quick.sh -d`
 
 
 1. **To get started the easiest way, visit our SaaS platform to set up a netmaker server with just a few clicks** `<https://app.netmaker.io>`_
 
-2. :doc:`check out these steps for manual installation process for on-prem, although we don't recommend this path, instead use the install script mentioned above<./manual-install>`
+2. :doc:`check out these steps for the manual installation process for on-prem, although we don't recommend this path, instead use the install script mentioned above<./manual-install>`
 
 3. :ref:`Highly Available Installation <HAInstall>`
 
