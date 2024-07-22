@@ -21,11 +21,7 @@ Input your username and a super memorable but strong password then click on the 
 
 
 .. include:: oauth.rst
-   :end-before: User creation
-
-
-.. include:: oauth.rst
-   :start-after: .. include_after_this_label
+   :end-before: Integrating OAuth
 
 
 .. include:: pro/pro-users.rst

@@ -49,10 +49,10 @@ SERVER_HOST
     **Description:** The public IP of the server where the machine is running.
 
 MASTER_KEY  
-    **Default:** "secretkey" 
+    **Default:** "secretkey"
 
     **Description:** The admin master key for accessing the API. Change this in any production installation.
- 
+
 MQ_USERNAME
     **Default** ""
 
@@ -159,6 +159,7 @@ VERBOSITY
     **Description** Logging verbosity level - 1, 2, 3, or 4
 
 REST_BACKEND
+
 
     **Default** on
 
@@ -382,203 +383,6 @@ At this point you should be able to ``docker-compose down && docker-compose up -
 
 Your server is now running on an EMQX broker. you can view your EMQX dashboard with ``http://<serverip>:18083/``. The signin credentials are the EMQX_DASHBOARD__DEFAULT_USERNAME and EMQX_DASHBOARD__DEFAULT_PASSWORD located in your netmaker.env file. This dashboard will give you all the information about your mq activity going on in your netmaker server.
 
-.. _NoDocker:
-
-Linux Install without Docker
-=============================
-
-Most systems support Docker, but some do not. In such environments, there are many options for installing Netmaker. Netmaker is available as a binary file, and there is a zip file of the Netmaker UI static HTML on GitHub. Beyond the UI and Server, you may want to optionally install a database (SQLite is embedded, rqlite or postgres are supported) and CoreDNS (also optional). 
-
-Once this is enabled and configured for a domain, you can continue with the below. The recommended server runs Ubuntu 20.04.
-
-Database Setup (optional)
---------------------------
-
-You can run the netmaker binary standalone and it will run an embedded SQLite server. Data goes in the data/ directory. Optionally, you can run PostgreSQL or rqlite. Instructions for rqlite are below.
-
-1. Install rqlite on your server: https://github.com/rqlite/rqlite
-2. Run rqlite: rqlited -node-id 1 ~/node.1
-
-If using rqlite or postgres, you must change the DATABASE environment/config variable and enter connection details.
-
-Server Setup (using sqlite)
----------------------------
-
-1. Get the binary. ``wget -O /etc/netmaker/netmaker https://github.com/gravitl/netmaker/releases/latest/download/netmaker-linux-amd64``
-2. Move the binary to /usr/sbin and make it executable.
-3. create a config file. /etc/netmaker/netmaker.yml
-
-.. code-block:: yaml
-
-    server:
-      server: "<YOUR_BASE_DOMAIN>"
-      broker: wss://broker.<YOUR_BASE_DOMAIN>
-      apiport: "8081"
-      apiconn: "api.<YOUR_BASE_DOMAIN>:443"
-      masterkey: "<SECRET_KEY>"
-      mqpassword: "<YOUR_PASSWORD>"
-      mqusername: "<YOUR_USERNAME>"
-      serverbrokerendpoint: "ws://mq:1883"
-
-
-
-4. Update YOUR_BASE_DOMAIN and SECRET_KEY as well as username and passwords for mq.
-5. create your netmaker.service file /etc/systemd/system/netmaker.service
-
-.. code-block:: cfg
-
-    [Unit]
-    Description=Netmaker Server
-    After=network.target
-
-    [Service]
-    Type=simple
-    Restart=on-failure
-
-    ExecStart=/usr/sbin/netmaker -c /etc/netmaker/netmaker.yml
-
-    [Install]
-    WantedBy=multi-user.target
-
-6. ``systemctl daemon-reload``
-7. Check status:  ``sudo journalctl -u netmaker``
-8. If any settings are incorrect such as host or sql credentials, change them under /etc/netmaker/netmaker.yml and then run ``sudo systemctl restart netmaker``
-
-UI Setup
----------
-
-The following uses Caddy as a file server/proxy.
-
-1. Download and Unzip UI asset files from https://github.com/gravitl/netmaker-ui/releases and put them in /var/www/netmaker
-    ``sudo wget -O /tmp/netmaker-ui.zip https://github.com/gravitl/netmaker-ui/releases/latest/download/netmaker-ui.zip``
-    ``sudo unzip /tmp/netmaker-ui.zip -d /var/www/netmaker``
-
-2. Create config.js in /var/www/netmaker
-    ``window.REACT_APP_BACKEND='https://api.<YOUR_BASE_DOMAIN>'``
-
-Proxy / Http server
-------------------------
-
-Caddy
------
-
-1. Install Caddy
-2. You should have a Caddy file from installing caddy. Replace the contents of that file with this configuration.
-
-.. code-block:: cfg
-
-    {
-        # ZeroSSL account
-        acme_ca https://acme.zerossl.com/v2/DV90
-        email <YOUR_EMAIL>
-    }
-
-    # Dashboard
-    https://dashboard.<YOUR_BASE_DOMAIN> {
-        header {
-            Access-Control-Allow-Origin *.<YOUR_BASE_DOMAIN>
-            Strict-Transport-Security "max-age=31536000;"
-            X-XSS-Protection "1; mode=block"
-            X-Frame-Options "SAMEORIGIN"
-            X-Robots-Tag "none"
-            -Server
-        }
-        root * /var/www/netmaker
-        file_server 
-    }
-
-    # API
-    https://api.<YOUR_BASE_DOMAIN> {
-        reverse_proxy http://127.0.0.1:8081
-    }
-
-3. start Caddy
-
-MQ
-----
-
-You will need an MQTT broker on the host. We recommend Mosquitto. In addition, it must use the mosquitto.conf file. Depending on The version, you will use one of the two files.
-
-.. code-block:: cfg
-
-    # use this config for versions earlier than v0.16.1
-
-    per_listener_settings true
-
-    listener 8883
-    allow_anonymous false
-    require_certificate true
-    use_identity_as_username false
-    cafile /etc/mosquitto/certs/root.pem
-    certfile /etc/mosquitto/certs/server.pem
-    keyfile /etc/mosquitto/certs/server.key
-
-    listener 1883
-    allow_anonymous true
-
-Start netmaker
-Copy root.pem, server.pem, and server.key from /etc/netmaker to /etc/mosquitto/certs/
-
-.. code-block::
-
-    #use this config file for v0.16.1 and later.
-    per_listener_settings false
-    listener 8883
-    allow_anonymous false
-
-    listener 1883
-    allow_anonymous false
-
-    plugin /usr/lib/x86_64-linux-gnu/mosquitto_dynamic_security.so
-    plugin_opt_config_file /etc/mosquitto/data/dynamic-security.json
-
-Copy dynamic-security.json from etc/netmaker to /etc/mosquitto/data.
-Restart netmaker.
-Restart mosquitto.
-You can check the status of caddy, mosquitto, and netmaker with ``journalctl -fu <ONE_OF_THOSE_THREE>`` to make sure everything is working.
-
-.. _KubeInstall:
-
-Kubernetes Install
-=======================
-
-Server Install
---------------------------
-
-This template assumes your cluster uses Nginx for ingress with valid wildcard certificates. If using an ingress controller other than Nginx (ex: Traefik), you will need to manually modify the Ingress entries in this template to match your environment.
-
-This template also requires RWX storage. Please change references to storageClassName in this template to your cluster's Storage Class.
-
-``wget https://raw.githubusercontent.com/gravitl/netmaker/master/kube/netmaker-template.yaml``
-
-Replace the NETMAKER_BASE_DOMAIN references to the base domain you would like for your Netmaker services (ui,api,grpc). Typically this will be something like **netmaker.yourwildcard.com**.
-
-``sed -i ‘s/NETMAKER_BASE_DOMAIN/<your base domain>/g’ netmaker-template.yaml``
-
-Now, assuming Ingress and Storage match correctly with your cluster configuration, you can install Netmaker.
-
-.. code-block::
-
-  kubectl create ns nm
-  kubectl config set-context --current --namespace=nm
-  kubectl apply -f netmaker-template.yaml -n nm
-
-In about 3 minutes, everything should be up and running:
-
-``kubectl get ingress nm-ui-ingress-nginx``
-
-Netclient Daemonset
---------------------------
-
-The following instructions assume you have Netmaker running and a network you would like to add your cluster into. The Netmaker server does not need to be running inside of a cluster for this.
-
-.. code-block::
-
-  wget https://raw.githubusercontent.com/gravitl/netmaker/master/kube/netclient-template.yaml
-  sed -i ‘s/ACCESS_TOKEN_VALUE/< your access token value>/g’ netclient-template.yaml
-  kubectl apply -f netclient-template.yaml
-
-For a more detailed guide on integrating Netmaker with MicroK8s, `check out this guide <https://itnext.io/how-to-deploy-a-cross-cloud-kubernetes-cluster-with-built-in-disaster-recovery-bbce27fcc9d7>`_. 
 
 Nginx Reverse Proxy Setup with https
 ======================================
@@ -729,8 +533,6 @@ The following is a cleaned up config generated by Nginx Proxy Manager to show ho
 
 .. _HAInstall:
 
-
-
 Highly Available Installation (Kubernetes)
 ==================================================
 
@@ -745,21 +547,35 @@ Requirements
 ---------------
 
 To run HA Netmaker on Kubernetes, your cluster must have the following:
-- RWO and RWX Storage Classes (RWX is only required if running Netmaker with DNS Management enabled).
-- An Ingress Controller and valid TLS certificates 
-- This chart can currently generate ingress for Nginx or Traefik Ingress with LetsEncrypt + Cert Manager
-- If LetsEncrypt and CertManager are not deployed, you must manually configure certificates for your ingress
 
-Furthermore, the chart will by default install and use a postgresql cluster as its datastore.
+- RWO and RWX Storage Classes
+- An Ingress Controller and valid TLS certificates
 
-Recommended Settings:
-----------------------
-A minimal HA install of Netmaker can be run with the following command:
-`helm install netmaker --generate-name --set baseDomain=nm.example.com`
-This install has some notable exceptions:
-- Ingress **must** be manually configured post-install (need to create valid Ingress with TLS)
-- Server will use "userspace" WireGuard, which is slower than kernel WG
-- DNS will be disabled
+  This chart can currently generate ingress for:
+  - Nginx Ingress + LetsEncrypt/Cert-Manager
+
+  To generate automatically, make sure one of the two is configured for your cluster
+
+- Ability to set up ingress route for Secure Web Sockets
+
+  Nginx Ingress supports Secure Web Sockets (WSS) by default. If you are not using Nginx Ingress, you must route external traffic from broker.domain to the MQTT service, and provide valid TLS certificates.
+
+  One option is to set up a Load Balancer which routes broker.domain:443 to the MQTT service on port 8883.
+
+  We do not provide guidance beyond this, and recommend using an Ingress Controller that supports websockets.
+
+Furthermore, the chart will by default install and use a postgresql cluster as its datastore:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Repository
+     - Name
+     - Version
+   * - https://charts.bitnami.com/bitnami
+     - postgresql-ha
+     - 7.11.0
+
 
 Example Installations:
 ------------------------
@@ -768,13 +584,11 @@ An annotated install command:
 .. code-block::
 
     helm install netmaker/netmaker --generate-name \ # generate a random id for the deploy 
-    --set baseDomain=nm.example.com \ # the base wildcard domain to use for the netmaker api/dashboard/grpc ingress 
-    --set replicas=3 \ # number of server replicas to deploy (3 by default) 
-    --set ingress.enabled=true \ # deploy ingress automatically (requires nginx or traefik and cert-manager + letsencrypt) 
-    --set ingress.className=nginx \ # ingress class to use 
-    --set ingress.tls.issuerName=letsencrypt-prod \ # LetsEncrypt certificate issuer to use 
-    --set dns.enabled=true \ # deploy and enable private DNS management with CoreDNS 
-    --set dns.clusterIP=10.245.75.75 --set dns.RWX.storageClassName=nfs \ # required fields for DNS 
+    --set baseDomain=nm.example.com \ # the base wildcard domain to use for the netmaker api/dashboard/mq ingress 
+    --set server.replicas=3 \ # number of server replicas to deploy (3 by default) 
+    --set ingress.enabled=true \ # deploy ingress automatically (requires nginx and cert-manager + letsencrypt) 
+    --set ingress.kubernetes.io/ingress.class=nginx \ # ingress class to use
+    --set ingress.cert-manager.io/cluster-issuer=letsencrypt-prod \ # LetsEncrypt certificate issuer to use
     --set postgresql-ha.postgresql.replicaCount=2 \ # number of DB replicas to deploy (default 2)
 
 
@@ -796,30 +610,32 @@ The below command will install netmaker with three server replicas (the default)
     --set ui.replicas=1 --set ingress.enabled=true \
     --set ingress.tls.issuerName=le-prod-2 --set ingress.className=traefik
 
+Recommended Settings:
+----------------------
+This install has some notable exceptions:
+* Ingress **must** be configured on your cluster, with cluster issuer for TLS certs
+* DNS will be disabled
+
 Below, we discuss the considerations for Ingress, Kernel WireGuard, and DNS.
 
-Ingress	
+MQ
+----------
+The MQ Broker is deployed either with Ingress (Nginx ) preconfigured, or without. If you are using an ingress controller other than Nginx, Netmaker's MQTT will not be complete. "broker.domain" must reach the MQTT service at port 8883 over WSS (Secure Web Sockets).
+
+Ingress
 ----------
 To run HA Netmaker, you must have ingress installed and enabled on your cluster with valid TLS certificates (not self-signed). If you are running Nginx as your Ingress Controller and LetsEncrypt for TLS certificate management, you can run the helm install with the following settings:
 
 - `--set ingress.enabled=true`
 - `--set ingress.annotations.cert-manager.io/cluster-issuer=<your LE issuer name>`
 
-If you are not using Nginx or Traefik and LetsEncrypt, we recommend leaving ingress.enabled=false (default), and then manually creating the ingress objects post-install. You will need three ingress objects with TLS:
+If you are not using Nginx and LetsEncrypt, we recommend leaving ingress.enabled=false (default), and then manually creating the ingress objects post-install. You will need three ingress objects with TLS:
 
 - `dashboard.<baseDomain>`
 - `api.<baseDomain>`
-- `grpc.<baseDomain>`
-
-If deploying manually, the gRPC ingress object requires special considerations. Look up the proper way to route grpc with your ingress controller. For instance, on Traefik, an IngressRouteTCP object is required.
+- `broker.<baseDomain>`
 
 There are some example ingress objects in the kube/example folder.
-
-Kernel WireGuard
-------------------
-If you have control of the Kubernetes worker node servers, we recommend **first** installing WireGuard on the hosts, and then installing HA Netmaker in Kernel mode. By default, Netmaker will install with userspace WireGuard (wireguard-go) for maximum compatibility and to avoid needing permissions at the host level. If you have installed WireGuard on your hosts, you should install Netmaker's helm chart with the following option:
-
-- `--set wireguard.kernel=true`
 
 DNS
 ----------
@@ -836,13 +652,13 @@ This will also require specifying a service address for DNS. Choose a valid ipv4
 - `--set dns.clusterIP=10.245.69.69`
 
 **This address will only be reachable from hosts that have access to the cluster service CIDR.** It is only designed for use cases related to k8s. If you want a more general-use Netmaker server on Kubernetes for use cases outside of k8s, you will need to do one of the following:
-- bind the CoreDNS service to port 53 on one of your worker nodes and set the COREDNS_ADDRESS equal to the public IP of the worker node
-- Create a private Network with Netmaker and set the COREDNS_ADDRESS equal to the private address of the host running CoreDNS. For this, CoreDNS will need a node selector and will ideally run on the same host as one of the Netmaker server instances.
+* bind the CoreDNS service to port 53 on one of your worker nodes and set the COREDNS_ADDRESS equal to the public IP of the worker node.
+* Create a private Network with Netmaker and set the COREDNS_ADDRESS equal to the private address of the host running CoreDNS. For this, CoreDNS will need a node selector and will ideally run on the same host as one of the Netmaker server instances.
 
 Values
 ---------
 
-To view all options for the chart, please visit the README in the code repo `here <https://github.com/gravitl/netmaker/tree/master/kube/helm#values>`_ .
+To view all options for the chart, please visit the README in the netmaker-helm chart repo `here <https://github.com/gravitl/netmaker-helm?tab=readme-ov-file#values>`_ .
 
 Security Settings
 ==================

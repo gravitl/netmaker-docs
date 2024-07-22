@@ -12,6 +12,7 @@ Netmaker Professional
 
    pro-setup
    pro-users
+   ../oauth
    pro-relay-server
    pro-metrics
    pro-branding
@@ -30,6 +31,8 @@ Netmaker Professional is our advanced Netmaker offering for business use cases. 
 - **Metrics:** Nodes collect networking metrics such as latency, transfer, and connectivity status. These are displayed in the Netmaker UI, and also exported to Grafana via Prometheus.
 
 - **Users:** On community you can only create admin users, where as on PRO it gives ability to create non-admin users which you can pair with remote-access gateway to segment users on different networks.
+
+- **OAuth:** By integrating with an OAuth provider, Netmaker users can log in via the provider, rather than the default simple auth.
 
 - **Remote Access Client:** Netmaker Professional comes with a remote access client that allows you to connect to your network from anywhere. This is a great way to connect to your network from a laptop or mobile device (soon).
 

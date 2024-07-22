@@ -18,11 +18,11 @@ Configuring your provider
 
 In order to use OAuth, configure your OAuth provider (GitHub, Google, Azure AD).
 
-You must configure your provider (except for Azure AD) to use the Netmaker Dashboard URI dashboard.<netmaker.base.domain> as the origin URL.
+You must configure your provider (except for Azure AD) to use the Netmaker Dashboard URI: dashboard.<netmaker.base.domain> as the origin URL.
 
 For example: `https://dashboard.netmaker.mydomain.com`
 
-You must configure your provider to use the Netmaker API URI redirect route with the following format: https://api.<netmaker base domain>/api/oauth/callback.
+You must configure your provider to use the Netmaker API URI redirect route with the following format: api.<netmaker base domain>/api/oauth/callback
 
 For example: `https://api.netmaker.mydomain.com/api/oauth/callback`
 
@@ -48,7 +48,7 @@ Next, Configure Netmaker with the following environment variables. If any are le
     SERVER_HTTP_HOST: "api.<netmaker base domain>"
     FRONTEND_URL: "https://dashboard.<netmaker base domain>"
     AZURE_TENANT: "<only for azure, you may optionally specify the tenant for the OAuth>"
-    OIDC_ISSUER: "<only for oidc, your issuer endpoint for OIDC ie. http://127.0.0.1:5556/dex"
+    OIDC_ISSUER: "<only for oidc, your issuer endpoint for OIDC> ie. http://127.0.0.1:5556/dex"
 
 After restarting your server, the Netmaker logs will indicate if the OAuth provider was successfully initialized:
 
@@ -56,37 +56,11 @@ After restarting your server, the Netmaker logs will indicate if the OAuth provi
 
    sudo docker logs netmaker
 
-Once successful, users can click the key symbol on the login page to sign-in with your configured OAuth provider.
+Once successful, users can click on the "Login with SSO" button in the login page to sign-in with your configured OAuth provider.
 
 .. image:: images/oauth1.jpg
    :alt: Login Oauth
    :align: center
-
-
-Configuring User Permissions
-===============================
-
-User management is done through the Netmaker dashboard, under the Users (or Manage Account, for SaaS) section from the left navigation bar.
-Only server admins have access to this section and can promote users to admin status. The superadmin/tenant owner can both promote and demote users to admin status.
-
-.. image:: images/user-mgmt.png
-   :width: 80%
-   :alt: Users
-   :align: center
-
-Normal users do not have access to the dashboard and are recommended to use our Remote Access Client to connect to the network.
-An admin must aforehand grant such users permission to certain networks by assigning them to remote access gateways however. View the "Remote Access" section for more information on this.
-
-User creation
--------------
-
-To create a new user, click the "Add a User" button on the Users page. Fill in the user's details and click "Create User".
-
-.. image:: images/oauth3.jpg
-   :alt: Edit User 2
-   :align: center
-
-.. include_after_this_label
 
 Oauth Users
 -----------
@@ -98,5 +72,5 @@ Users are also allowed to join a Netmaker server via OAuth. They can do this by 
    :alt: Pending Users
    :align: center
 
-From v0.23.1, new accounts would be added to a pending list and would require approval from an admin before they can access any resource. This version also allows whielisting of email domains for OAuth users.
+From v0.23.1, new accounts would be added to a pending list and would require approval from an admin before they can access any resource. This version also allows whitelisting of email domains for OAuth users.
 Server admins can do that by adding a comma-separated list of domains to the `ALLOWED_EMAIL_DOMAINS` environment variable. eg: `ALLOWED_EMAIL_DOMAINS=example.net,example.com`
