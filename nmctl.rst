@@ -8,6 +8,9 @@ NMCTL is a CLI tool for interacting with the Netmaker API.
 Quick Start
 ******************
 
+Setup
+------
+
 Start with getting the latest nmctl binary specific to your operating system from the link below:
 
 .. code-block::
