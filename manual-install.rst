@@ -87,7 +87,10 @@ At this point you should have all the system dependencies you need.
 3. Open Firewall
 ===============================
 
-Make sure firewall settings are set for Netmaker both on the VM and with your cloud security groups (AWS, GCP, etc). 
+Netmaker Server 
+-----------------
+
+Make sure firewall settings are set for Netmaker on the VM and with your cloud security groups (AWS, GCP, etc) or with your router (or firewall appliance). 
 
 Make sure the following ports are open both on the VM and in the cloud security groups:
 
@@ -104,6 +107,9 @@ Make sure the following ports are open both on the VM and in the cloud security 
   sudo ufw allow proto tcp from any to any port 3479
   sudo ufw allow proto tcp from any to any port 8089 
   sudo ufw allow 51821:51830/udp
+  sudo ufw allow proto tcp from any to any port 53 
+  sudo ufw allow proto udp from any to any port 53 
+
   
 
 It is also important to make sure the server does not block forwarding traffic (it will do this by default on some providers). To ensure traffic will be forwarded:
@@ -119,6 +125,53 @@ It is also important to make sure the server does not block forwarding traffic (
   - allow 3479/tcp from all
   - allow 8089/tcp from all
   - allow 51821-51830/udp from all
+  - allow 53/tcp from all 
+  - allow 53/UDP form all
+
+
+Machines Running Netclient
+------------------------------
+
+As we already know, Netclient manages WireGuard on client devices (nodes). As its name suggests, Netclient is a client in a mesh topology, thus it needs to communicate with the server and with the other clients as well. Netclient will detect local changes and send them to the server when necessary. A change in IP address or port will lead to a network update to keep everything in sync.
+It goes without saying that in almost all cases it is imperative that firewall must be up and running on any device that is connected to a network, especially the internet. Firewalls are inherently restrictive for good reasons. And by default, it doesn't allow any traffic that Netclient would use to function properly.
+
+On Windows machines, it is possible to allow programs or applications through the firewall. Thus you might want to allow Netclient and, depending on your setup, WireGuard.
+
+On Linux, these necessary ports are needed to be opened:
+
+- UDP and TCP ports 51821-51830
+- TCP ports 80 and 443
+- UDP and TCP port 53 for DNS
+
+In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
+
+- UDP ports 19302 & 3478 for STUN
+- TCP port 3479 for TURN
+- TCP ports 1883 & 8883 for MQTT
+- TCP ports 8083 & 8084 for EMQX Websocket
+- TCP port 8081 for the NM API
+
+If the public port is not in the range of 51821-51830, set a static one and allow that port 
+
+For advanced use cases, you might need to view your device's firewall logs, or in case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
+
+For example, in UFW you may do:
+
+.. code-block::
+
+  #set firewall to log only the blocked traffic
+  ufw logging low
+
+  #clear out the current logs
+  cat /dev/null | sudo tee /var/log/ufw.log
+
+  #reload ufw
+  ufw reload
+
+  #filter the logs
+  cat /var/log/ufw.log | grep -e <netmaker server IP> -e <other nodes' IPs> 
+
+
   
 4. Prepare MQ
 ========================
