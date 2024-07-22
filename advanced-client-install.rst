@@ -9,9 +9,9 @@ These steps should be run after the Netmaker server has been created and a netwo
 Introduction to Netclient
 ===============================
 
-At its heart, the netclient is a simple CLI for managing access to various WireGuard-based networks. It manages WireGuard on the host system, so that you don't have to. Why is this necessary?
+At its heart, the netclient is a simple CLI for managing access to various WireGuard-based networks. It manages WireGuard on the host system so that you don't have to. Why is this necessary?
 
-If you are setting up a WireGuard-based virtual network, you must configure each machine with very specific settings, so that every machine can reach it, and it can reach every other machine. Any changes to the settings of any one of these machines can break those connections. Any machine that is added, removed, or modified on the network requires reconfiguring of every peer in the network. This can be very time consuming.
+If you are setting up a WireGuard-based virtual network, you must configure each machine with very specific settings, so that every machine can reach it, and it can reach every other machine. Any changes to the settings of any one of these machines can break those connections. Any machine that is added, removed, or modified on the network requires reconfiguring of every peer in the network. This can be very time-consuming.
 
 The netmaker server holds configuration details about every machine in your network and how other machines should connect to it.
 
@@ -27,13 +27,13 @@ IPv6 requires a minimum MTU of 1280. A lot of router configurations expect a sta
 Notes on Windows
 ==================================
 
-If running the netclient on windows, you must download the netclient.exe binary and run it from Powershell as an Administrator.
+If running the netclient on Windows, you must download the netclient.exe binary and run it from Powershell as an Administrator.
 
 Windows will by default have firewall rules that prevent inbound connections. If you wish to allow inbound connections from particular peers, use the following command:
 
 ``netsh advfirewall firewall add rule name="Allow from <peer private addr>" dir=in action=allow protocol=ANY remoteip=<peer private addr>``
 
-If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server(Professional Edition Feature) from Netmaker GUI. In order to achieve this, netmaker pro edition is required.
+If you want to allow all peers access, but do not want to configure firewall rules for all peers, you can configure access for one peer, and set it as a Relay Server(Professional Edition Feature) from Netmaker GUI. To achieve this, a netmaker pro edition is required.
 
 Running netclient commands
 ----------------------------
@@ -53,19 +53,19 @@ With some versions of WireGuard on Windows, high CPU utilization has been found 
 Changing network profile to private
 ------------------------------------
 
-By default the netmaker network profile is added as a public network. This is the default behavior on Windows. For changing it to private, please run Powershell command,
+By default, the netmaker network profile is added as a public network. This is the default behaviour on Windows. To change it to private, please run the Powershell command,
 
 - `Set-NetConnectionProfile -InterfaceAlias 'netmaker' -NetworkCategory 'Private'`
 
 Issue after Windows sleep/hibernate
 -------------------------------------
 
-Sometimes the netclient does not work after the Windows wake up from sleep/hibernate. The root cause is not identified.  Restarting netclient service can fix the issue.
+Sometimes the netclient does not work after the Windows wake up from sleep/hibernation. The root cause is not identified.  Restarting the netclient service can fix the issue.
 
 Irregular netclient restart on Windows 2016 server
 ----------------------------------------------------
 
-There is one issue reported on Windows 2016 server.  The netclient restarted irregularly. The root cause is not identified. But as the feedback from the client, the issue can be fixed by disabling ISATAP adapter and 6to4 feature.
+There is one issue reported on the Windows 2016 server.  The netclient restarted irregularly. The root cause is not identified. However, as per the feedback from the client, the issue can be fixed by disabling the ISATAP adapter and 6to4 feature.
 
 - `Set-Net6to4configuration -state disabled`
 - `Set-Netisatapconfiguration -state disabled`
@@ -73,7 +73,7 @@ There is one issue reported on Windows 2016 server.  The netclient restarted irr
 
 Event id 0 in Windows Event logs
 ---------------------------------
-netclient service is delegated to Winsw on Windows. An issue is reported that the stop/start/restart events in Event logs show event id as 0 always. It does not impact any netclient functions.
+netclient service is delegated to Winsw on Windows. An issue is reported that the stop/start/restart events in Event logs show the event ID as 0 always. It does not impact any netclient functions.
 
 Modes and System Compatibility
 ==================================
@@ -85,23 +85,23 @@ The netclient can be run in a few "modes". System compatibility depends on which
 CLI
 ------------
 
-In its simplest form, the netclient can be treated as just a simple, manual, CLI tool, which a user can call to configure the machine. The cli can be compiled from source code to run on most systems, and has already been compiled for x86 and ARM architectures.
+In its simplest form, the netclient can be treated as just a simple, manual, CLI tool, which a user can call to configure the machine. The CLI can be compiled from source code to run on most systems and has already been compiled for x86 and ARM architectures.
 
-As a CLI, the netclient should function on any Linux or Unix based system that has the wireguard utility (callable with **wg**) installed.
+As a CLI, the netclient should function on any Linux or Unix-based system that has the wireguard utility (callable with **wg**) installed.
 
 Daemon
 ----------
 
 The netclient is intended to be run as a system daemon. This allows it to automatically retrieve and send updates. To do this, the netclient can install itself as a systemd service, or launchd/windows service for Mac or Windows.
 
-If running the netclient on non-systemd linux, it is recommended to manually configure the netclient as a daemon using whatever method is acceptable on the chosen operating system.
+If running the netclient on non-systemd Linux, it is recommended to manually configure the netclient as a daemon using whatever method is acceptable on the chosen operating system.
 
 Private DNS Management
 -----------------------
 
 To manage private DNS, the netclient relies on systemd-resolved (resolvectl). Absent this, it cannot set private DNS for the machine.
 
-A user may choose to manually set a private DNS nameserver of <netmaker server>:53. However, beware, as netmaker sets split dns, and the system must be configured properly. Otherwise, this nameserver may break your local DNS.
+A user may choose to manually set a private DNS nameserver of <netmaker server>:53. However, beware, as netmaker sets split DNS, the system must be configured properly. Otherwise, this nameserver may break your local DNS.
 
 Prerequisites
 =============
@@ -120,7 +120,7 @@ Please refer to the `Firewall Rules for Machines Running Netclient <https://docs
 Configuration
 ===============
 
-The CLI has information about all commands and variables. This section shows the "help" output for these commands as well as some additional reference.
+The CLI has information about all commands and variables. This section shows the "help" output for these commands as well as some additional references.
 
 CLI Reference
 --------------------
@@ -147,11 +147,11 @@ Installation
 
 To install netclient and join a network, you need to use ``netclient install`` command and get an enrollment key for a particular network from netmaker.
 
-An admin creates an enrollment key in the "Enrollment Keys" section of the UI. Upon creating a key, it can be viewed by clicking onto the key from UI. Some details regarding the key will be visible:
+An admin creates an enrollment key in the "Enrollment Keys" section of the UI. Upon creating a key, it can be viewed by clicking on the key from UI. Some details regarding the key will be visible:
 
 **Key:** The enrollment key to join and authenticate to a netmaker network
 
-**Type:** Type of key determines the usage limitation of a particular key. Possible values are: Unlimited, Time Bound, Limited Number of Uses
+**Type:** The Type of key determines the usage limitation of a particular key. Possible values are: Unlimited, Time Bound, Limited Number of Uses
 
 **Expires at:** Shows the expiration date of the particular enrollment key
 
@@ -159,7 +159,7 @@ An admin creates an enrollment key in the "Enrollment Keys" section of the UI. U
 
 **Install Command:** The CLI command to register with the server using the enrollment key, and join the networks
 
-For first time installations, you can run the Install Command. For additional networks, simply run ``netclient join -t <enrollment key>``.
+For first-time installations, you can run the Install Command. For additional networks, simply run ``netclient join -t <enrollment key>``.
 
 
 Managing Netclient
