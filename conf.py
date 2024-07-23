@@ -61,15 +61,16 @@ html_theme_options = {
     'navigation_depth': 4,
     'includehidden': True,
     'titles_only': False,
-    'nav_title': 'Netmaker Docs',
-    'repo_url': 'https://github.com/gravitl/netmaker/',
-    "repo_name": "Netmaker",
+    'github_url': 'https://github.com/gravitl/netmaker-docs'
+#    'nav_title': 'Netmaker Docs',
+#    'repo_url': 'https://github.com/gravitl/netmaker/',
+#    "repo_name": "Netmaker",
     'nosidebar': True,
-    "repo_type": "github",
-    'color_primary': 'blue',
-    'color_accent': 'teal',
-    'logo_icon': '&#xe869',
-    'globaltoc_depth': 2,
+#    "repo_type": "github",
+#    'color_primary': 'blue',
+#    'color_accent': 'teal',
+#    'logo_icon': '&#xe869',
+#    'globaltoc_depth': 2,
     'globaltoc_collapse': True,
 }
 
@@ -84,6 +85,8 @@ html_css_files = {
 html_sidebars = {
         "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
+
+html_logo = 'images/netmaker.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

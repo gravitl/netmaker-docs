@@ -5,7 +5,7 @@
 
 
 .. image:: images/netmaker.png
-   :width: 100%
+   :width: 70%
    :alt: Netmaker WireGuard
    :align: center
 
