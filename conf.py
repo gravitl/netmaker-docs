@@ -55,7 +55,7 @@ html_theme_options = {
     'logo_only': True,
     'style_external_links': False,
     'titles_only': False,
-    'github_url': 'https://github.com/gravitl/netmaker-docs'
+    'github_url': 'https://github.com/gravitl/netmaker-docs',
 #    'nav_title': 'Netmaker Docs',
 #    'repo_url': 'https://github.com/gravitl/netmaker/',
 #    "repo_name": "Netmaker",
