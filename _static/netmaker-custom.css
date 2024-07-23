@@ -1,3 +1,18 @@
-.wy-nav-content {
+/* .wy-nav-content {
     max-width: 75% !important;
+} */
+.wy-nav-content {
+    max-width: none;
+}
+
+.wy-menu-vertical a {
+    color: aqua;
+}
+
+.wy-menu-vertical li.toctree-l2 a {
+    color: aqua;
+}
+
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
+    color: blue;
 }
