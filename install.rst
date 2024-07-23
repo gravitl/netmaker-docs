@@ -91,18 +91,10 @@ On Windows machines, it is possible to allow programs or applications through th
 
 On Linux, these necessary ports are needed to be opened:
 
-- UDP and TCP ports 51821-51830 (based on your client's listen port running on the machine)
-- TCP ports 80 and 443
-- UDP and TCP port 53 for DNS (optional)
-
-In some cases, depending on the nature of your network setup, these ports may need to be opened as well:
-
-- UDP ports 19302 & 3478 for STUN
-- TCP ports 1883 & 8883 for MQTT
-- TCP ports 8083 & 8084 for EMQX Websocket
-- TCP port 8081 for the NM API
+- UDP and TCP ports 51821-51830 for inbound and outbound (based on your client's listen port running on the machine)
+- TCP port 443 for outbound
+- UDP ports 19302 & 3478 for STUN outbound requests
  
-
 For advanced use cases, you might need to view your device's firewall logs, or in the case of Netclients behind a NAT, your Firewall-Appliance/Router's firewall logs. Look for blocked traffic coming in and out having origin/destination IPs of your devices.
 
 For example, in UFW you may do:
