@@ -11,7 +11,7 @@ Prerequisites
 Server
 -----------------
 
-All components of Netmaker can be run on a single server (Virtual Machine or Bare Metal). Here some recommendations for setting up the server:
+All components of Netmaker can be run on a single server (Virtual Machine or Bare Metal). Here are some recommendations for setting up the server:
 
 - We **highly recommend** that Netmaker be deployed in a dedicated networking environment.
 - The machine should have a public, static IP address 
@@ -51,16 +51,16 @@ Make sure the following ports are open both on the VM and in the cloud security 
 - **443, 80 (tcp):** for Caddy, which proxies the Dashboard (UI), REST API (Netmaker Server), and Broker (MQTT)  
 - **51821 (udp and tcp):** for WireGuard - Install script automatically setups a netclient on the server machine with default port as 51821.  
 - **8085 (exporter Pro):** If you are building a Pro server, you need this port open.
-- **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. if you are setting up EMQX, these four need to be open for MQTT, SSL MQTT, web sockets, and the EMQX dashbaord/REST api.
-- **53 (tcp and udp):** if you set the CoreDNS container, that comes with the Netmaker installion, to 'host' your domain name resolution needs
+- **1883, 8883 8083, 18083 (if using EMQX):** We use two different types of brokers. There is Mosquitto or EMQX. Mosquitto is our default offering which uses ports 8883 and 1883. If you are setting up EMQX, all four ports mentioned need to be opened for MQTT, SSL MQTT, web sockets, and the EMQX dashboard/REST API.
+- **53 (tcp and udp):** If you set the CoreDNS container, that comes with the Netmaker installation, to 'host' your domain name resolution needs
 
 
 .. code-block::
 
   sudo ufw allow proto tcp from any to any port 443 
   sudo ufw allow proto tcp from any to any port 80
-  sudo ufw allow 51821/udp (based on your netclient listen port)
-  sudo ufw allow 51821/tcp (based on your netclient listen port)
+  sudo ufw allow 51821/udp (based on your netclient listen port on server machine)
+  sudo ufw allow 51821/tcp (based on your netclient listen port on server machine)
 
   #optional: only when hosting DNS on the Netmaker server
   sudo ufw allow 53
