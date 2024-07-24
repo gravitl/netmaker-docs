@@ -6,6 +6,7 @@ How-to-Guides
    :maxdepth: 1
 
    integrating-non-native-devices
+   site2site-mesh-vpn
    usage
 
 **Egress Gateway**
@@ -32,9 +33,16 @@ By default, Netmaker creates a "full mesh," meaning every node in your network c
 
 :ref:`acls`
 
+
 **Integrating Non-native Devices**
 
 :ref:`integrating-non-native-devices`
+
+
+**Setting up Site-to-site Mesh VPN**
+
+:ref:`site2site-mesh-vpn`
+
 
 **External Guides**
 
