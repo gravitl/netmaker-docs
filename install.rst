@@ -127,7 +127,7 @@ Quick Install
 **IMPORTANT:** Notes on Installation
 - Due to the high volume of installations, the auto-generated domain has been rate-limited by the certificate provider. For this reason, we **strongly recommend** using your domain. Using the auto-generated domain may lead to a failed installation due to rate limiting.
 
-**IMPORTANT:** From v0.22.0 the install script will install the PRO version of netmaker with a 30-day free trial, for you to try out the full capabilities of netmaker.
+**IMPORTANT:** From v0.22.0 the install script will install PRO version of netmaker with a 14-day free trial, for you to try out full capabilities of netmaker.
 
 Integrating OAuth
 ====================
@@ -138,8 +138,7 @@ After the trial period ends:
 ==============================
 
     a. if you wish to continue using PRO:-
-
-        i. Check these steps to obtain a pro license `<https://docs.netmaker.io/quick-start.html#extra-steps-for-pro>`_
+        i. check these steps to obtain pro license `<https://docs.netmaker.io/pro/pro-setup.html>`_
         ii. Run `/root/nm-quick.sh -u`
 
     b. if you wish to downgrade to the community version

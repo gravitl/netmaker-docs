@@ -217,7 +217,7 @@ Extra Steps for Pro
 -----------------------------------------------------------------------------------------------------
 
 1. Visit `<https://app.netmaker.io>`_ to create your account on the Netmaker SaaS platform.
-2. Create a tenant of type ``self-hosted`` to obtain a license key. more details in :doc:`Netmaker Professional setup <./pro/pro-setup>`
+2. Create a tenant of type ``On-Prem`` to obtain a license key. more details in :doc:`Netmaker Professional setup <./pro/pro-setup>`
 3. Retrieve Tenant ID and license key from the tenant's settings tab.
 4. Place the licence key and tenant ID in the netmaker.env file.
 5. In the netmaker.env file, change the METRICS_EXPORTER and PROMETHEUS from off to on.
