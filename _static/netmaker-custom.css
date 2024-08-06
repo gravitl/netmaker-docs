@@ -37,6 +37,10 @@
     color: #d9d9d9
 }
 
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a:hover {
+    color: #fff
+}
+
 .wy-menu-vertical li.toctree-l3.current li.toctree-l4.current > a {
     background-color: #0f0d2d;
     color: #fff
@@ -49,6 +53,10 @@
 
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3.current > a {
     background-color: #0f0d2d;
+    color: #fff
+}
+
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:hover {
     color: #fff
 }
 
