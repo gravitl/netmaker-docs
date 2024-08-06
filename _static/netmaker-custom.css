@@ -6,13 +6,28 @@
 }
 
 .wy-menu-vertical a {
-    color: aqua;
+    background-color: #0f0d2d;
+    color: #fff;
 }
 
 .wy-menu-vertical li.toctree-l2 a {
-    color: aqua;
+    background-color: #0f0d2d;
+    color: #fff;
 }
 
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
-    color: navy;
+    background-color: #0f0d2d;
+    color: #fff;
+}
+
+.wy-side-scroll {
+    background-color: #0f0d2d;
+}
+
+.wy-nav-side {
+    background-color: #0f0d2d;
+}
+
+.wy-side-nav-search {
+    background-color: #0f0d2d;
 }
