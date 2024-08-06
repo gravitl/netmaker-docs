@@ -47,26 +47,42 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
+html_theme = 'renku'
 
 html_show_sourcelink = False
 
 html_theme_options = {
-    'nav_title': 'Netmaker Docs',
-    'repo_url': 'https://github.com/gravitl/netmaker/',
-    "repo_name": "Netmaker",
-    'nosidebar': True,
-    "repo_type": "github",
-    'color_primary': 'blue',
-    'color_accent': 'teal',
-    'logo_icon': '&#xe869',
-    'globaltoc_depth': 2,
+    'logo_only': True,
+    'style_external_links': False,
+    'titles_only': False,
+    'display_version': True,
+#    'github_url': 'https://github.com/gravitl/netmaker-docs',
+#    'nav_title': 'Netmaker Docs',
+#    'repo_url': 'https://github.com/gravitl/netmaker/',
+#    "repo_name": "Netmaker",
+    'nosidebar': False,
+#    "repo_type": "github",
+#    'color_primary': 'blue',
+#    'color_accent': 'teal',
+#    'logo_icon': '&#xe869',
+#    'globaltoc_depth': 2,
     'globaltoc_collapse': True,
+}
+
+html_static_path = [
+    '_static'
+] 
+
+html_css_files = {
+    'netmaker-custom.css'
 }
 
 html_sidebars = {
         "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
+
+html_logo = 'images/netmaker-teal.png'
+#html_logo = 'https://cdn.prod.website-files.com/64149f8bba6c1301c5e75001/64149f8bba6c135dcee750af_netmaker%20logo%20old.svg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
