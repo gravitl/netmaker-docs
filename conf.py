@@ -81,8 +81,8 @@ html_sidebars = {
         "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
 
-#html_logo = 'images/netmaker-teal.png'
-html_logo = 'https://cdn.prod.website-files.com/64149f8bba6c1301c5e75001/64149f8bba6c135dcee750af_netmaker%20logo%20old.svg'
+html_logo = 'images/netmaker-teal.png'
+#html_logo = 'https://cdn.prod.website-files.com/64149f8bba6c1301c5e75001/64149f8bba6c135dcee750af_netmaker%20logo%20old.svg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
