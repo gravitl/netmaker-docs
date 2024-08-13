@@ -6,9 +6,6 @@ User Management
 
 **Superadmin Signup**
 
-
-
-
 .. include:: ui-reference.rst
    :start-after: Signup
    :end-before: (1

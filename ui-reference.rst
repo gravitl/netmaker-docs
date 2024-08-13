@@ -20,7 +20,6 @@ When you start Netmaker for the first time, you will be prompted to create a sup
 (1) **Username:** Enter a unique username for the admin user.
 (2) **Password:** Enter a secure password for your new user.
 (3) **Password Confirmation:** Repeat the password for verification.
-(4) **Signup with OAuth:** Button to signup with OAuth. From v0.23.1, OAuth users will need further approval from a server admin to gain access.
 
 Login
 --------
@@ -33,7 +32,8 @@ Login
 (1) **Username:** Enter your username.
 (2) **Password:** Enter your password.
 (3) **Login:** Button to login.
-(4) **Login with OAuth:** Button to login with OAuth.
+
+**Signup/Login with OAuth:** Users have the option to sign in or sign up via OAuth. New users however will require apporval from a server admin to gain access.
 
 Dashboard
 =================
@@ -274,3 +274,183 @@ Access Control Lists
 (4) **(allowed):** Click to switch a connection to "deny." Note that node names are higlighted on the side and top to track location.
 (5) **(blocked):** Click to switch a connection to "allow."
 (6) **Submit Changes:** Click once you are ready to submit. Will send message to update relevant nodes in network.
+
+
+User Management
+=====================
+
+Netmaker v0.25.0 comes with a revamped user management, for easy onboarding of users (including bulk onboarding) and fine-grained permissioning.
+
+Under the **User Management** section, available for *super admins* and *admins* only, you will see all active users, groups (Pro), roles (Pro), invites and pending users. Ypu can manage users from this section of the dashboard.
+
+.. image:: ./images/users.png
+   :width: 80%
+   :alt: Users
+   :align: center
+
+All active users are listed here. You can search for a user by name or email. You can also see the different groups the user belongs to and their platform access level.
+
+You can view and update a user's details by clicking on the user's name.
+From this modal, you can change user details including: password, groups, network roles, and platform access level.
+
+.. image:: images/user-details.png
+   :width: 80%
+   :align: center
+   :alt: User details of a user. You can update the user's details, change their password, ...
+
+
+Create User
+------------
+
+Creating a new user is easy. Click on the **Add a User** button at the top right to begin the process.
+
+There are two ways to create a user:
+1. **Basic Auth:** Fill in the user's details and click **Create User**.
+2. **User Invite:** Enter the different email addresses of the users you want to invite. They will receive an email with a link to create their account (Ensure you have set up the SMTP client for emailing).
+
+
+Basic Auth
+------------
+
+.. image:: images/create-user-modal-groups.png
+   :width: 80%
+   :alt: Create User Basic Auth
+   :align: center
+
+.. image:: images/create-user-modal-custom-roles.png
+   :width: 80%
+   :alt: Create User Basic Auth
+   :align: center
+
+(1) **Username:** Enter a unique username of the user.
+(2) **Password:** Choose a password for the user. User's are advised to change their password after logging in.
+(3) **Confirm Password:** Confirm the password for the user.
+(4) **Platform Access Level:** Select the platform access level for the user. The platform access level determines the user's access to the platform as a whole, rather than a specific network. Admin/Superadmins are able to access all networks and server-level settings. Platform users are able to access a limited set of the dasboard. Service users are not able to access the dashboard: they are only able to access networks via our RAC app.
+(5) **Groups:** Select the groups the user will belong to.
+(6) **Additional Roles Per Network:** Select the network roles the user will have per network.
+
+
+User Invite
+------------
+
+.. image:: images/invite-user.png
+   :width: 80%
+   :alt: Invite Users
+   :align: center
+
+(1) **Email Address(es):** Enter the email addresses of the users you want to invite. Separate multiple email addresses with a comma. **No spaces**
+(2) **Platform Access Level:** Select the platform access level for the user. The platform access level determines the user's access to the platform as a whole, rather than a specific network.
+(3) **Groups:** Select the groups the users will belong to.
+(4) **Additional Roles Per Network:** Select the network roles the users will have per network.
+
+
+After inviting a user, they will receive an email with a link to create their account. The user will be prompted to create a password or continue via OAuth, and will be able to access the platform with the permissions you have set. See screenshots below:
+
+.. image:: images/continue-invite-basic-auth.png
+   :width: 80%
+   :alt: Invite Email
+   :align: center
+
+.. image:: images/continue-invite-sso.png
+   :width: 80%
+   :alt: Invite Email
+   :align: center
+
+
+User Roles
+============
+
+Netmaker v0.25.0 introduces user roles, which allow you to assign specific permissions to users on a per-network basis. This feature is available for Pro users only.
+
+Under the **User Management** section, you will see the **Roles** tab. Here, you can create, edit, and delete roles.
+
+.. image:: images/network-roles.png
+   :width: 80%
+   :alt: Network Roles
+   :align: center
+
+
+Create Network Role
+---------------------
+
+To create a new role, click on the **Create Network Role** button at the top right.
+
+.. image:: images/create-network-role.png
+   :width: 80%
+   :alt: Create Network Role
+   :align: center
+
+(1) **Role Name:** Enter a unique name for the role.
+(2) **Network:** Select the network the role will apply to.
+(3) **Assign Admin Access To Network:** Check this box to give the user admin access to the network. This will make any user with this role a "network administrator" for the selected network.
+(4) **Permissions (VPN Access):** Select the different RAGs (gateways) a user with this role will be able to connect to.
+(5) **Create Role:** Click to create the role.
+
+A created network role can be viewed and edited by clicking on the role name in the roles list.
+It can also be deleted from the list/table view.
+
+
+User Groups
+============
+
+Netmaker v0.25.0 re-introduces user groups, which allow you to group users together and assign permissions to the group. This feature is available for Pro users only.
+A group, in theory, is simply a collection or network roles. A group can have multiple users (members) and multiple roles.
+
+Under the **User Management** section, you will see the **Groups** tab. Here, you can create, edit, and delete groups.
+
+.. image:: images/groups.png
+   :width: 80%
+   :alt: Groups
+   :align: center
+
+
+Create Group
+----------------
+
+To create a new group, click on the **Create Group** button at the top right.
+
+.. image:: images/create-group.png
+   :width: 80%
+   :alt: Create Group
+   :align: center
+
+(1) **Group Name:** Enter a unique name for the group.
+(2) **Description:** Enter a description for the group.
+(3) **Associated Network Roles:** Select the roles the group will have, for each network. A group can have multiple roles.
+(4) **Group Members:** Select the users that will be members of the group.
+(5) **Create Group:** Click to create the group.
+
+A created group can be viewed and edited by clicking on the group name in the groups list.
+It can also be deleted from the list/table view.
+
+
+User Invites
+===============
+
+Under the **User Management** section, you will see the **Invites** tab. Here, you can view all invites and send new invites.
+
+.. image:: images/invites.png
+   :width: 80%
+   :alt: Invites
+   :align: center
+
+Each invite has a unique magic link that can be used to create an account. This link can be sent to the invitee via email or other means.
+
+You can clear all invites by clicking on the **Clear All Invites** button at the top right, or delete individual invites by clicking on the **Delete** button next to the invite.
+
+
+Pending Users
+===============
+
+Under the **User Management** section, you will see the **Pending Users** tab. Here, you can view all pending users and approve or reject them.
+
+.. image:: images/pending-users.png
+   :width: 80%
+   :alt: Pending Users
+   :align: center
+
+Pending users automatically join the platform as *service users* by default. This means they can only access networks via the RAC app.
+Their permissions can be changed by an admin or superadmin after approval.
+
+You can approve or reject pending users by clicking on the **Approve** or **Reject** button next to the user.
+You can also deny all pending users by clicking on the **Deny All Users** button at the top right.

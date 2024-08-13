@@ -72,8 +72,8 @@ Please follow this Gist if you are encountering issues with 0.13+: https://gist.
 UI
 ----
 **I want to make a separate network and give my friend access to only that network.**
-  Simply navigate to the UI (as an admin account). Select users in the top left and create an account for them.
-  Select the network(s) to give them and they should be good to go! They are an admin of that network(s) only now.
+  Simply navigate to the UI (as an admin account). Create an account for (username/password) or invite your friend via email.
+  Assign a network administrator role, for the network you want them to have access to. This would give your friend full access to the assigned network.
 
 **I'm done with an access key, can I delete it?**
   Simply navigate to the UI (as an admin account). Select your network of interest, then select the ``Access Keys`` tab.
