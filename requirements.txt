@@ -1,1 +1,1 @@
-sphinx-material
+renku-sphinx-theme
