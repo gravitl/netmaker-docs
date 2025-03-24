@@ -243,6 +243,37 @@ ENDPOINT_DETECTION
 
     **Description** if turned on netclient checks if peers are reachable over private/LAN address, and choose that as peer endpoint
 
+EMAIL_SENDER_TYPE
+
+    **Default** smtp
+
+    **Description** smtp or resend
+
+SMTP_HOST
+
+    **Default** ""
+
+    **Description** The address of the host SMTP service
+
+SMTP_PORT
+
+    **Default** 587
+
+    **Description** The port of the SMTP service
+
+EMAIL_SENDER_ADDR
+
+    **Default** ""
+
+    **Description** The email address to send from
+
+EMAIL_SENDER_AUTH
+
+    **Default** ""
+
+    **Description** The auth token or password for the email sender
+
+
 Compose File - Annotated
 --------------------------------------
 
